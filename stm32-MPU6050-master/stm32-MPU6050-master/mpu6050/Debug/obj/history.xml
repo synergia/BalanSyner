@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F303VC -DSTM32F30X -I..\..\..\workspace\mpu6050\cmsis_boot -I..\..\..\workspace -I..\..\..\workspace\mpu6050\cmsis_lib\include -I..\..\..\workspace\mpu6050\cmsis_lib -I..\..\..\workspace\mpu6050\cmsis -I..\..\..\workspace\mpu6050">
+      <target file="stm32f30x_tim.o" lastModified="14ca93312a0">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_tim.c" lastModified="14c933b7146"/>
+      </target>
+      <target file="syscalls.o" lastModified="14ca93311a6">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="14c9146e9f0"/>
+      </target>
+      <target file="stm32f30x_usart.o" lastModified="14ca933131d">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_usart.c" lastModified="14c933b7710"/>
+      </target>
+      <target file="stm32f30x_i2c.o" lastModified="14ca93310db">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_i2c.c" lastModified="14c933b4c68"/>
+      </target>
+      <target file="startup_stm32f30x.o" lastModified="14ca93312bf">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f30x.S" lastModified="14c933b24df"/>
+      </target>
+      <target file="stm32f30x_spi.o" lastModified="14ca933106e">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_spi.c" lastModified="14c933b6ab9"/>
+      </target>
+      <target file="stm32f30x_rcc.o" lastModified="14ca9330f16">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_rcc.c" lastModified="14c933b3302"/>
+      </target>
+      <target file="stm32f30x_gpio.o" lastModified="14ca9330f64">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_gpio.c" lastModified="14c933b398e"/>
+      </target>
+      <target file="main.o" lastModified="14caf881115">
+         <source file="..\..\..\main.c" lastModified="14caf87f9df"/>
+      </target>
+      <target file="mpu6050.o" lastModified="14caf6c20e5">
+         <source file="..\..\..\cmsis_lib\source\mpu6050.c" lastModified="14caf69dd97"/>
+      </target>
+      <target file="stm32f30x_misc.o" lastModified="14ca93311e5">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_misc.c" lastModified="14c933b80f0"/>
+      </target>
+      <target file="system_stm32f30x_temp.o" lastModified="14ca9331158">
+         <source file="..\..\..\cmsis_boot\system_stm32f30x_temp.c" lastModified="14c933b24ef"/>
+      </target>
+   </processor>
+</history>

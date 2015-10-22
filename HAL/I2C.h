@@ -15,6 +15,5 @@
 
 //-----------------------Public prototypes----------------------------//
 void InitializeI2C();
-void I2C_read(I2C_TypeDef *I2Cx, uint8_t address, uint8_t first_reg, uint8_t length, int8_t *buffor);
 
 #endif

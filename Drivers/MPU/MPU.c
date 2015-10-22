@@ -3,6 +3,7 @@
 #include "stm32f30x.h"
 #include "../Drivers/PinDefines.h"
 #include "MPU.h"
+#include "_LibMPU6050.h"
 #include "GPIO.h"
 #include "I2C.h"
 #include "RCC.h"
@@ -20,18 +21,17 @@
 //-----------------------Private functions-----------------------------//
 
 //-----------------------Public functions------------------------------//
-void InitializeMPU()
+uint8_t InitializeMPU()
 {
+	MPU6050_errorstatus errorstatus;
 	InitializeRCC(SelectMpu);
 	InitializeI2C();
 	InitializeGPIO(SelectMpu);
+	errorstatus = MPU6050_Initialization();
+	return errorstatus;
 }
 
 void MPU_Send(uint16_t Char)
 {
-	//while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
-	//USART_SendData(USART_BT, Char);
 
-	//while ((USART_BT->ISR & USART_FLAG_TXE) == RESET) {}
-	//USART_BT->TDR = Char;
 }

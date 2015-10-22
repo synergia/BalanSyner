@@ -154,6 +154,8 @@ typedef enum
  * ACCELEROMETER+GYROSCOPE (MPU)
  */
 #define MPU_I2C				I2C3
+#define MPU6050_I2C			I2C3
+#define MPU6050_ADDRESS		0b1101000
 #define MPU_AF_I2C3			GPIO_AF_3
 
 #define MPU_SCL_GPIO		GPIOA

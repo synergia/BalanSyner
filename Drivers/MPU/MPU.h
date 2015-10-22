@@ -2,6 +2,7 @@
 #define MPU_H_
 
 //-----------------------Includes-------------------------------------//
+//#include "_LibMPU6050.h"
 
 //-----------------------Public typedefs------------------------------//
 
@@ -12,7 +13,7 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
-void InitializeMPU();
+uint8_t InitializeMPU();
 void MPU_Send(uint16_t Char);
 
 #endif

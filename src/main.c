@@ -34,6 +34,8 @@
 #include "../Drivers/BT/BT.h"
 #include "../Drivers/Wifi/Wifi.h"
 #include "../Drivers/MPU/MPU.h"
+#include "../Drivers/MPU/_LibMPU6050.h"
+
 
 
 //-----------------------Private typedefs------------------------------//
@@ -51,6 +53,8 @@ int main(void);
 int main(void)
 {
   uint32_t ii = 1;
+  MPU6050_errorstatus err;
+  err = MPU6050_I2C_ERROR;
 
   InitializeClock();
   InitializeSysTick();
@@ -77,18 +81,21 @@ int main(void)
 #endif
 
 #ifdef _USE_MPU
-  InitializeMPU();
+  err = InitializeMPU();
 #endif
 
   //InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
 
+  float x,y,z;
   while (1)
   {
        if(--ii==0){
     	   BT_Send('s');
-    	   I2C_SendData(MPU_I2C, 'd');
+    	   err = MPU6050_Get_Accel_Data(&x,&y,&z);
     	   //Wifi_Send('5');
-    	   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+    	   if(MPU6050_NO_ERROR == err){
+    		   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+    	   }
     	   ii=1000000;
        }
   }
