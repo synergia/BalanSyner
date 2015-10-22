@@ -86,17 +86,24 @@ int main(void)
 
   //InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
 
-  float x,y,z;
+  int16_t x,y,z;
+  int8_t s8x, s8y, s8z;
   while (1)
   {
        if(--ii==0){
-    	   BT_Send('s');
-    	   err = MPU6050_Get_Accel_Data(&x,&y,&z);
-    	   //Wifi_Send('5');
+    	   err = MPU6050_Get_Accel_Data_Raw(&x,&y,&z);
     	   if(MPU6050_NO_ERROR == err){
+    		   BT_Send( 1 );
+    		   s8x = (x>>8) & 0xFF;
+    		   s8y = (y>>8) & 0xFF;
+    		   s8z = (z>>8) & 0xFF;
+    		   ( s8x==1 ) ? BT_Send( 0 ) : BT_Send( s8x );
+    		   ( s8y==1 ) ? BT_Send( 0 ) : BT_Send( s8y );
+    		   ( s8z==1 ) ? BT_Send( 0 ) : BT_Send( s8z );
+
     		   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
     	   }
-    	   ii=1000000;
+    	   ii=50000;
        }
   }
   return 0;
