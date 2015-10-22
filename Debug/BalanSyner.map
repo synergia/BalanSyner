@@ -1,0 +1,3041 @@
+Archive member included because of file (symbol)
+
+c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                              src\startup_stm32f303xe.o (__libc_init_array)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+ .data          0x00000000        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ .text          0x00000000        0x0 src\system_stm32f30x.o
+ .data          0x00000000        0x0 src\system_stm32f30x.o
+ .bss           0x00000000        0x0 src\system_stm32f30x.o
+ .data.SystemCoreClock
+                0x00000000        0x4 src\system_stm32f30x.o
+ .data.AHBPrescTable
+                0x00000000       0x10 src\system_stm32f30x.o
+ .text.SystemCoreClockUpdate
+                0x00000000       0xd4 src\system_stm32f30x.o
+ .text          0x00000000       0x14 src\startup_stm32f303xe.o
+ .data          0x00000000        0x0 src\startup_stm32f303xe.o
+ .bss           0x00000000        0x0 src\startup_stm32f303xe.o
+ .text          0x00000000        0x0 src\main.o
+ .data          0x00000000        0x0 src\main.o
+ .bss           0x00000000        0x0 src\main.o
+ .text          0x00000000        0x0 HAL\USART.o
+ .data          0x00000000        0x0 HAL\USART.o
+ .bss           0x00000000        0x0 HAL\USART.o
+ .text          0x00000000        0x0 HAL\Timers.o
+ .data          0x00000000        0x0 HAL\Timers.o
+ .bss           0x00000000        0x0 HAL\Timers.o
+ .text          0x00000000        0x0 HAL\SysTick.o
+ .data          0x00000000        0x0 HAL\SysTick.o
+ .bss           0x00000000        0x0 HAL\SysTick.o
+ .text          0x00000000        0x0 HAL\RCC.o
+ .data          0x00000000        0x0 HAL\RCC.o
+ .bss           0x00000000        0x0 HAL\RCC.o
+ .text          0x00000000        0x0 HAL\NVIC.o
+ .data          0x00000000        0x0 HAL\NVIC.o
+ .bss           0x00000000        0x0 HAL\NVIC.o
+ .text.NVIC_EnableIRQ
+                0x00000000       0x30 HAL\NVIC.o
+ .text.InitializeNVIC
+                0x00000000       0xb8 HAL\NVIC.o
+ .debug_info    0x00000000      0x50b HAL\NVIC.o
+ .debug_abbrev  0x00000000      0x140 HAL\NVIC.o
+ .debug_aranges
+                0x00000000       0x28 HAL\NVIC.o
+ .debug_ranges  0x00000000       0x18 HAL\NVIC.o
+ .debug_line    0x00000000      0x221 HAL\NVIC.o
+ .debug_str     0x00000000      0x7de HAL\NVIC.o
+ .comment       0x00000000       0x84 HAL\NVIC.o
+ .ARM.attributes
+                0x00000000       0x39 HAL\NVIC.o
+ .debug_frame   0x00000000       0x4c HAL\NVIC.o
+ .text          0x00000000        0x0 HAL\I2C.o
+ .data          0x00000000        0x0 HAL\I2C.o
+ .bss           0x00000000        0x0 HAL\I2C.o
+ .text.checkI2CErrors
+                0x00000000       0x18 HAL\I2C.o
+ .text.I2C_read
+                0x00000000       0x28 HAL\I2C.o
+ .text          0x00000000        0x0 HAL\GPIO.o
+ .data          0x00000000        0x0 HAL\GPIO.o
+ .bss           0x00000000        0x0 HAL\GPIO.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_wwdg.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_wwdg.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_DeInit
+                0x00000000       0x1c Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_SetPrescaler
+                0x00000000       0x34 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_SetWindowValue
+                0x00000000       0x38 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_EnableIT
+                0x00000000       0x1c Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_SetCounter
+                0x00000000       0x24 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_Enable
+                0x00000000       0x24 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_GetFlagStatus
+                0x00000000       0x30 Framework\src\stm32f30x_wwdg.o
+ .text.WWDG_ClearFlag
+                0x00000000       0x18 Framework\src\stm32f30x_wwdg.o
+ .debug_info    0x00000000      0x25e Framework\src\stm32f30x_wwdg.o
+ .debug_abbrev  0x00000000      0x142 Framework\src\stm32f30x_wwdg.o
+ .debug_aranges
+                0x00000000       0x58 Framework\src\stm32f30x_wwdg.o
+ .debug_ranges  0x00000000       0x48 Framework\src\stm32f30x_wwdg.o
+ .debug_line    0x00000000      0x226 Framework\src\stm32f30x_wwdg.o
+ .debug_str     0x00000000      0x2e8 Framework\src\stm32f30x_wwdg.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_wwdg.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_wwdg.o
+ .debug_frame   0x00000000       0xe8 Framework\src\stm32f30x_wwdg.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_usart.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_usart.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_usart.o
+ .text.USART_DeInit
+                0x00000000       0xb8 Framework\src\stm32f30x_usart.o
+ .text.USART_ClockInit
+                0x00000000       0x48 Framework\src\stm32f30x_usart.o
+ .text.USART_ClockStructInit
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_DirectionModeCmd
+                0x00000000       0x3c Framework\src\stm32f30x_usart.o
+ .text.USART_OverSampling8Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_OneBitMethodCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_MSBFirstCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_DataInvCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_InvPinCmd
+                0x00000000       0x3c Framework\src\stm32f30x_usart.o
+ .text.USART_SWAPPinCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_ReceiverTimeOutCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_SetReceiverTimeOut
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_SetPrescaler
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_STOPModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_StopModeWakeUpSourceConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_AutoBaudRateCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_AutoBaudRateConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_ReceiveData
+                0x00000000       0x20 Framework\src\stm32f30x_usart.o
+ .text.USART_SetAddress
+                0x00000000       0x30 Framework\src\stm32f30x_usart.o
+ .text.USART_MuteModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_MuteModeWakeUpConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_AddressDetectionConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_LINBreakDetectLengthConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_LINCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_HalfDuplexCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_SetGuardTime
+                0x00000000       0x3c Framework\src\stm32f30x_usart.o
+ .text.USART_SmartCardCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_SmartCardNACKCmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_SetAutoRetryCount
+                0x00000000       0x30 Framework\src\stm32f30x_usart.o
+ .text.USART_SetBlockLength
+                0x00000000       0x30 Framework\src\stm32f30x_usart.o
+ .text.USART_IrDAConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_IrDACmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_DECmd
+                0x00000000       0x38 Framework\src\stm32f30x_usart.o
+ .text.USART_DEPolarityConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_SetDEAssertionTime
+                0x00000000       0x30 Framework\src\stm32f30x_usart.o
+ .text.USART_SetDEDeassertionTime
+                0x00000000       0x30 Framework\src\stm32f30x_usart.o
+ .text.USART_DMACmd
+                0x00000000       0x3c Framework\src\stm32f30x_usart.o
+ .text.USART_DMAReceptionErrorConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_RequestCmd
+                0x00000000       0x48 Framework\src\stm32f30x_usart.o
+ .text.USART_OverrunDetectionConfig
+                0x00000000       0x2c Framework\src\stm32f30x_usart.o
+ .text.USART_ClearFlag
+                0x00000000       0x1c Framework\src\stm32f30x_usart.o
+ .text.USART_GetITStatus
+                0x00000000       0xa0 Framework\src\stm32f30x_usart.o
+ .text.USART_ClearITPendingBit
+                0x00000000       0x34 Framework\src\stm32f30x_usart.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_tim.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_tim.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_tim.o
+ .text.TIM_DeInit
+                0x00000000      0x16c Framework\src\stm32f30x_tim.o
+ .text.TIM_TimeBaseStructInit
+                0x00000000       0x34 Framework\src\stm32f30x_tim.o
+ .text.TIM_PrescalerConfig
+                0x00000000       0x28 Framework\src\stm32f30x_tim.o
+ .text.TIM_CounterModeConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCounter
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetAutoreload
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_GetCounter
+                0x00000000       0x18 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetPrescaler
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_UpdateDisableConfig
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_UpdateRequestConfig
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_UIFRemap
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_ARRPreloadConfig
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectOnePulseMode
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetClockDivision
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC1Init
+                0x00000000      0x118 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC3Init
+                0x00000000       0xfc Framework\src\stm32f30x_tim.o
+ .text.TIM_OC4Init
+                0x00000000       0xc0 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC5Init
+                0x00000000       0xb8 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC6Init
+                0x00000000       0xac Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectGC5C1
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectGC5C2
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectGC5C3
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OCStructInit
+                0x00000000       0x44 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectOCxM
+                0x00000000       0xa4 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare1
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare2
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare3
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare4
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare5
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_SetCompare6
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC1Config
+                0x00000000       0x3c Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC2Config
+                0x00000000       0x3c Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC3Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC4Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC5Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ForcedOC6Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC1PreloadConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC3PreloadConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC4PreloadConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC5PreloadConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC6PreloadConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC1FastConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC2FastConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC3FastConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC4FastConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC1Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC2Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC3Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC4Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC5Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearOC6Ref
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectOCREFClear
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC1PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC1NPolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC2PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC2NPolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC3PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC3NPolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC4PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC5PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_OC6PolarityConfig
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_CCxCmd
+                0x00000000       0x48 Framework\src\stm32f30x_tim.o
+ .text.TIM_CCxNCmd
+                0x00000000       0x48 Framework\src\stm32f30x_tim.o
+ .text.TIM_ICInit
+                0x00000000       0xa8 Framework\src\stm32f30x_tim.o
+ .text.TIM_ICStructInit
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_PWMIConfig
+                0x00000000       0xb8 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetCapture1
+                0x00000000       0x18 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetCapture2
+                0x00000000       0x18 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetCapture3
+                0x00000000       0x18 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetCapture4
+                0x00000000       0x18 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetIC1Prescaler
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetIC2Prescaler
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetIC3Prescaler
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_SetIC4Prescaler
+                0x00000000       0x34 Framework\src\stm32f30x_tim.o
+ .text.TIM_BDTRConfig
+                0x00000000       0x50 Framework\src\stm32f30x_tim.o
+ .text.TIM_Break1Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_Break2Config
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_Break1Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_Break2Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_BDTRStructInit
+                0x00000000       0x3c Framework\src\stm32f30x_tim.o
+ .text.TIM_CtrlPWMOutputs
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectCOM
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_CCPreloadControl
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_ITConfig
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_GenerateEvent
+                0x00000000       0x1c Framework\src\stm32f30x_tim.o
+ .text.TIM_GetFlagStatus
+                0x00000000       0x34 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearFlag
+                0x00000000       0x24 Framework\src\stm32f30x_tim.o
+ .text.TIM_GetITStatus
+                0x00000000       0x54 Framework\src\stm32f30x_tim.o
+ .text.TIM_ClearITPendingBit
+                0x00000000       0x24 Framework\src\stm32f30x_tim.o
+ .text.TIM_DMAConfig
+                0x00000000       0x28 Framework\src\stm32f30x_tim.o
+ .text.TIM_DMACmd
+                0x00000000       0x40 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectCCDMA
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_InternalClockConfig
+                0x00000000       0x20 Framework\src\stm32f30x_tim.o
+ .text.TIM_ITRxExternalClockConfig
+                0x00000000       0x28 Framework\src\stm32f30x_tim.o
+ .text.TIM_TIxExternalClockConfig
+                0x00000000       0x50 Framework\src\stm32f30x_tim.o
+ .text.TIM_ETRClockMode1Config
+                0x00000000       0x50 Framework\src\stm32f30x_tim.o
+ .text.TIM_ETRClockMode2Config
+                0x00000000       0x2c Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectInputTrigger
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectOutputTrigger
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectOutputTrigger2
+                0x00000000       0x2c Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectSlaveMode
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectMasterSlaveMode
+                0x00000000       0x30 Framework\src\stm32f30x_tim.o
+ .text.TIM_ETRConfig
+                0x00000000       0x48 Framework\src\stm32f30x_tim.o
+ .text.TIM_EncoderInterfaceConfig
+                0x00000000       0x8c Framework\src\stm32f30x_tim.o
+ .text.TIM_SelectHallSensor
+                0x00000000       0x38 Framework\src\stm32f30x_tim.o
+ .text.TIM_RemapConfig
+                0x00000000       0x20 Framework\src\stm32f30x_tim.o
+ .text.TI1_Config
+                0x00000000       0x70 Framework\src\stm32f30x_tim.o
+ .text.TI2_Config
+                0x00000000       0x88 Framework\src\stm32f30x_tim.o
+ .text.TI3_Config
+                0x00000000       0x80 Framework\src\stm32f30x_tim.o
+ .text.TI4_Config
+                0x00000000       0x90 Framework\src\stm32f30x_tim.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_syscfg.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_syscfg.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_DeInit
+                0x00000000       0x58 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_MemoryRemapConfig
+                0x00000000       0x38 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_DMAChannelRemapConfig
+                0x00000000       0x68 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_TriggerRemapConfig
+                0x00000000       0x68 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_EncoderRemapConfig
+                0x00000000       0x30 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_USBInterruptLineRemapCmd
+                0x00000000       0x20 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_I2CFastModePlusConfig
+                0x00000000       0x3c Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_EXTILineConfig
+                0x00000000       0x7c Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_BreakConfig
+                0x00000000       0x24 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_BypassParityCheckDisable
+                0x00000000       0x18 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_ADCTriggerRemapConfig
+                0x00000000       0x3c Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_SRAMWRPEnable
+                0x00000000       0x24 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_GetFlagStatus
+                0x00000000       0x34 Framework\src\stm32f30x_syscfg.o
+ .text.SYSCFG_ClearFlag
+                0x00000000       0x24 Framework\src\stm32f30x_syscfg.o
+ .debug_info    0x00000000      0x4b7 Framework\src\stm32f30x_syscfg.o
+ .debug_abbrev  0x00000000      0x183 Framework\src\stm32f30x_syscfg.o
+ .debug_aranges
+                0x00000000       0x90 Framework\src\stm32f30x_syscfg.o
+ .debug_ranges  0x00000000       0x80 Framework\src\stm32f30x_syscfg.o
+ .debug_line    0x00000000      0x2c4 Framework\src\stm32f30x_syscfg.o
+ .debug_str     0x00000000      0x522 Framework\src\stm32f30x_syscfg.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_syscfg.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_syscfg.o
+ .debug_frame   0x00000000      0x1b0 Framework\src\stm32f30x_syscfg.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_spi.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_spi.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_DeInit
+                0x00000000       0x94 Framework\src\stm32f30x_spi.o
+ .text.SPI_StructInit
+                0x00000000       0x4c Framework\src\stm32f30x_spi.o
+ .text.SPI_Init
+                0x00000000      0x114 Framework\src\stm32f30x_spi.o
+ .text.I2S_StructInit
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.I2S_Init
+                0x00000000      0x178 Framework\src\stm32f30x_spi.o
+ .text.SPI_Cmd  0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_TIModeCmd
+                0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.I2S_Cmd  0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_DataSizeConfig
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.SPI_RxFIFOThresholdConfig
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.SPI_BiDirectionalLineConfig
+                0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_NSSInternalSoftwareConfig
+                0x00000000       0x44 Framework\src\stm32f30x_spi.o
+ .text.I2S_FullDuplexConfig
+                0x00000000       0x9c Framework\src\stm32f30x_spi.o
+ .text.SPI_SSOutputCmd
+                0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_NSSPulseModeCmd
+                0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_SendData8
+                0x00000000       0x2c Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_SendData16
+                0x00000000       0x1c Framework\src\stm32f30x_spi.o
+ .text.SPI_ReceiveData8
+                0x00000000       0x28 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_ReceiveData16
+                0x00000000       0x1c Framework\src\stm32f30x_spi.o
+ .text.SPI_CRCLengthConfig
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.SPI_CalculateCRC
+                0x00000000       0x40 Framework\src\stm32f30x_spi.o
+ .text.SPI_TransmitCRC
+                0x00000000       0x24 Framework\src\stm32f30x_spi.o
+ .text.SPI_GetCRC
+                0x00000000       0x34 Framework\src\stm32f30x_spi.o
+ .text.SPI_GetCRCPolynomial
+                0x00000000       0x1c Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_DMACmd
+                0x00000000       0x48 Framework\src\stm32f30x_spi.o
+ .text.SPI_LastDMATransferCmd
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_ITConfig
+                0x00000000       0x60 Framework\src\stm32f30x_spi.o
+ .text.SPI_GetTransmissionFIFOStatus
+                0x00000000       0x20 Framework\src\stm32f30x_spi.o
+ .text.SPI_GetReceptionFIFOStatus
+                0x00000000       0x20 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_GetFlagStatus
+                0x00000000       0x38 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_ClearFlag
+                0x00000000       0x20 Framework\src\stm32f30x_spi.o
+ .text.SPI_I2S_GetITStatus
+                0x00000000       0x78 Framework\src\stm32f30x_spi.o
+ .debug_info    0x00000000      0xbd6 Framework\src\stm32f30x_spi.o
+ .debug_abbrev  0x00000000      0x18b Framework\src\stm32f30x_spi.o
+ .debug_aranges
+                0x00000000      0x118 Framework\src\stm32f30x_spi.o
+ .debug_ranges  0x00000000      0x108 Framework\src\stm32f30x_spi.o
+ .debug_line    0x00000000      0x4fc Framework\src\stm32f30x_spi.o
+ .debug_str     0x00000000      0x8c4 Framework\src\stm32f30x_spi.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_spi.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_spi.o
+ .debug_frame   0x00000000      0x398 Framework\src\stm32f30x_spi.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_rtc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_rtc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_rtc.o
+ .text.RTC_DeInit
+                0x00000000       0xec Framework\src\stm32f30x_rtc.o
+ .text.RTC_Init
+                0x00000000       0x78 Framework\src\stm32f30x_rtc.o
+ .text.RTC_StructInit
+                0x00000000       0x24 Framework\src\stm32f30x_rtc.o
+ .text.RTC_WriteProtectionCmd
+                0x00000000       0x34 Framework\src\stm32f30x_rtc.o
+ .text.RTC_EnterInitMode
+                0x00000000       0x74 Framework\src\stm32f30x_rtc.o
+ .text.RTC_ExitInitMode
+                0x00000000       0x1c Framework\src\stm32f30x_rtc.o
+ .text.RTC_WaitForSynchro
+                0x00000000       0x88 Framework\src\stm32f30x_rtc.o
+ .text.RTC_RefClockCmd
+                0x00000000       0x68 Framework\src\stm32f30x_rtc.o
+ .text.RTC_BypassShadowCmd
+                0x00000000       0x4c Framework\src\stm32f30x_rtc.o
+ .text.RTC_SetTime
+                0x00000000      0x114 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TimeStructInit
+                0x00000000       0x2c Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetTime
+                0x00000000       0x9c Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetSubSecond
+                0x00000000       0x28 Framework\src\stm32f30x_rtc.o
+ .text.RTC_SetDate
+                0x00000000      0x120 Framework\src\stm32f30x_rtc.o
+ .text.RTC_DateStructInit
+                0x00000000       0x2c Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetDate
+                0x00000000       0xa4 Framework\src\stm32f30x_rtc.o
+ .text.RTC_SetAlarm
+                0x00000000      0x138 Framework\src\stm32f30x_rtc.o
+ .text.RTC_AlarmStructInit
+                0x00000000       0x3c Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetAlarm
+                0x00000000       0xd8 Framework\src\stm32f30x_rtc.o
+ .text.RTC_AlarmCmd
+                0x00000000       0x9c Framework\src\stm32f30x_rtc.o
+ .text.RTC_AlarmSubSecondConfig
+                0x00000000       0x50 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetAlarmSubSecond
+                0x00000000       0x3c Framework\src\stm32f30x_rtc.o
+ .text.RTC_WakeUpClockConfig
+                0x00000000       0x40 Framework\src\stm32f30x_rtc.o
+ .text.RTC_SetWakeUpCounter
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetWakeUpCounter
+                0x00000000       0x18 Framework\src\stm32f30x_rtc.o
+ .text.RTC_WakeUpCmd
+                0x00000000       0x94 Framework\src\stm32f30x_rtc.o
+ .text.RTC_DayLightSavingConfig
+                0x00000000       0x48 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetStoreOperation
+                0x00000000       0x1c Framework\src\stm32f30x_rtc.o
+ .text.RTC_OutputConfig
+                0x00000000       0x48 Framework\src\stm32f30x_rtc.o
+ .text.RTC_CalibOutputCmd
+                0x00000000       0x4c Framework\src\stm32f30x_rtc.o
+ .text.RTC_CalibOutputConfig
+                0x00000000       0x40 Framework\src\stm32f30x_rtc.o
+ .text.RTC_SmoothCalibConfig
+                0x00000000       0x84 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TimeStampCmd
+                0x00000000       0x60 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetTimeStamp
+                0x00000000      0x114 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetTimeStampSubSecond
+                0x00000000       0x18 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperTriggerConfig
+                0x00000000       0x40 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperCmd
+                0x00000000       0x3c Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperFilterConfig
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperSamplingFreqConfig
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperPinsPrechargeDuration
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TimeStampOnTamperDetectionCmd
+                0x00000000       0x38 Framework\src\stm32f30x_rtc.o
+ .text.RTC_TamperPullUpCmd
+                0x00000000       0x38 Framework\src\stm32f30x_rtc.o
+ .text.RTC_WriteBackupRegister
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_ReadBackupRegister
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_OutputTypeConfig
+                0x00000000       0x30 Framework\src\stm32f30x_rtc.o
+ .text.RTC_SynchroShiftConfig
+                0x00000000       0x9c Framework\src\stm32f30x_rtc.o
+ .text.RTC_ITConfig
+                0x00000000       0x78 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetFlagStatus
+                0x00000000       0x44 Framework\src\stm32f30x_rtc.o
+ .text.RTC_ClearFlag
+                0x00000000       0x34 Framework\src\stm32f30x_rtc.o
+ .text.RTC_GetITStatus
+                0x00000000       0x70 Framework\src\stm32f30x_rtc.o
+ .text.RTC_ClearITPendingBit
+                0x00000000       0x38 Framework\src\stm32f30x_rtc.o
+ .text.RTC_ByteToBcd2
+                0x00000000       0x3c Framework\src\stm32f30x_rtc.o
+ .text.RTC_Bcd2ToByte
+                0x00000000       0x38 Framework\src\stm32f30x_rtc.o
+ .debug_info    0x00000000      0xfe2 Framework\src\stm32f30x_rtc.o
+ .debug_abbrev  0x00000000      0x1b0 Framework\src\stm32f30x_rtc.o
+ .debug_aranges
+                0x00000000      0x1c0 Framework\src\stm32f30x_rtc.o
+ .debug_ranges  0x00000000      0x1b0 Framework\src\stm32f30x_rtc.o
+ .debug_line    0x00000000      0x7ba Framework\src\stm32f30x_rtc.o
+ .debug_str     0x00000000      0xb05 Framework\src\stm32f30x_rtc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_rtc.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_rtc.o
+ .debug_frame   0x00000000      0x5f8 Framework\src\stm32f30x_rtc.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_rcc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_rcc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_rcc.o
+ .text.RCC_DeInit
+                0x00000000       0x7c Framework\src\stm32f30x_rcc.o
+ .text.RCC_HSEConfig
+                0x00000000       0x24 Framework\src\stm32f30x_rcc.o
+ .text.RCC_WaitForHSEStartUp
+                0x00000000       0x50 Framework\src\stm32f30x_rcc.o
+ .text.RCC_AdjustHSICalibrationValue
+                0x00000000       0x3c Framework\src\stm32f30x_rcc.o
+ .text.RCC_LSEConfig
+                0x00000000       0x3c Framework\src\stm32f30x_rcc.o
+ .text.RCC_LSEDriveConfig
+                0x00000000       0x30 Framework\src\stm32f30x_rcc.o
+ .text.RCC_LSICmd
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text.RCC_PREDIV1Config
+                0x00000000       0x38 Framework\src\stm32f30x_rcc.o
+ .text.RCC_ClockSecuritySystemCmd
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text.RCC_MCOConfig
+                0x00000000       0x44 Framework\src\stm32f30x_rcc.o
+ .text.RCC_GetSYSCLKSource
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text.RCC_ADCCLKConfig
+                0x00000000       0x4c Framework\src\stm32f30x_rcc.o
+ .text.RCC_TIMCLKConfig
+                0x00000000       0xc8 Framework\src\stm32f30x_rcc.o
+ .text.RCC_HRTIM1CLKConfig
+                0x00000000       0x30 Framework\src\stm32f30x_rcc.o
+ .text.RCC_USARTCLKConfig
+                0x00000000       0x98 Framework\src\stm32f30x_rcc.o
+ .text.RCC_USBCLKConfig
+                0x00000000       0x1c Framework\src\stm32f30x_rcc.o
+ .text.RCC_RTCCLKConfig
+                0x00000000       0x24 Framework\src\stm32f30x_rcc.o
+ .text.RCC_I2SCLKConfig
+                0x00000000       0x1c Framework\src\stm32f30x_rcc.o
+ .text.RCC_RTCCLKCmd
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text.RCC_BackupResetCmd
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text.RCC_AHBPeriphResetCmd
+                0x00000000       0x3c Framework\src\stm32f30x_rcc.o
+ .text.RCC_APB2PeriphResetCmd
+                0x00000000       0x3c Framework\src\stm32f30x_rcc.o
+ .text.RCC_APB1PeriphResetCmd
+                0x00000000       0x3c Framework\src\stm32f30x_rcc.o
+ .text.RCC_ITConfig
+                0x00000000       0x48 Framework\src\stm32f30x_rcc.o
+ .text.RCC_GetFlagStatus
+                0x00000000       0x84 Framework\src\stm32f30x_rcc.o
+ .text.RCC_ClearFlag
+                0x00000000       0x1c Framework\src\stm32f30x_rcc.o
+ .text.RCC_GetITStatus
+                0x00000000       0x38 Framework\src\stm32f30x_rcc.o
+ .text.RCC_ClearITPendingBit
+                0x00000000       0x20 Framework\src\stm32f30x_rcc.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_pwr.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_pwr.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_pwr.o
+ .text.PWR_DeInit
+                0x00000000       0x1c Framework\src\stm32f30x_pwr.o
+ .text.PWR_BackupAccessCmd
+                0x00000000       0x20 Framework\src\stm32f30x_pwr.o
+ .text.PWR_PVDLevelConfig
+                0x00000000       0x38 Framework\src\stm32f30x_pwr.o
+ .text.PWR_PVDCmd
+                0x00000000       0x20 Framework\src\stm32f30x_pwr.o
+ .text.PWR_WakeUpPinCmd
+                0x00000000       0x3c Framework\src\stm32f30x_pwr.o
+ .text.PWR_EnterSleepMode
+                0x00000000       0x34 Framework\src\stm32f30x_pwr.o
+ .text.PWR_EnterSTOPMode
+                0x00000000       0x64 Framework\src\stm32f30x_pwr.o
+ .text.PWR_EnterSTANDBYMode
+                0x00000000       0x30 Framework\src\stm32f30x_pwr.o
+ .text.PWR_GetFlagStatus
+                0x00000000       0x34 Framework\src\stm32f30x_pwr.o
+ .text.PWR_ClearFlag
+                0x00000000       0x24 Framework\src\stm32f30x_pwr.o
+ .debug_info    0x00000000      0x50b Framework\src\stm32f30x_pwr.o
+ .debug_abbrev  0x00000000      0x181 Framework\src\stm32f30x_pwr.o
+ .debug_aranges
+                0x00000000       0x68 Framework\src\stm32f30x_pwr.o
+ .debug_ranges  0x00000000       0x58 Framework\src\stm32f30x_pwr.o
+ .debug_line    0x00000000      0x28c Framework\src\stm32f30x_pwr.o
+ .debug_str     0x00000000      0x3c5 Framework\src\stm32f30x_pwr.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_pwr.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_pwr.o
+ .debug_frame   0x00000000      0x124 Framework\src\stm32f30x_pwr.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_opamp.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_opamp.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_DeInit
+                0x00000000       0x20 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_Init
+                0x00000000       0x48 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_StructInit
+                0x00000000       0x20 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_PGAConfig
+                0x00000000       0x4c Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_VrefConfig
+                0x00000000       0x40 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_VrefConnectNonInvertingInput
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_VrefConnectADCCmd
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_TimerControlledMuxConfig
+                0x00000000       0x4c Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_TimerControlledMuxCmd
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_Cmd
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_GetOutputLevel
+                0x00000000       0x3c Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_OffsetTrimModeSelect
+                0x00000000       0x44 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_OffsetTrimConfig
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_StartCalibration
+                0x00000000       0x50 Framework\src\stm32f30x_opamp.o
+ .text.OPAMP_LockConfig
+                0x00000000       0x2c Framework\src\stm32f30x_opamp.o
+ .debug_info    0x00000000      0x440 Framework\src\stm32f30x_opamp.o
+ .debug_abbrev  0x00000000      0x123 Framework\src\stm32f30x_opamp.o
+ .debug_aranges
+                0x00000000       0x90 Framework\src\stm32f30x_opamp.o
+ .debug_ranges  0x00000000       0x80 Framework\src\stm32f30x_opamp.o
+ .debug_line    0x00000000      0x31f Framework\src\stm32f30x_opamp.o
+ .debug_str     0x00000000      0x40a Framework\src\stm32f30x_opamp.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_opamp.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_opamp.o
+ .debug_frame   0x00000000      0x1b4 Framework\src\stm32f30x_opamp.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_misc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_misc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_misc.o
+ .text.NVIC_PriorityGroupConfig
+                0x00000000       0x24 Framework\src\stm32f30x_misc.o
+ .text.NVIC_Init
+                0x00000000       0xc0 Framework\src\stm32f30x_misc.o
+ .text.NVIC_SetVectorTable
+                0x00000000       0x2c Framework\src\stm32f30x_misc.o
+ .text.NVIC_SystemLPConfig
+                0x00000000       0x40 Framework\src\stm32f30x_misc.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_iwdg.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_iwdg.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_WriteAccessCmd
+                0x00000000       0x20 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_SetPrescaler
+                0x00000000       0x20 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_SetReload
+                0x00000000       0x20 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_ReloadCounter
+                0x00000000       0x18 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_SetWindowValue
+                0x00000000       0x20 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_Enable
+                0x00000000       0x18 Framework\src\stm32f30x_iwdg.o
+ .text.IWDG_GetFlagStatus
+                0x00000000       0x38 Framework\src\stm32f30x_iwdg.o
+ .debug_info    0x00000000      0x240 Framework\src\stm32f30x_iwdg.o
+ .debug_abbrev  0x00000000      0x112 Framework\src\stm32f30x_iwdg.o
+ .debug_aranges
+                0x00000000       0x50 Framework\src\stm32f30x_iwdg.o
+ .debug_ranges  0x00000000       0x40 Framework\src\stm32f30x_iwdg.o
+ .debug_line    0x00000000      0x20d Framework\src\stm32f30x_iwdg.o
+ .debug_str     0x00000000      0x2ee Framework\src\stm32f30x_iwdg.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_iwdg.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_iwdg.o
+ .debug_frame   0x00000000       0xcc Framework\src\stm32f30x_iwdg.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_i2c.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_i2c.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_i2c.o
+ .text.I2C_DeInit
+                0x00000000       0x44 Framework\src\stm32f30x_i2c.o
+ .text.I2C_StructInit
+                0x00000000       0x40 Framework\src\stm32f30x_i2c.o
+ .text.I2C_SoftwareResetCmd
+                0x00000000       0x30 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_i2c.o
+ .text.I2C_StretchClockCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_StopModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_DualAddressCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_OwnAddress2Config
+                0x00000000       0x4c Framework\src\stm32f30x_i2c.o
+ .text.I2C_GeneralCallCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_SlaveByteControlCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_SlaveAddressConfig
+                0x00000000       0x40 Framework\src\stm32f30x_i2c.o
+ .text.I2C_10BitAddressingModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_AutoEndCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ReloadCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_NumberOfBytesConfig
+                0x00000000       0x3c Framework\src\stm32f30x_i2c.o
+ .text.I2C_MasterRequestConfig
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_GenerateSTART
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_GenerateSTOP
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_10BitAddressHeaderCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_AcknowledgeConfig
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_GetAddressMatched
+                0x00000000       0x20 Framework\src\stm32f30x_i2c.o
+ .text.I2C_GetTransferDirection
+                0x00000000       0x3c Framework\src\stm32f30x_i2c.o
+ .text.I2C_TransferHandling
+                0x00000000       0x58 Framework\src\stm32f30x_i2c.o
+ .text.I2C_SMBusAlertCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ClockTimeoutCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ExtendedClockTimeoutCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_IdleClockTimeoutCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_TimeoutAConfig
+                0x00000000       0x40 Framework\src\stm32f30x_i2c.o
+ .text.I2C_TimeoutBConfig
+                0x00000000       0x44 Framework\src\stm32f30x_i2c.o
+ .text.I2C_CalculatePEC
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_PECRequestCmd
+                0x00000000       0x38 Framework\src\stm32f30x_i2c.o
+ .text.I2C_GetPEC
+                0x00000000       0x1c Framework\src\stm32f30x_i2c.o
+ .text.I2C_ReadRegister
+                0x00000000       0x2c Framework\src\stm32f30x_i2c.o
+ .text.I2C_ReceiveData
+                0x00000000       0x1c Framework\src\stm32f30x_i2c.o
+ .text.I2C_DMACmd
+                0x00000000       0x3c Framework\src\stm32f30x_i2c.o
+ .text.I2C_GetFlagStatus
+                0x00000000       0x40 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ClearFlag
+                0x00000000       0x1c Framework\src\stm32f30x_i2c.o
+ .text.I2C_GetITStatus
+                0x00000000       0x80 Framework\src\stm32f30x_i2c.o
+ .text.I2C_ClearITPendingBit
+                0x00000000       0x1c Framework\src\stm32f30x_i2c.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_gpio.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_gpio.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_DeInit
+                0x00000000      0x118 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_StructInit
+                0x00000000       0x34 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_PinLockConfig
+                0x00000000       0x44 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_ReadInputDataBit
+                0x00000000       0x38 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_ReadInputData
+                0x00000000       0x1c Framework\src\stm32f30x_gpio.o
+ .text.GPIO_ReadOutputData
+                0x00000000       0x1c Framework\src\stm32f30x_gpio.o
+ .text.GPIO_WriteBit
+                0x00000000       0x30 Framework\src\stm32f30x_gpio.o
+ .text.GPIO_Write
+                0x00000000       0x1c Framework\src\stm32f30x_gpio.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_fmc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_fmc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_fmc.o
+ .text.FMC_NORSRAMDeInit
+                0x00000000       0x58 Framework\src\stm32f30x_fmc.o
+ .text.FMC_NORSRAMInit
+                0x00000000      0x13c Framework\src\stm32f30x_fmc.o
+ .text.FMC_NORSRAMStructInit
+                0x00000000       0xd4 Framework\src\stm32f30x_fmc.o
+ .text.FMC_NORSRAMCmd
+                0x00000000       0x54 Framework\src\stm32f30x_fmc.o
+ .text.FMC_NANDDeInit
+                0x00000000       0x5c Framework\src\stm32f30x_fmc.o
+ .text.FMC_NANDInit
+                0x00000000       0xcc Framework\src\stm32f30x_fmc.o
+ .text.FMC_NANDStructInit
+                0x00000000       0x7c Framework\src\stm32f30x_fmc.o
+ .text.FMC_NANDCmd
+                0x00000000       0x6c Framework\src\stm32f30x_fmc.o
+ .text.FMC_NANDECCCmd
+                0x00000000       0x6c Framework\src\stm32f30x_fmc.o
+ .text.FMC_GetECC
+                0x00000000       0x38 Framework\src\stm32f30x_fmc.o
+ .text.FMC_PCCARDDeInit
+                0x00000000       0x34 Framework\src\stm32f30x_fmc.o
+ .text.FMC_PCCARDInit
+                0x00000000       0xac Framework\src\stm32f30x_fmc.o
+ .text.FMC_PCCARDStructInit
+                0x00000000       0x84 Framework\src\stm32f30x_fmc.o
+ .text.FMC_PCCARDCmd
+                0x00000000       0x3c Framework\src\stm32f30x_fmc.o
+ .text.FMC_ITConfig
+                0x00000000       0xa0 Framework\src\stm32f30x_fmc.o
+ .text.FMC_GetFlagStatus
+                0x00000000       0x68 Framework\src\stm32f30x_fmc.o
+ .text.FMC_ClearFlag
+                0x00000000       0x5c Framework\src\stm32f30x_fmc.o
+ .text.FMC_GetITStatus
+                0x00000000       0x80 Framework\src\stm32f30x_fmc.o
+ .text.FMC_ClearITPendingBit
+                0x00000000       0x64 Framework\src\stm32f30x_fmc.o
+ .debug_info    0x00000000      0x8e3 Framework\src\stm32f30x_fmc.o
+ .debug_abbrev  0x00000000      0x172 Framework\src\stm32f30x_fmc.o
+ .debug_aranges
+                0x00000000       0xb0 Framework\src\stm32f30x_fmc.o
+ .debug_ranges  0x00000000       0xa0 Framework\src\stm32f30x_fmc.o
+ .debug_line    0x00000000      0x457 Framework\src\stm32f30x_fmc.o
+ .debug_str     0x00000000      0x78e Framework\src\stm32f30x_fmc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_fmc.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_fmc.o
+ .debug_frame   0x00000000      0x220 Framework\src\stm32f30x_fmc.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_flash.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_flash.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_flash.o
+ .text.FLASH_SetLatency
+                0x00000000       0x38 Framework\src\stm32f30x_flash.o
+ .text.FLASH_HalfCycleAccessCmd
+                0x00000000       0x38 Framework\src\stm32f30x_flash.o
+ .text.FLASH_PrefetchBufferCmd
+                0x00000000       0x38 Framework\src\stm32f30x_flash.o
+ .text.FLASH_Unlock
+                0x00000000       0x30 Framework\src\stm32f30x_flash.o
+ .text.FLASH_Lock
+                0x00000000       0x1c Framework\src\stm32f30x_flash.o
+ .text.FLASH_ErasePage
+                0x00000000       0x64 Framework\src\stm32f30x_flash.o
+ .text.FLASH_EraseAllPages
+                0x00000000       0x5c Framework\src\stm32f30x_flash.o
+ .text.FLASH_ProgramWord
+                0x00000000       0x90 Framework\src\stm32f30x_flash.o
+ .text.FLASH_ProgramHalfWord
+                0x00000000       0x5c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_Unlock
+                0x00000000       0x30 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_Lock
+                0x00000000       0x1c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_Launch
+                0x00000000       0x1c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_Erase
+                0x00000000       0xbc Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_EnableWRP
+                0x00000000      0x104 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_RDPConfig
+                0x00000000       0xb0 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_UserConfig
+                0x00000000       0x90 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_BOOTConfig
+                0x00000000       0x7c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_VDDAConfig
+                0x00000000       0x7c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_SRAMParityConfig
+                0x00000000       0x68 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_WriteUser
+                0x00000000       0x7c Framework\src\stm32f30x_flash.o
+ .text.FLASH_ProgramOptionByteData
+                0x00000000       0x64 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_GetUser
+                0x00000000       0x1c Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_GetWRP
+                0x00000000       0x18 Framework\src\stm32f30x_flash.o
+ .text.FLASH_OB_GetRDP
+                0x00000000       0x34 Framework\src\stm32f30x_flash.o
+ .text.FLASH_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_flash.o
+ .text.FLASH_GetFlagStatus
+                0x00000000       0x34 Framework\src\stm32f30x_flash.o
+ .text.FLASH_ClearFlag
+                0x00000000       0x1c Framework\src\stm32f30x_flash.o
+ .text.FLASH_GetStatus
+                0x00000000       0x58 Framework\src\stm32f30x_flash.o
+ .text.FLASH_WaitForLastOperation
+                0x00000000       0x44 Framework\src\stm32f30x_flash.o
+ .debug_info    0x00000000      0x7ed Framework\src\stm32f30x_flash.o
+ .debug_abbrev  0x00000000      0x1b4 Framework\src\stm32f30x_flash.o
+ .debug_aranges
+                0x00000000      0x100 Framework\src\stm32f30x_flash.o
+ .debug_ranges  0x00000000       0xf0 Framework\src\stm32f30x_flash.o
+ .debug_line    0x00000000      0x4d4 Framework\src\stm32f30x_flash.o
+ .debug_str     0x00000000      0x612 Framework\src\stm32f30x_flash.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_flash.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_flash.o
+ .debug_frame   0x00000000      0x358 Framework\src\stm32f30x_flash.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_exti.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_exti.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_exti.o
+ .text.EXTI_DeInit
+                0x00000000       0x5c Framework\src\stm32f30x_exti.o
+ .text.EXTI_Init
+                0x00000000      0x1f4 Framework\src\stm32f30x_exti.o
+ .text.EXTI_StructInit
+                0x00000000       0x2c Framework\src\stm32f30x_exti.o
+ .text.EXTI_GenerateSWInterrupt
+                0x00000000       0x40 Framework\src\stm32f30x_exti.o
+ .text.EXTI_GetFlagStatus
+                0x00000000       0x48 Framework\src\stm32f30x_exti.o
+ .text.EXTI_ClearFlag
+                0x00000000       0x30 Framework\src\stm32f30x_exti.o
+ .text.EXTI_GetITStatus
+                0x00000000       0x48 Framework\src\stm32f30x_exti.o
+ .text.EXTI_ClearITPendingBit
+                0x00000000       0x30 Framework\src\stm32f30x_exti.o
+ .debug_info    0x00000000      0x3a9 Framework\src\stm32f30x_exti.o
+ .debug_abbrev  0x00000000      0x17c Framework\src\stm32f30x_exti.o
+ .debug_aranges
+                0x00000000       0x58 Framework\src\stm32f30x_exti.o
+ .debug_ranges  0x00000000       0x48 Framework\src\stm32f30x_exti.o
+ .debug_line    0x00000000      0x2ab Framework\src\stm32f30x_exti.o
+ .debug_str     0x00000000      0x3da Framework\src\stm32f30x_exti.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_exti.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_exti.o
+ .debug_frame   0x00000000       0xec Framework\src\stm32f30x_exti.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_dma.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_dma.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_dma.o
+ .text.DMA_DeInit
+                0x00000000      0x178 Framework\src\stm32f30x_dma.o
+ .text.DMA_Init
+                0x00000000       0x80 Framework\src\stm32f30x_dma.o
+ .text.DMA_StructInit
+                0x00000000       0x54 Framework\src\stm32f30x_dma.o
+ .text.DMA_Cmd  0x00000000       0x38 Framework\src\stm32f30x_dma.o
+ .text.DMA_SetCurrDataCounter
+                0x00000000       0x1c Framework\src\stm32f30x_dma.o
+ .text.DMA_GetCurrDataCounter
+                0x00000000       0x1c Framework\src\stm32f30x_dma.o
+ .text.DMA_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_dma.o
+ .text.DMA_GetFlagStatus
+                0x00000000       0x54 Framework\src\stm32f30x_dma.o
+ .text.DMA_ClearFlag
+                0x00000000       0x34 Framework\src\stm32f30x_dma.o
+ .text.DMA_GetITStatus
+                0x00000000       0x54 Framework\src\stm32f30x_dma.o
+ .text.DMA_ClearITPendingBit
+                0x00000000       0x34 Framework\src\stm32f30x_dma.o
+ .debug_info    0x00000000      0x477 Framework\src\stm32f30x_dma.o
+ .debug_abbrev  0x00000000      0x157 Framework\src\stm32f30x_dma.o
+ .debug_aranges
+                0x00000000       0x70 Framework\src\stm32f30x_dma.o
+ .debug_ranges  0x00000000       0x60 Framework\src\stm32f30x_dma.o
+ .debug_line    0x00000000      0x305 Framework\src\stm32f30x_dma.o
+ .debug_str     0x00000000      0x424 Framework\src\stm32f30x_dma.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_dma.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_dma.o
+ .debug_frame   0x00000000      0x144 Framework\src\stm32f30x_dma.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_dbgmcu.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_dbgmcu.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_dbgmcu.o
+ .text.DBGMCU_GetREVID
+                0x00000000       0x18 Framework\src\stm32f30x_dbgmcu.o
+ .text.DBGMCU_GetDEVID
+                0x00000000       0x1c Framework\src\stm32f30x_dbgmcu.o
+ .text.DBGMCU_Config
+                0x00000000       0x3c Framework\src\stm32f30x_dbgmcu.o
+ .text.DBGMCU_APB1PeriphConfig
+                0x00000000       0x3c Framework\src\stm32f30x_dbgmcu.o
+ .text.DBGMCU_APB2PeriphConfig
+                0x00000000       0x3c Framework\src\stm32f30x_dbgmcu.o
+ .debug_info    0x00000000      0x1e0 Framework\src\stm32f30x_dbgmcu.o
+ .debug_abbrev  0x00000000       0xe0 Framework\src\stm32f30x_dbgmcu.o
+ .debug_aranges
+                0x00000000       0x40 Framework\src\stm32f30x_dbgmcu.o
+ .debug_ranges  0x00000000       0x30 Framework\src\stm32f30x_dbgmcu.o
+ .debug_line    0x00000000      0x1ed Framework\src\stm32f30x_dbgmcu.o
+ .debug_str     0x00000000      0x29d Framework\src\stm32f30x_dbgmcu.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_dbgmcu.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_dbgmcu.o
+ .debug_frame   0x00000000       0x94 Framework\src\stm32f30x_dbgmcu.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_dac.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_dac.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_dac.o
+ .text.DAC_DeInit
+                0x00000000       0x44 Framework\src\stm32f30x_dac.o
+ .text.DAC_Init
+                0x00000000       0x64 Framework\src\stm32f30x_dac.o
+ .text.DAC_StructInit
+                0x00000000       0x2c Framework\src\stm32f30x_dac.o
+ .text.DAC_Cmd  0x00000000       0x48 Framework\src\stm32f30x_dac.o
+ .text.DAC_SoftwareTriggerCmd
+                0x00000000       0x4c Framework\src\stm32f30x_dac.o
+ .text.DAC_DualSoftwareTriggerCmd
+                0x00000000       0x38 Framework\src\stm32f30x_dac.o
+ .text.DAC_WaveGenerationCmd
+                0x00000000       0x48 Framework\src\stm32f30x_dac.o
+ .text.DAC_SetChannel1Data
+                0x00000000       0x30 Framework\src\stm32f30x_dac.o
+ .text.DAC_SetChannel2Data
+                0x00000000       0x30 Framework\src\stm32f30x_dac.o
+ .text.DAC_SetDualChannelData
+                0x00000000       0x50 Framework\src\stm32f30x_dac.o
+ .text.DAC_GetDataOutputValue
+                0x00000000       0x30 Framework\src\stm32f30x_dac.o
+ .text.DAC_DMACmd
+                0x00000000       0x4c Framework\src\stm32f30x_dac.o
+ .text.DAC_ITConfig
+                0x00000000       0x48 Framework\src\stm32f30x_dac.o
+ .text.DAC_GetFlagStatus
+                0x00000000       0x3c Framework\src\stm32f30x_dac.o
+ .text.DAC_ClearFlag
+                0x00000000       0x20 Framework\src\stm32f30x_dac.o
+ .text.DAC_GetITStatus
+                0x00000000       0x54 Framework\src\stm32f30x_dac.o
+ .text.DAC_ClearITPendingBit
+                0x00000000       0x20 Framework\src\stm32f30x_dac.o
+ .debug_info    0x00000000      0x73a Framework\src\stm32f30x_dac.o
+ .debug_abbrev  0x00000000      0x180 Framework\src\stm32f30x_dac.o
+ .debug_aranges
+                0x00000000       0xa0 Framework\src\stm32f30x_dac.o
+ .debug_ranges  0x00000000       0x90 Framework\src\stm32f30x_dac.o
+ .debug_line    0x00000000      0x35e Framework\src\stm32f30x_dac.o
+ .debug_str     0x00000000      0x4b6 Framework\src\stm32f30x_dac.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_dac.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_dac.o
+ .debug_frame   0x00000000      0x1f0 Framework\src\stm32f30x_dac.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_crc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_crc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_crc.o
+ .text.CRC_DeInit
+                0x00000000       0x38 Framework\src\stm32f30x_crc.o
+ .text.CRC_ResetDR
+                0x00000000       0x1c Framework\src\stm32f30x_crc.o
+ .text.CRC_PolynomialSizeSelect
+                0x00000000       0x38 Framework\src\stm32f30x_crc.o
+ .text.CRC_ReverseInputDataSelect
+                0x00000000       0x38 Framework\src\stm32f30x_crc.o
+ .text.CRC_ReverseOutputDataCmd
+                0x00000000       0x38 Framework\src\stm32f30x_crc.o
+ .text.CRC_SetInitRegister
+                0x00000000       0x1c Framework\src\stm32f30x_crc.o
+ .text.CRC_SetPolynomial
+                0x00000000       0x1c Framework\src\stm32f30x_crc.o
+ .text.CRC_CalcCRC
+                0x00000000       0x24 Framework\src\stm32f30x_crc.o
+ .text.CRC_CalcCRC16bits
+                0x00000000       0x24 Framework\src\stm32f30x_crc.o
+ .text.CRC_CalcCRC8bits
+                0x00000000       0x24 Framework\src\stm32f30x_crc.o
+ .text.CRC_CalcBlockCRC
+                0x00000000       0x44 Framework\src\stm32f30x_crc.o
+ .text.CRC_GetCRC
+                0x00000000       0x18 Framework\src\stm32f30x_crc.o
+ .text.CRC_SetIDRegister
+                0x00000000       0x20 Framework\src\stm32f30x_crc.o
+ .text.CRC_GetIDRegister
+                0x00000000       0x18 Framework\src\stm32f30x_crc.o
+ .debug_info    0x00000000      0x392 Framework\src\stm32f30x_crc.o
+ .debug_abbrev  0x00000000      0x180 Framework\src\stm32f30x_crc.o
+ .debug_aranges
+                0x00000000       0x88 Framework\src\stm32f30x_crc.o
+ .debug_ranges  0x00000000       0x78 Framework\src\stm32f30x_crc.o
+ .debug_line    0x00000000      0x2aa Framework\src\stm32f30x_crc.o
+ .debug_str     0x00000000      0x3c5 Framework\src\stm32f30x_crc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_crc.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_crc.o
+ .debug_frame   0x00000000      0x188 Framework\src\stm32f30x_crc.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_comp.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_comp.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_comp.o
+ .text.COMP_DeInit
+                0x00000000       0x20 Framework\src\stm32f30x_comp.o
+ .text.COMP_Init
+                0x00000000       0x68 Framework\src\stm32f30x_comp.o
+ .text.COMP_StructInit
+                0x00000000       0x3c Framework\src\stm32f30x_comp.o
+ .text.COMP_Cmd
+                0x00000000       0x50 Framework\src\stm32f30x_comp.o
+ .text.COMP_SwitchCmd
+                0x00000000       0x50 Framework\src\stm32f30x_comp.o
+ .text.COMP_GetOutputLevel
+                0x00000000       0x3c Framework\src\stm32f30x_comp.o
+ .text.COMP_WindowCmd
+                0x00000000       0x50 Framework\src\stm32f30x_comp.o
+ .text.COMP_LockConfig
+                0x00000000       0x2c Framework\src\stm32f30x_comp.o
+ .debug_info    0x00000000      0x2c8 Framework\src\stm32f30x_comp.o
+ .debug_abbrev  0x00000000      0x123 Framework\src\stm32f30x_comp.o
+ .debug_aranges
+                0x00000000       0x58 Framework\src\stm32f30x_comp.o
+ .debug_ranges  0x00000000       0x48 Framework\src\stm32f30x_comp.o
+ .debug_line    0x00000000      0x29d Framework\src\stm32f30x_comp.o
+ .debug_str     0x00000000      0x32d Framework\src\stm32f30x_comp.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_comp.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_comp.o
+ .debug_frame   0x00000000       0xf0 Framework\src\stm32f30x_comp.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_can.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_can.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_can.o
+ .text.CAN_DeInit
+                0x00000000       0x24 Framework\src\stm32f30x_can.o
+ .text.CAN_Init
+                0x00000000      0x1a4 Framework\src\stm32f30x_can.o
+ .text.CAN_FilterInit
+                0x00000000      0x164 Framework\src\stm32f30x_can.o
+ .text.CAN_StructInit
+                0x00000000       0x54 Framework\src\stm32f30x_can.o
+ .text.CAN_SlaveStartBank
+                0x00000000       0x60 Framework\src\stm32f30x_can.o
+ .text.CAN_DBGFreeze
+                0x00000000       0x38 Framework\src\stm32f30x_can.o
+ .text.CAN_TTComModeCmd
+                0x00000000       0x98 Framework\src\stm32f30x_can.o
+ .text.CAN_Transmit
+                0x00000000      0x190 Framework\src\stm32f30x_can.o
+ .text.CAN_TransmitStatus
+                0x00000000       0xd4 Framework\src\stm32f30x_can.o
+ .text.CAN_CancelTransmit
+                0x00000000       0x50 Framework\src\stm32f30x_can.o
+ .text.CAN_Receive
+                0x00000000      0x170 Framework\src\stm32f30x_can.o
+ .text.CAN_FIFORelease
+                0x00000000       0x38 Framework\src\stm32f30x_can.o
+ .text.CAN_MessagePending
+                0x00000000       0x4c Framework\src\stm32f30x_can.o
+ .text.CAN_OperatingModeRequest
+                0x00000000       0xfc Framework\src\stm32f30x_can.o
+ .text.CAN_Sleep
+                0x00000000       0x3c Framework\src\stm32f30x_can.o
+ .text.CAN_WakeUp
+                0x00000000       0x58 Framework\src\stm32f30x_can.o
+ .text.CAN_GetLastErrorCode
+                0x00000000       0x28 Framework\src\stm32f30x_can.o
+ .text.CAN_GetReceiveErrorCounter
+                0x00000000       0x24 Framework\src\stm32f30x_can.o
+ .text.CAN_GetLSBTransmitErrorCounter
+                0x00000000       0x28 Framework\src\stm32f30x_can.o
+ .text.CAN_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_can.o
+ .text.CAN_GetFlagStatus
+                0x00000000       0xd0 Framework\src\stm32f30x_can.o
+ .text.CAN_ClearFlag
+                0x00000000       0x70 Framework\src\stm32f30x_can.o
+ .text.CAN_GetITStatus
+                0x00000000      0x194 Framework\src\stm32f30x_can.o
+ .text.CAN_ClearITPendingBit
+                0x00000000       0xdc Framework\src\stm32f30x_can.o
+ .text.CheckITStatus
+                0x00000000       0x30 Framework\src\stm32f30x_can.o
+ .debug_info    0x00000000      0xba0 Framework\src\stm32f30x_can.o
+ .debug_abbrev  0x00000000      0x1f5 Framework\src\stm32f30x_can.o
+ .debug_aranges
+                0x00000000       0xe0 Framework\src\stm32f30x_can.o
+ .debug_ranges  0x00000000       0xd0 Framework\src\stm32f30x_can.o
+ .debug_line    0x00000000      0x56a Framework\src\stm32f30x_can.o
+ .debug_str     0x00000000      0x79b Framework\src\stm32f30x_can.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_can.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_can.o
+ .debug_frame   0x00000000      0x2d4 Framework\src\stm32f30x_can.o
+ .text          0x00000000        0x0 Framework\src\stm32f30x_adc.o
+ .data          0x00000000        0x0 Framework\src\stm32f30x_adc.o
+ .bss           0x00000000        0x0 Framework\src\stm32f30x_adc.o
+ .text.ADC_DeInit
+                0x00000000       0x64 Framework\src\stm32f30x_adc.o
+ .text.ADC_Init
+                0x00000000       0x80 Framework\src\stm32f30x_adc.o
+ .text.ADC_StructInit
+                0x00000000       0x44 Framework\src\stm32f30x_adc.o
+ .text.ADC_InjectedInit
+                0x00000000       0x60 Framework\src\stm32f30x_adc.o
+ .text.ADC_InjectedStructInit
+                0x00000000       0x3c Framework\src\stm32f30x_adc.o
+ .text.ADC_CommonInit
+                0x00000000       0x9c Framework\src\stm32f30x_adc.o
+ .text.ADC_CommonStructInit
+                0x00000000       0x30 Framework\src\stm32f30x_adc.o
+ .text.ADC_Cmd  0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_StartCalibration
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetCalibrationValue
+                0x00000000       0x1c Framework\src\stm32f30x_adc.o
+ .text.ADC_SetCalibrationValue
+                0x00000000       0x1c Framework\src\stm32f30x_adc.o
+ .text.ADC_SelectCalibrationMode
+                0x00000000       0x2c Framework\src\stm32f30x_adc.o
+ .text.ADC_GetCalibrationStatus
+                0x00000000       0x2c Framework\src\stm32f30x_adc.o
+ .text.ADC_DisableCmd
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetDisableCmdStatus
+                0x00000000       0x30 Framework\src\stm32f30x_adc.o
+ .text.ADC_VoltageRegulatorCmd
+                0x00000000       0x44 Framework\src\stm32f30x_adc.o
+ .text.ADC_SelectDifferentialMode
+                0x00000000       0x50 Framework\src\stm32f30x_adc.o
+ .text.ADC_SelectQueueOfContextMode
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_AutoDelayCmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdogCmd
+                0x00000000       0x34 Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog1ThresholdsConfig
+                0x00000000       0x54 Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog2ThresholdsConfig
+                0x00000000       0x4c Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog3ThresholdsConfig
+                0x00000000       0x4c Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog1SingleChannelConfig
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog2SingleChannelConfig
+                0x00000000       0x4c Framework\src\stm32f30x_adc.o
+ .text.ADC_AnalogWatchdog3SingleChannelConfig
+                0x00000000       0x4c Framework\src\stm32f30x_adc.o
+ .text.ADC_TempSensorCmd
+                0x00000000       0x3c Framework\src\stm32f30x_adc.o
+ .text.ADC_VrefintCmd
+                0x00000000       0x74 Framework\src\stm32f30x_adc.o
+ .text.ADC_VbatCmd
+                0x00000000       0x3c Framework\src\stm32f30x_adc.o
+ .text.ADC_RegularChannelConfig
+                0x00000000      0x1e4 Framework\src\stm32f30x_adc.o
+ .text.ADC_RegularChannelSequencerLengthConfig
+                0x00000000       0x30 Framework\src\stm32f30x_adc.o
+ .text.ADC_ExternalTriggerConfig
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_StartConversion
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetStartConversionStatus
+                0x00000000       0x30 Framework\src\stm32f30x_adc.o
+ .text.ADC_StopConversion
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_DiscModeChannelCountConfig
+                0x00000000       0x44 Framework\src\stm32f30x_adc.o
+ .text.ADC_DiscModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetConversionValue
+                0x00000000       0x1c Framework\src\stm32f30x_adc.o
+ .text.ADC_GetDualModeConversionValue
+                0x00000000       0x44 Framework\src\stm32f30x_adc.o
+ .text.ADC_SetChannelOffset1
+                0x00000000       0x50 Framework\src\stm32f30x_adc.o
+ .text.ADC_SetChannelOffset2
+                0x00000000       0x50 Framework\src\stm32f30x_adc.o
+ .text.ADC_SetChannelOffset3
+                0x00000000       0x50 Framework\src\stm32f30x_adc.o
+ .text.ADC_SetChannelOffset4
+                0x00000000       0x50 Framework\src\stm32f30x_adc.o
+ .text.ADC_ChannelOffset1Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_ChannelOffset2Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_ChannelOffset3Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_ChannelOffset4Cmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_DMACmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_DMAConfig
+                0x00000000       0x2c Framework\src\stm32f30x_adc.o
+ .text.ADC_InjectedChannelSampleTimeConfig
+                0x00000000       0xa0 Framework\src\stm32f30x_adc.o
+ .text.ADC_StartInjectedConversion
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_StopInjectedConversion
+                0x00000000       0x20 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetStartInjectedConversionStatus
+                0x00000000       0x30 Framework\src\stm32f30x_adc.o
+ .text.ADC_AutoInjectedConvCmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_InjectedDiscModeCmd
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_GetInjectedConversionValue
+                0x00000000       0x38 Framework\src\stm32f30x_adc.o
+ .text.ADC_ITConfig
+                0x00000000       0x3c Framework\src\stm32f30x_adc.o
+ .text.ADC_GetFlagStatus
+                0x00000000       0x34 Framework\src\stm32f30x_adc.o
+ .text.ADC_ClearFlag
+                0x00000000       0x1c Framework\src\stm32f30x_adc.o
+ .text.ADC_GetCommonFlagStatus
+                0x00000000       0x60 Framework\src\stm32f30x_adc.o
+ .text.ADC_ClearCommonFlag
+                0x00000000       0x4c Framework\src\stm32f30x_adc.o
+ .text.ADC_GetITStatus
+                0x00000000       0x58 Framework\src\stm32f30x_adc.o
+ .text.ADC_ClearITPendingBit
+                0x00000000       0x1c Framework\src\stm32f30x_adc.o
+ .debug_info    0x00000000     0x131b Framework\src\stm32f30x_adc.o
+ .debug_abbrev  0x00000000      0x192 Framework\src\stm32f30x_adc.o
+ .debug_aranges
+                0x00000000      0x210 Framework\src\stm32f30x_adc.o
+ .debug_ranges  0x00000000      0x200 Framework\src\stm32f30x_adc.o
+ .debug_line    0x00000000      0x7a2 Framework\src\stm32f30x_adc.o
+ .debug_str     0x00000000      0xbf7 Framework\src\stm32f30x_adc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_adc.o
+ .ARM.attributes
+                0x00000000       0x39 Framework\src\stm32f30x_adc.o
+ .debug_frame   0x00000000      0x6f8 Framework\src\stm32f30x_adc.o
+ .text          0x00000000        0x0 Drivers\Wifi\Wifi.o
+ .data          0x00000000        0x0 Drivers\Wifi\Wifi.o
+ .bss           0x00000000        0x0 Drivers\Wifi\Wifi.o
+ .text.InitializeWifi
+                0x00000000       0x3c Drivers\Wifi\Wifi.o
+ .text.Wifi_Send
+                0x00000000       0x30 Drivers\Wifi\Wifi.o
+ .debug_info    0x00000000      0x3f3 Drivers\Wifi\Wifi.o
+ .debug_abbrev  0x00000000      0x131 Drivers\Wifi\Wifi.o
+ .debug_aranges
+                0x00000000       0x28 Drivers\Wifi\Wifi.o
+ .debug_ranges  0x00000000       0x18 Drivers\Wifi\Wifi.o
+ .debug_line    0x00000000      0x213 Drivers\Wifi\Wifi.o
+ .debug_str     0x00000000      0x3f4 Drivers\Wifi\Wifi.o
+ .comment       0x00000000       0x84 Drivers\Wifi\Wifi.o
+ .ARM.attributes
+                0x00000000       0x39 Drivers\Wifi\Wifi.o
+ .debug_frame   0x00000000       0x50 Drivers\Wifi\Wifi.o
+ .text          0x00000000        0x0 Drivers\MPU\MPU.o
+ .data          0x00000000        0x0 Drivers\MPU\MPU.o
+ .bss           0x00000000        0x0 Drivers\MPU\MPU.o
+ .text.MPU_Send
+                0x00000000       0x14 Drivers\MPU\MPU.o
+ .text          0x00000000        0x0 Drivers\LEDs\LED.o
+ .data          0x00000000        0x0 Drivers\LEDs\LED.o
+ .bss           0x00000000        0x0 Drivers\LEDs\LED.o
+ .text.InitializeLed14
+                0x00000000       0x14 Drivers\LEDs\LED.o
+ .text.InitializeLedEye
+                0x00000000       0x14 Drivers\LEDs\LED.o
+ .text          0x00000000        0x0 Drivers\Clock\clock.o
+ .data          0x00000000        0x0 Drivers\Clock\clock.o
+ .bss           0x00000000        0x0 Drivers\Clock\clock.o
+ .text          0x00000000        0x0 Drivers\BT\BT.o
+ .data          0x00000000        0x0 Drivers\BT\BT.o
+ .bss           0x00000000        0x0 Drivers\BT\BT.o
+ .text          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+ .eh_frame      0x00000000        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+ .ARM.attributes
+                0x00000000       0x34 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+ .text          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ .data          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ .bss           0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00080000         xr
+RAM              0x20000000         0x00010000         xrw
+MEMORY_B1        0x60000000         0x00000000         xr
+CCMRAM           0x10000000         0x00002000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+LOAD src\system_stm32f30x.o
+LOAD src\startup_stm32f303xe.o
+LOAD src\main.o
+LOAD HAL\USART.o
+LOAD HAL\Timers.o
+LOAD HAL\SysTick.o
+LOAD HAL\RCC.o
+LOAD HAL\NVIC.o
+LOAD HAL\I2C.o
+LOAD HAL\GPIO.o
+LOAD Framework\src\stm32f30x_wwdg.o
+LOAD Framework\src\stm32f30x_usart.o
+LOAD Framework\src\stm32f30x_tim.o
+LOAD Framework\src\stm32f30x_syscfg.o
+LOAD Framework\src\stm32f30x_spi.o
+LOAD Framework\src\stm32f30x_rtc.o
+LOAD Framework\src\stm32f30x_rcc.o
+LOAD Framework\src\stm32f30x_pwr.o
+LOAD Framework\src\stm32f30x_opamp.o
+LOAD Framework\src\stm32f30x_misc.o
+LOAD Framework\src\stm32f30x_iwdg.o
+LOAD Framework\src\stm32f30x_i2c.o
+LOAD Framework\src\stm32f30x_gpio.o
+LOAD Framework\src\stm32f30x_fmc.o
+LOAD Framework\src\stm32f30x_flash.o
+LOAD Framework\src\stm32f30x_exti.o
+LOAD Framework\src\stm32f30x_dma.o
+LOAD Framework\src\stm32f30x_dbgmcu.o
+LOAD Framework\src\stm32f30x_dac.o
+LOAD Framework\src\stm32f30x_crc.o
+LOAD Framework\src\stm32f30x_comp.o
+LOAD Framework\src\stm32f30x_can.o
+LOAD Framework\src\stm32f30x_adc.o
+LOAD Drivers\Wifi\Wifi.o
+LOAD Drivers\MPU\MPU.o
+LOAD Drivers\LEDs\LED.o
+LOAD Drivers\Clock\clock.o
+LOAD Drivers\BT\BT.o
+START GROUP
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a
+END GROUP
+                0x00001000                malloc_getpagesize_P = 0x1000
+START GROUP
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu\libgcc.a
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc.a
+END GROUP
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtend.o
+LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x20010000                _estack = 0x20010000
+                0x00000000                _Min_Heap_Size = 0x0
+                0x00000200                _Min_Stack_Size = 0x200
+
+.isr_vector     0x08000000      0x194
+                0x08000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x08000000      0x194 src\startup_stm32f303xe.o
+                0x08000000                g_pfnVectors
+                0x08000194                . = ALIGN (0x4)
+
+.text           0x08000194     0x1a10
+                0x08000194                . = ALIGN (0x4)
+ *(.text)
+ .text          0x08000194       0x40 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ *(.text*)
+ .text.SystemInit
+                0x080001d4       0x90 src\system_stm32f30x.o
+                0x080001d4                SystemInit
+ .text.SetSysClock
+                0x08000264       0xe0 src\system_stm32f30x.o
+ .text.Reset_Handler
+                0x08000344       0x5c src\startup_stm32f303xe.o
+                0x08000344                Reset_Handler
+ .text.Default_Handler
+                0x080003a0        0x4 src\startup_stm32f303xe.o
+                0x080003a0                RTC_Alarm_IRQHandler
+                0x080003a0                TIM8_TRG_COM_IRQHandler
+                0x080003a0                TIM8_CC_IRQHandler
+                0x080003a0                DebugMon_Handler
+                0x080003a0                SPI4_IRQHandler
+                0x080003a0                TIM1_CC_IRQHandler
+                0x080003a0                HardFault_Handler
+                0x080003a0                USB_HP_IRQHandler
+                0x080003a0                PVD_IRQHandler
+                0x080003a0                TAMP_STAMP_IRQHandler
+                0x080003a0                PendSV_Handler
+                0x080003a0                NMI_Handler
+                0x080003a0                EXTI3_IRQHandler
+                0x080003a0                I2C3_ER_IRQHandler
+                0x080003a0                USB_HP_CAN_TX_IRQHandler
+                0x080003a0                EXTI0_IRQHandler
+                0x080003a0                I2C2_EV_IRQHandler
+                0x080003a0                FPU_IRQHandler
+                0x080003a0                TIM1_UP_TIM16_IRQHandler
+                0x080003a0                UsageFault_Handler
+                0x080003a0                ADC1_2_IRQHandler
+                0x080003a0                SPI1_IRQHandler
+                0x080003a0                CAN_SCE_IRQHandler
+                0x080003a0                TIM6_DAC_IRQHandler
+                0x080003a0                TIM8_UP_IRQHandler
+                0x080003a0                DMA2_Channel2_IRQHandler
+                0x080003a0                DMA1_Channel4_IRQHandler
+                0x080003a0                TIM20_TRG_COM_IRQHandler
+                0x080003a0                DMA1_Channel7_IRQHandler
+                0x080003a0                UART5_IRQHandler
+                0x080003a0                ADC3_IRQHandler
+                0x080003a0                TIM4_IRQHandler
+                0x080003a0                CAN_RX1_IRQHandler
+                0x080003a0                DMA2_Channel1_IRQHandler
+                0x080003a0                I2C1_EV_IRQHandler
+                0x080003a0                DMA1_Channel6_IRQHandler
+                0x080003a0                UART4_IRQHandler
+                0x080003a0                DMA2_Channel4_IRQHandler
+                0x080003a0                TIM3_IRQHandler
+                0x080003a0                RCC_IRQHandler
+                0x080003a0                TIM20_UP_IRQHandler
+                0x080003a0                DMA1_Channel1_IRQHandler
+                0x080003a0                Default_Handler
+                0x080003a0                USBWakeUp_RMP_IRQHandler
+                0x080003a0                EXTI15_10_IRQHandler
+                0x080003a0                TIM7_IRQHandler
+                0x080003a0                I2C3_EV_IRQHandler
+                0x080003a0                EXTI9_5_IRQHandler
+                0x080003a0                RTC_WKUP_IRQHandler
+                0x080003a0                SPI2_IRQHandler
+                0x080003a0                USB_LP_CAN_RX0_IRQHandler
+                0x080003a0                MemManage_Handler
+                0x080003a0                SVC_Handler
+                0x080003a0                DMA2_Channel5_IRQHandler
+                0x080003a0                DMA1_Channel5_IRQHandler
+                0x080003a0                USB_LP_IRQHandler
+                0x080003a0                EXTI4_IRQHandler
+                0x080003a0                TIM1_TRG_COM_TIM17_IRQHandler
+                0x080003a0                DMA1_Channel3_IRQHandler
+                0x080003a0                ADC4_IRQHandler
+                0x080003a0                WWDG_IRQHandler
+                0x080003a0                TIM2_IRQHandler
+                0x080003a0                COMP7_IRQHandler
+                0x080003a0                COMP1_2_3_IRQHandler
+                0x080003a0                EXTI1_IRQHandler
+                0x080003a0                COMP4_5_6_IRQHandler
+                0x080003a0                TIM20_BRK_IRQHandler
+                0x080003a0                I2C2_ER_IRQHandler
+                0x080003a0                DMA1_Channel2_IRQHandler
+                0x080003a0                TIM8_BRK_IRQHandler
+                0x080003a0                FLASH_IRQHandler
+                0x080003a0                TIM20_CC_IRQHandler
+                0x080003a0                BusFault_Handler
+                0x080003a0                SPI3_IRQHandler
+                0x080003a0                I2C1_ER_IRQHandler
+                0x080003a0                FMC_IRQHandler
+                0x080003a0                USBWakeUp_IRQHandler
+                0x080003a0                DMA2_Channel3_IRQHandler
+                0x080003a0                EXTI2_TSC_IRQHandler
+                0x080003a0                TIM1_BRK_TIM15_IRQHandler
+ .text.main     0x080003a4       0x74 src\main.o
+                0x080003a4                main
+ .text.InitializeUSART
+                0x08000418       0xb0 HAL\USART.o
+                0x08000418                InitializeUSART
+ .text.USARTInterrupt
+                0x080004c8       0x14 HAL\USART.o
+                0x080004c8                USARTInterrupt
+ .text.USART1_IRQHandler
+                0x080004dc       0x10 HAL\USART.o
+                0x080004dc                USART1_IRQHandler
+ .text.USART2_IRQHandler
+                0x080004ec       0x10 HAL\USART.o
+                0x080004ec                USART2_IRQHandler
+ .text.USART3_IRQHandler
+                0x080004fc       0x10 HAL\USART.o
+                0x080004fc                USART3_IRQHandler
+ .text.InitializeTimers
+                0x0800050c       0xa4 HAL\Timers.o
+                0x0800050c                InitializeTimers
+ .text.NVIC_SetPriority
+                0x080005b0       0x54 HAL\SysTick.o
+ .text.SysTick_Config
+                0x08000604       0x44 HAL\SysTick.o
+ .text.InitializeSysTick
+                0x08000648       0x18 HAL\SysTick.o
+                0x08000648                InitializeSysTick
+ .text.SysTick_Handler
+                0x08000660        0xc HAL\SysTick.o
+                0x08000660                SysTick_Handler
+ .text.priv_InitializeMPU
+                0x0800066c       0x30 HAL\RCC.o
+                0x0800066c                priv_InitializeMPU
+ .text.priv_InitializeLedNucleo
+                0x0800069c       0x10 HAL\RCC.o
+                0x0800069c                priv_InitializeLedNucleo
+ .text.priv_InitializeLed14
+                0x080006ac       0x1c HAL\RCC.o
+                0x080006ac                priv_InitializeLed14
+ .text.priv_InitializeLedEye
+                0x080006c8       0x10 HAL\RCC.o
+                0x080006c8                priv_InitializeLedEye
+ .text.priv_InitializeBt
+                0x080006d8       0x1c HAL\RCC.o
+                0x080006d8                priv_InitializeBt
+ .text.priv_InitializeWifi
+                0x080006f4       0x1c HAL\RCC.o
+                0x080006f4                priv_InitializeWifi
+ .text.priv_InitializePi
+                0x08000710       0x1c HAL\RCC.o
+                0x08000710                priv_InitializePi
+ .text.InitializeRCC
+                0x0800072c       0x68 HAL\RCC.o
+                0x0800072c                InitializeRCC
+ .text.InitializeI2C
+                0x08000794       0x40 HAL\I2C.o
+                0x08000794                InitializeI2C
+ .text.priv_InitializeLed14
+                0x080007d4       0x5c HAL\GPIO.o
+ .text.priv_InitializeLedEye
+                0x08000830       0x28 HAL\GPIO.o
+ .text.priv_InitializeLedNucleo
+                0x08000858       0x24 HAL\GPIO.o
+ .text.priv_InitializeBt
+                0x0800087c       0x54 HAL\GPIO.o
+ .text.priv_InitializeWifi
+                0x080008d0        0xc HAL\GPIO.o
+ .text.priv_InitializePi
+                0x080008dc        0xc HAL\GPIO.o
+ .text.priv_InitializeMpu
+                0x080008e8       0x58 HAL\GPIO.o
+ .text.InitializeGPIO
+                0x08000940       0x68 HAL\GPIO.o
+                0x08000940                InitializeGPIO
+ .text.USART_Init
+                0x080009a8      0x174 Framework\src\stm32f30x_usart.o
+                0x080009a8                USART_Init
+ .text.USART_StructInit
+                0x08000b1c       0x38 Framework\src\stm32f30x_usart.o
+                0x08000b1c                USART_StructInit
+ .text.USART_Cmd
+                0x08000b54       0x38 Framework\src\stm32f30x_usart.o
+                0x08000b54                USART_Cmd
+ .text.USART_SendData
+                0x08000b8c       0x24 Framework\src\stm32f30x_usart.o
+                0x08000b8c                USART_SendData
+ .text.USART_ITConfig
+                0x08000bb0       0x84 Framework\src\stm32f30x_usart.o
+                0x08000bb0                USART_ITConfig
+ .text.USART_GetFlagStatus
+                0x08000c34       0x34 Framework\src\stm32f30x_usart.o
+                0x08000c34                USART_GetFlagStatus
+ .text.TIM_TimeBaseInit
+                0x08000c68      0x100 Framework\src\stm32f30x_tim.o
+                0x08000c68                TIM_TimeBaseInit
+ .text.TIM_Cmd  0x08000d68       0x40 Framework\src\stm32f30x_tim.o
+                0x08000d68                TIM_Cmd
+ .text.TIM_OC2Init
+                0x08000da8      0x100 Framework\src\stm32f30x_tim.o
+                0x08000da8                TIM_OC2Init
+ .text.TIM_OC2PreloadConfig
+                0x08000ea8       0x38 Framework\src\stm32f30x_tim.o
+                0x08000ea8                TIM_OC2PreloadConfig
+ .text.RCC_HSICmd
+                0x08000ee0       0x20 Framework\src\stm32f30x_rcc.o
+                0x08000ee0                RCC_HSICmd
+ .text.RCC_PLLConfig
+                0x08000f00       0x34 Framework\src\stm32f30x_rcc.o
+                0x08000f00                RCC_PLLConfig
+ .text.RCC_PLLCmd
+                0x08000f34       0x20 Framework\src\stm32f30x_rcc.o
+                0x08000f34                RCC_PLLCmd
+ .text.RCC_SYSCLKConfig
+                0x08000f54       0x38 Framework\src\stm32f30x_rcc.o
+                0x08000f54                RCC_SYSCLKConfig
+ .text.RCC_HCLKConfig
+                0x08000f8c       0x38 Framework\src\stm32f30x_rcc.o
+                0x08000f8c                RCC_HCLKConfig
+ .text.RCC_PCLK1Config
+                0x08000fc4       0x38 Framework\src\stm32f30x_rcc.o
+                0x08000fc4                RCC_PCLK1Config
+ .text.RCC_PCLK2Config
+                0x08000ffc       0x38 Framework\src\stm32f30x_rcc.o
+                0x08000ffc                RCC_PCLK2Config
+ .text.RCC_GetClocksFreq
+                0x08001034      0x5b0 Framework\src\stm32f30x_rcc.o
+                0x08001034                RCC_GetClocksFreq
+ .text.RCC_I2CCLKConfig
+                0x080015e4       0x68 Framework\src\stm32f30x_rcc.o
+                0x080015e4                RCC_I2CCLKConfig
+ .text.RCC_AHBPeriphClockCmd
+                0x0800164c       0x3c Framework\src\stm32f30x_rcc.o
+                0x0800164c                RCC_AHBPeriphClockCmd
+ .text.RCC_APB2PeriphClockCmd
+                0x08001688       0x3c Framework\src\stm32f30x_rcc.o
+                0x08001688                RCC_APB2PeriphClockCmd
+ .text.RCC_APB1PeriphClockCmd
+                0x080016c4       0x3c Framework\src\stm32f30x_rcc.o
+                0x080016c4                RCC_APB1PeriphClockCmd
+ .text.SysTick_CLKSourceConfig
+                0x08001700       0x38 Framework\src\stm32f30x_misc.o
+                0x08001700                SysTick_CLKSourceConfig
+ .text.I2C_Init
+                0x08001738       0xc8 Framework\src\stm32f30x_i2c.o
+                0x08001738                I2C_Init
+ .text.I2C_Cmd  0x08001800       0x38 Framework\src\stm32f30x_i2c.o
+                0x08001800                I2C_Cmd
+ .text.I2C_SendData
+                0x08001838       0x1c Framework\src\stm32f30x_i2c.o
+                0x08001838                I2C_SendData
+ .text.GPIO_Init
+                0x08001854      0x130 Framework\src\stm32f30x_gpio.o
+                0x08001854                GPIO_Init
+ .text.GPIO_ReadOutputDataBit
+                0x08001984       0x38 Framework\src\stm32f30x_gpio.o
+                0x08001984                GPIO_ReadOutputDataBit
+ .text.GPIO_SetBits
+                0x080019bc       0x1c Framework\src\stm32f30x_gpio.o
+                0x080019bc                GPIO_SetBits
+ .text.GPIO_ResetBits
+                0x080019d8       0x1c Framework\src\stm32f30x_gpio.o
+                0x080019d8                GPIO_ResetBits
+ .text.GPIO_PinAFConfig
+                0x080019f4       0x8c Framework\src\stm32f30x_gpio.o
+                0x080019f4                GPIO_PinAFConfig
+ .text.InitializeMPU
+                0x08001a80       0x18 Drivers\MPU\MPU.o
+                0x08001a80                InitializeMPU
+ .text.InitializeLedNucleo
+                0x08001a98       0x14 Drivers\LEDs\LED.o
+                0x08001a98                InitializeLedNucleo
+ .text.InitializeClock
+                0x08001aac       0x48 Drivers\Clock\clock.o
+                0x08001aac                InitializeClock
+ .text.InitializeBT
+                0x08001af4       0x1c Drivers\BT\BT.o
+                0x08001af4                InitializeBT
+ .text.BT_Send  0x08001b10       0x30 Drivers\BT\BT.o
+                0x08001b10                BT_Send
+ .text.__libc_init_array
+                0x08001b40       0x4c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                0x08001b40                __libc_init_array
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x08001b8c        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ *(.init)
+ .init          0x08001b8c        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08001b8c                _init
+ .init          0x08001b90        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ *(.fini)
+ .fini          0x08001b98        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08001b98                _fini
+ .fini          0x08001b9c        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x08001ba4                . = ALIGN (0x4)
+                0x08001ba4                _etext = .
+
+.vfp11_veneer   0x08001ba4        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x08001ba4        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x08001ba4        0x0
+ .iplt          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+
+.rel.dyn        0x08001ba4        0x0
+ .rel.iplt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+
+.rodata         0x08001ba4        0x0
+                0x08001ba4                . = ALIGN (0x4)
+ *(.rodata)
+ *(.rodata*)
+                0x08001ba4                . = ALIGN (0x4)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x08001ba4        0x0
+                0x08001ba4                __exidx_start = .
+ *(.ARM.exidx*)
+                0x08001ba4                __exidx_end = .
+
+.preinit_array  0x08001ba4        0x0
+                0x08001ba4                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array*)
+                0x08001ba4                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x08001ba4        0x4
+                0x08001ba4                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array*)
+ .init_array    0x08001ba4        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08001ba8                PROVIDE (__init_array_end, .)
+
+.fini_array     0x08001ba8        0x4
+                0x08001ba8                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x08001ba8        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08001bac                PROVIDE (__fini_array_end, .)
+                0x08001bac                _sidata = LOADADDR (.data)
+
+.data           0x20000000       0x30 load address 0x08001bac
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.APBAHBPrescTable
+                0x20000000       0x10 Framework\src\stm32f30x_rcc.o
+ .data.ADCPrescTable
+                0x20000010       0x20 Framework\src\stm32f30x_rcc.o
+                0x20000030                . = ALIGN (0x4)
+                0x20000030                _edata = .
+                0x08001bdc                _siccmram = LOADADDR (.ccmram)
+
+.igot.plt       0x20000030        0x0 load address 0x08001bdc
+ .igot.plt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+
+.ccmram         0x10000000        0x0 load address 0x08001bdc
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _sccmram = .
+ *(.ccmram)
+ *(.ccmram*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _eccmram = .
+                0x10000000                . = ALIGN (0x4)
+
+.bss            0x20000030       0x1c
+                0x20000030                _sbss = .
+                0x20000030                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x20000030       0x1c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ *(.bss*)
+ *(COMMON)
+                0x2000004c                . = ALIGN (0x4)
+                0x2000004c                _ebss = .
+                0x2000004c                __bss_end__ = _ebss
+
+._user_heap_stack
+                0x2000004c      0x200
+                0x2000004c                . = ALIGN (0x4)
+                0x2000004c                PROVIDE (end, .)
+                0x2000004c                PROVIDE (_end, .)
+                0x2000004c                . = (. + _Min_Heap_Size)
+                0x2000024c                . = (. + _Min_Stack_Size)
+ *fill*         0x2000004c      0x200 
+                0x2000024c                . = ALIGN (0x4)
+
+.memory_b1_text
+ *(.mb1text)
+ *(.mb1text*)
+ *(.mb1rodata)
+ *(.mb1rodata*)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x00000000       0x30
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x22 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+ .ARM.attributes
+                0x00000022       0x34 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ .ARM.attributes
+                0x00000056       0x39 src\system_stm32f30x.o
+ .ARM.attributes
+                0x0000008f       0x21 src\startup_stm32f303xe.o
+ .ARM.attributes
+                0x000000b0       0x39 src\main.o
+ .ARM.attributes
+                0x000000e9       0x39 HAL\USART.o
+ .ARM.attributes
+                0x00000122       0x39 HAL\Timers.o
+ .ARM.attributes
+                0x0000015b       0x39 HAL\SysTick.o
+ .ARM.attributes
+                0x00000194       0x39 HAL\RCC.o
+ .ARM.attributes
+                0x000001cd       0x39 HAL\I2C.o
+ .ARM.attributes
+                0x00000206       0x39 HAL\GPIO.o
+ .ARM.attributes
+                0x0000023f       0x39 Framework\src\stm32f30x_usart.o
+ .ARM.attributes
+                0x00000278       0x39 Framework\src\stm32f30x_tim.o
+ .ARM.attributes
+                0x000002b1       0x39 Framework\src\stm32f30x_rcc.o
+ .ARM.attributes
+                0x000002ea       0x39 Framework\src\stm32f30x_misc.o
+ .ARM.attributes
+                0x00000323       0x39 Framework\src\stm32f30x_i2c.o
+ .ARM.attributes
+                0x0000035c       0x39 Framework\src\stm32f30x_gpio.o
+ .ARM.attributes
+                0x00000395       0x39 Drivers\MPU\MPU.o
+ .ARM.attributes
+                0x000003ce       0x39 Drivers\LEDs\LED.o
+ .ARM.attributes
+                0x00000407       0x39 Drivers\Clock\clock.o
+ .ARM.attributes
+                0x00000440       0x39 Drivers\BT\BT.o
+ .ARM.attributes
+                0x00000479       0x34 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+ .ARM.attributes
+                0x000004ad       0x22 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+OUTPUT(BalanSyner.elf elf32-littlearm)
+
+.debug_info     0x00000000     0x7866
+ .debug_info    0x00000000      0x49c src\system_stm32f30x.o
+ .debug_info    0x0000049c       0x88 src\startup_stm32f303xe.o
+ .debug_info    0x00000524      0x27d src\main.o
+ .debug_info    0x000007a1      0x2b7 HAL\USART.o
+ .debug_info    0x00000a58      0x556 HAL\Timers.o
+ .debug_info    0x00000fae      0x66f HAL\SysTick.o
+ .debug_info    0x0000161d      0x1aa HAL\RCC.o
+ .debug_info    0x000017c7      0x2b8 HAL\I2C.o
+ .debug_info    0x00001a7f      0x3dc HAL\GPIO.o
+ .debug_info    0x00001e5b      0xf20 Framework\src\stm32f30x_usart.o
+ .debug_info    0x00002d7b     0x2188 Framework\src\stm32f30x_tim.o
+ .debug_info    0x00004f03      0xb63 Framework\src\stm32f30x_rcc.o
+ .debug_info    0x00005a66      0x541 Framework\src\stm32f30x_misc.o
+ .debug_info    0x00005fa7      0xbe2 Framework\src\stm32f30x_i2c.o
+ .debug_info    0x00006b89      0x610 Framework\src\stm32f30x_gpio.o
+ .debug_info    0x00007199      0x118 Drivers\MPU\MPU.o
+ .debug_info    0x000072b1      0x100 Drivers\LEDs\LED.o
+ .debug_info    0x000073b1      0x281 Drivers\Clock\clock.o
+ .debug_info    0x00007632      0x234 Drivers\BT\BT.o
+
+.debug_abbrev   0x00000000     0x14bb
+ .debug_abbrev  0x00000000      0x147 src\system_stm32f30x.o
+ .debug_abbrev  0x00000147       0x12 src\startup_stm32f303xe.o
+ .debug_abbrev  0x00000159       0xc4 src\main.o
+ .debug_abbrev  0x0000021d      0x12c HAL\USART.o
+ .debug_abbrev  0x00000349       0xff HAL\Timers.o
+ .debug_abbrev  0x00000448      0x15b HAL\SysTick.o
+ .debug_abbrev  0x000005a3       0xb1 HAL\RCC.o
+ .debug_abbrev  0x00000654      0x12c HAL\I2C.o
+ .debug_abbrev  0x00000780      0x12d HAL\GPIO.o
+ .debug_abbrev  0x000008ad      0x157 Framework\src\stm32f30x_usart.o
+ .debug_abbrev  0x00000a04      0x189 Framework\src\stm32f30x_tim.o
+ .debug_abbrev  0x00000b8d      0x1e5 Framework\src\stm32f30x_rcc.o
+ .debug_abbrev  0x00000d72      0x147 Framework\src\stm32f30x_misc.o
+ .debug_abbrev  0x00000eb9      0x180 Framework\src\stm32f30x_i2c.o
+ .debug_abbrev  0x00001039      0x1a5 Framework\src\stm32f30x_gpio.o
+ .debug_abbrev  0x000011de       0xa4 Drivers\MPU\MPU.o
+ .debug_abbrev  0x00001282       0x7b Drivers\LEDs\LED.o
+ .debug_abbrev  0x000012fd       0xcc Drivers\Clock\clock.o
+ .debug_abbrev  0x000013c9       0xf2 Drivers\BT\BT.o
+
+.debug_aranges  0x00000000      0xb58
+ .debug_aranges
+                0x00000000       0x30 src\system_stm32f30x.o
+ .debug_aranges
+                0x00000030       0x28 src\startup_stm32f303xe.o
+ .debug_aranges
+                0x00000058       0x20 src\main.o
+ .debug_aranges
+                0x00000078       0x40 HAL\USART.o
+ .debug_aranges
+                0x000000b8       0x20 HAL\Timers.o
+ .debug_aranges
+                0x000000d8       0x38 HAL\SysTick.o
+ .debug_aranges
+                0x00000110       0x58 HAL\RCC.o
+ .debug_aranges
+                0x00000168       0x30 HAL\I2C.o
+ .debug_aranges
+                0x00000198       0x58 HAL\GPIO.o
+ .debug_aranges
+                0x000001f0      0x1a0 Framework\src\stm32f30x_usart.o
+ .debug_aranges
+                0x00000390      0x3a8 Framework\src\stm32f30x_tim.o
+ .debug_aranges
+                0x00000738      0x158 Framework\src\stm32f30x_rcc.o
+ .debug_aranges
+                0x00000890       0x40 Framework\src\stm32f30x_misc.o
+ .debug_aranges
+                0x000008d0      0x168 Framework\src\stm32f30x_i2c.o
+ .debug_aranges
+                0x00000a38       0x80 Framework\src\stm32f30x_gpio.o
+ .debug_aranges
+                0x00000ab8       0x28 Drivers\MPU\MPU.o
+ .debug_aranges
+                0x00000ae0       0x30 Drivers\LEDs\LED.o
+ .debug_aranges
+                0x00000b10       0x20 Drivers\Clock\clock.o
+ .debug_aranges
+                0x00000b30       0x28 Drivers\BT\BT.o
+
+.debug_ranges   0x00000000      0xa30
+ .debug_ranges  0x00000000       0x20 src\system_stm32f30x.o
+ .debug_ranges  0x00000020       0x20 src\startup_stm32f303xe.o
+ .debug_ranges  0x00000040       0x10 src\main.o
+ .debug_ranges  0x00000050       0x30 HAL\USART.o
+ .debug_ranges  0x00000080       0x10 HAL\Timers.o
+ .debug_ranges  0x00000090       0x28 HAL\SysTick.o
+ .debug_ranges  0x000000b8       0x48 HAL\RCC.o
+ .debug_ranges  0x00000100       0x20 HAL\I2C.o
+ .debug_ranges  0x00000120       0x48 HAL\GPIO.o
+ .debug_ranges  0x00000168      0x190 Framework\src\stm32f30x_usart.o
+ .debug_ranges  0x000002f8      0x398 Framework\src\stm32f30x_tim.o
+ .debug_ranges  0x00000690      0x148 Framework\src\stm32f30x_rcc.o
+ .debug_ranges  0x000007d8       0x30 Framework\src\stm32f30x_misc.o
+ .debug_ranges  0x00000808      0x158 Framework\src\stm32f30x_i2c.o
+ .debug_ranges  0x00000960       0x70 Framework\src\stm32f30x_gpio.o
+ .debug_ranges  0x000009d0       0x18 Drivers\MPU\MPU.o
+ .debug_ranges  0x000009e8       0x20 Drivers\LEDs\LED.o
+ .debug_ranges  0x00000a08       0x10 Drivers\Clock\clock.o
+ .debug_ranges  0x00000a18       0x18 Drivers\BT\BT.o
+
+.debug_line     0x00000000     0x3b51
+ .debug_line    0x00000000      0x203 src\system_stm32f30x.o
+ .debug_line    0x00000203       0x7b src\startup_stm32f303xe.o
+ .debug_line    0x0000027e      0x1a1 src\main.o
+ .debug_line    0x0000041f      0x243 HAL\USART.o
+ .debug_line    0x00000662      0x213 HAL\Timers.o
+ .debug_line    0x00000875      0x1d2 HAL\SysTick.o
+ .debug_line    0x00000a47      0x23a HAL\RCC.o
+ .debug_line    0x00000c81      0x213 HAL\I2C.o
+ .debug_line    0x00000e94      0x2b8 HAL\GPIO.o
+ .debug_line    0x0000114c      0x61c Framework\src\stm32f30x_usart.o
+ .debug_line    0x00001768      0xc4f Framework\src\stm32f30x_tim.o
+ .debug_line    0x000023b7      0x61e Framework\src\stm32f30x_rcc.o
+ .debug_line    0x000029d5      0x25a Framework\src\stm32f30x_misc.o
+ .debug_line    0x00002c2f      0x56f Framework\src\stm32f30x_i2c.o
+ .debug_line    0x0000319e      0x32d Framework\src\stm32f30x_gpio.o
+ .debug_line    0x000034cb      0x187 Drivers\MPU\MPU.o
+ .debug_line    0x00003652      0x19b Drivers\LEDs\LED.o
+ .debug_line    0x000037ed      0x19a Drivers\Clock\clock.o
+ .debug_line    0x00003987      0x1ca Drivers\BT\BT.o
+
+.debug_str      0x00000000     0x2e8a
+ .debug_str     0x00000000      0x2f6 src\system_stm32f30x.o
+                                0x365 (size before relaxing)
+ .debug_str     0x000002f6       0x99 src\main.o
+                                0x278 (size before relaxing)
+ .debug_str     0x0000038f      0x124 HAL\USART.o
+                                0x317 (size before relaxing)
+ .debug_str     0x000004b3      0x300 HAL\Timers.o
+                                0x550 (size before relaxing)
+ .debug_str     0x000007b3      0x544 HAL\SysTick.o
+                                0x7ab (size before relaxing)
+ .debug_str     0x00000cf7       0xff HAL\RCC.o
+                                0x2e1 (size before relaxing)
+ .debug_str     0x00000df6       0xea HAL\I2C.o
+                                0x309 (size before relaxing)
+ .debug_str     0x00000ee0       0x46 HAL\GPIO.o
+                                0x494 (size before relaxing)
+ .debug_str     0x00000f26      0x80b Framework\src\stm32f30x_usart.o
+                                0xafc (size before relaxing)
+ .debug_str     0x00001731      0xbcb Framework\src\stm32f30x_tim.o
+                                0xfde (size before relaxing)
+ .debug_str     0x000022fc      0x48e Framework\src\stm32f30x_rcc.o
+                                0x92d (size before relaxing)
+ .debug_str     0x0000278a      0x166 Framework\src\stm32f30x_misc.o
+                                0x435 (size before relaxing)
+ .debug_str     0x000028f0      0x3bb Framework\src\stm32f30x_i2c.o
+                                0x6b4 (size before relaxing)
+ .debug_str     0x00002cab      0x155 Framework\src\stm32f30x_gpio.o
+                                0x50d (size before relaxing)
+ .debug_str     0x00002e00       0x23 Drivers\MPU\MPU.o
+                                0x242 (size before relaxing)
+ .debug_str     0x00002e23       0x16 Drivers\LEDs\LED.o
+                                0x248 (size before relaxing)
+ .debug_str     0x00002e39       0x29 Drivers\Clock\clock.o
+                                0x269 (size before relaxing)
+ .debug_str     0x00002e62       0x28 Drivers\BT\BT.o
+                                0x2a2 (size before relaxing)
+
+.comment        0x00000000       0x83
+ .comment       0x00000000       0x83 src\system_stm32f30x.o
+                                 0x84 (size before relaxing)
+ .comment       0x00000000       0x84 src\main.o
+ .comment       0x00000000       0x84 HAL\USART.o
+ .comment       0x00000000       0x84 HAL\Timers.o
+ .comment       0x00000000       0x84 HAL\SysTick.o
+ .comment       0x00000000       0x84 HAL\RCC.o
+ .comment       0x00000000       0x84 HAL\I2C.o
+ .comment       0x00000000       0x84 HAL\GPIO.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_usart.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_tim.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_rcc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_misc.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_i2c.o
+ .comment       0x00000000       0x84 Framework\src\stm32f30x_gpio.o
+ .comment       0x00000000       0x84 Drivers\MPU\MPU.o
+ .comment       0x00000000       0x84 Drivers\LEDs\LED.o
+ .comment       0x00000000       0x84 Drivers\Clock\clock.o
+ .comment       0x00000000       0x84 Drivers\BT\BT.o
+
+.debug_frame    0x00000000     0x22dc
+ .debug_frame   0x00000000       0x64 src\system_stm32f30x.o
+ .debug_frame   0x00000064       0x30 src\main.o
+ .debug_frame   0x00000094       0xa0 HAL\USART.o
+ .debug_frame   0x00000134       0x30 HAL\Timers.o
+ .debug_frame   0x00000164       0x80 HAL\SysTick.o
+ .debug_frame   0x000001e4       0xf4 HAL\RCC.o
+ .debug_frame   0x000002d8       0x6c HAL\I2C.o
+ .debug_frame   0x00000344      0x100 HAL\GPIO.o
+ .debug_frame   0x00000444      0x574 Framework\src\stm32f30x_usart.o
+ .debug_frame   0x000009b8      0xca4 Framework\src\stm32f30x_tim.o
+ .debug_frame   0x0000165c      0x468 Framework\src\stm32f30x_rcc.o
+ .debug_frame   0x00001ac4       0x9c Framework\src\stm32f30x_misc.o
+ .debug_frame   0x00001b60      0x4ac Framework\src\stm32f30x_i2c.o
+ .debug_frame   0x0000200c      0x180 Framework\src\stm32f30x_gpio.o
+ .debug_frame   0x0000218c       0x48 Drivers\MPU\MPU.o
+ .debug_frame   0x000021d4       0x64 Drivers\LEDs\LED.o
+ .debug_frame   0x00002238       0x2c Drivers\Clock\clock.o
+ .debug_frame   0x00002264       0x4c Drivers\BT\BT.o
+ .debug_frame   0x000022b0       0x2c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+
+Cross Reference Table
+
+Symbol                                            File
+ADC1_2_IRQHandler                                 src\startup_stm32f303xe.o
+ADC3_IRQHandler                                   src\startup_stm32f303xe.o
+ADC4_IRQHandler                                   src\startup_stm32f303xe.o
+ADC_AnalogWatchdog1SingleChannelConfig            Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdog1ThresholdsConfig               Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdog2SingleChannelConfig            Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdog2ThresholdsConfig               Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdog3SingleChannelConfig            Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdog3ThresholdsConfig               Framework\src\stm32f30x_adc.o
+ADC_AnalogWatchdogCmd                             Framework\src\stm32f30x_adc.o
+ADC_AutoDelayCmd                                  Framework\src\stm32f30x_adc.o
+ADC_AutoInjectedConvCmd                           Framework\src\stm32f30x_adc.o
+ADC_ChannelOffset1Cmd                             Framework\src\stm32f30x_adc.o
+ADC_ChannelOffset2Cmd                             Framework\src\stm32f30x_adc.o
+ADC_ChannelOffset3Cmd                             Framework\src\stm32f30x_adc.o
+ADC_ChannelOffset4Cmd                             Framework\src\stm32f30x_adc.o
+ADC_ClearCommonFlag                               Framework\src\stm32f30x_adc.o
+ADC_ClearFlag                                     Framework\src\stm32f30x_adc.o
+ADC_ClearITPendingBit                             Framework\src\stm32f30x_adc.o
+ADC_Cmd                                           Framework\src\stm32f30x_adc.o
+ADC_CommonInit                                    Framework\src\stm32f30x_adc.o
+ADC_CommonStructInit                              Framework\src\stm32f30x_adc.o
+ADC_DMACmd                                        Framework\src\stm32f30x_adc.o
+ADC_DMAConfig                                     Framework\src\stm32f30x_adc.o
+ADC_DeInit                                        Framework\src\stm32f30x_adc.o
+ADC_DisableCmd                                    Framework\src\stm32f30x_adc.o
+ADC_DiscModeChannelCountConfig                    Framework\src\stm32f30x_adc.o
+ADC_DiscModeCmd                                   Framework\src\stm32f30x_adc.o
+ADC_ExternalTriggerConfig                         Framework\src\stm32f30x_adc.o
+ADC_GetCalibrationStatus                          Framework\src\stm32f30x_adc.o
+ADC_GetCalibrationValue                           Framework\src\stm32f30x_adc.o
+ADC_GetCommonFlagStatus                           Framework\src\stm32f30x_adc.o
+ADC_GetConversionValue                            Framework\src\stm32f30x_adc.o
+ADC_GetDisableCmdStatus                           Framework\src\stm32f30x_adc.o
+ADC_GetDualModeConversionValue                    Framework\src\stm32f30x_adc.o
+ADC_GetFlagStatus                                 Framework\src\stm32f30x_adc.o
+ADC_GetITStatus                                   Framework\src\stm32f30x_adc.o
+ADC_GetInjectedConversionValue                    Framework\src\stm32f30x_adc.o
+ADC_GetStartConversionStatus                      Framework\src\stm32f30x_adc.o
+ADC_GetStartInjectedConversionStatus              Framework\src\stm32f30x_adc.o
+ADC_ITConfig                                      Framework\src\stm32f30x_adc.o
+ADC_Init                                          Framework\src\stm32f30x_adc.o
+ADC_InjectedChannelSampleTimeConfig               Framework\src\stm32f30x_adc.o
+ADC_InjectedDiscModeCmd                           Framework\src\stm32f30x_adc.o
+ADC_InjectedInit                                  Framework\src\stm32f30x_adc.o
+ADC_InjectedStructInit                            Framework\src\stm32f30x_adc.o
+ADC_RegularChannelConfig                          Framework\src\stm32f30x_adc.o
+ADC_RegularChannelSequencerLengthConfig           Framework\src\stm32f30x_adc.o
+ADC_SelectCalibrationMode                         Framework\src\stm32f30x_adc.o
+ADC_SelectDifferentialMode                        Framework\src\stm32f30x_adc.o
+ADC_SelectQueueOfContextMode                      Framework\src\stm32f30x_adc.o
+ADC_SetCalibrationValue                           Framework\src\stm32f30x_adc.o
+ADC_SetChannelOffset1                             Framework\src\stm32f30x_adc.o
+ADC_SetChannelOffset2                             Framework\src\stm32f30x_adc.o
+ADC_SetChannelOffset3                             Framework\src\stm32f30x_adc.o
+ADC_SetChannelOffset4                             Framework\src\stm32f30x_adc.o
+ADC_StartCalibration                              Framework\src\stm32f30x_adc.o
+ADC_StartConversion                               Framework\src\stm32f30x_adc.o
+ADC_StartInjectedConversion                       Framework\src\stm32f30x_adc.o
+ADC_StopConversion                                Framework\src\stm32f30x_adc.o
+ADC_StopInjectedConversion                        Framework\src\stm32f30x_adc.o
+ADC_StructInit                                    Framework\src\stm32f30x_adc.o
+ADC_TempSensorCmd                                 Framework\src\stm32f30x_adc.o
+ADC_VbatCmd                                       Framework\src\stm32f30x_adc.o
+ADC_VoltageRegulatorCmd                           Framework\src\stm32f30x_adc.o
+ADC_VrefintCmd                                    Framework\src\stm32f30x_adc.o
+AHBPrescTable                                     src\system_stm32f30x.o
+BT_Send                                           Drivers\BT\BT.o
+                                                  src\main.o
+BusFault_Handler                                  src\startup_stm32f303xe.o
+CAN_CancelTransmit                                Framework\src\stm32f30x_can.o
+CAN_ClearFlag                                     Framework\src\stm32f30x_can.o
+CAN_ClearITPendingBit                             Framework\src\stm32f30x_can.o
+CAN_DBGFreeze                                     Framework\src\stm32f30x_can.o
+CAN_DeInit                                        Framework\src\stm32f30x_can.o
+CAN_FIFORelease                                   Framework\src\stm32f30x_can.o
+CAN_FilterInit                                    Framework\src\stm32f30x_can.o
+CAN_GetFlagStatus                                 Framework\src\stm32f30x_can.o
+CAN_GetITStatus                                   Framework\src\stm32f30x_can.o
+CAN_GetLSBTransmitErrorCounter                    Framework\src\stm32f30x_can.o
+CAN_GetLastErrorCode                              Framework\src\stm32f30x_can.o
+CAN_GetReceiveErrorCounter                        Framework\src\stm32f30x_can.o
+CAN_ITConfig                                      Framework\src\stm32f30x_can.o
+CAN_Init                                          Framework\src\stm32f30x_can.o
+CAN_MessagePending                                Framework\src\stm32f30x_can.o
+CAN_OperatingModeRequest                          Framework\src\stm32f30x_can.o
+CAN_RX1_IRQHandler                                src\startup_stm32f303xe.o
+CAN_Receive                                       Framework\src\stm32f30x_can.o
+CAN_SCE_IRQHandler                                src\startup_stm32f303xe.o
+CAN_SlaveStartBank                                Framework\src\stm32f30x_can.o
+CAN_Sleep                                         Framework\src\stm32f30x_can.o
+CAN_StructInit                                    Framework\src\stm32f30x_can.o
+CAN_TTComModeCmd                                  Framework\src\stm32f30x_can.o
+CAN_Transmit                                      Framework\src\stm32f30x_can.o
+CAN_TransmitStatus                                Framework\src\stm32f30x_can.o
+CAN_WakeUp                                        Framework\src\stm32f30x_can.o
+COMP1_2_3_IRQHandler                              src\startup_stm32f303xe.o
+COMP4_5_6_IRQHandler                              src\startup_stm32f303xe.o
+COMP7_IRQHandler                                  src\startup_stm32f303xe.o
+COMP_Cmd                                          Framework\src\stm32f30x_comp.o
+COMP_DeInit                                       Framework\src\stm32f30x_comp.o
+COMP_GetOutputLevel                               Framework\src\stm32f30x_comp.o
+COMP_Init                                         Framework\src\stm32f30x_comp.o
+COMP_LockConfig                                   Framework\src\stm32f30x_comp.o
+COMP_StructInit                                   Framework\src\stm32f30x_comp.o
+COMP_SwitchCmd                                    Framework\src\stm32f30x_comp.o
+COMP_WindowCmd                                    Framework\src\stm32f30x_comp.o
+CRC_CalcBlockCRC                                  Framework\src\stm32f30x_crc.o
+CRC_CalcCRC                                       Framework\src\stm32f30x_crc.o
+CRC_CalcCRC16bits                                 Framework\src\stm32f30x_crc.o
+CRC_CalcCRC8bits                                  Framework\src\stm32f30x_crc.o
+CRC_DeInit                                        Framework\src\stm32f30x_crc.o
+CRC_GetCRC                                        Framework\src\stm32f30x_crc.o
+CRC_GetIDRegister                                 Framework\src\stm32f30x_crc.o
+CRC_PolynomialSizeSelect                          Framework\src\stm32f30x_crc.o
+CRC_ResetDR                                       Framework\src\stm32f30x_crc.o
+CRC_ReverseInputDataSelect                        Framework\src\stm32f30x_crc.o
+CRC_ReverseOutputDataCmd                          Framework\src\stm32f30x_crc.o
+CRC_SetIDRegister                                 Framework\src\stm32f30x_crc.o
+CRC_SetInitRegister                               Framework\src\stm32f30x_crc.o
+CRC_SetPolynomial                                 Framework\src\stm32f30x_crc.o
+DAC_ClearFlag                                     Framework\src\stm32f30x_dac.o
+DAC_ClearITPendingBit                             Framework\src\stm32f30x_dac.o
+DAC_Cmd                                           Framework\src\stm32f30x_dac.o
+DAC_DMACmd                                        Framework\src\stm32f30x_dac.o
+DAC_DeInit                                        Framework\src\stm32f30x_dac.o
+DAC_DualSoftwareTriggerCmd                        Framework\src\stm32f30x_dac.o
+DAC_GetDataOutputValue                            Framework\src\stm32f30x_dac.o
+DAC_GetFlagStatus                                 Framework\src\stm32f30x_dac.o
+DAC_GetITStatus                                   Framework\src\stm32f30x_dac.o
+DAC_ITConfig                                      Framework\src\stm32f30x_dac.o
+DAC_Init                                          Framework\src\stm32f30x_dac.o
+DAC_SetChannel1Data                               Framework\src\stm32f30x_dac.o
+DAC_SetChannel2Data                               Framework\src\stm32f30x_dac.o
+DAC_SetDualChannelData                            Framework\src\stm32f30x_dac.o
+DAC_SoftwareTriggerCmd                            Framework\src\stm32f30x_dac.o
+DAC_StructInit                                    Framework\src\stm32f30x_dac.o
+DAC_WaveGenerationCmd                             Framework\src\stm32f30x_dac.o
+DBGMCU_APB1PeriphConfig                           Framework\src\stm32f30x_dbgmcu.o
+DBGMCU_APB2PeriphConfig                           Framework\src\stm32f30x_dbgmcu.o
+DBGMCU_Config                                     Framework\src\stm32f30x_dbgmcu.o
+DBGMCU_GetDEVID                                   Framework\src\stm32f30x_dbgmcu.o
+DBGMCU_GetREVID                                   Framework\src\stm32f30x_dbgmcu.o
+DMA1_Channel1_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel2_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel3_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel4_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel5_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel6_IRQHandler                          src\startup_stm32f303xe.o
+DMA1_Channel7_IRQHandler                          src\startup_stm32f303xe.o
+DMA2_Channel1_IRQHandler                          src\startup_stm32f303xe.o
+DMA2_Channel2_IRQHandler                          src\startup_stm32f303xe.o
+DMA2_Channel3_IRQHandler                          src\startup_stm32f303xe.o
+DMA2_Channel4_IRQHandler                          src\startup_stm32f303xe.o
+DMA2_Channel5_IRQHandler                          src\startup_stm32f303xe.o
+DMA_ClearFlag                                     Framework\src\stm32f30x_dma.o
+DMA_ClearITPendingBit                             Framework\src\stm32f30x_dma.o
+DMA_Cmd                                           Framework\src\stm32f30x_dma.o
+DMA_DeInit                                        Framework\src\stm32f30x_dma.o
+DMA_GetCurrDataCounter                            Framework\src\stm32f30x_dma.o
+DMA_GetFlagStatus                                 Framework\src\stm32f30x_dma.o
+DMA_GetITStatus                                   Framework\src\stm32f30x_dma.o
+DMA_ITConfig                                      Framework\src\stm32f30x_dma.o
+DMA_Init                                          Framework\src\stm32f30x_dma.o
+DMA_SetCurrDataCounter                            Framework\src\stm32f30x_dma.o
+DMA_StructInit                                    Framework\src\stm32f30x_dma.o
+DebugMon_Handler                                  src\startup_stm32f303xe.o
+Default_Handler                                   src\startup_stm32f303xe.o
+EXTI0_IRQHandler                                  src\startup_stm32f303xe.o
+EXTI15_10_IRQHandler                              src\startup_stm32f303xe.o
+EXTI1_IRQHandler                                  src\startup_stm32f303xe.o
+EXTI2_TSC_IRQHandler                              src\startup_stm32f303xe.o
+EXTI3_IRQHandler                                  src\startup_stm32f303xe.o
+EXTI4_IRQHandler                                  src\startup_stm32f303xe.o
+EXTI9_5_IRQHandler                                src\startup_stm32f303xe.o
+EXTI_ClearFlag                                    Framework\src\stm32f30x_exti.o
+EXTI_ClearITPendingBit                            Framework\src\stm32f30x_exti.o
+EXTI_DeInit                                       Framework\src\stm32f30x_exti.o
+EXTI_GenerateSWInterrupt                          Framework\src\stm32f30x_exti.o
+EXTI_GetFlagStatus                                Framework\src\stm32f30x_exti.o
+EXTI_GetITStatus                                  Framework\src\stm32f30x_exti.o
+EXTI_Init                                         Framework\src\stm32f30x_exti.o
+EXTI_StructInit                                   Framework\src\stm32f30x_exti.o
+FLASH_ClearFlag                                   Framework\src\stm32f30x_flash.o
+FLASH_EraseAllPages                               Framework\src\stm32f30x_flash.o
+FLASH_ErasePage                                   Framework\src\stm32f30x_flash.o
+FLASH_GetFlagStatus                               Framework\src\stm32f30x_flash.o
+FLASH_GetStatus                                   Framework\src\stm32f30x_flash.o
+FLASH_HalfCycleAccessCmd                          Framework\src\stm32f30x_flash.o
+FLASH_IRQHandler                                  src\startup_stm32f303xe.o
+FLASH_ITConfig                                    Framework\src\stm32f30x_flash.o
+FLASH_Lock                                        Framework\src\stm32f30x_flash.o
+FLASH_OB_BOOTConfig                               Framework\src\stm32f30x_flash.o
+FLASH_OB_EnableWRP                                Framework\src\stm32f30x_flash.o
+FLASH_OB_Erase                                    Framework\src\stm32f30x_flash.o
+FLASH_OB_GetRDP                                   Framework\src\stm32f30x_flash.o
+FLASH_OB_GetUser                                  Framework\src\stm32f30x_flash.o
+FLASH_OB_GetWRP                                   Framework\src\stm32f30x_flash.o
+FLASH_OB_Launch                                   Framework\src\stm32f30x_flash.o
+FLASH_OB_Lock                                     Framework\src\stm32f30x_flash.o
+FLASH_OB_RDPConfig                                Framework\src\stm32f30x_flash.o
+FLASH_OB_SRAMParityConfig                         Framework\src\stm32f30x_flash.o
+FLASH_OB_Unlock                                   Framework\src\stm32f30x_flash.o
+FLASH_OB_UserConfig                               Framework\src\stm32f30x_flash.o
+FLASH_OB_VDDAConfig                               Framework\src\stm32f30x_flash.o
+FLASH_OB_WriteUser                                Framework\src\stm32f30x_flash.o
+FLASH_PrefetchBufferCmd                           Framework\src\stm32f30x_flash.o
+FLASH_ProgramHalfWord                             Framework\src\stm32f30x_flash.o
+FLASH_ProgramOptionByteData                       Framework\src\stm32f30x_flash.o
+FLASH_ProgramWord                                 Framework\src\stm32f30x_flash.o
+FLASH_SetLatency                                  Framework\src\stm32f30x_flash.o
+FLASH_Unlock                                      Framework\src\stm32f30x_flash.o
+FLASH_WaitForLastOperation                        Framework\src\stm32f30x_flash.o
+FMC_ClearFlag                                     Framework\src\stm32f30x_fmc.o
+FMC_ClearITPendingBit                             Framework\src\stm32f30x_fmc.o
+FMC_GetECC                                        Framework\src\stm32f30x_fmc.o
+FMC_GetFlagStatus                                 Framework\src\stm32f30x_fmc.o
+FMC_GetITStatus                                   Framework\src\stm32f30x_fmc.o
+FMC_IRQHandler                                    src\startup_stm32f303xe.o
+FMC_ITConfig                                      Framework\src\stm32f30x_fmc.o
+FMC_NANDCmd                                       Framework\src\stm32f30x_fmc.o
+FMC_NANDDeInit                                    Framework\src\stm32f30x_fmc.o
+FMC_NANDECCCmd                                    Framework\src\stm32f30x_fmc.o
+FMC_NANDInit                                      Framework\src\stm32f30x_fmc.o
+FMC_NANDStructInit                                Framework\src\stm32f30x_fmc.o
+FMC_NORSRAMCmd                                    Framework\src\stm32f30x_fmc.o
+FMC_NORSRAMDeInit                                 Framework\src\stm32f30x_fmc.o
+FMC_NORSRAMInit                                   Framework\src\stm32f30x_fmc.o
+FMC_NORSRAMStructInit                             Framework\src\stm32f30x_fmc.o
+FMC_PCCARDCmd                                     Framework\src\stm32f30x_fmc.o
+FMC_PCCARDDeInit                                  Framework\src\stm32f30x_fmc.o
+FMC_PCCARDInit                                    Framework\src\stm32f30x_fmc.o
+FMC_PCCARDStructInit                              Framework\src\stm32f30x_fmc.o
+FPU_IRQHandler                                    src\startup_stm32f303xe.o
+GPIO_DeInit                                       Framework\src\stm32f30x_gpio.o
+GPIO_Init                                         Framework\src\stm32f30x_gpio.o
+                                                  Drivers\Wifi\Wifi.o
+                                                  HAL\GPIO.o
+                                                  HAL\Timers.o
+GPIO_PinAFConfig                                  Framework\src\stm32f30x_gpio.o
+                                                  Drivers\Wifi\Wifi.o
+                                                  HAL\GPIO.o
+                                                  HAL\Timers.o
+GPIO_PinLockConfig                                Framework\src\stm32f30x_gpio.o
+GPIO_ReadInputData                                Framework\src\stm32f30x_gpio.o
+GPIO_ReadInputDataBit                             Framework\src\stm32f30x_gpio.o
+GPIO_ReadOutputData                               Framework\src\stm32f30x_gpio.o
+GPIO_ReadOutputDataBit                            Framework\src\stm32f30x_gpio.o
+                                                  src\main.o
+GPIO_ResetBits                                    Framework\src\stm32f30x_gpio.o
+                                                  src\main.o
+GPIO_SetBits                                      Framework\src\stm32f30x_gpio.o
+                                                  src\main.o
+GPIO_StructInit                                   Framework\src\stm32f30x_gpio.o
+GPIO_Write                                        Framework\src\stm32f30x_gpio.o
+GPIO_WriteBit                                     Framework\src\stm32f30x_gpio.o
+HardFault_Handler                                 src\startup_stm32f303xe.o
+I2C1_ER_IRQHandler                                src\startup_stm32f303xe.o
+I2C1_EV_IRQHandler                                src\startup_stm32f303xe.o
+I2C2_ER_IRQHandler                                src\startup_stm32f303xe.o
+I2C2_EV_IRQHandler                                src\startup_stm32f303xe.o
+I2C3_ER_IRQHandler                                src\startup_stm32f303xe.o
+I2C3_EV_IRQHandler                                src\startup_stm32f303xe.o
+I2C_10BitAddressHeaderCmd                         Framework\src\stm32f30x_i2c.o
+I2C_10BitAddressingModeCmd                        Framework\src\stm32f30x_i2c.o
+I2C_AcknowledgeConfig                             Framework\src\stm32f30x_i2c.o
+I2C_AutoEndCmd                                    Framework\src\stm32f30x_i2c.o
+I2C_CalculatePEC                                  Framework\src\stm32f30x_i2c.o
+I2C_ClearFlag                                     Framework\src\stm32f30x_i2c.o
+I2C_ClearITPendingBit                             Framework\src\stm32f30x_i2c.o
+I2C_ClockTimeoutCmd                               Framework\src\stm32f30x_i2c.o
+I2C_Cmd                                           Framework\src\stm32f30x_i2c.o
+                                                  HAL\I2C.o
+I2C_DMACmd                                        Framework\src\stm32f30x_i2c.o
+I2C_DeInit                                        Framework\src\stm32f30x_i2c.o
+I2C_DualAddressCmd                                Framework\src\stm32f30x_i2c.o
+I2C_ExtendedClockTimeoutCmd                       Framework\src\stm32f30x_i2c.o
+I2C_GeneralCallCmd                                Framework\src\stm32f30x_i2c.o
+I2C_GenerateSTART                                 Framework\src\stm32f30x_i2c.o
+I2C_GenerateSTOP                                  Framework\src\stm32f30x_i2c.o
+I2C_GetAddressMatched                             Framework\src\stm32f30x_i2c.o
+I2C_GetFlagStatus                                 Framework\src\stm32f30x_i2c.o
+I2C_GetITStatus                                   Framework\src\stm32f30x_i2c.o
+I2C_GetPEC                                        Framework\src\stm32f30x_i2c.o
+I2C_GetTransferDirection                          Framework\src\stm32f30x_i2c.o
+I2C_ITConfig                                      Framework\src\stm32f30x_i2c.o
+I2C_IdleClockTimeoutCmd                           Framework\src\stm32f30x_i2c.o
+I2C_Init                                          Framework\src\stm32f30x_i2c.o
+                                                  HAL\I2C.o
+I2C_MasterRequestConfig                           Framework\src\stm32f30x_i2c.o
+I2C_NumberOfBytesConfig                           Framework\src\stm32f30x_i2c.o
+I2C_OwnAddress2Config                             Framework\src\stm32f30x_i2c.o
+I2C_PECRequestCmd                                 Framework\src\stm32f30x_i2c.o
+I2C_ReadRegister                                  Framework\src\stm32f30x_i2c.o
+I2C_ReceiveData                                   Framework\src\stm32f30x_i2c.o
+I2C_ReloadCmd                                     Framework\src\stm32f30x_i2c.o
+I2C_SMBusAlertCmd                                 Framework\src\stm32f30x_i2c.o
+I2C_SendData                                      Framework\src\stm32f30x_i2c.o
+                                                  HAL\I2C.o
+                                                  src\main.o
+I2C_SlaveAddressConfig                            Framework\src\stm32f30x_i2c.o
+I2C_SlaveByteControlCmd                           Framework\src\stm32f30x_i2c.o
+I2C_SoftwareResetCmd                              Framework\src\stm32f30x_i2c.o
+I2C_StopModeCmd                                   Framework\src\stm32f30x_i2c.o
+I2C_StretchClockCmd                               Framework\src\stm32f30x_i2c.o
+I2C_StructInit                                    Framework\src\stm32f30x_i2c.o
+I2C_TimeoutAConfig                                Framework\src\stm32f30x_i2c.o
+I2C_TimeoutBConfig                                Framework\src\stm32f30x_i2c.o
+I2C_TransferHandling                              Framework\src\stm32f30x_i2c.o
+I2C_read                                          HAL\I2C.o
+I2S_Cmd                                           Framework\src\stm32f30x_spi.o
+I2S_FullDuplexConfig                              Framework\src\stm32f30x_spi.o
+I2S_Init                                          Framework\src\stm32f30x_spi.o
+I2S_StructInit                                    Framework\src\stm32f30x_spi.o
+IWDG_Enable                                       Framework\src\stm32f30x_iwdg.o
+IWDG_GetFlagStatus                                Framework\src\stm32f30x_iwdg.o
+IWDG_ReloadCounter                                Framework\src\stm32f30x_iwdg.o
+IWDG_SetPrescaler                                 Framework\src\stm32f30x_iwdg.o
+IWDG_SetReload                                    Framework\src\stm32f30x_iwdg.o
+IWDG_SetWindowValue                               Framework\src\stm32f30x_iwdg.o
+IWDG_WriteAccessCmd                               Framework\src\stm32f30x_iwdg.o
+InitializeBT                                      Drivers\BT\BT.o
+                                                  src\main.o
+InitializeClock                                   Drivers\Clock\clock.o
+                                                  src\main.o
+InitializeGPIO                                    HAL\GPIO.o
+                                                  Drivers\BT\BT.o
+                                                  Drivers\LEDs\LED.o
+                                                  Drivers\MPU\MPU.o
+InitializeI2C                                     HAL\I2C.o
+                                                  Drivers\MPU\MPU.o
+InitializeLed14                                   Drivers\LEDs\LED.o
+InitializeLedEye                                  Drivers\LEDs\LED.o
+InitializeLedNucleo                               Drivers\LEDs\LED.o
+                                                  src\main.o
+InitializeMPU                                     Drivers\MPU\MPU.o
+                                                  src\main.o
+InitializeNVIC                                    HAL\NVIC.o
+InitializeRCC                                     HAL\RCC.o
+                                                  Drivers\BT\BT.o
+                                                  Drivers\LEDs\LED.o
+                                                  Drivers\MPU\MPU.o
+InitializeSysTick                                 HAL\SysTick.o
+                                                  src\main.o
+InitializeTimers                                  HAL\Timers.o
+                                                  src\main.o
+InitializeUSART                                   HAL\USART.o
+                                                  Drivers\BT\BT.o
+InitializeWifi                                    Drivers\Wifi\Wifi.o
+MPU_Send                                          Drivers\MPU\MPU.o
+MemManage_Handler                                 src\startup_stm32f303xe.o
+NMI_Handler                                       src\startup_stm32f303xe.o
+NVIC_Init                                         Framework\src\stm32f30x_misc.o
+                                                  HAL\NVIC.o
+NVIC_PriorityGroupConfig                          Framework\src\stm32f30x_misc.o
+                                                  HAL\NVIC.o
+NVIC_SetVectorTable                               Framework\src\stm32f30x_misc.o
+NVIC_SystemLPConfig                               Framework\src\stm32f30x_misc.o
+OPAMP_Cmd                                         Framework\src\stm32f30x_opamp.o
+OPAMP_DeInit                                      Framework\src\stm32f30x_opamp.o
+OPAMP_GetOutputLevel                              Framework\src\stm32f30x_opamp.o
+OPAMP_Init                                        Framework\src\stm32f30x_opamp.o
+OPAMP_LockConfig                                  Framework\src\stm32f30x_opamp.o
+OPAMP_OffsetTrimConfig                            Framework\src\stm32f30x_opamp.o
+OPAMP_OffsetTrimModeSelect                        Framework\src\stm32f30x_opamp.o
+OPAMP_PGAConfig                                   Framework\src\stm32f30x_opamp.o
+OPAMP_StartCalibration                            Framework\src\stm32f30x_opamp.o
+OPAMP_StructInit                                  Framework\src\stm32f30x_opamp.o
+OPAMP_TimerControlledMuxCmd                       Framework\src\stm32f30x_opamp.o
+OPAMP_TimerControlledMuxConfig                    Framework\src\stm32f30x_opamp.o
+OPAMP_VrefConfig                                  Framework\src\stm32f30x_opamp.o
+OPAMP_VrefConnectADCCmd                           Framework\src\stm32f30x_opamp.o
+OPAMP_VrefConnectNonInvertingInput                Framework\src\stm32f30x_opamp.o
+PVD_IRQHandler                                    src\startup_stm32f303xe.o
+PWR_BackupAccessCmd                               Framework\src\stm32f30x_pwr.o
+PWR_ClearFlag                                     Framework\src\stm32f30x_pwr.o
+PWR_DeInit                                        Framework\src\stm32f30x_pwr.o
+PWR_EnterSTANDBYMode                              Framework\src\stm32f30x_pwr.o
+PWR_EnterSTOPMode                                 Framework\src\stm32f30x_pwr.o
+PWR_EnterSleepMode                                Framework\src\stm32f30x_pwr.o
+PWR_GetFlagStatus                                 Framework\src\stm32f30x_pwr.o
+PWR_PVDCmd                                        Framework\src\stm32f30x_pwr.o
+PWR_PVDLevelConfig                                Framework\src\stm32f30x_pwr.o
+PWR_WakeUpPinCmd                                  Framework\src\stm32f30x_pwr.o
+PendSV_Handler                                    src\startup_stm32f303xe.o
+RCC_ADCCLKConfig                                  Framework\src\stm32f30x_rcc.o
+RCC_AHBPeriphClockCmd                             Framework\src\stm32f30x_rcc.o
+                                                  HAL\RCC.o
+RCC_AHBPeriphResetCmd                             Framework\src\stm32f30x_rcc.o
+                                                  Framework\src\stm32f30x_adc.o
+                                                  Framework\src\stm32f30x_gpio.o
+RCC_APB1PeriphClockCmd                            Framework\src\stm32f30x_rcc.o
+                                                  HAL\RCC.o
+RCC_APB1PeriphResetCmd                            Framework\src\stm32f30x_rcc.o
+                                                  Framework\src\stm32f30x_can.o
+                                                  Framework\src\stm32f30x_dac.o
+                                                  Framework\src\stm32f30x_i2c.o
+                                                  Framework\src\stm32f30x_pwr.o
+                                                  Framework\src\stm32f30x_spi.o
+                                                  Framework\src\stm32f30x_tim.o
+                                                  Framework\src\stm32f30x_usart.o
+                                                  Framework\src\stm32f30x_wwdg.o
+RCC_APB2PeriphClockCmd                            Framework\src\stm32f30x_rcc.o
+                                                  HAL\RCC.o
+RCC_APB2PeriphResetCmd                            Framework\src\stm32f30x_rcc.o
+                                                  Framework\src\stm32f30x_spi.o
+                                                  Framework\src\stm32f30x_tim.o
+                                                  Framework\src\stm32f30x_usart.o
+RCC_AdjustHSICalibrationValue                     Framework\src\stm32f30x_rcc.o
+RCC_BackupResetCmd                                Framework\src\stm32f30x_rcc.o
+RCC_ClearFlag                                     Framework\src\stm32f30x_rcc.o
+RCC_ClearITPendingBit                             Framework\src\stm32f30x_rcc.o
+RCC_ClockSecuritySystemCmd                        Framework\src\stm32f30x_rcc.o
+RCC_DeInit                                        Framework\src\stm32f30x_rcc.o
+RCC_GetClocksFreq                                 Framework\src\stm32f30x_rcc.o
+                                                  Framework\src\stm32f30x_spi.o
+                                                  Framework\src\stm32f30x_usart.o
+RCC_GetFlagStatus                                 Framework\src\stm32f30x_rcc.o
+RCC_GetITStatus                                   Framework\src\stm32f30x_rcc.o
+RCC_GetSYSCLKSource                               Framework\src\stm32f30x_rcc.o
+RCC_HCLKConfig                                    Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_HRTIM1CLKConfig                               Framework\src\stm32f30x_rcc.o
+RCC_HSEConfig                                     Framework\src\stm32f30x_rcc.o
+RCC_HSICmd                                        Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_I2CCLKConfig                                  Framework\src\stm32f30x_rcc.o
+                                                  HAL\RCC.o
+RCC_I2SCLKConfig                                  Framework\src\stm32f30x_rcc.o
+RCC_IRQHandler                                    src\startup_stm32f303xe.o
+RCC_ITConfig                                      Framework\src\stm32f30x_rcc.o
+RCC_LSEConfig                                     Framework\src\stm32f30x_rcc.o
+RCC_LSEDriveConfig                                Framework\src\stm32f30x_rcc.o
+RCC_LSICmd                                        Framework\src\stm32f30x_rcc.o
+RCC_MCOConfig                                     Framework\src\stm32f30x_rcc.o
+RCC_PCLK1Config                                   Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_PCLK2Config                                   Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_PLLCmd                                        Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_PLLConfig                                     Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_PREDIV1Config                                 Framework\src\stm32f30x_rcc.o
+RCC_RTCCLKCmd                                     Framework\src\stm32f30x_rcc.o
+RCC_RTCCLKConfig                                  Framework\src\stm32f30x_rcc.o
+RCC_SYSCLKConfig                                  Framework\src\stm32f30x_rcc.o
+                                                  Drivers\Clock\clock.o
+RCC_TIMCLKConfig                                  Framework\src\stm32f30x_rcc.o
+RCC_USARTCLKConfig                                Framework\src\stm32f30x_rcc.o
+RCC_USBCLKConfig                                  Framework\src\stm32f30x_rcc.o
+RCC_WaitForHSEStartUp                             Framework\src\stm32f30x_rcc.o
+RTC_AlarmCmd                                      Framework\src\stm32f30x_rtc.o
+RTC_AlarmStructInit                               Framework\src\stm32f30x_rtc.o
+RTC_AlarmSubSecondConfig                          Framework\src\stm32f30x_rtc.o
+RTC_Alarm_IRQHandler                              src\startup_stm32f303xe.o
+RTC_BypassShadowCmd                               Framework\src\stm32f30x_rtc.o
+RTC_CalibOutputCmd                                Framework\src\stm32f30x_rtc.o
+RTC_CalibOutputConfig                             Framework\src\stm32f30x_rtc.o
+RTC_ClearFlag                                     Framework\src\stm32f30x_rtc.o
+RTC_ClearITPendingBit                             Framework\src\stm32f30x_rtc.o
+RTC_DateStructInit                                Framework\src\stm32f30x_rtc.o
+RTC_DayLightSavingConfig                          Framework\src\stm32f30x_rtc.o
+RTC_DeInit                                        Framework\src\stm32f30x_rtc.o
+RTC_EnterInitMode                                 Framework\src\stm32f30x_rtc.o
+RTC_ExitInitMode                                  Framework\src\stm32f30x_rtc.o
+RTC_GetAlarm                                      Framework\src\stm32f30x_rtc.o
+RTC_GetAlarmSubSecond                             Framework\src\stm32f30x_rtc.o
+RTC_GetDate                                       Framework\src\stm32f30x_rtc.o
+RTC_GetFlagStatus                                 Framework\src\stm32f30x_rtc.o
+RTC_GetITStatus                                   Framework\src\stm32f30x_rtc.o
+RTC_GetStoreOperation                             Framework\src\stm32f30x_rtc.o
+RTC_GetSubSecond                                  Framework\src\stm32f30x_rtc.o
+RTC_GetTime                                       Framework\src\stm32f30x_rtc.o
+RTC_GetTimeStamp                                  Framework\src\stm32f30x_rtc.o
+RTC_GetTimeStampSubSecond                         Framework\src\stm32f30x_rtc.o
+RTC_GetWakeUpCounter                              Framework\src\stm32f30x_rtc.o
+RTC_ITConfig                                      Framework\src\stm32f30x_rtc.o
+RTC_Init                                          Framework\src\stm32f30x_rtc.o
+RTC_OutputConfig                                  Framework\src\stm32f30x_rtc.o
+RTC_OutputTypeConfig                              Framework\src\stm32f30x_rtc.o
+RTC_ReadBackupRegister                            Framework\src\stm32f30x_rtc.o
+RTC_RefClockCmd                                   Framework\src\stm32f30x_rtc.o
+RTC_SetAlarm                                      Framework\src\stm32f30x_rtc.o
+RTC_SetDate                                       Framework\src\stm32f30x_rtc.o
+RTC_SetTime                                       Framework\src\stm32f30x_rtc.o
+RTC_SetWakeUpCounter                              Framework\src\stm32f30x_rtc.o
+RTC_SmoothCalibConfig                             Framework\src\stm32f30x_rtc.o
+RTC_StructInit                                    Framework\src\stm32f30x_rtc.o
+RTC_SynchroShiftConfig                            Framework\src\stm32f30x_rtc.o
+RTC_TamperCmd                                     Framework\src\stm32f30x_rtc.o
+RTC_TamperFilterConfig                            Framework\src\stm32f30x_rtc.o
+RTC_TamperPinsPrechargeDuration                   Framework\src\stm32f30x_rtc.o
+RTC_TamperPullUpCmd                               Framework\src\stm32f30x_rtc.o
+RTC_TamperSamplingFreqConfig                      Framework\src\stm32f30x_rtc.o
+RTC_TamperTriggerConfig                           Framework\src\stm32f30x_rtc.o
+RTC_TimeStampCmd                                  Framework\src\stm32f30x_rtc.o
+RTC_TimeStampOnTamperDetectionCmd                 Framework\src\stm32f30x_rtc.o
+RTC_TimeStructInit                                Framework\src\stm32f30x_rtc.o
+RTC_WKUP_IRQHandler                               src\startup_stm32f303xe.o
+RTC_WaitForSynchro                                Framework\src\stm32f30x_rtc.o
+RTC_WakeUpClockConfig                             Framework\src\stm32f30x_rtc.o
+RTC_WakeUpCmd                                     Framework\src\stm32f30x_rtc.o
+RTC_WriteBackupRegister                           Framework\src\stm32f30x_rtc.o
+RTC_WriteProtectionCmd                            Framework\src\stm32f30x_rtc.o
+Reset_Handler                                     src\startup_stm32f303xe.o
+SPI1_IRQHandler                                   src\startup_stm32f303xe.o
+SPI2_IRQHandler                                   src\startup_stm32f303xe.o
+SPI3_IRQHandler                                   src\startup_stm32f303xe.o
+SPI4_IRQHandler                                   src\startup_stm32f303xe.o
+SPI_BiDirectionalLineConfig                       Framework\src\stm32f30x_spi.o
+SPI_CRCLengthConfig                               Framework\src\stm32f30x_spi.o
+SPI_CalculateCRC                                  Framework\src\stm32f30x_spi.o
+SPI_Cmd                                           Framework\src\stm32f30x_spi.o
+SPI_DataSizeConfig                                Framework\src\stm32f30x_spi.o
+SPI_GetCRC                                        Framework\src\stm32f30x_spi.o
+SPI_GetCRCPolynomial                              Framework\src\stm32f30x_spi.o
+SPI_GetReceptionFIFOStatus                        Framework\src\stm32f30x_spi.o
+SPI_GetTransmissionFIFOStatus                     Framework\src\stm32f30x_spi.o
+SPI_I2S_ClearFlag                                 Framework\src\stm32f30x_spi.o
+SPI_I2S_DMACmd                                    Framework\src\stm32f30x_spi.o
+SPI_I2S_DeInit                                    Framework\src\stm32f30x_spi.o
+SPI_I2S_GetFlagStatus                             Framework\src\stm32f30x_spi.o
+SPI_I2S_GetITStatus                               Framework\src\stm32f30x_spi.o
+SPI_I2S_ITConfig                                  Framework\src\stm32f30x_spi.o
+SPI_I2S_ReceiveData16                             Framework\src\stm32f30x_spi.o
+SPI_I2S_SendData16                                Framework\src\stm32f30x_spi.o
+SPI_Init                                          Framework\src\stm32f30x_spi.o
+SPI_LastDMATransferCmd                            Framework\src\stm32f30x_spi.o
+SPI_NSSInternalSoftwareConfig                     Framework\src\stm32f30x_spi.o
+SPI_NSSPulseModeCmd                               Framework\src\stm32f30x_spi.o
+SPI_ReceiveData8                                  Framework\src\stm32f30x_spi.o
+SPI_RxFIFOThresholdConfig                         Framework\src\stm32f30x_spi.o
+SPI_SSOutputCmd                                   Framework\src\stm32f30x_spi.o
+SPI_SendData8                                     Framework\src\stm32f30x_spi.o
+SPI_StructInit                                    Framework\src\stm32f30x_spi.o
+SPI_TIModeCmd                                     Framework\src\stm32f30x_spi.o
+SPI_TransmitCRC                                   Framework\src\stm32f30x_spi.o
+SVC_Handler                                       src\startup_stm32f303xe.o
+SYSCFG_ADCTriggerRemapConfig                      Framework\src\stm32f30x_syscfg.o
+SYSCFG_BreakConfig                                Framework\src\stm32f30x_syscfg.o
+SYSCFG_BypassParityCheckDisable                   Framework\src\stm32f30x_syscfg.o
+SYSCFG_ClearFlag                                  Framework\src\stm32f30x_syscfg.o
+SYSCFG_DMAChannelRemapConfig                      Framework\src\stm32f30x_syscfg.o
+SYSCFG_DeInit                                     Framework\src\stm32f30x_syscfg.o
+SYSCFG_EXTILineConfig                             Framework\src\stm32f30x_syscfg.o
+SYSCFG_EncoderRemapConfig                         Framework\src\stm32f30x_syscfg.o
+SYSCFG_GetFlagStatus                              Framework\src\stm32f30x_syscfg.o
+SYSCFG_I2CFastModePlusConfig                      Framework\src\stm32f30x_syscfg.o
+SYSCFG_ITConfig                                   Framework\src\stm32f30x_syscfg.o
+SYSCFG_MemoryRemapConfig                          Framework\src\stm32f30x_syscfg.o
+SYSCFG_SRAMWRPEnable                              Framework\src\stm32f30x_syscfg.o
+SYSCFG_TriggerRemapConfig                         Framework\src\stm32f30x_syscfg.o
+SYSCFG_USBInterruptLineRemapCmd                   Framework\src\stm32f30x_syscfg.o
+SysTick_CLKSourceConfig                           Framework\src\stm32f30x_misc.o
+                                                  HAL\SysTick.o
+SysTick_Handler                                   HAL\SysTick.o
+                                                  src\startup_stm32f303xe.o
+SystemCoreClock                                   src\system_stm32f30x.o
+SystemCoreClockUpdate                             src\system_stm32f30x.o
+SystemInit                                        src\system_stm32f30x.o
+                                                  src\startup_stm32f303xe.o
+TAMP_STAMP_IRQHandler                             src\startup_stm32f303xe.o
+TIM1_BRK_TIM15_IRQHandler                         src\startup_stm32f303xe.o
+TIM1_CC_IRQHandler                                src\startup_stm32f303xe.o
+TIM1_TRG_COM_TIM17_IRQHandler                     src\startup_stm32f303xe.o
+TIM1_UP_TIM16_IRQHandler                          src\startup_stm32f303xe.o
+TIM20_BRK_IRQHandler                              src\startup_stm32f303xe.o
+TIM20_CC_IRQHandler                               src\startup_stm32f303xe.o
+TIM20_TRG_COM_IRQHandler                          src\startup_stm32f303xe.o
+TIM20_UP_IRQHandler                               src\startup_stm32f303xe.o
+TIM2_IRQHandler                                   src\startup_stm32f303xe.o
+TIM3_IRQHandler                                   src\startup_stm32f303xe.o
+TIM4_IRQHandler                                   src\startup_stm32f303xe.o
+TIM6_DAC_IRQHandler                               src\startup_stm32f303xe.o
+TIM7_IRQHandler                                   src\startup_stm32f303xe.o
+TIM8_BRK_IRQHandler                               src\startup_stm32f303xe.o
+TIM8_CC_IRQHandler                                src\startup_stm32f303xe.o
+TIM8_TRG_COM_IRQHandler                           src\startup_stm32f303xe.o
+TIM8_UP_IRQHandler                                src\startup_stm32f303xe.o
+TIM_ARRPreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_BDTRConfig                                    Framework\src\stm32f30x_tim.o
+TIM_BDTRStructInit                                Framework\src\stm32f30x_tim.o
+TIM_Break1Cmd                                     Framework\src\stm32f30x_tim.o
+TIM_Break1Config                                  Framework\src\stm32f30x_tim.o
+TIM_Break2Cmd                                     Framework\src\stm32f30x_tim.o
+TIM_Break2Config                                  Framework\src\stm32f30x_tim.o
+TIM_CCPreloadControl                              Framework\src\stm32f30x_tim.o
+TIM_CCxCmd                                        Framework\src\stm32f30x_tim.o
+TIM_CCxNCmd                                       Framework\src\stm32f30x_tim.o
+TIM_ClearFlag                                     Framework\src\stm32f30x_tim.o
+TIM_ClearITPendingBit                             Framework\src\stm32f30x_tim.o
+TIM_ClearOC1Ref                                   Framework\src\stm32f30x_tim.o
+TIM_ClearOC2Ref                                   Framework\src\stm32f30x_tim.o
+TIM_ClearOC3Ref                                   Framework\src\stm32f30x_tim.o
+TIM_ClearOC4Ref                                   Framework\src\stm32f30x_tim.o
+TIM_ClearOC5Ref                                   Framework\src\stm32f30x_tim.o
+TIM_ClearOC6Ref                                   Framework\src\stm32f30x_tim.o
+TIM_Cmd                                           Framework\src\stm32f30x_tim.o
+                                                  HAL\Timers.o
+TIM_CounterModeConfig                             Framework\src\stm32f30x_tim.o
+TIM_CtrlPWMOutputs                                Framework\src\stm32f30x_tim.o
+TIM_DMACmd                                        Framework\src\stm32f30x_tim.o
+TIM_DMAConfig                                     Framework\src\stm32f30x_tim.o
+TIM_DeInit                                        Framework\src\stm32f30x_tim.o
+TIM_ETRClockMode1Config                           Framework\src\stm32f30x_tim.o
+TIM_ETRClockMode2Config                           Framework\src\stm32f30x_tim.o
+TIM_ETRConfig                                     Framework\src\stm32f30x_tim.o
+TIM_EncoderInterfaceConfig                        Framework\src\stm32f30x_tim.o
+TIM_ForcedOC1Config                               Framework\src\stm32f30x_tim.o
+TIM_ForcedOC2Config                               Framework\src\stm32f30x_tim.o
+TIM_ForcedOC3Config                               Framework\src\stm32f30x_tim.o
+TIM_ForcedOC4Config                               Framework\src\stm32f30x_tim.o
+TIM_ForcedOC5Config                               Framework\src\stm32f30x_tim.o
+TIM_ForcedOC6Config                               Framework\src\stm32f30x_tim.o
+TIM_GenerateEvent                                 Framework\src\stm32f30x_tim.o
+TIM_GetCapture1                                   Framework\src\stm32f30x_tim.o
+TIM_GetCapture2                                   Framework\src\stm32f30x_tim.o
+TIM_GetCapture3                                   Framework\src\stm32f30x_tim.o
+TIM_GetCapture4                                   Framework\src\stm32f30x_tim.o
+TIM_GetCounter                                    Framework\src\stm32f30x_tim.o
+TIM_GetFlagStatus                                 Framework\src\stm32f30x_tim.o
+TIM_GetITStatus                                   Framework\src\stm32f30x_tim.o
+TIM_GetPrescaler                                  Framework\src\stm32f30x_tim.o
+TIM_ICInit                                        Framework\src\stm32f30x_tim.o
+TIM_ICStructInit                                  Framework\src\stm32f30x_tim.o
+TIM_ITConfig                                      Framework\src\stm32f30x_tim.o
+TIM_ITRxExternalClockConfig                       Framework\src\stm32f30x_tim.o
+TIM_InternalClockConfig                           Framework\src\stm32f30x_tim.o
+TIM_OC1FastConfig                                 Framework\src\stm32f30x_tim.o
+TIM_OC1Init                                       Framework\src\stm32f30x_tim.o
+TIM_OC1NPolarityConfig                            Framework\src\stm32f30x_tim.o
+TIM_OC1PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC1PreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_OC2FastConfig                                 Framework\src\stm32f30x_tim.o
+TIM_OC2Init                                       Framework\src\stm32f30x_tim.o
+                                                  HAL\Timers.o
+TIM_OC2NPolarityConfig                            Framework\src\stm32f30x_tim.o
+TIM_OC2PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC2PreloadConfig                              Framework\src\stm32f30x_tim.o
+                                                  HAL\Timers.o
+TIM_OC3FastConfig                                 Framework\src\stm32f30x_tim.o
+TIM_OC3Init                                       Framework\src\stm32f30x_tim.o
+TIM_OC3NPolarityConfig                            Framework\src\stm32f30x_tim.o
+TIM_OC3PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC3PreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_OC4FastConfig                                 Framework\src\stm32f30x_tim.o
+TIM_OC4Init                                       Framework\src\stm32f30x_tim.o
+TIM_OC4PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC4PreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_OC5Init                                       Framework\src\stm32f30x_tim.o
+TIM_OC5PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC5PreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_OC6Init                                       Framework\src\stm32f30x_tim.o
+TIM_OC6PolarityConfig                             Framework\src\stm32f30x_tim.o
+TIM_OC6PreloadConfig                              Framework\src\stm32f30x_tim.o
+TIM_OCStructInit                                  Framework\src\stm32f30x_tim.o
+TIM_PWMIConfig                                    Framework\src\stm32f30x_tim.o
+TIM_PrescalerConfig                               Framework\src\stm32f30x_tim.o
+TIM_RemapConfig                                   Framework\src\stm32f30x_tim.o
+TIM_SelectCCDMA                                   Framework\src\stm32f30x_tim.o
+TIM_SelectCOM                                     Framework\src\stm32f30x_tim.o
+TIM_SelectGC5C1                                   Framework\src\stm32f30x_tim.o
+TIM_SelectGC5C2                                   Framework\src\stm32f30x_tim.o
+TIM_SelectGC5C3                                   Framework\src\stm32f30x_tim.o
+TIM_SelectHallSensor                              Framework\src\stm32f30x_tim.o
+TIM_SelectInputTrigger                            Framework\src\stm32f30x_tim.o
+TIM_SelectMasterSlaveMode                         Framework\src\stm32f30x_tim.o
+TIM_SelectOCREFClear                              Framework\src\stm32f30x_tim.o
+TIM_SelectOCxM                                    Framework\src\stm32f30x_tim.o
+TIM_SelectOnePulseMode                            Framework\src\stm32f30x_tim.o
+TIM_SelectOutputTrigger                           Framework\src\stm32f30x_tim.o
+TIM_SelectOutputTrigger2                          Framework\src\stm32f30x_tim.o
+TIM_SelectSlaveMode                               Framework\src\stm32f30x_tim.o
+TIM_SetAutoreload                                 Framework\src\stm32f30x_tim.o
+TIM_SetClockDivision                              Framework\src\stm32f30x_tim.o
+TIM_SetCompare1                                   Framework\src\stm32f30x_tim.o
+TIM_SetCompare2                                   Framework\src\stm32f30x_tim.o
+TIM_SetCompare3                                   Framework\src\stm32f30x_tim.o
+TIM_SetCompare4                                   Framework\src\stm32f30x_tim.o
+TIM_SetCompare5                                   Framework\src\stm32f30x_tim.o
+TIM_SetCompare6                                   Framework\src\stm32f30x_tim.o
+TIM_SetCounter                                    Framework\src\stm32f30x_tim.o
+TIM_SetIC1Prescaler                               Framework\src\stm32f30x_tim.o
+TIM_SetIC2Prescaler                               Framework\src\stm32f30x_tim.o
+TIM_SetIC3Prescaler                               Framework\src\stm32f30x_tim.o
+TIM_SetIC4Prescaler                               Framework\src\stm32f30x_tim.o
+TIM_TIxExternalClockConfig                        Framework\src\stm32f30x_tim.o
+TIM_TimeBaseInit                                  Framework\src\stm32f30x_tim.o
+                                                  HAL\Timers.o
+TIM_TimeBaseStructInit                            Framework\src\stm32f30x_tim.o
+TIM_UIFRemap                                      Framework\src\stm32f30x_tim.o
+TIM_UpdateDisableConfig                           Framework\src\stm32f30x_tim.o
+TIM_UpdateRequestConfig                           Framework\src\stm32f30x_tim.o
+UART4_IRQHandler                                  src\startup_stm32f303xe.o
+UART5_IRQHandler                                  src\startup_stm32f303xe.o
+USART1_IRQHandler                                 HAL\USART.o
+                                                  src\startup_stm32f303xe.o
+USART2_IRQHandler                                 HAL\USART.o
+                                                  src\startup_stm32f303xe.o
+USART3_IRQHandler                                 HAL\USART.o
+                                                  src\startup_stm32f303xe.o
+USARTInterrupt                                    HAL\USART.o
+USART_AddressDetectionConfig                      Framework\src\stm32f30x_usart.o
+USART_AutoBaudRateCmd                             Framework\src\stm32f30x_usart.o
+USART_AutoBaudRateConfig                          Framework\src\stm32f30x_usart.o
+USART_ClearFlag                                   Framework\src\stm32f30x_usart.o
+USART_ClearITPendingBit                           Framework\src\stm32f30x_usart.o
+USART_ClockInit                                   Framework\src\stm32f30x_usart.o
+USART_ClockStructInit                             Framework\src\stm32f30x_usart.o
+USART_Cmd                                         Framework\src\stm32f30x_usart.o
+                                                  HAL\USART.o
+USART_DECmd                                       Framework\src\stm32f30x_usart.o
+USART_DEPolarityConfig                            Framework\src\stm32f30x_usart.o
+USART_DMACmd                                      Framework\src\stm32f30x_usart.o
+USART_DMAReceptionErrorConfig                     Framework\src\stm32f30x_usart.o
+USART_DataInvCmd                                  Framework\src\stm32f30x_usart.o
+USART_DeInit                                      Framework\src\stm32f30x_usart.o
+USART_DirectionModeCmd                            Framework\src\stm32f30x_usart.o
+USART_GetFlagStatus                               Framework\src\stm32f30x_usart.o
+                                                  Drivers\BT\BT.o
+                                                  Drivers\Wifi\Wifi.o
+USART_GetITStatus                                 Framework\src\stm32f30x_usart.o
+USART_HalfDuplexCmd                               Framework\src\stm32f30x_usart.o
+USART_ITConfig                                    Framework\src\stm32f30x_usart.o
+                                                  HAL\USART.o
+USART_Init                                        Framework\src\stm32f30x_usart.o
+                                                  HAL\USART.o
+USART_InvPinCmd                                   Framework\src\stm32f30x_usart.o
+USART_IrDACmd                                     Framework\src\stm32f30x_usart.o
+USART_IrDAConfig                                  Framework\src\stm32f30x_usart.o
+USART_LINBreakDetectLengthConfig                  Framework\src\stm32f30x_usart.o
+USART_LINCmd                                      Framework\src\stm32f30x_usart.o
+USART_MSBFirstCmd                                 Framework\src\stm32f30x_usart.o
+USART_MuteModeCmd                                 Framework\src\stm32f30x_usart.o
+USART_MuteModeWakeUpConfig                        Framework\src\stm32f30x_usart.o
+USART_OneBitMethodCmd                             Framework\src\stm32f30x_usart.o
+USART_OverSampling8Cmd                            Framework\src\stm32f30x_usart.o
+USART_OverrunDetectionConfig                      Framework\src\stm32f30x_usart.o
+USART_ReceiveData                                 Framework\src\stm32f30x_usart.o
+USART_ReceiverTimeOutCmd                          Framework\src\stm32f30x_usart.o
+USART_RequestCmd                                  Framework\src\stm32f30x_usart.o
+USART_STOPModeCmd                                 Framework\src\stm32f30x_usart.o
+USART_SWAPPinCmd                                  Framework\src\stm32f30x_usart.o
+USART_SendData                                    Framework\src\stm32f30x_usart.o
+                                                  Drivers\BT\BT.o
+                                                  Drivers\Wifi\Wifi.o
+USART_SetAddress                                  Framework\src\stm32f30x_usart.o
+USART_SetAutoRetryCount                           Framework\src\stm32f30x_usart.o
+USART_SetBlockLength                              Framework\src\stm32f30x_usart.o
+USART_SetDEAssertionTime                          Framework\src\stm32f30x_usart.o
+USART_SetDEDeassertionTime                        Framework\src\stm32f30x_usart.o
+USART_SetGuardTime                                Framework\src\stm32f30x_usart.o
+USART_SetPrescaler                                Framework\src\stm32f30x_usart.o
+USART_SetReceiverTimeOut                          Framework\src\stm32f30x_usart.o
+USART_SmartCardCmd                                Framework\src\stm32f30x_usart.o
+USART_SmartCardNACKCmd                            Framework\src\stm32f30x_usart.o
+USART_StopModeWakeUpSourceConfig                  Framework\src\stm32f30x_usart.o
+USART_StructInit                                  Framework\src\stm32f30x_usart.o
+                                                  HAL\USART.o
+USBWakeUp_IRQHandler                              src\startup_stm32f303xe.o
+USBWakeUp_RMP_IRQHandler                          src\startup_stm32f303xe.o
+USB_HP_CAN_TX_IRQHandler                          src\startup_stm32f303xe.o
+USB_HP_IRQHandler                                 src\startup_stm32f303xe.o
+USB_LP_CAN_RX0_IRQHandler                         src\startup_stm32f303xe.o
+USB_LP_IRQHandler                                 src\startup_stm32f303xe.o
+UsageFault_Handler                                src\startup_stm32f303xe.o
+WWDG_ClearFlag                                    Framework\src\stm32f30x_wwdg.o
+WWDG_DeInit                                       Framework\src\stm32f30x_wwdg.o
+WWDG_Enable                                       Framework\src\stm32f30x_wwdg.o
+WWDG_EnableIT                                     Framework\src\stm32f30x_wwdg.o
+WWDG_GetFlagStatus                                Framework\src\stm32f30x_wwdg.o
+WWDG_IRQHandler                                   src\startup_stm32f303xe.o
+WWDG_SetCounter                                   Framework\src\stm32f30x_wwdg.o
+WWDG_SetPrescaler                                 Framework\src\stm32f30x_wwdg.o
+WWDG_SetWindowValue                               Framework\src\stm32f30x_wwdg.o
+Wifi_Send                                         Drivers\Wifi\Wifi.o
+__deregister_frame_info                           c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+__dso_handle                                      c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+__init_array_end                                  c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+__init_array_start                                c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+__libc_init_array                                 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                                                  src\startup_stm32f303xe.o
+__preinit_array_end                               c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+__preinit_array_start                             c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+__register_frame_info                             c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+_ebss                                             src\startup_stm32f303xe.o
+_edata                                            src\startup_stm32f303xe.o
+_estack                                           src\startup_stm32f303xe.o
+_fini                                             c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+_init                                             c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                                                  c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+_sbss                                             src\startup_stm32f303xe.o
+_sdata                                            src\startup_stm32f303xe.o
+_sidata                                           src\startup_stm32f303xe.o
+g_pfnVectors                                      src\startup_stm32f303xe.o
+main                                              src\main.o
+                                                  src\startup_stm32f303xe.o
+priv_InitializeBt                                 HAL\RCC.o
+priv_InitializeLed14                              HAL\RCC.o
+priv_InitializeLedEye                             HAL\RCC.o
+priv_InitializeLedNucleo                          HAL\RCC.o
+priv_InitializeMPU                                HAL\RCC.o
+priv_InitializePi                                 HAL\RCC.o
+priv_InitializeWifi                               HAL\RCC.o
