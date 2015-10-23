@@ -40,15 +40,11 @@ void BT_Send16(int16_t Word)
 	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
 	USART_SendData(USART_BT, (Word & 0xFF) );
 }
-void BT_SendMeasuredData( MeasuredDataStruct MpuMeasuredData)
+void BT_SendMeasuredData( void )
 {
 	BT_Send16( 0xFFFF );
-	BT_Send16( MpuMeasuredData.X_AccRaw );
-	BT_Send16( MpuMeasuredData.Y_AccRaw );
 	BT_Send16( MpuMeasuredData.Z_AccRaw );
 	BT_Send16( MpuMeasuredData.X_GyroRaw );
-	BT_Send16( MpuMeasuredData.Y_GyroRaw );
-	BT_Send16( MpuMeasuredData.Z_GyroRaw );
 
 	/*!
 	( MpuMeasuredData.X_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.X_AccRaw );

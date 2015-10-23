@@ -22,20 +22,7 @@
 */
 
 //-----------------------Includes-------------------------------------//
-#include "stm32f30x.h"
 #include "main.h"
-#include "../HAL/SysTick.h"
-#include "../HAL/NVIC.h"
-#include "../HAL/Timers.h"
-#include "../HAL/RCC.h"
-#include "../HAL/USART.h"
-
-#include "../Drivers/Clock/clock.h"
-#include "../Drivers/LEDs/LED.h"
-#include "../Drivers/BT/BT.h"
-#include "../Drivers/Wifi/Wifi.h"
-#include "../Drivers/MPU/MPU.h"
-#include "../Drivers/MPU/_LibMPU6050.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -51,12 +38,6 @@ int main(void);
 //-----------------------Private functions-----------------------------//
 int main(void)
 {
-	uint32_t ii = 1;
-	MPU6050_errorstatus err;
-	err = MPU6050_I2C_ERROR;
-
-	MeasuredDataStruct MpuMeasuredData;
-
 	InitializeClock();
 	InitializeSysTick();
 	InitializeTimers();//todo wypieprzyæ: ma by initMOTORS, SERVOSARM, SERVOSCAM
@@ -88,16 +69,7 @@ int main(void)
   //InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
   while (1)
   {
-       if(--ii==0){
-    	   err = MPU6050_Get_Accel_Data_Raw(&MpuMeasuredData.X_AccRaw, &MpuMeasuredData.Y_AccRaw, &MpuMeasuredData.Z_AccRaw);
-    	   err = MPU6050_Get_Gyro_Data_Raw(&MpuMeasuredData.X_GyroRaw, &MpuMeasuredData.Y_GyroRaw, &MpuMeasuredData.Z_GyroRaw);
-    	   if(MPU6050_NO_ERROR == err)
-    	   {
-    		   BT_SendMeasuredData(MpuMeasuredData);
-    		   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
-    	   }
-    	   ii=50000;
-       }
+	  ;
   }
   return 0;
 }

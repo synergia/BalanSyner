@@ -35,6 +35,8 @@
 uint32_t MPU6050_Timeout = MPU6050_FLAG_TIMEOUT;
 MPU6050_dataStruct dataStruct;
 
+#define _NoError
+
 /* @brief Sets up MPU6050 internal clock and sensors sensitivity rate
 *  This function must be called before using the sensor!
 *
@@ -53,13 +55,13 @@ MPU6050_errorstatus MPU6050_Initialization(void){
 	/* Set Gyroscope's full scope range
 	 * possible values @gyro_scale_range
 	 */
-	errorstatus = MPU6050_Gyro_Set_Range(MPU6050_GYRO_250);
+	errorstatus = MPU6050_Gyro_Set_Range(MPU6050_GYRO_1000);
 	if(errorstatus != 0) return errorstatus;
 
 	/* Set Accelerometer's full scope range
 	 * possible values @accel_scale_range
 	 */
-	errorstatus = MPU6050_Accel_Set_Range(MPU6050_ACCEL_2g);
+	errorstatus = MPU6050_Accel_Set_Range(MPU6050_ACCEL_4g);
 	if(errorstatus != 0) return errorstatus;
 
 	return MPU6050_NO_ERROR;
@@ -212,38 +214,81 @@ MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z
 	uint8_t xlow, xhigh, ylow, yhigh, zlow, zhigh;
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_L, &xlow, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_H, &xhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_YOUT_L, &ylow, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_YOUT_H, &yhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_ZOUT_L, &zlow, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_ZOUT_H, &zhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	*X = (int16_t)(xhigh << 8 | xlow);
 	*Y = (int16_t)(yhigh << 8 | ylow);
 	*Z = (int16_t)(zhigh << 8 | zlow);
+
+	return MPU6050_NO_ERROR;
+}
+
+/* @brief Get Gyroscope X raw data
+ *
+ * @param X - sensor roll on X axis
+ *
+ * @retval @MPU6050_errorstatus
+ */
+MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X){
+
+	MPU6050_errorstatus errorstatus;
+
+	uint8_t xlow, xhigh;
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_L, &xlow, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_H, &xhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	*X = (int16_t)(xhigh << 8 | xlow);
 
 	return MPU6050_NO_ERROR;
 }
@@ -263,37 +308,81 @@ MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* 
 	uint8_t xlow, xhigh, ylow, yhigh, zlow, zhigh;
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_XOUT_L, &xlow, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_XOUT_H, &xhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_L, &ylow, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_H, &yhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_L, &zlow, 1);
-	if(errorstatus != 0){
+#ifndef _NoError
+if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_H, &zhigh, 1);
+#ifndef _NoError
 	if(errorstatus != 0){
 		return errorstatus;
 	}
+#endif
 
 	*X = (int16_t)(xhigh << 8 | xlow);
 	*Y = (int16_t)(yhigh << 8 | ylow);
+	*Z = (int16_t)(zhigh << 8 | zlow);
+
+	return MPU6050_NO_ERROR;
+}
+
+/* @brief Get Accelerometer Z raw data
+ *
+ * @param Z - sensor accel on Z axis
+ *
+ * @retval @MPU6050_errorstatus
+ */
+#define _NoError
+MPU6050_errorstatus MPU6050_Get_AccelZ_Data_Raw( int16_t* Z ){
+
+	MPU6050_errorstatus errorstatus;
+
+	uint8_t zlow, zhigh;
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_L, &zlow, 1);
+#ifndef _NoError
+if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_H, &zhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
 	*Z = (int16_t)(zhigh << 8 | zlow);
 
 	return MPU6050_NO_ERROR;

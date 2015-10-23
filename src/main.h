@@ -4,15 +4,24 @@
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 
+#include "../HAL/SysTick.h"
+#include "../HAL/NVIC.h"
+#include "../HAL/Timers.h"
+#include "../HAL/RCC.h"
+#include "../HAL/USART.h"
+
+#include "../Drivers/Clock/clock.h"
+#include "../Drivers/LEDs/LED.h"
+#include "../Drivers/BT/BT.h"
+#include "../Drivers/Wifi/Wifi.h"
+#include "../Drivers/MPU/MPU.h"
+#include "../Drivers/MPU/_LibMPU6050.h"
+
 //-----------------------Public typedefs------------------------------//
 typedef struct
 {
-	int16_t X_AccRaw;
-	int16_t Y_AccRaw;
 	int16_t Z_AccRaw;
 	int16_t X_GyroRaw;
-	int16_t Y_GyroRaw;
-	int16_t Z_GyroRaw;
 }MeasuredDataStruct;
 
 //-----------------------Public defines-------------------------------//
@@ -26,6 +35,8 @@ typedef struct
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
+MPU6050_errorstatus err;
+MeasuredDataStruct MpuMeasuredData;
 
 //-----------------------Public prototypes----------------------------//
 

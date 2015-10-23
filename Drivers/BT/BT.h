@@ -13,9 +13,9 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
-void InitializeBT();
+void InitializeBT( void );
 void BT_Send(int8_t Char);
 void BT_Send16(int16_t Word);
-void BT_SendMeasuredData( MeasuredDataStruct MpuMeasuredData );
+void BT_SendMeasuredData( void );
 
 #endif

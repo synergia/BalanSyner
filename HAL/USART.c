@@ -24,6 +24,7 @@ void InitializeUSART(USART_TypeDef* USARTx)
 
 	if(USARTx == USART_BT)
 	{
+		usart_conf.USART_BaudRate = 115200u;
 		USART_Init(USART_BT, &usart_conf);
 		USART_BT->CR1 |= USART_CR1_UE;
 		USART_BT->CR1 |= USART_CR1_TE;
