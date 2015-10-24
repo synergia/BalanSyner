@@ -70,7 +70,7 @@ void BT_SendMeasuredData( void )
 	BT_Send16( 0xFFFF );
 	//TODO: send angle [float]
 	BT_Send32( MpuMeasuredData.AngleYZ_AccPrsc1000 );
-	BT_Send32( MpuMeasuredData.AngleX_GyroPrsc1000 );
+	BT_Send32( MpuMeasuredData.AngleYZ_AccPrsc1000Filtered );
 
 	/*!
 	( MpuMeasuredData.X_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.X_AccRaw );

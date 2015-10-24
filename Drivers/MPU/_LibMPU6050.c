@@ -305,9 +305,24 @@ MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X){
  */
 inline void MPU6050_Get_GyroAngleX_Data_Raw(int16_t X, uint8_t dt, float *Angle, int32_t* AnglePrsc1000 )
 {
+	//tricky: if range is different than 1000 it wont work!
 	*Angle = (float)( ((float)X * dt) / (1<<15) );
 	//todo: only temporary for labview sending
 	*AnglePrsc1000 = (int32_t)(*Angle*1000);
+}
+
+/* @brief Get angle around X axis dgr/s
+ *
+ * @param X - sensor  X gyro
+ * @param dt -  time unit
+ * @param DegPerSecond - measurend data in degrees per second for range 1000
+ *
+ * @retval void
+ */
+inline void MPU6050_Get_GyroX_Data(int16_t X, float *DegPerSecond )
+{
+	//tricky: if range is different than 1000 it wont work!
+	*DegPerSecond = (float)( ((float)X*1000) / (1<<15) );
 }
 
 /* @brief Get Accelerometer X,Y,Z raw data

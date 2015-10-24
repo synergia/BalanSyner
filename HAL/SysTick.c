@@ -55,8 +55,11 @@ void SysTick_Handler(void)
  	    MPU6050_Get_GyroX_Data_Raw( &MpuMeasuredData.X_GyroRaw );
 
  	    MPU6050_Get_AccAngleYZ_Data_Raw( MpuMeasuredData.Y_AccRaw, MpuMeasuredData.Z_AccRaw, &MpuMeasuredData.AngleYZ_AccRaw, &MpuMeasuredData.AngleYZ_AccPrsc1000 );
- 	    MPU6050_Get_GyroAngleX_Data_Raw( MpuMeasuredData.X_GyroRaw, Multiplier4<<Period, &MpuMeasuredData.AngleX_GyroRaw, &MpuMeasuredData.AngleX_GyroPrsc1000 );
+ 	    MPU6050_Get_GyroX_Data(MpuMeasuredData.AngleX_GyroRaw, &MpuMeasuredData.X_Gyro);
 
+ 	    MpuMeasuredData.AngleYZ_AccFiltered = KalmanGetValue(MpuMeasuredData.AngleYZ_AccRaw, MpuMeasuredData.X_Gyro);
+
+ 	    MpuMeasuredData.AngleYZ_AccPrsc1000Filtered = (int32_t)(MpuMeasuredData.AngleYZ_AccFiltered*1000);
 		BT_SendMeasuredData( );
 
 		LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;

@@ -65,9 +65,9 @@ int main(void)
 #ifdef _USE_MPU
 	err = InitializeMPU();
 #endif
-
-	MpuMeasuredData.AngleX_GyroRaw = 0;
 	//InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
+
+	KalmanInitialize();
 	while (1)
 	{
 		;
