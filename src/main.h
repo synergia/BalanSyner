@@ -21,7 +21,9 @@
 typedef struct
 {
 	int16_t Z_AccRaw;
+	int16_t Y_AccRaw;
 	int16_t X_GyroRaw;
+	int16_t AngleYZ_AccRaw;
 }MeasuredDataStruct;
 
 //-----------------------Public defines-------------------------------//

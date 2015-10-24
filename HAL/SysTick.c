@@ -48,8 +48,9 @@ void SysTick_Handler(void)
 		/* whole process needs about 2ms */
 		LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-		err = MPU6050_Get_AccelZ_Data_Raw(&MpuMeasuredData.Z_AccRaw);
+		err = MPU6050_Get_AccelYZ_Data_Raw(&MpuMeasuredData.Y_AccRaw, &MpuMeasuredData.Z_AccRaw);
  	    err = MPU6050_Get_GyroX_Data_Raw(&MpuMeasuredData.X_GyroRaw);
+ 	    MPU6050_Get_AccAngleYZ_Data(MpuMeasuredData.Y_AccRaw, MpuMeasuredData.Z_AccRaw, &MpuMeasuredData.AngleYZ_AccRaw);
 		if(MPU6050_NO_ERROR == err)
 		{
 			BT_SendMeasuredData( );

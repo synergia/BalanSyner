@@ -206,9 +206,12 @@ MPU6050_errorstatus MPU6050_Initialization(void);
 /* Data functions prototypes */
 MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X);
-MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
-MPU6050_errorstatus MPU6050_Get_AccelZ_Data_Raw( int16_t* Z );
 MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z);
+
+MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
+MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z );
+inline void MPU6050_Get_AccAngleYZ_Data(int16_t Y, int16_t Z, int16_t* Angle);
 MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z);
+
 int16_t MPU6050_Get_Temperature(void);
 

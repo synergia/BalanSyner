@@ -16,6 +16,7 @@
 void InitializeBT( void );
 void BT_Send(int8_t Char);
 void BT_Send16(int16_t Word);
+void BT_SendF32(float f);
 void BT_SendMeasuredData( void );
 
 #endif

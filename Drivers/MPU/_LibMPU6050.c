@@ -30,10 +30,13 @@
 
 
 #include "_LibMPU6050.h"
+#include "tgmath.h"
 #include "../PinDefines.h"
 
 uint32_t MPU6050_Timeout = MPU6050_FLAG_TIMEOUT;
 MPU6050_dataStruct dataStruct;
+
+#define radiansToDegrees(angleRadians) (angleRadians * 180.0 / M_PI)
 
 #define _NoError
 
@@ -259,7 +262,7 @@ MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z
 	*Y = (int16_t)(yhigh << 8 | ylow);
 	*Z = (int16_t)(zhigh << 8 | zlow);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
 /* @brief Get Gyroscope X raw data
@@ -290,7 +293,7 @@ MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X){
 
 	*X = (int16_t)(xhigh << 8 | xlow);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
 /* @brief Get Accelerometer X,Y,Z raw data
@@ -353,7 +356,7 @@ if(errorstatus != 0){
 	*Y = (int16_t)(yhigh << 8 | ylow);
 	*Z = (int16_t)(zhigh << 8 | zlow);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
 /* @brief Get Accelerometer Z raw data
@@ -363,11 +366,25 @@ if(errorstatus != 0){
  * @retval @MPU6050_errorstatus
  */
 #define _NoError
-MPU6050_errorstatus MPU6050_Get_AccelZ_Data_Raw( int16_t* Z ){
+MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z ){
 
 	MPU6050_errorstatus errorstatus;
 
-	uint8_t zlow, zhigh;
+	uint8_t ylow, yhigh, zlow, zhigh;
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_L, &ylow, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_H, &yhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
 
 	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_L, &zlow, 1);
 #ifndef _NoError
@@ -383,9 +400,39 @@ if(errorstatus != 0){
 	}
 #endif
 
+	*Y = (int16_t)(yhigh << 8 | ylow);
 	*Z = (int16_t)(zhigh << 8 | zlow);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
+}
+
+/* @brief Get angle Z,Y calculated data
+ *
+ * @param X - sensor  X acc
+ * @param Y - sensor  Y acc
+ * @param Angle - calculated angle
+ *
+ * @retval void
+ */
+inline void MPU6050_Get_AccAngleYZ_Data(int16_t Y, int16_t Z, int16_t* Angle){
+
+	static int16_t tempAngle=0;
+	tempAngle = radiansToDegrees( atanf( ((float)Y)/((float)Z) ) );
+	if(		(Y<0 && tempAngle<0)
+		|| 	(Y>0 && tempAngle>0)
+		)
+	{
+		*Angle = tempAngle;
+	}
+	else if(Y>0 && tempAngle<0)
+	{
+		*Angle = 180 + tempAngle;
+	}
+	else if(Y<0 && tempAngle>0)
+	{
+		*Angle = -180 + tempAngle;
+	}
+
 }
 
 /* @brief Get Gyroscope X,Y,Z calculated data
@@ -420,7 +467,7 @@ MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z){
 	*Y = (float)(gyro_y*mult);
 	*Z = (float)(gyro_z*mult);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
 /* @brief Get Accelerometer X,Y,Z calculated data
@@ -455,7 +502,7 @@ MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z){
 	*Y = (float)(accel_y*mult);
 	*Z = (float)(accel_z*mult);
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
 /* @brief Reads bytes from MPU6050
