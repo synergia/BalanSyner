@@ -163,7 +163,8 @@ typedef enum{
 	MPU6050_GYRO_1000 = 0x10,
 	MPU6050_GYRO_2000 = 0x18
 
-}MPU6050_Gyro_Range;
+}MPU6050_Gyro_EnumRange;
+#define MPU6050_Gyro_Range MPU6050_GYRO_1000
 
 /* Accelerometer's full scale range options		@accel_scale_range */
 typedef enum{
@@ -192,7 +193,7 @@ MPU6050_errorstatus MPU6050_Test(void);
 
 /* Gyroscope Full scale range functions */
 uint8_t MPU6050_Gyro_Get_Range(void);
-MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_Range range);
+MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_EnumRange range);
 
 /* Accelerometer Full scale range functions */
 MPU6050_errorstatus MPU6050_Accel_Get_Range(void);
@@ -206,11 +207,12 @@ MPU6050_errorstatus MPU6050_Initialization(void);
 /* Data functions prototypes */
 MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X);
+inline void MPU6050_Get_GyroAngleX_Data_Raw(int16_t X, uint8_t dt, float *Angle, int32_t* AnglePrsc1000 );
 MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z);
 
 MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z );
-inline void MPU6050_Get_AccAngleYZ_Data(int16_t Y, int16_t Z, int16_t* Angle);
+inline void MPU6050_Get_AccAngleYZ_Data_Raw(int16_t Y, int16_t Z, float* Angle, int32_t* AnglePrsc1000 );
 MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z);
 
 int16_t MPU6050_Get_Temperature(void);

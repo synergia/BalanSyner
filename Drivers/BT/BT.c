@@ -41,6 +41,19 @@ void BT_Send16(int16_t Word)
 	USART_SendData(USART_BT, (Word & 0xFF) );
 }
 
+void BT_Send32(int32_t Word)
+{
+	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
+	USART_SendData(USART_BT, (Word>>24 & 0xFF) );
+	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
+	USART_SendData(USART_BT, (Word>>16 & 0xFF) );
+	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
+	USART_SendData(USART_BT, (Word>>8 & 0xFF) );
+	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
+	USART_SendData(USART_BT, (Word & 0xFF) );
+
+}
+
 void BT_SendF32(float f)
 {
 	int8_t *p, i;
@@ -56,8 +69,8 @@ void BT_SendMeasuredData( void )
 {
 	BT_Send16( 0xFFFF );
 	//TODO: send angle [float]
-	BT_Send16( MpuMeasuredData.AngleYZ_AccRaw );
-	BT_Send16( MpuMeasuredData.X_GyroRaw );
+	BT_Send32( MpuMeasuredData.AngleYZ_AccPrsc1000 );
+	BT_Send32( MpuMeasuredData.AngleX_GyroPrsc1000 );
 
 	/*!
 	( MpuMeasuredData.X_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.X_AccRaw );

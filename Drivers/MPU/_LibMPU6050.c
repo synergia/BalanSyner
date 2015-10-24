@@ -28,7 +28,6 @@
  *  --------------------------------------------------------------------------------
  */
 
-
 #include "_LibMPU6050.h"
 #include "tgmath.h"
 #include "../PinDefines.h"
@@ -58,7 +57,7 @@ MPU6050_errorstatus MPU6050_Initialization(void){
 	/* Set Gyroscope's full scope range
 	 * possible values @gyro_scale_range
 	 */
-	errorstatus = MPU6050_Gyro_Set_Range(MPU6050_GYRO_1000);
+	errorstatus = MPU6050_Gyro_Set_Range(MPU6050_Gyro_Range);
 	if(errorstatus != 0) return errorstatus;
 
 	/* Set Accelerometer's full scope range
@@ -110,7 +109,7 @@ uint8_t MPU6050_Gyro_Get_Range(void){
  * @param range - check @MPU6050_Gyro_Range
  * @retval @MPU6050_errorstatus
  */
-MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_Range range){
+MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_EnumRange range){
 
 	MPU6050_errorstatus errorstatus;
 	dataStruct.gyroMul = range;
@@ -296,6 +295,21 @@ MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X){
 	return errorstatus;
 }
 
+/* @brief Get angle around X axis
+ *
+ * @param X - sensor  X gyro
+ * @param dt -  time unit
+ * @param Angle - calculated angle
+ *
+ * @retval void
+ */
+inline void MPU6050_Get_GyroAngleX_Data_Raw(int16_t X, uint8_t dt, float *Angle, int32_t* AnglePrsc1000 )
+{
+	*Angle = (float)( ((float)X * dt) / (1<<15) );
+	//todo: only temporary for labview sending
+	*AnglePrsc1000 = (int32_t)(*Angle*1000);
+}
+
 /* @brief Get Accelerometer X,Y,Z raw data
  *
  * @param X - sensor accel on X axis
@@ -365,7 +379,6 @@ if(errorstatus != 0){
  *
  * @retval @MPU6050_errorstatus
  */
-#define _NoError
 MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z ){
 
 	MPU6050_errorstatus errorstatus;
@@ -414,9 +427,9 @@ if(errorstatus != 0){
  *
  * @retval void
  */
-inline void MPU6050_Get_AccAngleYZ_Data(int16_t Y, int16_t Z, int16_t* Angle){
+inline void MPU6050_Get_AccAngleYZ_Data_Raw(int16_t Y, int16_t Z, float* Angle, int32_t* AnglePrsc1000){
 
-	static int16_t tempAngle=0;
+	static float tempAngle=0;
 	tempAngle = radiansToDegrees( atanf( ((float)Y)/((float)Z) ) );
 	if(		(Y<0 && tempAngle<0)
 		|| 	(Y>0 && tempAngle>0)
@@ -432,6 +445,8 @@ inline void MPU6050_Get_AccAngleYZ_Data(int16_t Y, int16_t Z, int16_t* Angle){
 	{
 		*Angle = -180 + tempAngle;
 	}
+	//todo: only for labview sending purposes
+	*AnglePrsc1000 = (int32_t)(*Angle*1000);
 
 }
 

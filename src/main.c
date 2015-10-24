@@ -66,12 +66,13 @@ int main(void)
 	err = InitializeMPU();
 #endif
 
-  //InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
-  while (1)
-  {
-	  ;
-  }
-  return 0;
+	MpuMeasuredData.AngleX_GyroRaw = 0;
+	//InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
+	while (1)
+	{
+		;
+	}
+	return 0;
 }
 
 //-----------------------Public functions------------------------------//
