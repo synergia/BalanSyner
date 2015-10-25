@@ -15,11 +15,25 @@ typedef enum
 	SelectWifi,
 	SelectPi,
 	SelectMpu,
+	SelectMotors,
+	SelectServosArm,
+	SelectServosCam,
 } DriverSelector;
+
+typedef enum
+{
+	SelectMotorLeft,
+	SelectMotorRight,
+	SelectServoArmLeft,
+	SelectServoArmRight,
+	SelectServoCamHor,
+	SelectServoCamVer,
+}PwmSelector;
 //-----------------------Public defines-------------------------------//
 /*!
  * _USE_define
  */
+#define _USE_MOTORS
 //#define _USE_LED_14
 //#define _USE_LED_EYE
 #define _USE_LED_NUCLEO
@@ -53,57 +67,63 @@ typedef enum
 #define BUTTON_BACK_GPIO	GPIOB
 #define BUTTON_BACK_PIN		GPIO_Pin_2
 #define BUTTON_UP_GPIO		GPIOC
-#define BUTTON_UP_PIN		GPIO_Pin_8
-#define BUTTON_DOWN_GPIO	GPIOB
-#define BUTTON_DOWN_PIN		GPIO_Pin_1
+#define BUTTON_UP_PIN		GPIO_Pin_2
+#define BUTTON_DOWN_GPIO	GPIOC
+#define BUTTON_DOWN_PIN		GPIO_Pin_3
 
 /*!
  * MOTOR
+ * Warning! Check in RCC.c if channels are selected as you want
  */
+#define TIMER_AF_MOTOR		GPIO_AF_2
+#define TIM_MOTORS			TIM1
+#define MOT1_PWM_CHANNEL	CCR1
+#define MOT2_PWM_CHANNEL	CCR2
+
 #define MOT1_DIRA_GPIO		GPIOC
 #define MOT1_DIRA_PIN		GPIO_Pin_12
 #define MOT1_DIRB_GPIO		GPIOB
 #define MOT1_DIRB_PIN		GPIO_Pin_5
-
-#define MOT1_PWM_GPIO		GPIOC
-#define MOT1_PWM_PIN		GPIO_Pin_1
-#define MOT1_PWM_SOURCE		GPIO_PinSource1
-#define MOT1_AF				GPIO_AF_2
-
 
 #define MOT2_DIRA_GPIO		GPIOB
 #define MOT2_DIRA_PIN		GPIO_Pin_9
 #define MOT2_DIRB_GPIO		GPIOB
 #define MOT2_DIRB_PIN		GPIO_Pin_8
 
+#define MOT1_PWM_GPIO		GPIOC
+#define MOT1_PWM_PIN		GPIO_Pin_1
+#define MOT1_PWM_SOURCE		GPIO_PinSource1
+
 #define MOT2_PWM_GPIO		GPIOC
 #define MOT2_PWM_PIN		GPIO_Pin_0
-
-#define MOT1_TIMER			TIM1
-#define CHANNEL_MOT1		2
-
-#define TIMER_MOT2			TIM1
-#define CHANNEL_MOT2		1
+#define MOT2_PWM_SOURCE		GPIO_PinSource0
 
 /*!
  * SERVOs
  */
-#define SER_ARM_L_PWM_GPIO	GPIOC
-#define SER_ARM_L_PWM_PIN	GPIO_Pin_6
+#define TIMER_AF_SERVOS			GPIO_AF_2
+#define TIM_SERVOS				TIM3
 
-#define SER_ARM_P_PWM_GPIO	GPIOC
-#define SER_ARM_P_PWM_PIN	GPIO_Pin_7
+#define SERVO_ARM_L_PWM_CHANNEL	CCR1
+#define SERVO_ARM_P_PWM_CHANNEL	CCR2
+#define SERVO_HOR_PWM_CHANNEL	CCR3
+#define SERVO_VER_PWM_CHANNEL	CCR4
 
-#define SER_HOR_PWM_GPIO	GPIOC
-#define SER_HOR_PWM_PIN		GPIO_Pin_2
+#define SERVO_ARM_L_PWM_GPIO	GPIOC
+#define SERVO_ARM_L_PWM_PIN		GPIO_Pin_6
+#define SERVO_ARM_L_PWM_SOURCE	GPIO_PinSource6
 
-#define SER_VER_PWM_GPIO	GPIOC
-#define SER_VER_PWM_PIN		GPIO_Pin_3
+#define SERVO_ARM_P_PWM_GPIO	GPIOC
+#define SERVO_ARM_P_PWM_PIN		GPIO_Pin_7
+#define SERVO_ARM_P_PWM_SOURCE	GPIO_PinSource7
 
-#define TIMER_SER_ARM_L_PWM	TIM3_CH1
-#define TIMER_SER_ARM_P_PWM	TIM3_CH2
-#define TIMER_SER_HOR_PWM	TIM1_CH3
-#define TIMER_SER_VER_PWM	TIM1_CH4
+#define SERVO_HOR_PWM_GPIO		GPIOC
+#define SERVO_HOR_PWM_PIN		GPIO_Pin_8
+#define SERVO_HOR_PWM_SOURCE	GPIO_PinSource8
+
+#define SERVO_VER_PWM_GPIO		GPIOB
+#define SERVO_VER_PWM_PIN		GPIO_Pin_1
+#define SERVO_VER_PWM_SOURCE	GPIO_PinSource1
 
 /*!
  * ADC
@@ -191,21 +211,21 @@ typedef enum
 /*!
  * S65 DISPLAY
  */
-#define S65_PWM_GPIO		GPIOB
-#define S65_PWM_PIN			GPIO_Pin_0
+#define S65_PWM_GPIO		GPIOA
+#define S65_PWM_PIN			GPIO_Pin_6
 
 #define S65_MOSI_GPIO		GPIOA
 #define S65_MOSI_PIN		GPIO_Pin_7
 
-#define S65_RS_GPIO			GPIOA
-#define S65_RS_PIN			GPIO_Pin_6
+#define S65_RS_GPIO			GPIOB
+#define S65_RS_PIN			GPIO_Pin_0
 #define S65_RESET_GPIO		GPIOB
 #define S65_RESET_PIN		GPIO_Pin_11
 #define S65_CS_GPIO			GPIOA
 #define S65_CS_PIN			GPIO_Pin_4
 
 //TODO:define it
-#define TIMER_S65_PWM		TIM3_CH3
+#define TIMER_S65_PWM		TIM16_CH1
 //#define S65_SPI			SPI1
 
 //-----------------------Public macros--------------------------------//

@@ -20,6 +20,7 @@ static void priv_InitializeBt();
 static void priv_InitializeWifi();
 static void priv_InitializePi();
 static void priv_InitializeMpu();
+static void priv_InitializeMotors();
 
 //-----------------------Private functions-----------------------------//
 static void priv_InitializeLed14()
@@ -105,6 +106,44 @@ static void priv_InitializeMpu()
 	GPIO_Init(MPU_SCL_GPIO, &GPIO_InitStruct);
 }
 
+static void priv_InitializeMotors()
+{
+	/*! PWM output pins */
+	GPIO_PinAFConfig(MOT1_PWM_GPIO, MOT1_PWM_SOURCE, TIMER_AF_MOTOR);
+	GPIO_PinAFConfig(MOT2_PWM_GPIO, MOT2_PWM_SOURCE, TIMER_AF_MOTOR);
+
+	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP ;
+
+	GPIO_InitStruct.GPIO_Pin = MOT1_PWM_PIN;
+	GPIO_Init(MOT1_PWM_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = MOT2_PWM_PIN;
+	GPIO_Init(MOT2_PWM_GPIO, &GPIO_InitStruct);
+
+
+	/*! DIR output pins */
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+
+	GPIO_InitStruct.GPIO_Pin = MOT1_DIRA_PIN;
+	GPIO_Init(MOT1_DIRA_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = MOT1_DIRB_PIN;
+	GPIO_Init(MOT1_DIRB_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = MOT2_DIRA_PIN;
+	GPIO_Init(MOT2_DIRA_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = MOT2_DIRB_PIN;
+	GPIO_Init(MOT2_DIRB_GPIO, &GPIO_InitStruct);
+
+
+}
+
 //-----------------------Public functions------------------------------//
 void InitializeGPIO(uint8_t GPIOx)
 {
@@ -130,6 +169,9 @@ void InitializeGPIO(uint8_t GPIOx)
 		break;
 	case SelectMpu:
 		priv_InitializeMpu();
+		break;
+	case SelectMotors:
+		priv_InitializeMotors();
 		break;
 
 	default:

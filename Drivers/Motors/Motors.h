@@ -1,7 +1,15 @@
-#ifndef TIMERS_H_
-#define TIMERS_H_
+/*
+ * Motors.h
+ *
+ *  Created on: Oct 25, 2015
+ *      Author: Kuba
+ */
+
+#ifndef MOTORS_H_
+#define MOTORS_H_
 
 //-----------------------Includes-------------------------------------//
+#include "../PinDefines.h"
 
 //-----------------------Public typedefs------------------------------//
 
@@ -12,6 +20,8 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
-void InitializeTimers(TIM_TypeDef* TIMx);
+void InitializeMotors();
+void InitializeServos();
+void SetSpeed(PwmSelector PwmX, uint16_t Value);
 
-#endif
+#endif /* MOTORS_H_ */

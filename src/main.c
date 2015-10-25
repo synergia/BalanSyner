@@ -35,6 +35,7 @@
 #include "../Drivers/Wifi/Wifi.h"
 #include "../Drivers/MPU/MPU.h"
 #include "../Drivers/MPU/_LibMPU6050.h"
+#include "../Drivers/Motors/Motors.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -54,7 +55,18 @@ int main(void)
 
 	InitializeClock();
 	InitializeSysTick();
-	//InitializeTimers();//todo wypieprzyæ: ma by initMOTORS, SERVOSARM, SERVOSCAM
+
+#ifdef _USE_MOTORS
+	InitializeMotors();
+#endif
+
+#ifdef _USE_SERVOS_ARM
+	InitializeServosArm();
+#endif
+
+#ifdef _USE_SERVOS_CAM
+	InitializeServosCam();
+#endif
 
 #ifdef _USE_LED_NUCLEO
 	InitializeLedNucleo();
