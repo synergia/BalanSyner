@@ -23,11 +23,9 @@ void InitializeSysTick()
 	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
 }
 
-#define  Multiplier4 4
 void SysTick_Handler(void)
 {
-	static uint16_t Counter = 1000;
-	static uint8_t Period = 3; //bit shift. dt=MultiplierX<<Period;
+	static uint16_t Counter = 125;
 
 	//-------------------------8ms tasks-------------------------------------//
 	--Counter;
@@ -46,7 +44,7 @@ void SysTick_Handler(void)
 		}
 	}*/
 	//-------------------------32ms tasks-------------------------------------//
-	if( 0 == (Counter % Multiplier4) )
+	if( 0 == (Counter % 4) )
 	{
 		/* whole process needs about 2ms */
 		LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
@@ -55,7 +53,9 @@ void SysTick_Handler(void)
  	    MPU6050_Get_GyroX_Data_Raw( &MpuMeasuredData.X_GyroRaw );
 
  	    MPU6050_Get_AccAngleYZ_Data_Raw( MpuMeasuredData.Y_AccRaw, MpuMeasuredData.Z_AccRaw, &MpuMeasuredData.AngleYZ_AccRaw, &MpuMeasuredData.AngleYZ_AccPrsc1000 );
- 	    MPU6050_Get_GyroX_Data(MpuMeasuredData.AngleX_GyroRaw, &MpuMeasuredData.X_Gyro);
+ 	    MPU6050_Get_GyroX_Data(MpuMeasuredData.X_GyroRaw, &MpuMeasuredData.X_Gyro); //X_Gyro [deg/second]
+
+ 	   // MPU6050_Get_GyroAngleX_Data_Raw(MpuMeasuredData.X_Gyro, 0.032f, &MpuMeasuredData.AngleX_GyroRaw, &MpuMeasuredData.AngleX_GyroPrsc1000);
 
  	    MpuMeasuredData.AngleYZ_AccFiltered = KalmanGetValue(MpuMeasuredData.AngleYZ_AccRaw, MpuMeasuredData.X_Gyro);
 
@@ -67,8 +67,7 @@ void SysTick_Handler(void)
 	//-------------------------1000ms(1Hz)	tasks-------------------------------------//
 	if( 0 == Counter)
 	{
-		Counter = 1003;
-
+		Counter = 125;
 	}
 
 }

@@ -30,6 +30,7 @@
 
 #include "stm32f30x_i2c.h"
 
+#define GYRO_OFFSET 		(-1.69681f)
 /* Register map */
 #define SELF_TEST_X			0x0D
 #define SELF_TEST_Y			0x0E
@@ -208,7 +209,7 @@ MPU6050_errorstatus MPU6050_Initialization(void);
 MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X);
 inline void MPU6050_Get_GyroX_Data(int16_t X, float *DegPerSecond );
-inline void MPU6050_Get_GyroAngleX_Data_Raw(int16_t X, uint8_t dt, float *Angle, int32_t* AnglePrsc1000 );
+inline void MPU6050_Get_GyroAngleX_Data_Raw(float GyroX, float dt, float *Angle, int32_t* AnglePrsc1000 );
 MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z);
 
 MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);

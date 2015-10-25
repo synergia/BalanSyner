@@ -19,9 +19,9 @@ KalmanStruct KalmanData;
 void KalmanInitialize()
 {
     /* We will set the variables like so, these can also be tuned by the user */
-    KalmanData.Q_Angle = 0.001f;
-    KalmanData.Q_GyroBias = 0.003f;
-    KalmanData.R_measure = 0.03f;
+    KalmanData.Q_Angle = 0.00653f;		//varaince of gyro measurements
+    KalmanData.Q_GyroBias = 0.0007f; 	//MNP
+    KalmanData.R_measure = 0.42703f;	//measured: varaince of accelerometer data
 
     KalmanData.dt = 0.032f;
 
@@ -43,7 +43,7 @@ float KalmanGetValue(float NewAccAngle, float NewGyroRate)
     // Discrete Kalman filter time update equations - Time Update ("Predict")
     // Update xhat - Project the state ahead
     /* Step 1 */
-	KalmanData.RealGyroMeasurement = NewGyroRate - GYRO_BIAS_TO_0_MEAN - KalmanData.GyroBias;
+	KalmanData.RealGyroMeasurement = NewGyroRate - KalmanData.GyroBias;
 	KalmanData.Angle += KalmanData.dt * KalmanData.RealGyroMeasurement;
 
     // Update estimation error covariance - Project the error covariance ahead

@@ -68,7 +68,6 @@ typedef struct
 }CovarianceMatrixStruct;
 
 //-----------------------Public defines-------------------------------//
-#define GYRO_BIAS_TO_0_MEAN 	-1.65625f
 
 //-----------------------Public macros--------------------------------//
 
