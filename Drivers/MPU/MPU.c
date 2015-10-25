@@ -3,10 +3,11 @@
 #include "stm32f30x.h"
 #include "../Drivers/PinDefines.h"
 #include "MPU.h"
-#include "_LibMPU6050.h"
 #include "GPIO.h"
 #include "I2C.h"
 #include "RCC.h"
+#include "_LibMPU6050.h"
+#include "../Framework/inc/KalmanFilter.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -15,13 +16,14 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
+MpuKalmanDataStruct MpuKalmanData;
 
 //-----------------------Private prototypes----------------------------//
 
 //-----------------------Private functions-----------------------------//
 
 //-----------------------Public functions------------------------------//
-uint8_t InitializeMPU()
+MPU6050_errorstatus InitializeMPU()
 {
 	MPU6050_errorstatus errorstatus;
 	InitializeRCC(SelectMpu);
@@ -31,7 +33,13 @@ uint8_t InitializeMPU()
 	return errorstatus;
 }
 
-void MPU_Send(uint16_t Char)
+/*!
+ *  Saves measured data into MpuMeasuredData strunt and prepares data for Kalman filtering in MpuKalmanData struct
+ */
+void MPU_Perform()
 {
+	MPU6050_Get_AccAngleYZ_Data( &MpuKalmanData.Angle );
+	MPU6050_Get_GyroX_Data( &MpuKalmanData.Gyro ); //Gyro [deg/second]
 
+	MpuKalmanData.AngleFiltered = KalmanGetValue(MpuKalmanData.Angle, MpuKalmanData.Gyro);
 }

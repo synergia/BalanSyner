@@ -1,7 +1,10 @@
 
 //-----------------------Includes-------------------------------------//
-#include "main.h"
+#include "stm32f30x.h"
+#include "../Drivers/PinDefines.h"
 #include "Timers.h"
+#include "SysTick.h"
+
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private defines-------------------------------//
@@ -10,6 +13,7 @@
 #define _CPU_FREQ 			SYSTICK_FREQUENCY_MHZ
 #define _FREQ_AFTER_PRC		3.6		//MHz
 #define _TIM_PERIOD			1000
+
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//

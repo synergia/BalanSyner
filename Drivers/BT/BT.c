@@ -6,6 +6,7 @@
 #include "GPIO.h"
 #include "RCC.h"
 #include "USART.h"
+#include "../Drivers/MPU/MPU.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -14,6 +15,7 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
+extern MpuKalmanDataStruct MpuKalmanData;
 
 //-----------------------Private prototypes----------------------------//
 
@@ -27,7 +29,7 @@ void InitializeBT()
 	InitializeGPIO(SelectBt);
 }
 
-void BT_Send(int8_t Char)
+void BT_Send8(int8_t Char)
 {
 	while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
 	USART_SendData(USART_BT, Char);
@@ -63,21 +65,11 @@ void BT_SendF32(float f)
 		while (USART_GetFlagStatus(USART_BT, USART_FLAG_TXE) == RESET);
 		USART_SendData(USART_BT, (*p++) );
 	}
-
 }
+
 void BT_SendMeasuredData( void )
 {
-	BT_Send16( 0xFFFF );
-	//TODO: send angle [float]
-	BT_Send32( MpuMeasuredData.AngleYZ_AccPrsc1000 );
-	BT_Send32( MpuMeasuredData.AngleYZ_AccPrsc1000Filtered );
-
-	/*!
-	( MpuMeasuredData.X_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.X_AccRaw );
-	( MpuMeasuredData.Y_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.Y_AccRaw );
-	( MpuMeasuredData.Z_AccRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.Z_AccRaw );
-	( MpuMeasuredData.X_GyroRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.X_GyroRaw );
-	( MpuMeasuredData.Y_GyroRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.Y_GyroRaw );
-	( MpuMeasuredData.Z_GyroRaw==0xFFFF ) ? BT_Send16( 0xFFFE ) :  BT_Send16( MpuMeasuredData.Z_GyroRaw );
-	*/
+	BT_Send16( 0xFFFF );										//start bits
+	BT_Send32( (int32_t)(MpuKalmanData.Angle*1000) );
+	BT_Send32( (int32_t)(MpuKalmanData.AngleFiltered*1000) );
 }

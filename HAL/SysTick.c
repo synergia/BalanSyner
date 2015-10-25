@@ -1,7 +1,10 @@
 
 //-----------------------Includes-------------------------------------//
+#include "stm32f30x.h"
 #include "SysTick.h"
-#include "main.h"
+#include "../Drivers/MPU/MPU.h" 	//struct with angle and gyro
+#include "../Drivers/LEDs/LED.h" 	//led blinking functions
+#include "../Drivers/BT/BT.h"		//usart sending
 
 //-----------------------Private typedefs------------------------------//
 
@@ -29,38 +32,15 @@ void SysTick_Handler(void)
 
 	//-------------------------8ms tasks-------------------------------------//
 	--Counter;
-	 //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-	//-------------------------20ms	tasks-------------------------------------//
-	/*if( 0 == Counter%10 )
-	{
-		//err = MPU6050_Get_Accel_Data_Raw(&MpuMeasuredData.X_AccRaw, &MpuMeasuredData.Y_AccRaw, &MpuMeasuredData.Z_AccRaw);
-		//err = MPU6050_Get_Accel_Data_Raw(&MpuMeasuredData.X_AccRaw, &MpuMeasuredData.Y_AccRaw, &MpuMeasuredData.Z_AccRaw);
- 	    //err = MPU6050_Get_Gyro_Data_Raw(&MpuMeasuredData.X_GyroRaw, &MpuMeasuredData.Y_GyroRaw, &MpuMeasuredData.Z_GyroRaw);
-		if(MPU6050_NO_ERROR == err)
-		{
-		   BT_SendMeasuredData( );
-		   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
-		}
-	}*/
 	//-------------------------32ms tasks-------------------------------------//
 	if( 0 == (Counter % 4) )
 	{
 		/* whole process needs about 2ms */
 		LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-		MPU6050_Get_AccelYZ_Data_Raw( &MpuMeasuredData.Y_AccRaw, &MpuMeasuredData.Z_AccRaw );
- 	    MPU6050_Get_GyroX_Data_Raw( &MpuMeasuredData.X_GyroRaw );
-
- 	    MPU6050_Get_AccAngleYZ_Data_Raw( MpuMeasuredData.Y_AccRaw, MpuMeasuredData.Z_AccRaw, &MpuMeasuredData.AngleYZ_AccRaw, &MpuMeasuredData.AngleYZ_AccPrsc1000 );
- 	    MPU6050_Get_GyroX_Data(MpuMeasuredData.X_GyroRaw, &MpuMeasuredData.X_Gyro); //X_Gyro [deg/second]
-
- 	   // MPU6050_Get_GyroAngleX_Data_Raw(MpuMeasuredData.X_Gyro, 0.032f, &MpuMeasuredData.AngleX_GyroRaw, &MpuMeasuredData.AngleX_GyroPrsc1000);
-
- 	    MpuMeasuredData.AngleYZ_AccFiltered = KalmanGetValue(MpuMeasuredData.AngleYZ_AccRaw, MpuMeasuredData.X_Gyro);
-
- 	    MpuMeasuredData.AngleYZ_AccPrsc1000Filtered = (int32_t)(MpuMeasuredData.AngleYZ_AccFiltered*1000);
-		BT_SendMeasuredData( );
+		MPU_Perform(); //save data to struct in MPU.h/c
+ 	    BT_SendMeasuredData( );
 
 		LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 	}

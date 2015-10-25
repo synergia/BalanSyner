@@ -28,9 +28,62 @@
  *  --------------------------------------------------------------------------------
  */
 
+//-----------------------Includes-------------------------------------//
 #include "stm32f30x_i2c.h"
 
-#define GYRO_OFFSET 		(-1.69681f)
+//-----------------------Public typedefs------------------------------//
+typedef struct{
+
+	float gyroMul;		//Gyroscope raw data multiplier
+	float accelMul;		//Accelerometer raw data multiplier
+
+}MPU6050_dataStruct;
+
+typedef enum{
+	/* MPU6050 I2C success */
+	MPU6050_NO_ERROR = 0,
+	/* TX error */
+	MPU6050_I2C_TX_ERROR,
+	/* TX error */
+	MPU6050_I2C_RX_ERROR,
+	/* I2C error */
+	MPU6050_I2C_ERROR,
+}MPU6050_errorstatus;
+
+/* Gyroscope Full scale range options 	@gyro_scale_range */
+typedef enum{
+
+	MPU6050_GYRO_250 = 0x00,
+	MPU6050_GYRO_500 = 0x08,
+	MPU6050_GYRO_1000 = 0x10,
+	MPU6050_GYRO_2000 = 0x18
+
+}MPU6050_Gyro_EnumRange;
+
+/* Accelerometer's full scale range options		@accel_scale_range */
+typedef enum{
+
+	MPU6050_ACCEL_2g = 0x00,
+	MPU6050_ACCEL_4g = 0x08,
+	MPU6050_ACCEL_8g = 0x10,
+	MPU6050_ACCEL_16g = 0x18
+}MPU6050_Accel_Range;
+
+/* Power management 1 	@pwr_mngt_1 */
+typedef enum{
+
+	MPU6050_INTERNAL_OSC = 0x00,
+	MPU6050_PLL_X_GYRO = 0x01,
+	MPU6050_PLL_Y_GYRO = 0x02,
+	MPU6050_PLL_Z_GYRO = 0x03,
+	MPU6050_PLL_EXT_32KHZ = 0x04,
+	MPU6050_PLL_EXT_19MHZ = 0x05,
+	MPU6050_STOP_CLOCK = 0x07
+}MPU6050_Clock_Select;
+
+//-----------------------Public defines-------------------------------//
+#define GYRO_OFFSET 		(-1.69681f) //measured value
+
 /* Register map */
 #define SELF_TEST_X			0x0D
 #define SELF_TEST_Y			0x0E
@@ -118,6 +171,8 @@
 #define WHO_AM_I			0x75
 
 /* Gyroscope LSB sensitivity defines */
+#define MPU6050_Gyro_Range MPU6050_GYRO_1000
+
 #define MPU6050_GYRO_RANGE_250		((float)131)
 #define MPU6050_GYRO_RANGE_500		((float)65.5)
 #define MPU6050_GYRO_RANGE_1000		((float)32.8)
@@ -135,58 +190,12 @@
 #define MPU6050_FLAG_TIMEOUT             (uint32_t)0x1000
 #define MPU6050_LONG_TIMEOUT             (uint32_t)(10 * MPU6050_FLAG_TIMEOUT)
 
+//-----------------------Public macros--------------------------------//
 
-typedef struct{
+//-----------------------Public variables-----------------------------//
 
-	float gyroMul;		//Gyroscope raw data multiplier
-	float accelMul;		//Accelerometer raw data multiplier
-
-}MPU6050_dataStruct;
-
-typedef enum{
-	/* MPU6050 I2C success */
-	MPU6050_NO_ERROR = 0,
-	/* TX error */
-	MPU6050_I2C_TX_ERROR,
-	/* TX error */
-	MPU6050_I2C_RX_ERROR,
-	/* I2C error */
-	MPU6050_I2C_ERROR,
-
-
-}MPU6050_errorstatus;
-
-/* Gyroscope Full scale range options 	@gyro_scale_range */
-typedef enum{
-
-	MPU6050_GYRO_250 = 0x00,
-	MPU6050_GYRO_500 = 0x08,
-	MPU6050_GYRO_1000 = 0x10,
-	MPU6050_GYRO_2000 = 0x18
-
-}MPU6050_Gyro_EnumRange;
-#define MPU6050_Gyro_Range MPU6050_GYRO_1000
-
-/* Accelerometer's full scale range options		@accel_scale_range */
-typedef enum{
-
-	MPU6050_ACCEL_2g = 0x00,
-	MPU6050_ACCEL_4g = 0x08,
-	MPU6050_ACCEL_8g = 0x10,
-	MPU6050_ACCEL_16g = 0x18
-}MPU6050_Accel_Range;
-
-/* Power management 1 	@pwr_mngt_1 */
-typedef enum{
-
-	MPU6050_INTERNAL_OSC = 0x00,
-	MPU6050_PLL_X_GYRO = 0x01,
-	MPU6050_PLL_Y_GYRO = 0x02,
-	MPU6050_PLL_Z_GYRO = 0x03,
-	MPU6050_PLL_EXT_32KHZ = 0x04,
-	MPU6050_PLL_EXT_19MHZ = 0x05,
-	MPU6050_STOP_CLOCK = 0x07
-}MPU6050_Clock_Select;
+//-----------------------Public prototypes----------------------------//
+MPU6050_errorstatus MPU6050_Initialization(void);
 
 MPU6050_errorstatus MPU6050_Read(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* pBuffer, uint16_t NumByteToRead);
 MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* pBuffer);
@@ -197,25 +206,19 @@ uint8_t MPU6050_Gyro_Get_Range(void);
 MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_EnumRange range);
 
 /* Accelerometer Full scale range functions */
-MPU6050_errorstatus MPU6050_Accel_Get_Range(void);
+uint8_t MPU6050_Accel_Get_Range(void);
 MPU6050_errorstatus MPU6050_Accel_Set_Range(MPU6050_Accel_Range range);
 
 MPU6050_errorstatus MPU6050_Accel_Config(void);
 MPU6050_errorstatus MPU6050_Set_Clock(MPU6050_Clock_Select clock);
 
-MPU6050_errorstatus MPU6050_Initialization(void);
-
-/* Data functions prototypes */
 MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
-MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X);
-inline void MPU6050_Get_GyroX_Data(int16_t X, float *DegPerSecond );
-inline void MPU6050_Get_GyroAngleX_Data_Raw(float GyroX, float dt, float *Angle, int32_t* AnglePrsc1000 );
 MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z);
+inline MPU6050_errorstatus MPU6050_Get_GyroX_Data( float *DegPerSecond );
 
 MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
-MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z );
-inline void MPU6050_Get_AccAngleYZ_Data_Raw(int16_t Y, int16_t Z, float* Angle, int32_t* AnglePrsc1000 );
 MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z);
+inline MPU6050_errorstatus MPU6050_Get_AccAngleYZ_Data( float* Angle );
 
 int16_t MPU6050_Get_Temperature(void);
 

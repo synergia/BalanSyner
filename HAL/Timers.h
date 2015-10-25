@@ -2,8 +2,6 @@
 #define TIMERS_H_
 
 //-----------------------Includes-------------------------------------//
-#include "stm32f30x.h"
-#include "../Drivers/PinDefines.h"
 
 //-----------------------Public typedefs------------------------------//
 

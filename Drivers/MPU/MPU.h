@@ -2,9 +2,15 @@
 #define MPU_H_
 
 //-----------------------Includes-------------------------------------//
-//#include "_LibMPU6050.h"
 
 //-----------------------Public typedefs------------------------------//
+typedef struct
+{
+	float Angle;
+	float Gyro;
+
+	float AngleFiltered;
+}MpuKalmanDataStruct;
 
 //-----------------------Public defines-------------------------------//
 
@@ -14,6 +20,6 @@
 
 //-----------------------Public prototypes----------------------------//
 uint8_t InitializeMPU();
-void MPU_Send(uint16_t Char);
+void MPU_Perform();
 
 #endif

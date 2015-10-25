@@ -2,7 +2,6 @@
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 #include "../Framework/inc/stm32f30x_gpio.h"
-#include "../Drivers/PinDefines.h"
 #include "GPIO.h"
 #include "RCC.h"
 #include "LED.h"

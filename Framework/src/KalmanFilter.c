@@ -9,7 +9,7 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
-KalmanStruct KalmanData;
+static KalmanStruct KalmanData;
 
 //-----------------------Private prototypes----------------------------//
 
@@ -36,23 +36,22 @@ void KalmanInitialize()
 
 float KalmanGetValue(float NewAccAngle, float NewGyroRate)
 {
-	// KasBot V2  -  Kalman filter module - http://www.x-firm.com/?page_id=145
-    // Modified by Kristian Lauszus
     // See my blog post for more information: http://blog.tkjelectronics.dk/2012/09/a-practical-approach-to-kalman-filter-and-how-to-implement-it
+	// V1 Modified by Kristian Lauszus
+	// V2 Modified by Jakub Trzyna
 
-    // Discrete Kalman filter time update equations - Time Update ("Predict")
+	// Discrete Kalman filter time update equations - Time Update ("Predict")
     // Update xhat - Project the state ahead
     /* Step 1 */
-	KalmanData.RealGyroMeasurement = NewGyroRate - KalmanData.GyroBias;
-	KalmanData.Angle += KalmanData.dt * KalmanData.RealGyroMeasurement;
+	KalmanData.Angle += KalmanData.dt * (NewGyroRate - KalmanData.GyroBias);
+
 
     // Update estimation error covariance - Project the error covariance ahead
     /* Step 2 */
-	//todo: write matrix math
     KalmanData.P[0][0] +=KalmanData.dt * (KalmanData.dt*KalmanData.P[1][1] - KalmanData.P[0][1] - KalmanData.P[1][0] + KalmanData.Q_Angle);
     KalmanData.P[0][1] -= KalmanData.dt * KalmanData.P[1][1];
     KalmanData.P[1][0] -= KalmanData.dt * KalmanData.P[1][1];
-    KalmanData.P[1][1] += KalmanData.Q_GyroBias * KalmanData.dt;
+    KalmanData.P[1][1] += KalmanData.dt * KalmanData.Q_GyroBias;
 
 
 	// Calculate angle and bias - Update estimate with measurement zk (newAngle)
@@ -63,6 +62,7 @@ float KalmanGetValue(float NewAccAngle, float NewGyroRate)
     // Calculate Kalman gain - Compute the Kalman gain
     /* Step 4 */
     float S = KalmanData.P[0][0] + KalmanData.R_measure; // Estimate error
+
     /* Step 5 */
     float K[2]; // Kalman gain - This is a 2x1 vector
     K[0] = KalmanData.P[0][0] / S;
@@ -74,48 +74,10 @@ float KalmanGetValue(float NewAccAngle, float NewGyroRate)
 
     // Calculate estimation error covariance - Update the error covariance
     /* Step 7 */
-    float P00_temp = KalmanData.P[0][0];
-    float P01_temp = KalmanData.P[0][1];
-
-    KalmanData.P[0][0] -= K[0] * P00_temp;
-    KalmanData.P[0][1] -= K[0] * P01_temp;
-    KalmanData.P[1][0] -= K[1] * P00_temp;
-    KalmanData.P[1][1] -= K[1] * P01_temp;
+    KalmanData.P[1][1] -= K[1] * KalmanData.P[0][1];
+    KalmanData.P[1][0] -= K[1] * KalmanData.P[0][0];
+    KalmanData.P[0][1] -= K[0] * KalmanData.P[0][1];
+    KalmanData.P[0][0] -= K[0] * KalmanData.P[0][0];
 
     return KalmanData.Angle;
-}
-
-void PredictEstimateState()
-{
-
-}
-
-void PredictEstimateCovariance()
-{
-
-}
-
-void InnovationMeasurement()
-{
-
-}
-
-void InnovationCovariance()
-{
-
-}
-
-void ComputeCalmanGains()
-{
-
-}
-
-void UpdatePosterioriState()
-{
-
-}
-
-void UpdateCovariance()
-{
-
 }

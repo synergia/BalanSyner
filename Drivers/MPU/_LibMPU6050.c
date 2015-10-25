@@ -5,6 +5,11 @@
  * @author Urban Zrim
  * @date 7.4.2015
  *
+ *
+ * @Edit Jakub Trzyna
+ * @date 25.10.2015
+ * @project: BalanSyner
+ *
  *  --------------------------------------------------------------------------------
  *  Copyright (c) 2015, Urban Zrim
  *
@@ -28,17 +33,29 @@
  *  --------------------------------------------------------------------------------
  */
 
+//-----------------------Includes-------------------------------------//
 #include "_LibMPU6050.h"
 #include "tgmath.h"
 #include "../PinDefines.h"
 
+//-----------------------Private typedefs------------------------------//
+
+//-----------------------Private defines-------------------------------//
+#define radiansToDegrees(angleRadians) (angleRadians * 180.0 / M_PI)
+#define _NoError
+#define _BALANSYNER
+
+//-----------------------Private macros--------------------------------//
+
+//-----------------------Private variables-----------------------------//
 uint32_t MPU6050_Timeout = MPU6050_FLAG_TIMEOUT;
 MPU6050_dataStruct dataStruct;
 
-#define radiansToDegrees(angleRadians) (angleRadians * 180.0 / M_PI)
+//-----------------------Private prototypes----------------------------//
 
-#define _NoError
+//-----------------------Private functions-----------------------------//
 
+//-----------------------Public functions------------------------------//
 /* @brief Sets up MPU6050 internal clock and sensors sensitivity rate
 *  This function must be called before using the sensor!
 *
@@ -46,30 +63,211 @@ MPU6050_dataStruct dataStruct;
 */
 MPU6050_errorstatus MPU6050_Initialization(void){
 
-	MPU6050_errorstatus errorstatus;
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
 
 	/* Set Clock source for the chip
 	 * possible values @pwr_mngt_1
 	 */
 	errorstatus = MPU6050_Set_Clock(MPU6050_PLL_X_GYRO);
-	if(errorstatus != 0) return errorstatus;
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
 
 	/* Set Gyroscope's full scope range
 	 * possible values @gyro_scale_range
 	 */
 	errorstatus = MPU6050_Gyro_Set_Range(MPU6050_Gyro_Range);
-	if(errorstatus != 0) return errorstatus;
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
 
 	/* Set Accelerometer's full scope range
 	 * possible values @accel_scale_range
 	 */
 	errorstatus = MPU6050_Accel_Set_Range(MPU6050_ACCEL_4g);
-	if(errorstatus != 0) return errorstatus;
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
 
-	return MPU6050_NO_ERROR;
+	return errorstatus;
 }
 
+/* @brief Set Gyroscope's full scale range
+ * @param range - check @MPU6050_Gyro_Range
+ * @retval @MPU6050_errorstatus
+ */
+MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_EnumRange range){
 
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
+	dataStruct.gyroMul = range;
+
+	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, GYRO_CONFIG, &range);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	return errorstatus;
+}
+
+/* @brief Set Accelerometer full scale range
+ * @param range - check @MPU6050_Accel_Range
+ * @retval @MPU6050_errorstatus
+ */
+MPU6050_errorstatus MPU6050_Accel_Set_Range(MPU6050_Accel_Range range){
+
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
+	dataStruct.accelMul = range;
+
+	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_CONFIG, &range);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	return errorstatus;
+
+}
+
+/* @brief Set MPU6050 clock source
+ * @param clock - check @MPU6050_Clock_Select
+ * @retval @MPU6050_errorstatus
+ */
+MPU6050_errorstatus  MPU6050_Set_Clock(MPU6050_Clock_Select clock){
+
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
+
+	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, PWR_MGMT_1, &clock);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	return errorstatus;
+}
+
+/* @brief Get angle Z,Y calculated data
+ *
+ * @param X - sensor  X acc
+ * @param Y - sensor  Y acc
+ * @param Angle - calculated angle
+ *
+ * @retval void
+ */
+inline MPU6050_errorstatus MPU6050_Get_AccAngleYZ_Data( float* Angle ){
+
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
+	uint8_t ylow, yhigh, zlow, zhigh;
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_L, &ylow, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_H, &yhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_L, &zlow, 1);
+#ifndef _NoError
+if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_H, &zhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	int16_t Y = (yhigh << 8 | ylow);
+	int16_t Z = (zhigh << 8 | zlow);
+
+	static float tempAngle=0;
+	tempAngle = radiansToDegrees( atanf( ((float)Y)/((float)Z) ) );
+	if(		(Y<0 && tempAngle<0)
+		|| 	(Y>0 && tempAngle>0)
+		)
+	{
+		*Angle = tempAngle;
+	}
+	else if(Y>0 && tempAngle<0)
+	{
+		*Angle = 180 + tempAngle;
+	}
+	else if(Y<0 && tempAngle>0)
+	{
+		*Angle = -180 + tempAngle;
+	}
+
+	return errorstatus;
+}
+
+/* @brief Get angle/s around X axis dgr/s
+ *
+ * @param X - sensor  X gyroRaw(directly from sensor
+ * @param DegPerSecond - measurend data in degrees per second
+ *
+ * @retval void
+ */
+inline MPU6050_errorstatus MPU6050_Get_GyroX_Data( float *DegPerSecond )
+{
+	MPU6050_errorstatus errorstatus = MPU6050_NO_ERROR;
+
+	uint8_t xlow, xhigh;
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_L, &xlow, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_H, &xhigh, 1);
+#ifndef _NoError
+	if(errorstatus != 0){
+		return errorstatus;
+	}
+#endif
+
+	static uint16_t Range = 1000;
+	int16_t X = (xhigh << 8 | xlow);
+	*DegPerSecond = (float)( ((float)X*Range) / (1<<15) ) - GYRO_OFFSET; //measured value
+
+	return errorstatus;
+}
+
+/* @brief Get angle around X axis
+ *
+ * @param X - sensor  X gyro
+ * @param dt -  time unit
+ * @param Angle - calculated angle
+ *
+ * @retval void
+ */
+inline void MPU6050_Get_GyroAngleX_Data_Raw(float GyroX, float dt, float *Angle )
+{
+	//tricky: if range is different than 1000 it wont work!
+	*Angle = (GyroX * dt);
+}
+
+#ifndef _BALANSYNER
 /* @brief Test if chip is visible on I2C line
  * Reads the WHO_AM_I register
  *
@@ -86,7 +284,9 @@ MPU6050_errorstatus MPU6050_Test(void){
 	}
 	return MPU6050_NO_ERROR;
 }
+#endif
 
+#ifndef _BALANSYNER
 /* @brief Get Gyroscope's full scale range
  * Reads the GYRO_CONFIG register and returns the value of gyro's range
  *
@@ -102,26 +302,10 @@ uint8_t MPU6050_Gyro_Get_Range(void){
 		return 1;
 	}
 	else return tmp;
-
 }
+#endif
 
-/* @brief Set Gyroscope's full scale range
- * @param range - check @MPU6050_Gyro_Range
- * @retval @MPU6050_errorstatus
- */
-MPU6050_errorstatus MPU6050_Gyro_Set_Range(MPU6050_Gyro_EnumRange range){
-
-	MPU6050_errorstatus errorstatus;
-	dataStruct.gyroMul = range;
-
-	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, GYRO_CONFIG, &range);
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-	else return MPU6050_NO_ERROR;
-
-}
-
+#ifndef _BALANSYNER
 /* @brief Get Accelerometer full scale range
  * Reads the Accel_CONFIG register and returns the value of accelerometer's range
  *
@@ -137,42 +321,10 @@ uint8_t MPU6050_Accel_Get_Range(void){
 		return 1;
 	}
 	else return tmp;
-
 }
+#endif
 
-/* @brief Set Accelerometer full scale range
- * @param range - check @MPU6050_Accel_Range
- * @retval @MPU6050_errorstatus
- */
-MPU6050_errorstatus MPU6050_Accel_Set_Range(MPU6050_Accel_Range range){
-
-	MPU6050_errorstatus errorstatus;
-	dataStruct.accelMul = range;
-
-	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_CONFIG, &range);
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-	else return MPU6050_NO_ERROR;
-
-}
-
-/* @brief Set MPU6050 clock source
- * @param clock - check @MPU6050_Clock_Select
- * @retval @MPU6050_errorstatus
- */
-MPU6050_errorstatus  MPU6050_Set_Clock(MPU6050_Clock_Select clock){
-
-	MPU6050_errorstatus errorstatus;
-
-	errorstatus = MPU6050_Write((MPU6050_ADDRESS & 0x7f) << 1, PWR_MGMT_1, &clock);
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-	else return MPU6050_NO_ERROR;
-
-}
-
+#ifndef _BALANSYNER
 /* @brief Read MPU6050 temperature
  * @retval temp_celsius - temperature in degrees celsius
  */
@@ -198,9 +350,10 @@ int16_t MPU6050_Get_Temperature(void){
 
 	temp_celsius = temp/340 + 36;
 	return temp_celsius;
-
 }
+#endif
 
+#ifndef _BALANSYNER
 /* @brief Get Gyroscope X,Y,Z raw data
  *
  * @param X - sensor roll on X axis
@@ -263,67 +416,9 @@ MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z
 
 	return errorstatus;
 }
-
-/* @brief Get Gyroscope X raw data
- *
- * @param X - sensor roll on X axis
- *
- * @retval @MPU6050_errorstatus
- */
-MPU6050_errorstatus MPU6050_Get_GyroX_Data_Raw(int16_t* X){
-
-	MPU6050_errorstatus errorstatus;
-
-	uint8_t xlow, xhigh;
-
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_L, &xlow, 1);
-#ifndef _NoError
-	if(errorstatus != 0){
-		return errorstatus;
-	}
 #endif
 
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, GYRO_XOUT_H, &xhigh, 1);
-#ifndef _NoError
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-#endif
-
-	*X = (int16_t)(xhigh << 8 | xlow);
-
-	return errorstatus;
-}
-
-/* @brief Get angle around X axis
- *
- * @param X - sensor  X gyro
- * @param dt -  time unit
- * @param Angle - calculated angle
- *
- * @retval void
- */
-inline void MPU6050_Get_GyroAngleX_Data_Raw(float GyroX, float dt, float *Angle, int32_t* AnglePrsc1000 )
-{
-	//tricky: if range is different than 1000 it wont work!
-	*Angle = (GyroX * dt);
-	//todo: only temporary for labview sending
-	*AnglePrsc1000 = (int32_t)(*Angle*1000);
-}
-
-/* @brief Get angle/s around X axis dgr/s
- *
- * @param X - sensor  X gyroRaw(directly from sensor
- * @param DegPerSecond - measurend data in degrees per second
- *
- * @retval void
- */
-inline void MPU6050_Get_GyroX_Data(int16_t GyroXRaw, float *DegPerSecond )
-{
-	static uint16_t Range = 1000;
-	*DegPerSecond = (float)( ((float)GyroXRaw*Range) / (1<<15) ) - GYRO_OFFSET; //measured value
-}
-
+#ifndef _BALANSYNER
 /* @brief Get Accelerometer X,Y,Z raw data
  *
  * @param X - sensor accel on X axis
@@ -386,84 +481,9 @@ if(errorstatus != 0){
 
 	return errorstatus;
 }
-
-/* @brief Get Accelerometer Z raw data
- *
- * @param Z - sensor accel on Z axis
- *
- * @retval @MPU6050_errorstatus
- */
-MPU6050_errorstatus MPU6050_Get_AccelYZ_Data_Raw( int16_t* Y, int16_t* Z ){
-
-	MPU6050_errorstatus errorstatus;
-
-	uint8_t ylow, yhigh, zlow, zhigh;
-
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_L, &ylow, 1);
-#ifndef _NoError
-	if(errorstatus != 0){
-		return errorstatus;
-	}
 #endif
 
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_YOUT_H, &yhigh, 1);
-#ifndef _NoError
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-#endif
-
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_L, &zlow, 1);
-#ifndef _NoError
-if(errorstatus != 0){
-		return errorstatus;
-	}
-#endif
-
-	errorstatus = MPU6050_Read((MPU6050_ADDRESS & 0x7f) << 1, ACCEL_ZOUT_H, &zhigh, 1);
-#ifndef _NoError
-	if(errorstatus != 0){
-		return errorstatus;
-	}
-#endif
-
-	*Y = (int16_t)(yhigh << 8 | ylow);
-	*Z = (int16_t)(zhigh << 8 | zlow);
-
-	return errorstatus;
-}
-
-/* @brief Get angle Z,Y calculated data
- *
- * @param X - sensor  X acc
- * @param Y - sensor  Y acc
- * @param Angle - calculated angle
- *
- * @retval void
- */
-inline void MPU6050_Get_AccAngleYZ_Data_Raw(int16_t Y, int16_t Z, float* Angle, int32_t* AnglePrsc1000){
-
-	static float tempAngle=0;
-	tempAngle = radiansToDegrees( atanf( ((float)Y)/((float)Z) ) );
-	if(		(Y<0 && tempAngle<0)
-		|| 	(Y>0 && tempAngle>0)
-		)
-	{
-		*Angle = tempAngle;
-	}
-	else if(Y>0 && tempAngle<0)
-	{
-		*Angle = 180 + tempAngle;
-	}
-	else if(Y<0 && tempAngle>0)
-	{
-		*Angle = -180 + tempAngle;
-	}
-	//todo: only for labview sending purposes
-	*AnglePrsc1000 = (int32_t)(*Angle*1000);
-
-}
-
+#ifndef _BALANSYNER
 /* @brief Get Gyroscope X,Y,Z calculated data
  *
  * @param X - sensor roll on X axis
@@ -498,7 +518,9 @@ MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z){
 
 	return errorstatus;
 }
+#endif
 
+#ifndef _BALANSYNER
 /* @brief Get Accelerometer X,Y,Z calculated data
  *
  * @param X - sensor accel on X axis
@@ -533,6 +555,7 @@ MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z){
 
 	return errorstatus;
 }
+#endif
 
 /* @brief Reads bytes from MPU6050
  *
@@ -614,7 +637,13 @@ MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* p
 	MPU6050_Timeout = MPU6050_LONG_TIMEOUT;
 	while(I2C_GetFlagStatus(MPU6050_I2C, I2C_FLAG_BUSY) != RESET)
 	{
-		if((MPU6050_Timeout--) == 0) return MPU6050_I2C_ERROR;
+		if((MPU6050_Timeout--) == 0) {
+#ifndef _NoError
+			return MPU6050_I2C_ERROR;
+#else
+			return MPU6050_NO_ERROR;
+#endif
+		}
 	}
 
 	I2C_TransferHandling(MPU6050_I2C, SlaveAddr, 1, I2C_Reload_Mode, I2C_Generate_Start_Write);
@@ -622,7 +651,13 @@ MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* p
 	MPU6050_Timeout = MPU6050_LONG_TIMEOUT;
 	while(I2C_GetFlagStatus(MPU6050_I2C, I2C_FLAG_TXIS) == RESET)
 	{
-		if((MPU6050_Timeout--) == 0) return MPU6050_I2C_ERROR;
+		if((MPU6050_Timeout--) == 0) {
+#ifndef _NoError
+			return MPU6050_I2C_ERROR;
+#else
+			return MPU6050_NO_ERROR;
+#endif
+		}
 	}
 
 	I2C_SendData(MPU6050_I2C, (uint8_t) RegAddr);
@@ -630,7 +665,13 @@ MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* p
 	MPU6050_Timeout = MPU6050_LONG_TIMEOUT;
 	while(I2C_GetFlagStatus(MPU6050_I2C, I2C_FLAG_TCR) == RESET)
 	{
-		if((MPU6050_Timeout--) == 0) return MPU6050_I2C_ERROR;
+		if((MPU6050_Timeout--) == 0) {
+#ifndef _NoError
+			return MPU6050_I2C_ERROR;
+#else
+			return MPU6050_NO_ERROR;
+#endif
+		}
 	}
 
 	I2C_TransferHandling(MPU6050_I2C, SlaveAddr, 1, I2C_AutoEnd_Mode, I2C_No_StartStop);
@@ -638,7 +679,13 @@ MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* p
 	MPU6050_Timeout = MPU6050_LONG_TIMEOUT;
 	while(I2C_GetFlagStatus(MPU6050_I2C, I2C_FLAG_TXIS) == RESET)
 	{
-		if((MPU6050_Timeout--) == 0) return MPU6050_I2C_ERROR;
+		if((MPU6050_Timeout--) == 0) {
+#ifndef _NoError
+			return MPU6050_I2C_ERROR;
+#else
+			return MPU6050_NO_ERROR;
+#endif
+		}
 	}
 
 	I2C_SendData(MPU6050_I2C, *pBuffer);
@@ -646,7 +693,13 @@ MPU6050_errorstatus MPU6050_Write(uint8_t SlaveAddr, uint8_t RegAddr, uint8_t* p
     MPU6050_Timeout = MPU6050_LONG_TIMEOUT;
     while(I2C_GetFlagStatus(MPU6050_I2C, I2C_FLAG_STOPF) == RESET)
     {
-      if((MPU6050_Timeout--) == 0) return MPU6050_I2C_ERROR;
+      if((MPU6050_Timeout--) == 0){
+#ifndef _NoError
+    	  return MPU6050_I2C_ERROR;
+#else
+    	  return MPU6050_NO_ERROR;
+#endif
+      }
     }
 
     I2C_ClearFlag(MPU6050_I2C, I2C_FLAG_STOPF);
