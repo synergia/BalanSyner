@@ -16,6 +16,9 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
+/*!
+ * here are stored measured gyro and accelerometer data and also computed angle.
+ */
 MpuKalmanDataStruct MpuKalmanData;
 
 //-----------------------Private prototypes----------------------------//

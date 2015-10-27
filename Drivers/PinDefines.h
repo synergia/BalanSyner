@@ -24,16 +24,23 @@ typedef enum
 {
 	SelectMotorLeft,
 	SelectMotorRight,
+}MotorSelector;
+
+typedef enum
+{
 	SelectServoArmLeft,
 	SelectServoArmRight,
 	SelectServoCamHor,
 	SelectServoCamVer,
-}PwmSelector;
+}ServoSelector;
+
 //-----------------------Public defines-------------------------------//
 /*!
  * _USE_define
  */
 #define _USE_MOTORS
+#define _USE_SERVOS_ARM
+#define _USE_SERVOS_CAM
 //#define _USE_LED_14
 //#define _USE_LED_EYE
 #define _USE_LED_NUCLEO

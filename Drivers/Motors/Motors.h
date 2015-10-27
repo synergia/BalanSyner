@@ -21,7 +21,9 @@
 
 //-----------------------Public prototypes----------------------------//
 void InitializeMotors();
-void InitializeServos();
-void SetSpeed(PwmSelector PwmX, uint16_t Value);
+void InitializeServosArm();
+void InitializeServosCam();
+void MotorSetSpeed(MotorSelector Motor, uint16_t Value, uint8_t Direction);
+void ServoSetAngle(ServoSelector Servo, float Angle);
 
 #endif /* MOTORS_H_ */

@@ -70,15 +70,19 @@ void InitializeTimers(TIM_TypeDef* TIMx)
 	    outputChannelInit.TIM_OutputState = TIM_OutputState_Enable;
 	    outputChannelInit.TIM_OCPolarity = TIM_OCPolarity_High;
 
-	    //todo: configure it. and gpio
 	    TIM_OC1Init(TIM_SERVOS, &outputChannelInit);
 	    TIM_OC1PreloadConfig(TIM_SERVOS, TIM_OCPreload_Enable);
 
 	    TIM_OC2Init(TIM_SERVOS, &outputChannelInit);
 	    TIM_OC2PreloadConfig(TIM_SERVOS, TIM_OCPreload_Enable);
 
-	    TIM_Cmd(TIM_SERVOS, ENABLE);
+	    TIM_OC3Init(TIM_SERVOS, &outputChannelInit);
+	    TIM_OC3PreloadConfig(TIM_SERVOS, TIM_OCPreload_Enable);
 
+	    TIM_OC4Init(TIM_SERVOS, &outputChannelInit);
+	    TIM_OC4PreloadConfig(TIM_SERVOS, TIM_OCPreload_Enable);
+
+	    TIM_Cmd(TIM_SERVOS, ENABLE);
 	    TIM_CtrlPWMOutputs(TIM_SERVOS, ENABLE);
 	}
 }

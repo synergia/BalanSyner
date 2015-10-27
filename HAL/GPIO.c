@@ -21,6 +21,8 @@ static void priv_InitializeWifi();
 static void priv_InitializePi();
 static void priv_InitializeMpu();
 static void priv_InitializeMotors();
+static void priv_InitializeServosArm();
+static void priv_InitializeServosCam();
 
 //-----------------------Private functions-----------------------------//
 static void priv_InitializeLed14()
@@ -140,8 +142,42 @@ static void priv_InitializeMotors()
 
 	GPIO_InitStruct.GPIO_Pin = MOT2_DIRB_PIN;
 	GPIO_Init(MOT2_DIRB_GPIO, &GPIO_InitStruct);
+}
 
+static void priv_InitializeServosArm()
+{
+	GPIO_PinAFConfig(SERVO_ARM_L_PWM_GPIO, SERVO_ARM_L_PWM_SOURCE, TIMER_AF_SERVOS);
+	GPIO_PinAFConfig(SERVO_ARM_P_PWM_GPIO, SERVO_ARM_P_PWM_SOURCE, TIMER_AF_SERVOS);
 
+	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP ;
+
+	GPIO_InitStruct.GPIO_Pin = SERVO_ARM_L_PWM_PIN;
+	GPIO_Init(SERVO_ARM_L_PWM_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = SERVO_ARM_P_PWM_PIN;
+	GPIO_Init(SERVO_ARM_P_PWM_GPIO, &GPIO_InitStruct);
+}
+
+static void priv_InitializeServosCam()
+{
+	GPIO_PinAFConfig(SERVO_HOR_PWM_GPIO, SERVO_HOR_PWM_SOURCE, TIMER_AF_SERVOS);
+	GPIO_PinAFConfig(SERVO_VER_PWM_GPIO, SERVO_VER_PWM_SOURCE, TIMER_AF_SERVOS);
+
+	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP ;
+
+	GPIO_InitStruct.GPIO_Pin = SERVO_VER_PWM_PIN;
+	GPIO_Init(SERVO_VER_PWM_GPIO, &GPIO_InitStruct);
+
+	GPIO_InitStruct.GPIO_Pin = SERVO_HOR_PWM_PIN;
+	GPIO_Init(SERVO_HOR_PWM_GPIO, &GPIO_InitStruct);
 }
 
 //-----------------------Public functions------------------------------//
@@ -172,6 +208,12 @@ void InitializeGPIO(uint8_t GPIOx)
 		break;
 	case SelectMotors:
 		priv_InitializeMotors();
+		break;
+	case SelectServosArm:
+		priv_InitializeServosArm();
+		break;
+	case SelectServosCam:
+		priv_InitializeServosCam();
 		break;
 
 	default:
