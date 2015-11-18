@@ -24,9 +24,9 @@ extern MpuKalmanDataStruct MpuKalmanData;
 //-----------------------Public functions------------------------------//
 void InitializeBT()
 {
-	InitializeRCC(SelectBt);
+	InitializeRCC(DriverSelectBt);
 	InitializeUSART(USART_BT);
-	InitializeGPIO(SelectBt);
+	InitializeGPIO(DriverSelectBt);
 }
 
 void BT_Send8(int8_t Char)

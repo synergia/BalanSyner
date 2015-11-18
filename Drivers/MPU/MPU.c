@@ -29,15 +29,15 @@ MpuKalmanDataStruct MpuKalmanData;
 MPU6050_errorstatus InitializeMPU()
 {
 	MPU6050_errorstatus errorstatus;
-	InitializeRCC(SelectMpu);
+	InitializeRCC(DriverSelectMpu);
 	InitializeI2C();
-	InitializeGPIO(SelectMpu);
+	InitializeGPIO(DriverSelectMpu);
 	errorstatus = MPU6050_Initialization();
 	return errorstatus;
 }
 
 /*!
- *  Saves measured data into MpuMeasuredData strunt and prepares data for Kalman filtering in MpuKalmanData struct
+ *  Saves measured data into MpuMeasuredData struct and prepares data for Kalman filtering in MpuKalmanData struct
  */
 void MPU_Perform()
 {

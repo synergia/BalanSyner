@@ -27,7 +27,7 @@
 
 #include "../Framework/inc/KalmanFilter.h"
 
-#include "../HAL/SysTick.h"
+#include "../StmPeriphInit/SysTick.h"
 
 #include "../Drivers/Clock/clock.h"
 #include "../Drivers/LEDs/LED.h"
@@ -58,6 +58,10 @@ int main(void)
 
 #ifdef _USE_MOTORS
 	InitializeMotors();
+#endif
+
+#ifdef _USE_ENCODERS
+	InitializeEncoders();
 #endif
 
 #ifdef _USE_SERVOS_ARM
@@ -91,7 +95,6 @@ int main(void)
 #ifdef _USE_MPU
 	MPU_Error = InitializeMPU();
 #endif
-	//InitializeNVIC(); todo: ma byæ w initach komponentów, powyej
 
 	if(MPU_Error != MPU6050_NO_ERROR)
 	{

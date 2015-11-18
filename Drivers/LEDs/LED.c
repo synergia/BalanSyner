@@ -21,18 +21,18 @@
 //-----------------------Public functions------------------------------//
 void InitializeLedNucleo()
 {
-	InitializeRCC(SelectLedNucleo);
-	InitializeGPIO(SelectLedNucleo);
+	InitializeRCC(DriverSelectLedNucleo);
+	InitializeGPIO(DriverSelectLedNucleo);
 }
 
 void InitializeLed14()
 {
-	InitializeRCC(SelectLed14);
-	InitializeGPIO(SelectLed14);
+	InitializeRCC(DriverSelectLed14);
+	InitializeGPIO(DriverSelectLed14);
 }
 
 void InitializeLedEye()
 {
-	InitializeRCC(SelectLedEye);
-	InitializeGPIO(SelectLedEye);
+	InitializeRCC(DriverSelectLedEye);
+	InitializeGPIO(DriverSelectLedEye);
 }

@@ -14,6 +14,6 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
-void InitializeNVIC();
+void InitializeNVIC( uint8_t NVIC_Selector );
 
 #endif

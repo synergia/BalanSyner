@@ -111,8 +111,8 @@ static void priv_InitializeMpu()
 static void priv_InitializeMotors()
 {
 	/*! PWM output pins */
-	GPIO_PinAFConfig(MOT1_PWM_GPIO, MOT1_PWM_SOURCE, TIMER_AF_MOTOR);
-	GPIO_PinAFConfig(MOT2_PWM_GPIO, MOT2_PWM_SOURCE, TIMER_AF_MOTOR);
+	GPIO_PinAFConfig(MOT1_PWM_GPIO, MOT1_PWM_SOURCE, TIM_AF_MOTOR);
+	GPIO_PinAFConfig(MOT2_PWM_GPIO, MOT2_PWM_SOURCE, TIM_AF_MOTOR);
 
 	GPIO_InitTypeDef GPIO_InitStruct;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
@@ -180,42 +180,71 @@ static void priv_InitializeServosCam()
 	GPIO_Init(SERVO_HOR_PWM_GPIO, &GPIO_InitStruct);
 }
 
-//-----------------------Public functions------------------------------//
-void InitializeGPIO(uint8_t GPIOx)
+static void priv_InitializeEncoders()
 {
-	switch (GPIOx)
+	GPIO_InitTypeDef GPIO_InitStruct;
+
+	/*! ENCODER 1 */
+	GPIO_PinAFConfig(ENC1_GPIO, ENC1A_SOURCE, TIM_AF_ENCODER);
+	GPIO_PinAFConfig(ENC1_GPIO, ENC1B_SOURCE, TIM_AF_ENCODER);
+
+	GPIO_InitStruct.GPIO_Pin =  ENC1A_PIN | ENC1B_PIN;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(ENC1_GPIO, &GPIO_InitStruct);
+
+	/*! ENCODER 2 */
+	GPIO_PinAFConfig(ENC2_GPIO, ENC2A_SOURCE, TIM_AF_ENCODER);
+	GPIO_PinAFConfig(ENC2_GPIO, ENC2B_SOURCE, TIM_AF_ENCODER);
+
+	GPIO_InitStruct.GPIO_Pin =  ENC2A_PIN | ENC2B_PIN;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(ENC2_GPIO, &GPIO_InitStruct);
+}
+
+//-----------------------Public functions------------------------------//
+void InitializeGPIO(uint8_t GPIO_Selector)
+{
+	switch (GPIO_Selector)
 	{
-	case SelectLed14:
+	case DriverSelectLed14:
 		priv_InitializeLed14();
 		break;
-	case SelectLedEye:
+	case DriverSelectLedEye:
 		priv_InitializeLedEye();
 		break;
-	case SelectLedNucleo:
+	case DriverSelectLedNucleo:
 		priv_InitializeLedNucleo();
 		break;
-	case SelectBt:
+	case DriverSelectBt:
 		priv_InitializeBt();
 		break;
-	case SelectWifi:
+	case DriverSelectWifi:
 		priv_InitializeWifi();
 		break;
-	case SelectPi:
+	case DriverSelectPi:
 		priv_InitializePi();
 		break;
-	case SelectMpu:
+	case DriverSelectMpu:
 		priv_InitializeMpu();
 		break;
-	case SelectMotors:
+	case DriverSelectMotors:
 		priv_InitializeMotors();
 		break;
-	case SelectServosArm:
+	case DriverSelectServosArm:
 		priv_InitializeServosArm();
 		break;
-	case SelectServosCam:
+	case DriverSelectServosCam:
 		priv_InitializeServosCam();
 		break;
-
+	case DriverSelectEncoders:
+		priv_InitializeEncoders();
+		break;
 	default:
 		break;
 	}

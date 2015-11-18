@@ -8,9 +8,9 @@
 //-----------------------Includes-------------------------------------//
 #include "Motors.h"
 #include "../PinDefines.h"
-#include "../HAL/RCC.h"
-#include "../HAL/Timers.h"
-#include "../HAL/GPIO.h"
+#include "../StmPeriphInit/RCC.h"
+#include "../StmPeriphInit/Timers.h"
+#include "../StmPeriphInit/GPIO.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -22,13 +22,13 @@
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
-inline inline static void priv_SetAngleArmLeft(uint16_t Angle);
+inline static void priv_SetAngleArmLeft(uint16_t Angle);
 inline static void priv_SetAngleArmRight(uint16_t Angle);
 inline static void priv_SetAngleCamHor(uint16_t Angle);
 inline static void priv_SetAngleCamVer(uint16_t Angle);
 
 //-----------------------Private functions-----------------------------//
-inline inline static void priv_SetAngleArmLeft(uint16_t Angle)
+inline static void priv_SetAngleArmLeft(uint16_t Angle)
 {
 	TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = Angle;
 }
@@ -49,36 +49,45 @@ inline static void priv_SetAngleCamVer(uint16_t Angle)
 }
 
 //-----------------------Public functions------------------------------//
+void InitializeEncoders()
+{
+	InitializeRCC(DriverSelectEncoders);
+	InitializeNVIC(DriverSelectEncoders);
+	InitializeTimers(TIM_ENC1);
+	InitializeTimers(TIM_ENC2);
+	InitializeGPIO(DriverSelectEncoders);
+}
+
 void InitializeMotors()
 {
-	InitializeRCC(SelectMotors);
+	InitializeRCC(DriverSelectMotors);
 	InitializeTimers(TIM_MOTORS);
-	InitializeGPIO(SelectMotors);
+	InitializeGPIO(DriverSelectMotors);
 }
 
 void InitializeServosArm()
 {
-	InitializeRCC(SelectServosArm);
+	InitializeRCC(DriverSelectServosArm);
 	InitializeTimers(TIM_SERVOS);
-	InitializeGPIO(SelectServosArm);
+	InitializeGPIO(DriverSelectServosArm);
 }
 
 void InitializeServosCam()
 {
-	InitializeRCC(SelectServosCam);
+	InitializeRCC(DriverSelectServosCam);
 	InitializeTimers(TIM_SERVOS);
-	InitializeGPIO(SelectServosCam);
+	InitializeGPIO(DriverSelectServosCam);
 }
 
 /*!
  * Value may vary between 0 and 1000.
  */
-void MotorSetSpeed(MotorSelector Motor, uint16_t Value, uint8_t Direction)
+void MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
 {
 	//todo: handle direction
 	if(Value<=1000 && Value>=0)
 	{
-		switch (Motor)
+		switch (MotorSelector)
 		{
 		case SelectMotorLeft:
 			TIM_MOTORS->MOT1_PWM_CHANNEL = Value;
@@ -95,14 +104,14 @@ void MotorSetSpeed(MotorSelector Motor, uint16_t Value, uint8_t Direction)
 /*!
  * Value may vary between -90.0 and +90.0. Resolution 0.5.
  */
-void ServoSetAngle(ServoSelector Servo, float Angle)
+void ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
 {
 	if( -90>Angle ) Angle = -90;
 	if(	 90<Angle ) Angle = 90;
 
 	Angle = (uint16_t) 2*(Angle)+540;
 
-	switch (Servo)
+	switch (ServoSelector)
 	{
 	case SelectServoArmLeft:
 		priv_SetAngleArmLeft(Angle);

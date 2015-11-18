@@ -8,23 +8,30 @@
 //-----------------------Public typedefs------------------------------//
 typedef enum
 {
-	SelectLed14,
-	SelectLedEye,
-	SelectLedNucleo,
-	SelectBt,
-	SelectWifi,
-	SelectPi,
-	SelectMpu,
-	SelectMotors,
-	SelectServosArm,
-	SelectServosCam,
-} DriverSelector;
+	DriverSelectLed14,
+	DriverSelectLedEye,
+	DriverSelectLedNucleo,
+	DriverSelectBt,
+	DriverSelectWifi,
+	DriverSelectPi,
+	DriverSelectMpu,
+	DriverSelectMotors,
+	DriverSelectServosArm,
+	DriverSelectServosCam,
+	DriverSelectEncoders,
+} DriverSelector_T;
 
 typedef enum
 {
 	SelectMotorLeft,
 	SelectMotorRight,
-}MotorSelector;
+}MotorSelector_T;
+
+typedef enum
+{
+	SelectEncoderLeft,
+	SelectEncoderRight,
+}EncoderSelector_T;
 
 typedef enum
 {
@@ -32,15 +39,16 @@ typedef enum
 	SelectServoArmRight,
 	SelectServoCamHor,
 	SelectServoCamVer,
-}ServoSelector;
+}ServoSelector_T;
 
 //-----------------------Public defines-------------------------------//
 /*!
  * _USE_define
  */
 #define _USE_MOTORS
+#define _USE_ENCODERS
 #define _USE_SERVOS_ARM
-#define _USE_SERVOS_CAM
+//#define _USE_SERVOS_CAM
 //#define _USE_LED_14
 //#define _USE_LED_EYE
 #define _USE_LED_NUCLEO
@@ -82,7 +90,7 @@ typedef enum
  * MOTOR
  * Warning! Check in RCC.c if channels are selected as you want
  */
-#define TIMER_AF_MOTOR		GPIO_AF_2
+#define TIM_AF_MOTOR		GPIO_AF_2
 #define TIM_MOTORS			TIM1
 #define MOT1_PWM_CHANNEL	CCR1
 #define MOT2_PWM_CHANNEL	CCR2
@@ -91,6 +99,22 @@ typedef enum
 #define MOT1_DIRA_PIN		GPIO_Pin_12
 #define MOT1_DIRB_GPIO		GPIOB
 #define MOT1_DIRB_PIN		GPIO_Pin_5
+
+/*!< ENCODER 1 */
+#define TIM_AF_ENCODER		GPIO_AF_2
+
+#define TIM_ENC1			TIM4
+#define TIM_ENC1_IRQn		TIM4_IRQn
+#define ENC1A_CHANNEL		CCR1
+#define ENC1B_CHANNEL		CCR2
+
+#define ENC1_GPIO			GPIOB
+#define ENC1A_PIN			GPIO_Pin_6
+#define ENC1A_SOURCE		GPIO_PinSource6
+
+#define ENC1B_PIN			GPIO_Pin_7
+#define ENC1B_SOURCE		GPIO_PinSource7
+/*!< END OF ENCODER 1 */
 
 #define MOT2_DIRA_GPIO		GPIOB
 #define MOT2_DIRA_PIN		GPIO_Pin_9
@@ -104,6 +128,20 @@ typedef enum
 #define MOT2_PWM_GPIO		GPIOC
 #define MOT2_PWM_PIN		GPIO_Pin_0
 #define MOT2_PWM_SOURCE		GPIO_PinSource0
+
+/*!< ENCODER 2 */
+#define TIM_ENC2			TIM2
+#define TIM_ENC2_IRQn		TIM2_IRQn
+#define ENC2A_CHANNEL		CCR1
+#define ENC2B_CHANNEL		CCR2
+
+#define ENC2_GPIO			GPIOA
+#define ENC2A_PIN			GPIO_Pin_0
+#define ENC2A_SOURCE		GPIO_PinSource0
+
+#define ENC2B_PIN			GPIO_Pin_1
+#define ENC2B_SOURCE		GPIO_PinSource1
+/*!< END OF ENCODER 1 */
 
 /*!
  * SERVOs
@@ -196,25 +234,6 @@ typedef enum
 #define MPU_AD0_GPIO		GPIOA
 #define MPU_AD0_PIN			GPIO_Pin_9
 
-
-/*!
- * ENCODERs
- */
-#define ENC1_A_GPIO			GPIOB
-#define ENC1_A_PIN			GPIO_Pin_6
-#define ENC1_B_GPIO			GPIOB
-#define ENC1_B_PIN			GPIO_Pin_7
-
-#define ENC2_A_GPIO			GPIOA
-#define ENC2_A_PIN			GPIO_Pin_0
-#define ENC2_B_GPIO			GPIOA
-#define ENC2_B_PIN			GPIO_Pin_1
-
-#define TIMER_ENC1_A		TIM4_CH1
-#define TIMER_ENC1_B		TIM4_CH2
-#define TIMER_ENC2_A		TIM2_CH1
-#define TIMER_ENC2_B		TIM2_CH2
-
 /*!
  * S65 DISPLAY
  */
@@ -231,7 +250,6 @@ typedef enum
 #define S65_CS_GPIO			GPIOA
 #define S65_CS_PIN			GPIO_Pin_4
 
-//TODO:define it
 #define TIMER_S65_PWM		TIM16_CH1
 //#define S65_SPI			SPI1
 

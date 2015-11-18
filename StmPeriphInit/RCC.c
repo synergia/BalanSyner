@@ -14,113 +14,128 @@
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
-void priv_InitializeMPU();
-void priv_InitializeLedNucleo();
-void priv_InitializeLed14();
-void priv_InitializeLedEye();
-void priv_InitializeBt();
-void priv_InitializePi();
-void priv_InitializeWifi();
-void priv_InitializeMotors();
-void priv_InitializeServosArm();
-void priv_InitializeServosCam();
+static void priv_InitializeMPU();
+static void priv_InitializeLedNucleo();
+static void priv_InitializeLed14();
+static void priv_InitializeLedEye();
+static void priv_InitializeBt();
+static void priv_InitializePi();
+static void priv_InitializeWifi();
+static void priv_InitializeMotors();
+static void priv_InitializeServosArm();
+static void priv_InitializeServosCam();
+static void priv_InitializeEncoders();
 
 //-----------------------Private functions-----------------------------//
-void priv_InitializeMPU()
+static void priv_InitializeMPU()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C3, ENABLE);
 }
 
-void priv_InitializeLedNucleo()
+static void priv_InitializeLedNucleo()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 }
 
-void priv_InitializeLed14()
+static void priv_InitializeLed14()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
 }
 
-void priv_InitializeLedEye()
+static void priv_InitializeLedEye()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 }
 
-void priv_InitializeBt()
+static void priv_InitializeBt()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); //todo make it define
 }
 
-void priv_InitializeWifi()
+static void priv_InitializeWifi()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); //todo make it define
 }
 
-void priv_InitializePi()
+static void priv_InitializePi()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE); //todo make it define
 }
 
-void priv_InitializeMotors()
+static void priv_InitializeMotors()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
 }
 
-void priv_InitializeServosArm()
+static void priv_InitializeServosArm()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 }
 
-void priv_InitializeServosCam()
+static void priv_InitializeServosCam()
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 }
 
-//-----------------------Public functions------------------------------//
-void InitializeRCC(uint8_t RCCx)
+static void priv_InitializeEncoders()
 {
-	switch (RCCx)
+	/*!< ENCODER 1 */
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+
+	/*!< ENCODER 2 */
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+}
+
+//-----------------------Public functions------------------------------//
+void InitializeRCC(uint8_t RCC_Selector)
+{
+	switch (RCC_Selector)
 	{
-	case SelectLedNucleo:
+	case DriverSelectLedNucleo:
 		priv_InitializeLedNucleo();
 		break;
-	case SelectLed14:
+	case DriverSelectLed14:
 		priv_InitializeLed14();
 		break;
-	case SelectLedEye:
+	case DriverSelectLedEye:
 		priv_InitializeLedEye();
 		break;
-	case SelectMpu:
+	case DriverSelectMpu:
 		priv_InitializeMPU();
 		break;
-	case SelectBt:
+	case DriverSelectBt:
 		priv_InitializeBt();
 		break;
-	case SelectPi:
+	case DriverSelectPi:
 		priv_InitializePi();
 		break;
-	case SelectWifi:
+	case DriverSelectWifi:
 		priv_InitializeWifi();
 		break;
-	case SelectMotors:
+	case DriverSelectMotors:
 		priv_InitializeMotors();
 		break;
-	case SelectServosArm:
+	case DriverSelectServosArm:
 		priv_InitializeServosArm();
 		break;
-	case SelectServosCam:
+	case DriverSelectServosCam:
 		priv_InitializeServosCam();
+		break;
+	case DriverSelectEncoders:
+		priv_InitializeEncoders();
 		break;
 	default:
 		break;

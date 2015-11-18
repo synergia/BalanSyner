@@ -20,10 +20,11 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
+void InitializeEncoders();
 void InitializeMotors();
 void InitializeServosArm();
 void InitializeServosCam();
-void MotorSetSpeed(MotorSelector Motor, uint16_t Value, uint8_t Direction);
-void ServoSetAngle(ServoSelector Servo, float Angle);
+void MotorSetSpeed(MotorSelector_T Motor, uint16_t Value, uint8_t Direction);
+void ServoSetAngle(ServoSelector_T Servo, float Angle);
 
 #endif /* MOTORS_H_ */
