@@ -11,6 +11,7 @@
 #include "../StmPeriphInit/RCC.h"
 #include "../StmPeriphInit/Timers.h"
 #include "../StmPeriphInit/GPIO.h"
+#include "../StmPeriphInit/NVIC.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -22,6 +23,9 @@
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
+static void priv_MotorSetSpeed(MotorSelector_T Motor, uint16_t Value, uint8_t Direction);
+static void priv_ServoSetAngle(ServoSelector_T Servo, float Angle);
+
 inline static void priv_SetAngleArmLeft(uint16_t Angle);
 inline static void priv_SetAngleArmRight(uint16_t Angle);
 inline static void priv_SetAngleCamHor(uint16_t Angle);
@@ -51,22 +55,32 @@ inline static void priv_SetAngleCamVer(uint16_t Angle)
 //-----------------------Public functions------------------------------//
 void InitializeEncoders()
 {
+	/*! Physical initialization */
 	InitializeRCC(DriverSelectEncoders);
 	InitializeNVIC(DriverSelectEncoders);
 	InitializeTimers(TIM_ENC1);
 	InitializeTimers(TIM_ENC2);
 	InitializeGPIO(DriverSelectEncoders);
+
+	/*! Software */
+	EncodersStruct.GetOmega = GetCounter;
+	EncodersStruct.SetOmega = SetCounter;
 }
 
 void InitializeMotors()
 {
+	/*! Physical initialization */
 	InitializeRCC(DriverSelectMotors);
 	InitializeTimers(TIM_MOTORS);
 	InitializeGPIO(DriverSelectMotors);
+
+	/*! Software */
+	MotorStruct.SetSpeed = priv_MotorSetSpeed;
 }
 
 void InitializeServosArm()
 {
+	/*! Physical initialization */
 	InitializeRCC(DriverSelectServosArm);
 	InitializeTimers(TIM_SERVOS);
 	InitializeGPIO(DriverSelectServosArm);
@@ -74,6 +88,7 @@ void InitializeServosArm()
 
 void InitializeServosCam()
 {
+	/*! Physical initialization */
 	InitializeRCC(DriverSelectServosCam);
 	InitializeTimers(TIM_SERVOS);
 	InitializeGPIO(DriverSelectServosCam);
@@ -82,7 +97,7 @@ void InitializeServosCam()
 /*!
  * Value may vary between 0 and 1000.
  */
-void MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
+void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
 {
 	//todo: handle direction
 	if(Value<=1000 && Value>=0)
@@ -104,7 +119,7 @@ void MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direct
 /*!
  * Value may vary between -90.0 and +90.0. Resolution 0.5.
  */
-void ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
+void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
 {
 	if( -90>Angle ) Angle = -90;
 	if(	 90<Angle ) Angle = 90;

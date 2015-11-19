@@ -33,7 +33,7 @@
 #include "../Drivers/LEDs/LED.h"
 #include "../Drivers/BT/BT.h"
 #include "../Drivers/Wifi/Wifi.h"
-#include "../Drivers/MPU/MPU.h"
+#include "../Drivers/MPU/MPU.h" 	//struct with angle and gyro
 #include "../Drivers/MPU/_LibMPU6050.h"
 #include "../Drivers/Motors/Motors.h"
 
@@ -112,5 +112,29 @@ int main(void)
 	return 0;
 }
 
+inline void MainTask32ms()
+{
+	/* whole process needs about 2ms */
+	//LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+
+	//MPU_Perform(); //save angle to struct in MPU.h/c
+	EncodersStruct.SetOmega( TIM_ENC1, 10 );
+	EncodersStruct.EncoderOmegaLeft = EncodersStruct.GetOmega( TIM_ENC1 );
+
+	//CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
+	//LogicPerform(); // analyze angle and commands, PID and set PWMs,
+	//SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
+
+	MotorSetSpeed(SelectMotorLeft, 100, 1);
+	MotorSetSpeed(SelectMotorRight, 800, 1);
+	ServoSetAngle(SelectServoArmLeft, 0);
+	ServoSetAngle(SelectServoArmRight, 90);
+	ServoSetAngle(SelectServoCamHor, -90);
+	ServoSetAngle(SelectServoCamVer, 45);
+
+	BT_SendMeasuredData( );
+
+	//LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+}
 //-----------------------Public functions------------------------------//
 

@@ -14,4 +14,7 @@
 //-----------------------Public prototypes----------------------------//
 void InitializeTimers(TIM_TypeDef* TIMx);
 
+uint32_t GetCounter( TIM_TypeDef * TIMx );
+void SetCounter( TIM_TypeDef * TIMx, uint32_t Value);
+
 #endif

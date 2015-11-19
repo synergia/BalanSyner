@@ -12,19 +12,31 @@
 #include "../PinDefines.h"
 
 //-----------------------Public typedefs------------------------------//
+typedef struct
+{
+	float EncoderOmegaLeft;
+	float EncoderOmegaRight;
 
+	uint32_t (*GetOmega)( TIM_TypeDef * TIMx );
+	void (*SetOmega)( TIM_TypeDef * TIMx, uint32_t Value);
+}EncoderStruct_T;
+
+typedef struct
+{
+	void (*SetSpeed)( MotorSelector_T Motor, uint16_t Value, uint8_t Direction );
+}MotorsStruct_T;
 //-----------------------Public defines-------------------------------//
 
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
+EncoderStruct_T EncodersStruct;
+MotorsStruct_T MotorStruct;
 
 //-----------------------Public prototypes----------------------------//
 void InitializeEncoders();
 void InitializeMotors();
 void InitializeServosArm();
 void InitializeServosCam();
-void MotorSetSpeed(MotorSelector_T Motor, uint16_t Value, uint8_t Direction);
-void ServoSetAngle(ServoSelector_T Servo, float Angle);
 
 #endif /* MOTORS_H_ */

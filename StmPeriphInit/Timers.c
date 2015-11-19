@@ -109,7 +109,7 @@ static void priv_InitializeEncoderLeft()
 	/* Prescaler configuration */
 	TIM_PrescalerConfig(TIM_ENC1, PrescalerValue, TIM_PSCReloadMode_Immediate);
 
-	TIM_EncoderInterfaceConfig(TIM_ENC1, TIM_EncoderMode_TI1, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
+	TIM_EncoderInterfaceConfig(TIM_ENC1, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
 
 	/* TIM Interrupts enable */
 	TIM_ITConfig(TIM_ENC1, TIM_IT_Update, ENABLE);
@@ -137,7 +137,7 @@ static void priv_InitializeEncoderRight()
 	/* Prescaler configuration */
 	TIM_PrescalerConfig(TIM_ENC2, PrescalerValue, TIM_PSCReloadMode_Immediate);
 
-	TIM_EncoderInterfaceConfig(TIM_ENC2, TIM_EncoderMode_TI1, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
+	TIM_EncoderInterfaceConfig(TIM_ENC2, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
 
 	/* TIM Interrupts enable */
 	TIM_ITConfig(TIM_ENC2, TIM_IT_Update, ENABLE);
@@ -165,4 +165,25 @@ void InitializeTimers(TIM_TypeDef* TIMx)
 	{
 		priv_InitializeEncoderRight();
 	}
+}
+
+uint32_t GetCounter( TIM_TypeDef * TIMx )
+{
+	return TIMx->CNT;
+}
+
+void SetCounter( TIM_TypeDef * TIMx, uint32_t Value)
+{
+	TIMx->CNT = Value;
+}
+
+#include "../Drivers/LEDs/LED.h"
+//TODO:delete it
+void TIM4_IRQHandler(void)
+{
+  if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+  {
+	  LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+	  TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+  }
 }
