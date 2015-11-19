@@ -15,7 +15,7 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
-extern MpuKalmanDataStruct MpuKalmanData;
+extern MpuKalmanClass_T oMpuKalman;
 
 //-----------------------Private prototypes----------------------------//
 
@@ -70,6 +70,6 @@ void BT_SendF32(float f)
 void BT_SendMeasuredData( void )
 {
 	BT_Send16( 0xFFFF );										//start bits
-	BT_Send32( (int32_t)(MpuKalmanData.Angle*1000) );
-	BT_Send32( (int32_t)(MpuKalmanData.AngleFiltered*1000) );
+	BT_Send32( (int32_t)(oMpuKalman.AngleRaw*1000) );
+	BT_Send32( (int32_t)(oMpuKalman.AngleFiltered*1000) );
 }

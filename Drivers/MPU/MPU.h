@@ -6,20 +6,22 @@
 //-----------------------Public typedefs------------------------------//
 typedef struct
 {
-	float Angle;
-	float Gyro;
+	float AngleRaw;
+	float GyroRaw;
 
 	float AngleFiltered;
-}MpuKalmanDataStruct;
+
+	float (*GetFiltedAngle) (void);
+}MpuKalmanClass_T;
 
 //-----------------------Public defines-------------------------------//
 
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
+MpuKalmanClass_T oMpuKalman;
 
 //-----------------------Public prototypes----------------------------//
 uint8_t InitializeMPU();
-void MPU_Perform();
 
 #endif

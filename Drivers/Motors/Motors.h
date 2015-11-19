@@ -19,24 +19,32 @@ typedef struct
 
 	uint32_t (*GetOmega)( TIM_TypeDef * TIMx );
 	void (*SetOmega)( TIM_TypeDef * TIMx, uint32_t Value);
-}EncoderStruct_T;
+}EncoderClass_T;
 
 typedef struct
 {
+	//TODO void get speed
 	void (*SetSpeed)( MotorSelector_T Motor, uint16_t Value, uint8_t Direction );
-}MotorsStruct_T;
+}MotorsClass_T;
+
+typedef struct
+{
+	//TODO void get angle
+	void (*SetAngle)(ServoSelector_T ServoSelector, float Angle);
+}ServosClass_T;
+
 //-----------------------Public defines-------------------------------//
 
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
-EncoderStruct_T EncodersStruct;
-MotorsStruct_T MotorStruct;
+EncoderClass_T oEncoders;
+MotorsClass_T oMotor;
+ServosClass_T oServosArm;
 
 //-----------------------Public prototypes----------------------------//
 void InitializeEncoders();
 void InitializeMotors();
-void InitializeServosArm();
-void InitializeServosCam();
+void InitializeServos();
 
 #endif /* MOTORS_H_ */

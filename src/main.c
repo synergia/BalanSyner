@@ -33,8 +33,7 @@
 #include "../Drivers/LEDs/LED.h"
 #include "../Drivers/BT/BT.h"
 #include "../Drivers/Wifi/Wifi.h"
-#include "../Drivers/MPU/MPU.h" 	//struct with angle and gyro
-#include "../Drivers/MPU/_LibMPU6050.h"
+#include "../Drivers/MPU/MPU.h"
 #include "../Drivers/Motors/Motors.h"
 
 //-----------------------Private typedefs------------------------------//
@@ -51,8 +50,6 @@ int main(void);
 //-----------------------Private functions-----------------------------//
 int main(void)
 {
-	MPU6050_errorstatus MPU_Error;
-
 	InitializeClock();
 	InitializeSysTick();
 
@@ -64,12 +61,8 @@ int main(void)
 	InitializeEncoders();
 #endif
 
-#ifdef _USE_SERVOS_ARM
-	InitializeServosArm();
-#endif
-
-#ifdef _USE_SERVOS_CAM
-	InitializeServosCam();
+#ifdef _USE_SERVOS
+	InitializeServos();
 #endif
 
 #ifdef _USE_LED_NUCLEO
@@ -93,13 +86,15 @@ int main(void)
 #endif
 
 #ifdef _USE_MPU
-	MPU_Error = InitializeMPU();
+	InitializeMPU();
 #endif
 
-	if(MPU_Error != MPU6050_NO_ERROR)
+#if 0
+	if(//no MPU error))
 	{
 		//sth bad had happened...
 	}
+#endif
 
 	/*todo: only for labview sending purposes
 	*AnglePrsc1000 = (int32_t)(*Angle*1000);*/
@@ -118,19 +113,20 @@ inline void MainTask32ms()
 	//LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
 	//MPU_Perform(); //save angle to struct in MPU.h/c
-	EncodersStruct.SetOmega( TIM_ENC1, 10 );
-	EncodersStruct.EncoderOmegaLeft = EncodersStruct.GetOmega( TIM_ENC1 );
+	oMpuKalman.GetFiltedAngle();
+	oEncoders.SetOmega( TIM_ENC1, 10 );
+	oEncoders.EncoderOmegaLeft = oEncoders.GetOmega( TIM_ENC1 );
 
 	//CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
 	//LogicPerform(); // analyze angle and commands, PID and set PWMs,
 	//SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
 
-	MotorSetSpeed(SelectMotorLeft, 100, 1);
-	MotorSetSpeed(SelectMotorRight, 800, 1);
-	ServoSetAngle(SelectServoArmLeft, 0);
-	ServoSetAngle(SelectServoArmRight, 90);
-	ServoSetAngle(SelectServoCamHor, -90);
-	ServoSetAngle(SelectServoCamVer, 45);
+	oMotor.SetSpeed(SelectMotorLeft, 100, 1);
+	oMotor.SetSpeed(SelectMotorRight, 800, 1);
+	oServosArm.SetAngle(SelectServoArmLeft, 0);
+	oServosArm.SetAngle(SelectServoArmRight, 90);
+	oServosArm.SetAngle(SelectServoCamHor, -90);
+	oServosArm.SetAngle(SelectServoCamVer, 45);
 
 	BT_SendMeasuredData( );
 

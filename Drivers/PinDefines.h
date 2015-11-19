@@ -47,8 +47,7 @@ typedef enum
  */
 #define _USE_MOTORS
 #define _USE_ENCODERS
-#define _USE_SERVOS_ARM
-//#define _USE_SERVOS_CAM
+#define _USE_SERVOS
 //#define _USE_LED_14
 //#define _USE_LED_EYE
 #define _USE_LED_NUCLEO
