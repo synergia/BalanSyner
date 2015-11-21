@@ -7,7 +7,7 @@
 #include "GPIO.h"
 #include "I2C.h"
 #include "RCC.h"
-#include "../Framework/inc/KalmanFilter.h"
+#include "../Framework/Kalman/KalmanFilter.h"
 
 //-----------------------Private typedefs------------------------------//
 

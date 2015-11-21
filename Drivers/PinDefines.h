@@ -3,7 +3,7 @@
 
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
-#include "../Framework/inc/stm32f30x_gpio.h"
+#include "../Framework/stm32f30x/inc/stm32f30x_gpio.h"
 
 //-----------------------Public typedefs------------------------------//
 typedef enum
@@ -20,26 +20,6 @@ typedef enum
 	DriverSelectServosCam,
 	DriverSelectEncoders,
 } DriverSelector_T;
-
-typedef enum
-{
-	SelectMotorLeft,
-	SelectMotorRight,
-}MotorSelector_T;
-
-typedef enum
-{
-	SelectEncoderLeft,
-	SelectEncoderRight,
-}EncoderSelector_T;
-
-typedef enum
-{
-	SelectServoArmLeft,
-	SelectServoArmRight,
-	SelectServoCamHor,
-	SelectServoCamVer,
-}ServoSelector_T;
 
 //-----------------------Public defines-------------------------------//
 /*!

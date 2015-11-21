@@ -25,7 +25,7 @@
 #include "stm32f30x.h"
 #include "main.h"
 
-#include "../Framework/inc/KalmanFilter.h"
+#include "../Framework/Kalman/KalmanFilter.h"
 
 #include "../StmPeriphInit/SysTick.h"
 
@@ -50,87 +50,87 @@ int main(void);
 //-----------------------Private functions-----------------------------//
 int main(void)
 {
-	InitializeClock();
-	InitializeSysTick();
+   InitializeClock();
+   InitializeSysTick();
 
 #ifdef _USE_MOTORS
-	InitializeMotors();
+   InitializeMotors();
 #endif
 
 #ifdef _USE_ENCODERS
-	InitializeEncoders();
+   InitializeEncoders();
 #endif
 
 #ifdef _USE_SERVOS
-	InitializeServos();
+   InitializeServos();
 #endif
 
 #ifdef _USE_LED_NUCLEO
-	InitializeLedNucleo();
+   InitializeLedNucleo();
 #endif
 
 #ifdef _USE_LED_14
-	InitializeLed14();
+   InitializeLed14();
 #endif
 
 #ifdef _USE_LED_EYE
-	InitializeLedEye();
+   InitializeLedEye();
 #endif
 
 #ifdef _USE_BT
-	InitializeBT();
+   InitializeBT();
 #endif
 
 #ifdef _USE_WIFI
-	InitializeWifi();
+   InitializeWifi();
 #endif
 
 #ifdef _USE_MPU
-	InitializeMPU();
+   InitializeMPU();
 #endif
 
 #if 0
-	if(//no MPU error))
-	{
-		//sth bad had happened...
-	}
+   if(//no MPU error))
+   {
+      //sth bad had happened...
+   }
 #endif
 
-	/*todo: only for labview sending purposes
-	*AnglePrsc1000 = (int32_t)(*Angle*1000);*/
+   /*todo: only for labview sending purposes
+   *AnglePrsc1000 = (int32_t)(*Angle*1000);*/
 
-	KalmanInitialize();
-	while (1)
-	{
-		;
-	}
-	return 0;
+   KalmanInitialize();
+   while (1)
+   {
+      ;
+   }
+   return 0;
 }
 
 inline void MainTask32ms()
 {
-	/* whole process needs about 2ms */
-	//LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+   /* whole process needs about 2ms */
+   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-	//MPU_Perform(); //save angle to struct in MPU.h/c
-	oMpuKalman.GetFiltedAngle();
-	oEncoders.SetOmega( TIM_ENC1, 10 );
-	oEncoders.EncoderOmegaLeft = oEncoders.GetOmega( TIM_ENC1 );
+   //MPU_Perform(); //save angle to struct in MPU.h/c
+   oMpuKalman.GetFiltedAngle();
+   //oEncoderLeft.SetOmega( TIM_ENC1, 10 );
+   oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
 
-	//CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
-	//LogicPerform(); // analyze angle and commands, PID and set PWMs,
-	//SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
+   //CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
+   //LogicPerform(); // analyze angle and commands, PID and set PWMs,
+   //SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
 
-	oMotor.SetSpeed(SelectMotorLeft, 100, 1);
-	oMotor.SetSpeed(SelectMotorRight, 800, 1);
-	oServosArm.SetAngle(SelectServoArmLeft, 0);
-	oServosArm.SetAngle(SelectServoArmRight, 90);
-	oServosArm.SetAngle(SelectServoCamHor, -90);
-	oServosArm.SetAngle(SelectServoCamVer, 45);
+   oMotor.SetSpeed(SelectMotorLeft, 100, 1);
+   oMotor.SetSpeed(SelectMotorRight, 800, 1);
+   oServosArm.SetAngle(SelectServoArmLeft, 0);
+   oServosArm.SetAngle(SelectServoArmRight, 90);
+   oServosArm.SetAngle(SelectServoCamHor, -90);
+   oServosArm.SetAngle(SelectServoCamVer, 45);
 
-	BT_SendMeasuredData( );
+   //oBluetooth.SendKalmanToLabView();
 
-	//LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }
 //-----------------------Public functions------------------------------//
 

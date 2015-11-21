@@ -96,10 +96,10 @@ static void priv_InitializeEncoderLeft()
 
 	/* Compute the prescaler value */
 	uint16_t PrescalerValue = 0;
-	PrescalerValue = (uint16_t) ((SystemCoreClock ) / 6000000) - 1;
+	PrescalerValue = (uint16_t) 0;//((SystemCoreClock ) / 72000000) - 1;
 
 	/* Time base configuration */
-	timerInitStructure.TIM_Period = 399;
+	timerInitStructure.TIM_Period = 1023;
 	timerInitStructure.TIM_Prescaler = 0;
 	timerInitStructure.TIM_ClockDivision = 0;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -112,7 +112,7 @@ static void priv_InitializeEncoderLeft()
 	TIM_EncoderInterfaceConfig(TIM_ENC1, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
 
 	/* TIM Interrupts enable */
-	TIM_ITConfig(TIM_ENC1, TIM_IT_Update, ENABLE);
+	//TIM_ITConfig(TIM_ENC1, TIM_IT_Update, ENABLE);
 
 	/* TIM3 enable counter */
 	TIM_Cmd(TIM_ENC1, ENABLE);
@@ -183,7 +183,7 @@ void TIM4_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
   {
-	  LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+	  //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 	  TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
   }
 }

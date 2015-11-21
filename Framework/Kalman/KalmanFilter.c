@@ -34,12 +34,12 @@ typedef struct
 }KalmanStruct;
 
 //-----------------------Private defines-------------------------------//
-#define DT 0.032f
 
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private variables-----------------------------//
 static KalmanStruct KalmanData;
+extern float DT;
 
 //-----------------------Private prototypes----------------------------//
 

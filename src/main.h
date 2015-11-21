@@ -10,6 +10,7 @@
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
+const float DT = 0.032f; /*! extern float DT; if needed */
 
 //-----------------------Public prototypes----------------------------//
 inline void MainTask32ms();
