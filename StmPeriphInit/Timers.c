@@ -96,7 +96,7 @@ static void priv_InitializeEncoderLeft()
 
 	/* Compute the prescaler value */
 	uint16_t PrescalerValue = 0;
-	PrescalerValue = (uint16_t) 0;//((SystemCoreClock ) / 72000000) - 1;
+	PrescalerValue = (uint16_t) 0;
 
 	/* Time base configuration */
 	timerInitStructure.TIM_Period = 1023;

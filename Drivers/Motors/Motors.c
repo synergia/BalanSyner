@@ -16,10 +16,17 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private defines-------------------------------//
-#define CounterDef  100u
+/*!
+ * For max speed 500RPM and DT=0.032s and encoder resolution 1200 ticks per shaft revolution,
+ * maximum possible ticks per iteration is 96 so any number above that value is safe to use
+ * (counter won't over/underflow). Resolution is 9.375 deg/sec.
+ */
+#define CounterDef         150u
+#define TicksPerRevolution 1200u
+#define AnglePerTick       0.3f
 
 //-----------------------Private macros--------------------------------//
-#define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2*(ANGLE)+540 )
+#define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
 
 //-----------------------Private variables-----------------------------//
 extern float DT;
@@ -40,7 +47,7 @@ static void priv_SetAngleCamVer(uint16_t Angle);
 static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
 {
    //todo: handle direction
-   if(Value<=1000 && Value>=0)
+   if(Value<=1000u && Value>=0u)
    {
       switch (MotorSelector)
       {
@@ -108,18 +115,16 @@ static void priv_SetAngleCamVer(uint16_t Angle)
 #include "../Drivers/BT/BT.h"
 float priv_GetOmega( EncoderParameters_T *pkThis )
 {
-   uint8_t DeltaTicks = GetCounter( pkThis->TIMx );
+   /*! How many ticks since last iteration */
+   int16_t DeltaTicks = GetCounter( pkThis->TIMx ) - CounterDef;
 
-   pkThis->Omega = DeltaTicks / pkThis->Dt;
+   /*! Calculate angular speed of shaft */
+   pkThis->Omega = ( DeltaTicks * AnglePerTick ) / pkThis->Dt; /*!< Shaft Omega [degrees/second] */
 
-   oBluetooth.PushFifo(DeltaTicks);
-   oBluetooth.SendFifo();
+   /*! Reset counter so it cannot get out of range */
+   SetCounter( pkThis->TIMx, CounterDef );
 
-   //SetCounter( pkThis->TIMx, CounterDef );
-
-   float retOmega = 1.3f;
-   pkThis->Omega = retOmega;
-   return DeltaTicks/3;
+   return pkThis->Omega;
 }
 
 //-----------------------Public functions------------------------------//

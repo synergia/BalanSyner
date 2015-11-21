@@ -114,8 +114,9 @@ inline void MainTask32ms()
 
    //MPU_Perform(); //save angle to struct in MPU.h/c
    oMpuKalman.GetFiltedAngle();
-   //oEncoderLeft.SetOmega( TIM_ENC1, 10 );
-   oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
+   int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
+   oBluetooth.PushFifo( speed );
+   oBluetooth.SendFifo();
 
    //CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
    //LogicPerform(); // analyze angle and commands, PID and set PWMs,
