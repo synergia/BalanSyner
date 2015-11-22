@@ -36,6 +36,8 @@
 #include "../Drivers/MPU/MPU.h"
 #include "../Drivers/Motors/Motors.h"
 
+#include "Logic.h"
+
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private defines-------------------------------//
@@ -113,13 +115,11 @@ inline void MainTask16ms()
    /* whole process needs about 2ms */
 //   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-   //MPU_Perform(); //save angle to struct in MPU.h/c
    oMpuKalman.GetFiltedAngle();
    int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
    oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
-   //oBluetooth.SendFifo();
+   oBluetooth.SendFifo();
 
-   //CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
    //LogicPerform(); // analyze angle and commands, PID and set PWMs,
    //SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
 
@@ -130,8 +130,6 @@ inline void MainTask16ms()
    oServosArm.SetAngle(SelectServoCamHor, -90);
    oServosArm.SetAngle(SelectServoCamVer, 45);
 
-   USART_BT->CR1 |= USART_CR1_RXNEIE;
-
    //oBluetooth.SendKalmanToLabView();
 
 //   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
@@ -139,6 +137,6 @@ inline void MainTask16ms()
 
 inline void MainTask128ms()
 {
-   oBluetooth.SendFifo();
+   Logic_CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
    //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }

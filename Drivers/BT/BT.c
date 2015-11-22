@@ -23,13 +23,20 @@ extern MpuKalmanClass_T oMpuKalman;
 static void priv_BtSend8( int8_t Char );
 static void priv_BtSendMeasuredData( void );
 static void priv_BtPushFifo( Fifo_C *oFifo, int8_t Value );
+static uint16_t priv_BtFifoPop( Fifo_C *oFifo, void *pDst );
 static void priv_BtSendFifo(); /*! Sends TxBuffer via USARTc */
+static uint8_t priv_BtFifoIsEmpty( Fifo_C *oFifo );
 
 //-----------------------Private functions-----------------------------//
 static void priv_BtPushFifo( Fifo_C *oFifo, int8_t Value )
 {
    int8_t Src = Value;
    Fifo_Push( oFifo, &Src );
+}
+
+static uint16_t priv_BtFifoPop( Fifo_C *oFifo, void *pDst )
+{
+   return ( Fifo_Pop( oFifo, pDst ) );
 }
 
 static void priv_BtSendFifo()
@@ -40,6 +47,11 @@ static void priv_BtSendFifo()
       Fifo_Pop( &oBluetooth.oBtTxFifo, &Data );
       priv_BtSend8( Data );
    }
+}
+
+static uint8_t priv_BtFifoIsEmpty( Fifo_C *oFifo )
+{
+   return ( 0u == Fifo_IsEmpty( oFifo ) );
 }
 
 static void priv_BtSend8( int8_t Char )
@@ -64,12 +76,6 @@ static void priv_BtSendMeasuredData( void )
    priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleFiltered*1000)     & 0xFF );
 
    priv_BtSendFifo();
-
-#if 0
-   BT_Send16( 0xFFFF ); //start bits
-   BT_Send32( (int32_t)(oMpuKalman.AngleRaw*1000) );
-   BT_Send32( (int32_t)(oMpuKalman.AngleFiltered*1000) );
-#endif
 }
 
 //-----------------------Public functions------------------------------//
@@ -83,7 +89,9 @@ void InitializeBT()
 
    /*! Software */
    oBluetooth.PushFifo = priv_BtPushFifo;
+   oBluetooth.PopFifo = priv_BtFifoPop;
    oBluetooth.SendFifo = priv_BtSendFifo;
+   oBluetooth.IsFifoEmpty = priv_BtFifoIsEmpty;
    oBluetooth.SendKalmanToLabView = priv_BtSendMeasuredData;
 
    Fifo_Initialize( &oBluetooth.oBtTxFifo, oBluetooth.kBtTxBuffer, BtTxElementSize, BtTxBufferSize );

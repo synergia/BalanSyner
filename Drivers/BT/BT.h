@@ -27,7 +27,9 @@ typedef struct
    Fifo_C oBtRxFifo;
 
    void ( *PushFifo )( Fifo_C *oFifo, int8_t Value );
+   uint16_t ( *PopFifo )( Fifo_C *oFifo, void *pDst);
    void ( *SendFifo )( void );
+   uint8_t ( *IsFifoEmpty)( Fifo_C *oFifo );
    void ( *SendKalmanToLabView )( void );
 }Bluetoth_C;
 

@@ -19,8 +19,8 @@ void Fifo_Initialize( Fifo_C *pThis, uint8_t *pAddress, uint8_t uDataSize, uint1
 {
    pThis->pFifoBuffer = pAddress;
    pThis->uElementSize = uDataSize;
-   pThis->uFifoPointer = 0U;
-   pThis->uFifoCounter = 0U;
+   pThis->uFifoPointer = 0u;
+   pThis->uFifoCounter = 0u;
    pThis->uFifoBufferSize = uBufferSize;
 }
 
@@ -29,7 +29,7 @@ void Fifo_Push( Fifo_C *pThis, void *pSrc )
    uint32_t uFifoIndex;
    uint16_t i;
 
-   for ( i = 0U ; i < pThis->uElementSize ; i++ )
+   for ( i = 0u ; i < pThis->uElementSize ; i++ )
    {
       uFifoIndex = ( uint32_t ) pThis->uFifoPointer + ( uint32_t ) pThis->uFifoCounter;
 
@@ -63,7 +63,7 @@ uint16_t Fifo_Pop( Fifo_C *pThis, void *pDst )
 
    if ( !Fifo_IsEmpty( pThis ) )
    {
-      for ( i = 0U ; i < pThis->uElementSize ; i++ )
+      for ( i = 0u ; i < pThis->uElementSize ; i++ )
       {
          *( ( uint8_t* )pDst + i ) = pThis->pFifoBuffer[ pThis->uFifoPointer ];
          pThis->uFifoCounter--;
@@ -71,7 +71,7 @@ uint16_t Fifo_Pop( Fifo_C *pThis, void *pDst )
 
          if ( pThis->uFifoPointer >= ( pThis->uFifoBufferSize ) )
          {
-            pThis->uFifoPointer = 0U;
+            pThis->uFifoPointer = 0u;
          }
       }
    }
@@ -81,7 +81,7 @@ uint16_t Fifo_Pop( Fifo_C *pThis, void *pDst )
 
 uint8_t Fifo_IsEmpty( Fifo_C *pThis )
 {
-   return ( 0U == pThis->uFifoCounter );
+   return ( 0u == pThis->uFifoCounter );
 }
 
 uint8_t Fifo_IsFull( Fifo_C *pThis )
