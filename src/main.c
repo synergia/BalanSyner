@@ -107,16 +107,17 @@ int main(void)
    return 0;
 }
 
-inline void MainTask32ms()
+//-----------------------Public functions------------------------------//
+inline void MainTask16ms()
 {
    /* whole process needs about 2ms */
-   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+//   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
    //MPU_Perform(); //save angle to struct in MPU.h/c
    oMpuKalman.GetFiltedAngle();
    int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
-   oBluetooth.PushFifo( speed );
-   oBluetooth.SendFifo();
+   oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
+   //oBluetooth.SendFifo();
 
    //CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
    //LogicPerform(); // analyze angle and commands, PID and set PWMs,
@@ -129,9 +130,15 @@ inline void MainTask32ms()
    oServosArm.SetAngle(SelectServoCamHor, -90);
    oServosArm.SetAngle(SelectServoCamVer, 45);
 
+   USART_BT->CR1 |= USART_CR1_RXNEIE;
+
    //oBluetooth.SendKalmanToLabView();
 
-   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+//   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }
-//-----------------------Public functions------------------------------//
 
+inline void MainTask128ms()
+{
+   oBluetooth.SendFifo();
+   //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+}

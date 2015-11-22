@@ -112,7 +112,6 @@ static void priv_SetAngleCamVer(uint16_t Angle)
    TIM_SERVOS->SERVO_VER_PWM_CHANNEL = Angle;
 }
 
-#include "../Drivers/BT/BT.h"
 float priv_GetOmega( EncoderParameters_T *pkThis )
 {
    /*! How many ticks since last iteration */
@@ -131,11 +130,10 @@ float priv_GetOmega( EncoderParameters_T *pkThis )
 void InitializeEncoders()
 {
    /*! Physical initialization */
-   InitializeRCC(DriverSelectEncoders);
-   InitializeNVIC(DriverSelectEncoders);
-   InitializeTimers(TIM_ENC1);
-   InitializeTimers(TIM_ENC2);
-   InitializeGPIO(DriverSelectEncoders);
+   InitializeRCC( DriverSelectEncoders );
+   InitializeTimers( TIM_ENC1 );
+   InitializeTimers( TIM_ENC2 );
+   InitializeGPIO( DriverSelectEncoders );
 
    /*! Software */
    oEncoderLeft.Parameters.Dt = DT;

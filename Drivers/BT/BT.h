@@ -9,16 +9,24 @@
 #define BtTxBufferNumberOfElements  64
 #define BtTxElementSize             1
 
+#define BtRxBufferNumberOfElements  64
+#define BtRxElementSize             1
+
 //-----------------------Public macros--------------------------------//
 #define BtTxBufferSize              ( BtTxBufferNumberOfElements * BtTxElementSize )
+
+#define BtRxBufferSize              ( BtTxBufferNumberOfElements * BtTxElementSize )
 
 //-----------------------Public typedefs------------------------------//
 typedef struct
 {
    FifoBuffer_T kBtTxBuffer[ BtTxBufferSize ];
-   Fifo_C oBtFifo;
+   Fifo_C oBtTxFifo;
 
-   void ( *PushFifo )( int8_t Value );
+   FifoBuffer_T kBtRxBuffer[ BtRxBufferSize ];
+   Fifo_C oBtRxFifo;
+
+   void ( *PushFifo )( Fifo_C *oFifo, int8_t Value );
    void ( *SendFifo )( void );
    void ( *SendKalmanToLabView )( void );
 }Bluetoth_C;
@@ -28,5 +36,6 @@ Bluetoth_C oBluetooth;
 
 //-----------------------Public prototypes----------------------------//
 void InitializeBT( void );
+void BtRxInterruptCallback();
 
 #endif

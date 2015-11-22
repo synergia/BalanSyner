@@ -8,6 +8,7 @@
 #include "GPIO.h"
 #include "RCC.h"
 #include "USART.h"
+#include "NVIC.h"
 
 //-----------------------Private defines-------------------------------//
 
@@ -21,22 +22,22 @@ extern MpuKalmanClass_T oMpuKalman;
 //-----------------------Private prototypes----------------------------//
 static void priv_BtSend8( int8_t Char );
 static void priv_BtSendMeasuredData( void );
-static void priv_BtPushFifo( int8_t Value );
-static void priv_BtSendFifo();
+static void priv_BtPushFifo( Fifo_C *oFifo, int8_t Value );
+static void priv_BtSendFifo(); /*! Sends TxBuffer via USARTc */
 
 //-----------------------Private functions-----------------------------//
-static void priv_BtPushFifo( int8_t Value )
+static void priv_BtPushFifo( Fifo_C *oFifo, int8_t Value )
 {
    int8_t Src = Value;
-   Fifo_Push( &oBluetooth.oBtFifo, &Src );
+   Fifo_Push( oFifo, &Src );
 }
 
 static void priv_BtSendFifo()
 {
    uint8_t Data;
-   while( !Fifo_IsEmpty( &oBluetooth.oBtFifo ) )
+   while( !Fifo_IsEmpty( &oBluetooth.oBtTxFifo ) )
    {
-      Fifo_Pop( &oBluetooth.oBtFifo, &Data );
+      Fifo_Pop( &oBluetooth.oBtTxFifo, &Data );
       priv_BtSend8( Data );
    }
 }
@@ -49,18 +50,18 @@ static void priv_BtSend8( int8_t Char )
 
 static void priv_BtSendMeasuredData( void )
 {
-   priv_BtPushFifo( 0xFF );
-   priv_BtPushFifo( 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, 0xFF );
 
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleRaw*1000)>>24 & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleRaw*1000)>>16 & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleRaw*1000)>>8  & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleRaw*1000)     & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleRaw*1000)>>24 & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleRaw*1000)>>16 & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleRaw*1000)>>8  & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleRaw*1000)     & 0xFF );
 
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleFiltered*1000)>>24 & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleFiltered*1000)>>16 & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleFiltered*1000)>>8  & 0xFF );
-   priv_BtPushFifo( (int32_t)(oMpuKalman.AngleFiltered*1000)     & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleFiltered*1000)>>24 & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleFiltered*1000)>>16 & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleFiltered*1000)>>8  & 0xFF );
+   priv_BtPushFifo( &oBluetooth.oBtTxFifo, (int32_t)(oMpuKalman.AngleFiltered*1000)     & 0xFF );
 
    priv_BtSendFifo();
 
@@ -75,15 +76,22 @@ static void priv_BtSendMeasuredData( void )
 void InitializeBT()
 {
    /*! Physical initialization */
-   InitializeRCC(DriverSelectBt);
-   InitializeUSART(USART_BT);
-   InitializeGPIO(DriverSelectBt);
+   InitializeRCC( DriverSelectBt );
+   InitializeGPIO( DriverSelectBt );
+   InitializeNVIC( DriverSelectBt );
+   InitializeUSART( USART_BT );
 
    /*! Software */
    oBluetooth.PushFifo = priv_BtPushFifo;
    oBluetooth.SendFifo = priv_BtSendFifo;
    oBluetooth.SendKalmanToLabView = priv_BtSendMeasuredData;
 
-   Fifo_Initialize( &oBluetooth.oBtFifo, oBluetooth.kBtTxBuffer, BtTxElementSize, BtTxBufferSize );
+   Fifo_Initialize( &oBluetooth.oBtTxFifo, oBluetooth.kBtTxBuffer, BtTxElementSize, BtTxBufferSize );
+   Fifo_Initialize( &oBluetooth.oBtRxFifo, oBluetooth.kBtRxBuffer, BtRxElementSize, BtRxBufferSize );
+}
+
+void BtRxInterruptCallback()
+{
+   oBluetooth.PushFifo( &oBluetooth.oBtRxFifo, USART_BT->RDR );
 }
 
