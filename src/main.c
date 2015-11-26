@@ -25,8 +25,6 @@
 #include "stm32f30x.h"
 #include "main.h"
 
-#include "../Framework/Kalman/KalmanFilter.h"
-
 #include "../StmPeriphInit/SysTick.h"
 
 #include "../Drivers/Clock/clock.h"
@@ -101,7 +99,6 @@ int main(void)
    /*todo: only for labview sending purposes
    *AnglePrsc1000 = (int32_t)(*Angle*1000);*/
 
-   KalmanInitialize();
    while (1)
    {
       ;
@@ -115,7 +112,7 @@ inline void MainTask16ms()
    /* whole process needs about 2ms */
 //   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
-   oMpuKalman.GetFiltedAngle();
+   //oMpuKalman.GetFiltedAngle();
    int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
    oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
    oBluetooth.SendFifo();
@@ -137,6 +134,14 @@ inline void MainTask16ms()
 
 inline void MainTask128ms()
 {
+#if 0 //test
+   static float value = 1.5f;
+   static uint8_t Command[4];
+
+   uint32_t transport_bits = *( ( uint32_t* )&value );
+   *(uint32_t *) Command = transport_bits;
+#endif
+
    Logic_CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
    //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }

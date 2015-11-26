@@ -6,12 +6,19 @@
 //-----------------------Public typedefs------------------------------//
 typedef struct
 {
-	float AngleRaw;
-	float GyroRaw;
+   float AngleRaw;
+   float GyroRaw;
 
-	float AngleFiltered;
+   float AngleFiltered;
 
-	float (*GetFiltedAngle) (void);
+   float ( *GetFiltedAngle ) ( void );
+
+   float ( *GetKalmanQAngle ) ( void );
+   float ( *GetKalmanRMeasure ) ( void );
+   void ( *SetKalmanQAngle ) ( float Value );
+   void ( *SetKalmanQAngleDef ) ( void );
+   void ( *SetKalmanRMeasure ) ( float Value );
+   void ( *SetKalmanRMeasureDef ) ( void );
 }MpuKalmanClass_T;
 
 //-----------------------Public defines-------------------------------//

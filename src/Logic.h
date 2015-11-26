@@ -26,4 +26,7 @@
 //-----------------------Public functions------------------------------//
 void Logic_CheckInputs();
 
+void priv_WriteKalmanQAngle(uint8_t *Command);
+void priv_ReadKalmanQAngle();
+
 #endif /* LOGIC_H_ */

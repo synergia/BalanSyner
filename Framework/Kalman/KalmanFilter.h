@@ -14,6 +14,11 @@
 
 //-----------------------Public prototypes----------------------------//
 void KalmanInitialize();
-float KalmanGetValue(float NewAccAngle, float NewGyroRate);
-
+float KalmanGetValue( float NewAccAngle, float NewGyroRate );
+void KalmanSetQAngle( float NewValue );
+void KalmanSetQAngleDef();
+void KalmanSetRMeasure( float NewValue );
+void KalmanSetRMeasureDef();
+float KalmanGetQAngle( void );
+float KalmanGetRMeasure( void );
 #endif

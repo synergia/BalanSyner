@@ -7,7 +7,7 @@ typedef struct
 {
    /*! Zmienne stanu: x - state matrix */
    float Angle;      //Po³o¿enie k¹towe robota
-   float GyroBias;      //Dryft ¿yroksopu
+   float GyroBias;   //Dryft ¿yroksopu
 
    /*! Odstêp czasu pomiedzy odczytami.*/
    float dt;
@@ -26,14 +26,16 @@ typedef struct
    /*! Macierz kowariancji szumu przetwarzania */
    float Q_Angle;
 
-    /*! Measurement noise variance - this is actually the variance of accelerometr */
-    float R_measure;
+   /*! Measurement noise variance - this is actually the variance of accelerometr */
+   float R_measure;
 
-    /*! Macierz b³edu kowariancji */
-    float P[2][2];
+   /*! Macierz b³edu kowariancji */
+   float P[2][2];
 }KalmanStruct;
 
 //-----------------------Private defines-------------------------------//
+#define Q_AngleDef      0.00653f
+#define R_MeasureDef    0.42703f
 
 //-----------------------Private macros--------------------------------//
 
@@ -46,15 +48,15 @@ extern float DT;
 //-----------------------Private functions-----------------------------//
 
 //-----------------------Public functions------------------------------//
-void KalmanInitialize( )
+void KalmanInitialize()
 {
    KalmanData.Angle = 0.0f;   // Reset the angle
    KalmanData.GyroBias = 0.0f; // Reset bias
 
    KalmanData.dt = DT;
 
-   KalmanData.Q_Angle = 0.00653f;      //varaince of gyro measurements
-   KalmanData.R_measure = 0.42703f;    //measured: varaince of accelerometer data
+   KalmanData.Q_Angle = Q_AngleDef;      //varaince of gyro measurements
+   KalmanData.R_measure = R_MeasureDef;    //measured: varaince of accelerometer data
 
    KalmanData.AngleDiff = 0.0f;
    KalmanData.S = 0.0f;
@@ -72,7 +74,7 @@ void KalmanInitialize( )
    KalmanData.P[1][1] = 10.0f;
 }
 
-float KalmanGetValue(float NewAccAngle, float NewGyroRate)
+float KalmanGetValue( float NewAccAngle, float NewGyroRate )
 {
     // See my blog post for more information: http://blog.tkjelectronics.dk/2012/09/a-practical-approach-to-kalman-filter-and-how-to-implement-it
    // V1 Modified by Kristian Lauszus
@@ -81,7 +83,7 @@ float KalmanGetValue(float NewAccAngle, float NewGyroRate)
    // Discrete Kalman filter time update equations - Time Update ("Predict")
     // Update xhat - Project the state ahead
     /* Step 1 */
-   KalmanData.Angle += KalmanData.dt * (NewGyroRate - KalmanData.GyroBias);
+   KalmanData.Angle += KalmanData.dt * ( NewGyroRate - KalmanData.GyroBias );
 
 
     // Update estimation error covariance - Project the error covariance ahead
@@ -117,4 +119,34 @@ float KalmanGetValue(float NewAccAngle, float NewGyroRate)
     KalmanData.P[0][0] -= KalmanData.K[0] * KalmanData.P[0][0];
 
     return KalmanData.Angle;
+}
+
+void KalmanSetQAngle( float NewValue )
+{
+   KalmanData.Q_Angle = NewValue;
+}
+
+void KalmanSetRMeasure( float NewValue )
+{
+   KalmanData.R_measure = NewValue;
+}
+
+void KalmanSetRMeasureDef()
+{
+   KalmanData.R_measure = R_MeasureDef;
+}
+
+void KalmanSetQAngleDef()
+{
+   KalmanData.Q_Angle = Q_AngleDef;
+}
+
+float KalmanGetQAngle()
+{
+   return KalmanData.Q_Angle;
+}
+
+float KalmanGetRMeasure()
+{
+   return KalmanData.R_measure;
 }
