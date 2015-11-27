@@ -45,7 +45,7 @@ typedef struct
    EncoderParameters_T Parameters;
 
    float ( *GetOmega )( EncoderParameters_T *pkThis );
-   void ( *SetOmega )( TIM_TypeDef * TIMx, uint32_t Value );
+   void ( *SetCounter )( TIM_TypeDef *TIMx, uint32_t NewValue );
 }Encoder_C;
 
 typedef struct
@@ -66,6 +66,7 @@ typedef struct
 
 //-----------------------Public variables-----------------------------//
 Encoder_C oEncoderLeft;
+Encoder_C oEncoderRight;
 Motors_C oMotor;
 Servos_C oServosArm;
 

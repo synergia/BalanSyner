@@ -12,9 +12,9 @@
 //-----------------------Public variables-----------------------------//
 
 //-----------------------Public prototypes----------------------------//
-void InitializeTimers(TIM_TypeDef* TIMx);
+void InitializeTimers( TIM_TypeDef *TIMx );
 
-uint32_t GetCounter( TIM_TypeDef * TIMx );
-void SetCounter( TIM_TypeDef * TIMx, uint32_t Value);
+uint32_t GetCounter( TIM_TypeDef *TIMx );
+void SetCounter( TIM_TypeDef *TIMx, uint32_t NewValue );
 
 #endif

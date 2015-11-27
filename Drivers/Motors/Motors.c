@@ -141,7 +141,14 @@ void InitializeEncoders()
    oEncoderLeft.Parameters.Counter = CounterDef;
    oEncoderLeft.Parameters.Omega = 0u;
    oEncoderLeft.GetOmega = priv_GetOmega;
-   oEncoderLeft.SetOmega = SetCounter;
+   oEncoderLeft.SetCounter = SetCounter; /*! Timer function */
+
+   oEncoderRight.Parameters.Dt = DT;
+   oEncoderRight.Parameters.TIMx = TIM_ENC2;
+   oEncoderRight.Parameters.Counter = CounterDef;
+   oEncoderRight.Parameters.Omega = 0u;
+   oEncoderRight.GetOmega = priv_GetOmega;
+   oEncoderRight.SetCounter = SetCounter; /*! Timer function */
 }
 
 void InitializeMotors()

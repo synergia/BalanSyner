@@ -11,18 +11,21 @@
 
 #include "../Drivers/BT/BT.h"
 #include "../Drivers/MPU/MPU.h"
+#include "../Drivers/Motors/Motors.h"
 
 //-----------------------Private defines-------------------------------//
 #define START_BYTE_DEF           0xFF
-#define COMMAND_LENGTH           4
-
+#define COMMAND_LENGTH           8
+#define PARITY_BIT_TEMP          1
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private typedefs------------------------------//
 typedef enum
 {
-   ReadKalmanQAngle = 0u,
-   ReadKalmanRMeasure = 1u,
+   ReadKalmanQAngle     = 0u,
+   ReadKalmanRMeasure   = 1u,
+   ReadOmegaLeft        = 2u,
+   ReadOmegaRight       = 3u,
 
    WriteKalmanQAngleDef    = 100u,
    WriteKalmanQAngle       = 101u,
@@ -33,36 +36,78 @@ typedef enum
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
+void priv_SendDummy();
 uint8_t priv_CheckParityBits();
-//static void priv_ReadKalmanQAngle();
-static void priv_ReadKalmanRMeasure();
+static void priv_SendCommandBT( uint8_t *Command );
 
-//static void priv_WriteKalmanQAngle( uint8_t *Command );
+static void priv_ReadKalmanQAngle();
+static void priv_ReadKalmanRMeasure();
+static void priv_ReadOmegaLeft();
+static void priv_ReadOmegaRight();
+
+static void priv_WriteKalmanQAngle( uint8_t *Command );
 static void priv_WriteKalmanQAngleDef();
 static void priv_WriteKalmanRMeasure( uint8_t *Command );
 static void priv_WriteKalmanRMeasureDef();
 
 //-----------------------Private functions-----------------------------//
+void priv_SendDummy()
+{
+   uint8_t Command[] = { 0xFF, 0xFF, 255, 0, 0, 0, 0, PARITY_BIT_TEMP };
+   priv_SendCommandBT( Command );
+}
+
 uint8_t priv_CheckParityBits()
 {
    return 1;
 }
 
-void priv_ReadKalmanQAngle()
+static void priv_SendCommandBT( uint8_t *Command )
 {
+   uint8_t i = 0;
+   while ( COMMAND_LENGTH > i )
+   {
+      oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
+   }
+   oBluetooth.SendFifo();
+}
+
+static void priv_ReadKalmanQAngle()
+{
+   uint8_t Command[] = { 0xFF, 0xFF, ReadKalmanQAngle, 0, 0, 0, 0, PARITY_BIT_TEMP };
+
    float Value = oMpuKalman.GetKalmanQAngle();
-   //TODO: send Usart
+
+   uint32_t transport_bits = *( ( uint32_t* ) &Value );
+   *(uint32_t *) &Command[3] = transport_bits;
+
+   priv_SendCommandBT( Command );
 }
 
 static void priv_ReadKalmanRMeasure()
 {
+   uint8_t Command[] = { 0xFF, 0xFF, ReadKalmanRMeasure, 0, 0, 0, 0, PARITY_BIT_TEMP };
+
    float Value = oMpuKalman.GetKalmanRMeasure();
-   //TODO: send Usart
+
+   uint32_t transport_bits = *( ( uint32_t* ) &Value );
+   *(uint32_t *) &Command[3] = transport_bits;
+
+   priv_SendCommandBT( Command );
 }
 
- void priv_WriteKalmanQAngle( uint8_t *Command )
+static void priv_ReadOmegaLeft()
 {
-   //TODO:check it
+   oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
+}
+
+static void priv_ReadOmegaRight()
+{
+   oEncoderRight.GetOmega( &oEncoderRight.Parameters );
+}
+
+static void priv_WriteKalmanQAngle( uint8_t *Command )
+{
    uint32_t transport_bits = *( ( uint32_t* ) Command );
    float destination_float = *( ( float* ) & transport_bits );
 
@@ -117,6 +162,7 @@ static void priv_WriteKalmanRMeasureDef()
 #include "../Drivers/LEDs/LED.h"
 void Logic_CheckInputs()
 {
+   priv_SendDummy();
    while( 0u != oBluetooth.IsFifoEmpty( &oBluetooth.oBtRxFifo ) )
    {
 
@@ -160,6 +206,12 @@ void Logic_CheckInputs()
                      break;
                   case ReadKalmanRMeasure:
                      priv_ReadKalmanRMeasure();
+                     break;
+                  case ReadOmegaLeft:
+                     priv_ReadOmegaLeft();
+                     break;
+                  case ReadOmegaRight:
+                     priv_ReadOmegaRight();
                      break;
                   case WriteKalmanQAngleDef:
                      priv_WriteKalmanQAngleDef();

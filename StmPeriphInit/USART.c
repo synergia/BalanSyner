@@ -27,11 +27,8 @@ void InitializeUSART(USART_TypeDef* USARTx)
    {
       usart_conf.USART_BaudRate = 115200u;
       USART_Init( USART_BT, &usart_conf );
-      //USART_BT->CR1 |= USART_CR1_UE;               /*! USART enable */
-      //USART_BT->CR1 |= USART_CR1_TE;               /*! Transmitter enable */
-      //USART_BT->CR1 |= USART_CR1_RE;               /*! Receiver enable */
-      USART_BT->CR1 |= USART_CR1_RXNEIE;           /*! Receiver interrupts enable */
-      //USART_ITConfig(USART_BT, USART_IT_RXNE, ENABLE);
+      USART_ITConfig(USART_BT, USART_IT_RXNE, ENABLE); /*! Receiver interrupts enable */
+      USART_BT->CR3 |= USART_CR3_OVRDIS;
       USART_Cmd(USART_BT, ENABLE);
    }
    else if( USARTx == USART_WIFI )
@@ -119,12 +116,15 @@ void USART1_IRQHandler( void )
 //   USART1InterruptCallback();
 }
 
+#include "../Drivers/LEDs/LED.h"
 void USART2_IRQHandler( void )
 {
    if( USART_GetITStatus( USART2, USART_IT_RXNE ) )
    {
       USART2InterruptCallback();
    }
+   else if (USART_GetITStatus( USART2, USART_IT_ORE ))
+      LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }
 
 void USART3_IRQHandler( void )

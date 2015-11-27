@@ -167,14 +167,14 @@ void InitializeTimers(TIM_TypeDef* TIMx)
 	}
 }
 
-uint32_t GetCounter( TIM_TypeDef * TIMx )
+uint32_t GetCounter( TIM_TypeDef *TIMx )
 {
 	return TIMx->CNT;
 }
 
-void SetCounter( TIM_TypeDef * TIMx, uint32_t Value)
+void SetCounter( TIM_TypeDef *TIMx, uint32_t NewValue )
 {
-	TIMx->CNT = Value;
+	TIMx->CNT = NewValue;
 }
 
 #include "../Drivers/LEDs/LED.h"

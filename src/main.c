@@ -113,9 +113,9 @@ inline void MainTask16ms()
 //   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 
    //oMpuKalman.GetFiltedAngle();
-   int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
-   oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
-   oBluetooth.SendFifo();
+   //int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
+   //oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
+   //oBluetooth.SendFifo();
 
    //LogicPerform(); // analyze angle and commands, PID and set PWMs,
    //SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
@@ -134,6 +134,17 @@ inline void MainTask16ms()
 
 inline void MainTask128ms()
 {
+#if 0
+   uint8_t Command[] = { 0xFF, 0xFF, 101, 0, 0, 0, 0, 1 };
+
+   float Value = oMpuKalman.GetKalmanQAngle();
+
+   uint32_t transport_bits = *( ( uint32_t* ) &Value );
+   *(uint32_t *) &Command[3] = transport_bits;
+
+   priv_SendCommandBT( Command );
+
+#endif
 #if 0 //test
    static float value = 1.5f;
    static uint8_t Command[4];
