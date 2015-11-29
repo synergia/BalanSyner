@@ -13,6 +13,8 @@
 #include "../Drivers/MPU/MPU.h"
 #include "../Drivers/Motors/Motors.h"
 
+#include "../Framework/PID/PID.h"
+
 //-----------------------Private defines-------------------------------//
 #define START_BYTE_DEF           0xFF
 #define COMMAND_LENGTH           8
@@ -29,11 +31,23 @@ typedef enum
    ReadRawAngle         = 3u,
    ReadOmegaLeft        = 4u,
    ReadOmegaRight       = 5u,
+   ReadPidAngleKp       = 6u,
+   ReadPidAngleKi       = 7u,
+   ReadPidAngleKd       = 8u,
+   ReadPidOmegaKp       = 9u,
+   ReadPidOmegaKi       = 10u,
+   ReadPidOmegaKd       = 11u,
 
    WriteKalmanQAngleDef    = 100u,
    WriteKalmanQAngle       = 101u,
    WriteKalmanRMeasureDef  = 102u,
    WriteKalmanRMeasure     = 103u,
+   WritePidAngleKp         = 104u,
+   WritePidAngleKi         = 105u,
+   WritePidAngleKd         = 106u,
+   WritePidOmegaKp         = 107u,
+   WritePidOmegaKi         = 108u,
+   WritePidOmegaKd         = 109u,
 
 }Addresses_T;
 //-----------------------Private variables-----------------------------//
@@ -42,6 +56,7 @@ typedef enum
 void priv_SendDummy();
 uint8_t priv_CheckParityBits();
 static void priv_SendCommandBT( float Value, Addresses_T Address );
+static float priv_CommandToFloat( uint8_t *Command );
 
 static void priv_ReadKalmanQAngle();
 static void priv_ReadKalmanRMeasure();
@@ -49,11 +64,23 @@ static void priv_ReadFilteredAngle();
 static void priv_ReadRawAngle();
 static void priv_ReadOmegaLeft();
 static void priv_ReadOmegaRight();
+static void priv_ReadPidAngleKp();
+static void priv_ReadPidAngleKi();
+static void priv_ReadPidAngleKd();
+static void priv_ReadPidOmegaKp();
+static void priv_ReadPidOmegaKi();
+static void priv_ReadPidOmegaKd();
 
 static void priv_WriteKalmanQAngle( uint8_t *Command );
 static void priv_WriteKalmanQAngleDef();
 static void priv_WriteKalmanRMeasure( uint8_t *Command );
 static void priv_WriteKalmanRMeasureDef();
+static void priv_WritePidAngleKp( uint8_t *Command );
+static void priv_WritePidAngleKi( uint8_t *Command );
+static void priv_WritePidAngleKd( uint8_t *Command );
+static void priv_WritePidOmegaKp( uint8_t *Command );
+static void priv_WritePidOmegaKi( uint8_t *Command );
+static void priv_WritePidOmegaKd( uint8_t *Command );
 
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
@@ -79,6 +106,12 @@ static void priv_SendCommandBT( float Value, Addresses_T Address )
       oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
    }
    oBluetooth.SendFifo();
+}
+
+static float priv_CommandToFloat( uint8_t *Command )
+{
+   uint32_t transport_bits = *( ( uint32_t* ) Command );
+   return ( *( ( float* ) & transport_bits ) );
 }
 
 /*!
@@ -117,18 +150,46 @@ static void priv_ReadOmegaRight()
    priv_SendCommandBT( oEncoderRight.GetOmega( &oEncoderRight.Parameters ), ReadOmegaRight );
 }
 
+static void priv_ReadPidAngleKp()
+{
+   priv_SendCommandBT( oPID_Angle.GetKp( &oPID_Angle.Parameters ), ReadPidAngleKp );
+}
+
+static void priv_ReadPidAngleKi()
+{
+   priv_SendCommandBT( oPID_Angle.GetKi( &oPID_Angle.Parameters ), ReadPidAngleKi );
+}
+
+static void priv_ReadPidAngleKd()
+{
+   priv_SendCommandBT( oPID_Angle.GetKd( &oPID_Angle.Parameters ), ReadPidAngleKd );
+}
+
+static void priv_ReadPidOmegaKp()
+{
+   priv_SendCommandBT( oPID_Omega.GetKp( &oPID_Omega.Parameters ), ReadPidOmegaKp );
+}
+
+static void priv_ReadPidOmegaKi()
+{
+   priv_SendCommandBT( oPID_Omega.GetKi( &oPID_Omega.Parameters ), ReadPidOmegaKi );
+}
+
+static void priv_ReadPidOmegaKd()
+{
+   priv_SendCommandBT( oPID_Omega.GetKd( &oPID_Omega.Parameters ), ReadPidOmegaKd );
+}
+
 /*!
  *-------------------------------------------------------------------------------------
  ********************************    WRITE FUNCTIONS    *******************************
  *-------------------------------------------------------------------------------------
  *          The functions read new values from USART and applies them to robot
  */
+
 static void priv_WriteKalmanQAngle( uint8_t *Command )
 {
-   uint32_t transport_bits = *( ( uint32_t* ) Command );
-   float destination_float = *( ( float* ) & transport_bits );
-
-   oMpuKalman.SetKalmanQAngle( destination_float );
+   oMpuKalman.SetKalmanQAngle( priv_CommandToFloat( Command ) );
 }
 
 static void priv_WriteKalmanQAngleDef()
@@ -138,15 +199,42 @@ static void priv_WriteKalmanQAngleDef()
 
 static void priv_WriteKalmanRMeasure( uint8_t *Command )
 {
-   uint32_t transport_bits = *( ( uint32_t* ) Command );
-   float destination_float = *( ( float* ) & transport_bits );
-
-   oMpuKalman.SetKalmanRMeasure( destination_float );
+   oMpuKalman.SetKalmanRMeasure( priv_CommandToFloat( Command ) );
 }
 
 static void priv_WriteKalmanRMeasureDef()
 {
    oMpuKalman.SetKalmanRMeasureDef();
+}
+
+static void priv_WritePidAngleKp( uint8_t *Command )
+{
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidAngleKi( uint8_t *Command )
+{
+   oPID_Angle.SetKi( &oPID_Angle.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidAngleKd( uint8_t *Command )
+{
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidOmegaKp( uint8_t *Command )
+{
+   oPID_Omega.SetKp( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidOmegaKi( uint8_t *Command )
+{
+   oPID_Omega.SetKi( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidOmegaKd( uint8_t *Command )
+{
+   oPID_Omega.SetKd( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
 }
 
 //-----------------------Public functions------------------------------//
@@ -159,7 +247,7 @@ static void priv_WriteKalmanRMeasureDef()
  *
  *    SB - start byte = 255
  *
- *    Adr: TODO:Update list. Temporarly look at enum Addresses.
+ *    Adr: TODO:Update list. Temporarily look at enum Addresses.
  *       000 - Read&Send Kalman Q_Angle (gyro variance)
  *       001 - Read&Send Kalman R_measure (accelerometer variance)
  *
@@ -175,7 +263,6 @@ static void priv_WriteKalmanRMeasureDef()
  *
  *    PB - parity check TODO: implement some
  */
-#include "../Drivers/LEDs/LED.h"
 void Logic_CheckInputs()
 {
    priv_SendDummy();
@@ -212,9 +299,6 @@ void Logic_CheckInputs()
 
             if( priv_CheckParityBits() == Command[5] )
             {
-               /*! Everything is ok. */
-               LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
-
                switch( Command[0] )
                {
                   case ReadKalmanQAngle:
@@ -235,6 +319,26 @@ void Logic_CheckInputs()
                   case ReadOmegaRight:
                      priv_ReadOmegaRight();
                      break;
+                  case ReadPidAngleKp:
+                     priv_ReadPidAngleKp();
+                     break;
+                  case ReadPidAngleKi:
+                     priv_ReadPidAngleKi();
+                     break;
+                  case ReadPidAngleKd:
+                     priv_ReadPidAngleKd();
+                     break;
+                  case ReadPidOmegaKp:
+                     priv_ReadPidOmegaKp();
+                     break;
+                  case ReadPidOmegaKi:
+                     priv_ReadPidOmegaKi();
+                     break;
+                  case ReadPidOmegaKd:
+                     priv_ReadPidOmegaKd();
+                     break;
+
+
                   case WriteKalmanQAngleDef:
                      priv_WriteKalmanQAngleDef();
                      break;
@@ -247,6 +351,25 @@ void Logic_CheckInputs()
                   case WriteKalmanRMeasure:
                      priv_WriteKalmanRMeasure( &Command[1] );
                      break;
+                  case WritePidAngleKp:
+                     priv_WritePidAngleKp( &Command[1] );
+                     break;
+                  case WritePidAngleKi:
+                     priv_WritePidAngleKi( &Command[1] );
+                     break;
+                  case WritePidAngleKd:
+                     priv_WritePidAngleKd( &Command[1] );
+                     break;
+                  case WritePidOmegaKp:
+                     priv_WritePidOmegaKp( &Command[1] );
+                     break;
+                  case WritePidOmegaKi:
+                     priv_WritePidOmegaKi( &Command[1] );
+                     break;
+                  case WritePidOmegaKd:
+                     priv_WritePidOmegaKd( &Command[1] );
+                     break;
+
                   default:
                      break;
                }

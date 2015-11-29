@@ -10,6 +10,7 @@
 
 //-----------------------Includes-------------------------------------//
 #include "../PinDefines.h"
+#include "../Framework/PID/PID.h"
 
 //-----------------------Public typedefs------------------------------//
 typedef enum
@@ -75,10 +76,13 @@ Encoder_C oEncoderLeft;
 Encoder_C oEncoderRight;
 Motors_C oMotor;
 Servos_C oServosArm;
+PID_Struct_C oPID_Omega;
+PID_Struct_C oPID_Angle;
 
 //-----------------------Public prototypes----------------------------//
 void InitializeEncoders();
 void InitializeMotors();
 void InitializeServos();
+void InitializePIDs();
 
 #endif /* MOTORS_H_ */

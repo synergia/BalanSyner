@@ -41,7 +41,7 @@ typedef struct
 
 //-----------------------Private variables-----------------------------//
 static KalmanStruct KalmanData;
-extern float DT;
+extern float DT_fast;
 
 //-----------------------Private prototypes----------------------------//
 
@@ -53,7 +53,7 @@ void KalmanInitialize()
    KalmanData.Angle = 0.0f;   // Reset the angle
    KalmanData.GyroBias = 0.0f; // Reset bias
 
-   KalmanData.dt = DT;
+   KalmanData.dt = DT_fast;
 
    KalmanData.Q_Angle = Q_AngleDef;      //varaince of gyro measurements
    KalmanData.R_measure = R_MeasureDef;    //measured: varaince of accelerometer data

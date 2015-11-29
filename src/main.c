@@ -90,32 +90,29 @@ int main(void)
 #endif
 
 #if 0
-   if(//no MPU error))
+   if(//MPU error))
    {
       //sth bad had happened...
    }
 #endif
 
-   /*todo: only for labview sending purposes
-   *AnglePrsc1000 = (int32_t)(*Angle*1000);*/
-
-
    while (1)
    {
-//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'T');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '+');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'N');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'M');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'E');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '=');
-   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0d);
-//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0a);
+#if 0
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'T');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '+');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'N');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'M');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'E');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '=');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0d);
+      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0a);
 
-//      oBluetooth.SendFifo();
-
+      oBluetooth.SendFifo();
+#endif
    }
    return 0;
 }
@@ -123,14 +120,14 @@ int main(void)
 //-----------------------Public functions------------------------------//
 inline void MainTask16ms()
 {
-   /* whole process needs about 2ms */
-//   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+   /*! Measure angle of the robot */
+   oMpuKalman.ApplyFilter();
 
-   //oMpuKalman.GetFiltedAngle();
-   //int8_t speed = oEncoderLeft.GetOmega( &oEncoderLeft.Parameters );
-   //oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
-   //oBluetooth.SendFifo();
+   /*! Apply PID filter to motors to get required angle (output of omega regulator) */
+   oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered);
+   // MOTOR_PWM = oPID_Angle.Paramteres.U TODO:write it
 
+#if 0
    static float f=0.0f;
    static uint8_t up = 1;
    if(up)
@@ -144,9 +141,7 @@ inline void MainTask16ms()
    }
    oServosArm.SetAngle(SelectServoArmLeft, f);
 
-   //oBluetooth.SendKalmanToLabView();
-
-//   LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+#endif
 }
 
 inline void MainTask128ms()
@@ -163,12 +158,22 @@ inline void MainTask128ms()
 
 #endif
 
+#if 0
    static uint16_t i=300;
    oMotor.SetSpeed(SelectMotorLeft, i, DirectionCW);
    oMotor.SetSpeed(SelectMotorRight, i, DirectionCW);
    i += 5;
    if(900 < i) i=300;
+#endif
 
-   Logic_CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
-   LED1_IsOn ? LED1_SetOn : LED1_SetOff;
+   /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
+   Logic_CheckInputs();
+
+   /*! Calculate mean omega of the robot */
+   float OmegaMean = ( oEncoderLeft.GetOmega( &oEncoderLeft.Parameters )
+                      +oEncoderRight.GetOmega( &oEncoderRight.Parameters )
+                     ) / 2;
+
+   /*! Apply PID filter to motors to get required omega */
+   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
 }

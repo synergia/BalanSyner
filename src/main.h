@@ -10,7 +10,8 @@
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
-const float DT = 0.032f; /*! extern float DT; if needed */
+const float DT_fast = 0.016f; /*! extern float DT_fast; if needed. Angle regulator */
+const float DT_slow = 0.128f; /*! extern float DT_slow; if needed. Omega regulator */
 
 //-----------------------Public prototypes----------------------------//
 inline void MainTask16ms();

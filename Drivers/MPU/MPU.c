@@ -87,7 +87,6 @@ MPU6050_errorstatus InitializeMPU()
 
    oMpuKalman.ApplyFilter = priv_MpuGetFilteredData;
 
-
    oMpuKalman.GetKalmanQAngle = priv_ReadKalmanQAngle;
    oMpuKalman.GetKalmanRMeasure = priv_ReadKalmanRMeasure;
    oMpuKalman.SetKalmanQAngle = priv_WriteKalmanQAngle;

@@ -1,37 +1,53 @@
 
-#if 0
-
+//-----------------------Includes-------------------------------------//
+#include "stm32f30x.h"
 #include "arm_math.h"
+#include "PID.h"
 
-void arm_pid_init_f32(
-  arm_pid_instance_f32 * S,
-  int32_t resetStateFlag)
+//-----------------------Private typedefs------------------------------//
+#define Kp_Def    1;
+#define Ki_Def    0;
+#define Kd_Def    0;
+
+//-----------------------Private defines-------------------------------//
+
+//-----------------------Private macros--------------------------------//
+
+//-----------------------Private variables-----------------------------//
+
+//-----------------------Private prototypes----------------------------//
+static void priv_PID_Apply( PID_Parameters_T *PID, float ReadValue );
+static void priv_ChangeDstValue( PID_Parameters_T *PID, float NewValue );
+
+//-----------------------Private functions-----------------------------//
+static void priv_PID_Apply( PID_Parameters_T *PID, float ReadValue )
 {
-
-  /* Derived coefficient A0 */
-  S->A0 = S->Kp + S->Ki + S->Kd;
-
-  /* Derived coefficient A1 */
-  S->A1 = (-S->Kp) - ((float32_t) 2.0 * S->Kd);
-
-  /* Derived coefficient A2 */
-  S->A2 = S->Kd;
-
-  /* Check whether state needs reset or not */
-  if(resetStateFlag)
-  {
-    /* Clear the state buffer.  The size will be always 3 samples */
-    memset(S->state, 0, 3u * sizeof(float32_t));
-  }
-
+   PID->e = PID->DstValue - ReadValue;
+   PID->e_sum += PID->e;
+   PID->OutSignal = PID->Kp * PID->e
+                  + PID->Ki * PID->e_sum
+                  + PID->Kd * ( PID->e - PID->e_last );
+   PID->e_last = PID->e;
 }
 
-void arm_pid_reset_f32(
-  arm_pid_instance_f32 * S)
+static void priv_ChangeDstValue( PID_Parameters_T *PID, float NewValue )
 {
-
-  /* Clear the state buffer.  The size will be always 3 samples */
-  memset(S->state, 0, 3u * sizeof(float32_t));
+   PID->DstValue = NewValue;
 }
 
-#endif
+//-----------------------Public functions------------------------------//
+void PID_Initialize( PID_Struct_C *PID )
+{
+   PID->Parameters.Kp = Kp_Def;
+   PID->Parameters.Ki = Ki_Def;
+   PID->Parameters.Kd = Kd_Def;
+
+   PID->Parameters.e          = 0;
+   PID->Parameters.e_sum      = 0;
+   PID->Parameters.e_last     = 0;
+   PID->Parameters.OutSignal  = 0;
+   PID->Parameters.DstValue   = 0;
+
+   PID->ApplyPid = priv_PID_Apply;
+   PID->ChangeDstValue = priv_ChangeDstValue;
+}
