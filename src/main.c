@@ -99,9 +99,23 @@ int main(void)
    /*todo: only for labview sending purposes
    *AnglePrsc1000 = (int32_t)(*Angle*1000);*/
 
+
    while (1)
    {
-      ;
+//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'T');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '+');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'N');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'M');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'E');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '=');
+   //   oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
+//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0d);
+//      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0a);
+
+//      oBluetooth.SendFifo();
+
    }
    return 0;
 }
@@ -117,15 +131,18 @@ inline void MainTask16ms()
    //oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, speed );
    //oBluetooth.SendFifo();
 
-   //LogicPerform(); // analyze angle and commands, PID and set PWMs,
-   //SendOutputs(); //Some kind of variant manager maybe? if wifi or bt or pi. Send data to USART receiver, leds, lcd
-
-   oMotor.SetSpeed(SelectMotorLeft, 100, 1);
-   oMotor.SetSpeed(SelectMotorRight, 800, 1);
-   oServosArm.SetAngle(SelectServoArmLeft, 0);
-   oServosArm.SetAngle(SelectServoArmRight, 90);
-   oServosArm.SetAngle(SelectServoCamHor, -90);
-   oServosArm.SetAngle(SelectServoCamVer, 45);
+   static float f=0.0f;
+   static uint8_t up = 1;
+   if(up)
+   {
+      f += 1;
+      if(f>=180) up=0;
+   }
+   else{
+      f -= 1;
+      if(f<=-180) up=1;
+   }
+   oServosArm.SetAngle(SelectServoArmLeft, f);
 
    //oBluetooth.SendKalmanToLabView();
 
@@ -145,14 +162,13 @@ inline void MainTask128ms()
    priv_SendCommandBT( Command );
 
 #endif
-#if 0 //test
-   static float value = 1.5f;
-   static uint8_t Command[4];
 
-   uint32_t transport_bits = *( ( uint32_t* )&value );
-   *(uint32_t *) Command = transport_bits;
-#endif
+   static uint16_t i=300;
+   oMotor.SetSpeed(SelectMotorLeft, i, DirectionCW);
+   oMotor.SetSpeed(SelectMotorRight, i, DirectionCW);
+   i += 5;
+   if(900 < i) i=300;
 
    Logic_CheckInputs(); //check if any command from USART or buttons came and save buffer to struct. ADCx2.
-   //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
+   LED1_IsOn ? LED1_SetOn : LED1_SetOff;
 }

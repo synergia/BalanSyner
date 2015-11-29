@@ -47,14 +47,34 @@ static void priv_SetAngleCamVer(uint16_t Angle);
 static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
 {
    //todo: handle direction
-   if(Value<=1000u && Value>=0u)
+   if( Value <= 1000u && Value >= 0u )
    {
       switch (MotorSelector)
       {
       case SelectMotorLeft:
+         if( DirectionCW == Direction )
+         {
+            GPIO_SetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
+            GPIO_ResetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
+         }
+         else
+         {
+            GPIO_ResetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
+            GPIO_SetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
+         }
          TIM_MOTORS->MOT1_PWM_CHANNEL = Value;
          break;
       case SelectMotorRight:
+         if( DirectionCW == Direction )
+         {
+            GPIO_SetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
+            GPIO_ResetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
+         }
+         else
+         {
+            GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
+            GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
+         }
          TIM_MOTORS->MOT2_PWM_CHANNEL = Value;
          break;
       default:
@@ -68,8 +88,8 @@ static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, ui
  */
 static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
 {
-   if( -90>Angle ) Angle = -90;
-   if(  90<Angle ) Angle =  90;
+   if( -180 > Angle ) Angle = -180;
+   if(  180 < Angle ) Angle =  180;
 
    Angle = (uint16_t) 2*(Angle)+540;
 

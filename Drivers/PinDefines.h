@@ -28,9 +28,9 @@ typedef enum
 #define _USE_MOTORS
 #define _USE_ENCODERS
 #define _USE_SERVOS
-//#define _USE_LED_14
+#define _USE_LED_14
 //#define _USE_LED_EYE
-#define _USE_LED_NUCLEO
+//#define _USE_LED_NUCLEO
 
 #define _USE_BT
 //#define _USE_WIFI
@@ -40,18 +40,18 @@ typedef enum
 /*!
  * LEDs
  */
-#define  LED_NUCLEO_GPIO      GPIOA
-#define LED_NUCLEO_PIN     GPIO_Pin_5
-#define LED1_GPIO          GPIOB
-#define LED1_PIN        GPIO_Pin_12
-#define LED2_GPIO          GPIOB
-#define LED2_PIN        GPIO_Pin_13
-#define LED3_GPIO          GPIOA
-#define LED3_PIN        GPIO_Pin_10
-#define LED4_GPIO          GPIOA
-#define LED4_PIN        GPIO_Pin_11
-#define LED_EYE_GPIO    GPIOA
-#define LED_EYE_PIN        GPIO_Pin_12
+#define LED_NUCLEO_GPIO       GPIOA
+#define LED_NUCLEO_PIN        GPIO_Pin_5
+#define LED1_GPIO             GPIOB
+#define LED1_PIN              GPIO_Pin_12
+#define LED2_GPIO             GPIOB
+#define LED2_PIN              GPIO_Pin_13
+#define LED3_GPIO             GPIOA
+#define LED3_PIN              GPIO_Pin_10
+#define LED4_GPIO             GPIOA
+#define LED4_PIN              GPIO_Pin_11
+#define LED_EYE_GPIO          GPIOA
+#define LED_EYE_PIN           GPIO_Pin_12
 
 /*!
  * Buttons
@@ -69,7 +69,7 @@ typedef enum
  * MOTOR
  * Warning! Check in RCC.c if channels are selected as you want
  */
-#define TIM_AF_MOTOR    GPIO_AF_2
+#define TIM_AF_MOTOR       GPIO_AF_2
 #define TIM_MOTORS         TIM1
 #define MOT1_PWM_CHANNEL   CCR1
 #define MOT2_PWM_CHANNEL   CCR2
@@ -82,7 +82,7 @@ typedef enum
 /*!< ENCODER 1 */
 #define TIM_AF_ENCODER     GPIO_AF_2
 
-#define TIM_ENC1        TIM4
+#define TIM_ENC1           TIM4
 #define TIM_ENC1_IRQn      TIM4_IRQn
 #define ENC1A_CHANNEL      CCR1
 #define ENC1B_CHANNEL      CCR2
@@ -101,15 +101,15 @@ typedef enum
 #define MOT2_DIRB_PIN      GPIO_Pin_8
 
 #define MOT1_PWM_GPIO      GPIOC
-#define MOT1_PWM_PIN    GPIO_Pin_1
+#define MOT1_PWM_PIN       GPIO_Pin_1
 #define MOT1_PWM_SOURCE    GPIO_PinSource1
 
 #define MOT2_PWM_GPIO      GPIOC
-#define MOT2_PWM_PIN    GPIO_Pin_0
+#define MOT2_PWM_PIN       GPIO_Pin_0
 #define MOT2_PWM_SOURCE    GPIO_PinSource0
 
 /*!< ENCODER 2 */
-#define TIM_ENC2        TIM2
+#define TIM_ENC2           TIM2
 #define TIM_ENC2_IRQn      TIM2_IRQn
 #define ENC2A_CHANNEL      CCR1
 #define ENC2B_CHANNEL      CCR2
@@ -202,7 +202,7 @@ typedef enum
 #define MPU6050_ADDRESS    0b1101000
 #define MPU_AF_I2C3        GPIO_AF_3
 
-#define MPU_SCL_GPIO    GPIOA
+#define MPU_SCL_GPIO       GPIOA
 #define MPU_SCL_PIN        GPIO_Pin_8
 #define MPU_SCL_SOURCE     GPIO_PinSource8
 

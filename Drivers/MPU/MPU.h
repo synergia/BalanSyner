@@ -8,10 +8,9 @@ typedef struct
 {
    float AngleRaw;
    float GyroRaw;
-
    float AngleFiltered;
 
-   float ( *GetFiltedAngle ) ( void );
+   void ( *ApplyFilter ) ( void );
 
    float ( *GetKalmanQAngle ) ( void );
    float ( *GetKalmanRMeasure ) ( void );

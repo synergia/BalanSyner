@@ -18,7 +18,8 @@
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
-static float priv_MpuGetFilteredData();
+static void priv_MpuGetFilteredData();
+static void priv_MpuGetRawData();
 
 static float priv_ReadKalmanQAngle();
 static float priv_ReadKalmanRMeasure();
@@ -31,12 +32,16 @@ static void priv_WriteKalmanRMeasureDef();
 /*!
  *  Saves measured data into MpuMeasuredData struct and prepares data for Kalman filtering in MpuKalmanData struct
  */
-static float priv_MpuGetFilteredData()
+static void priv_MpuGetFilteredData()
+{
+   priv_MpuGetRawData();
+   oMpuKalman.AngleFiltered = KalmanGetValue( oMpuKalman.AngleRaw, oMpuKalman.GyroRaw );
+}
+
+static void priv_MpuGetRawData()
 {
    MPU6050_Get_AccAngleYZ_Data( &oMpuKalman.AngleRaw );
    MPU6050_Get_GyroX_Data( &oMpuKalman.GyroRaw ); //Gyro [deg/second]
-
-   return ( oMpuKalman.AngleFiltered = KalmanGetValue( oMpuKalman.AngleRaw, oMpuKalman.GyroRaw ) );
 }
 
 static float priv_ReadKalmanQAngle()
@@ -76,11 +81,12 @@ MPU6050_errorstatus InitializeMPU()
    InitializeRCC( DriverSelectMpu );
    InitializeI2C();
    InitializeGPIO( DriverSelectMpu );
-   //errorstatus = MPU6050_Initialization();
+   errorstatus = MPU6050_Initialization();
 
    KalmanInitialize();
 
-   oMpuKalman.GetFiltedAngle = priv_MpuGetFilteredData;
+   oMpuKalman.ApplyFilter = priv_MpuGetFilteredData;
+
 
    oMpuKalman.GetKalmanQAngle = priv_ReadKalmanQAngle;
    oMpuKalman.GetKalmanRMeasure = priv_ReadKalmanRMeasure;

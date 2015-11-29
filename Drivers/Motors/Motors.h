@@ -20,6 +20,12 @@ typedef enum
 
 typedef enum
 {
+   DirectionCW,
+   DirectionCCW
+}MotorDirection_T;
+
+typedef enum
+{
    SelectEncoderLeft,
    SelectEncoderRight,
 }EncoderSelector_T;

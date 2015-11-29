@@ -25,7 +25,7 @@ void InitializeUSART(USART_TypeDef* USARTx)
 
    if( USARTx == USART_BT )
    {
-      usart_conf.USART_BaudRate = 115200u;
+      usart_conf.USART_BaudRate = 9600u;
       USART_Init( USART_BT, &usart_conf );
       USART_ITConfig(USART_BT, USART_IT_RXNE, ENABLE); /*! Receiver interrupts enable */
       USART_BT->CR3 |= USART_CR3_OVRDIS;
@@ -123,8 +123,6 @@ void USART2_IRQHandler( void )
    {
       USART2InterruptCallback();
    }
-   else if (USART_GetITStatus( USART2, USART_IT_ORE ))
-      LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
 }
 
 void USART3_IRQHandler( void )

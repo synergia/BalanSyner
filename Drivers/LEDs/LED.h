@@ -9,9 +9,13 @@
 //-----------------------Public defines-------------------------------//
 
 //-----------------------Public macros--------------------------------//
-#define LED_Nucleo_SetOff 	GPIO_SetBits(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
-#define LED_Nucleo_SetOn 	GPIO_ResetBits(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
-#define LED_NUCLEO_IsOn		GPIO_ReadOutputDataBit(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
+#define LED_Nucleo_SetOff  GPIO_SetBits(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
+#define LED_Nucleo_SetOn   GPIO_ResetBits(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
+#define LED_NUCLEO_IsOn    GPIO_ReadOutputDataBit(LED_NUCLEO_GPIO, LED_NUCLEO_PIN)
+
+#define LED1_SetOff  GPIO_SetBits(LED1_GPIO, LED1_PIN)
+#define LED1_SetOn   GPIO_ResetBits(LED1_GPIO, LED1_PIN)
+#define LED1_IsOn    GPIO_ReadOutputDataBit(LED1_GPIO, LED1_PIN)
 //TODO: Add macros for every each LED, operate on registers, not functions
 
 //-----------------------Public variables-----------------------------//
