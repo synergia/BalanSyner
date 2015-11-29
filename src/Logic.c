@@ -37,6 +37,7 @@ typedef enum
    ReadPidOmegaKp       = 9u,
    ReadPidOmegaKi       = 10u,
    ReadPidOmegaKd       = 11u,
+   ReadPidDstOmega      = 12u,
 
    WriteKalmanQAngleDef    = 100u,
    WriteKalmanQAngle       = 101u,
@@ -48,6 +49,7 @@ typedef enum
    WritePidOmegaKp         = 107u,
    WritePidOmegaKi         = 108u,
    WritePidOmegaKd         = 109u,
+   WritePidDstOmega        = 110u,
 
 }Addresses_T;
 //-----------------------Private variables-----------------------------//
@@ -70,6 +72,7 @@ static void priv_ReadPidAngleKd();
 static void priv_ReadPidOmegaKp();
 static void priv_ReadPidOmegaKi();
 static void priv_ReadPidOmegaKd();
+static void privReadPidDstOmega();
 
 static void priv_WriteKalmanQAngle( uint8_t *Command );
 static void priv_WriteKalmanQAngleDef();
@@ -81,6 +84,7 @@ static void priv_WritePidAngleKd( uint8_t *Command );
 static void priv_WritePidOmegaKp( uint8_t *Command );
 static void priv_WritePidOmegaKi( uint8_t *Command );
 static void priv_WritePidOmegaKd( uint8_t *Command );
+static void priv_WritePidDstOmega( uint8_t *Command );
 
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
@@ -180,6 +184,10 @@ static void priv_ReadPidOmegaKd()
    priv_SendCommandBT( oPID_Omega.GetKd( &oPID_Omega.Parameters ), ReadPidOmegaKd );
 }
 
+static void privReadPidDstOmega()
+{
+   priv_SendCommandBT( oPID_Omega.GetDstValue( &oPID_Omega.Parameters ), ReadPidDstOmega );
+}
 /*!
  *-------------------------------------------------------------------------------------
  ********************************    WRITE FUNCTIONS    *******************************
@@ -235,6 +243,11 @@ static void priv_WritePidOmegaKi( uint8_t *Command )
 static void priv_WritePidOmegaKd( uint8_t *Command )
 {
    oPID_Omega.SetKd( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidDstOmega( uint8_t *Command )
+{
+   oPID_Omega.SetDstValue( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
 }
 
 //-----------------------Public functions------------------------------//
@@ -337,7 +350,9 @@ void Logic_CheckInputs()
                   case ReadPidOmegaKd:
                      priv_ReadPidOmegaKd();
                      break;
-
+                  case ReadPidDstOmega:
+                     privReadPidDstOmega();
+                     break;
 
                   case WriteKalmanQAngleDef:
                      priv_WriteKalmanQAngleDef();
@@ -368,6 +383,9 @@ void Logic_CheckInputs()
                      break;
                   case WritePidOmegaKd:
                      priv_WritePidOmegaKd( &Command[1] );
+                     break;
+                  case WritePidDstOmega:
+                     priv_WritePidDstOmega( &Command[1] );
                      break;
 
                   default:

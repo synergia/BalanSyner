@@ -42,13 +42,6 @@ static void priv_SetAngleArmRight(uint16_t Angle);
 static void priv_SetAngleCamHor(uint16_t Angle);
 static void priv_SetAngleCamVer(uint16_t Angle);
 
-static void priv_SetKp( PID_Parameters_T *pkThis, float NewValue );
-static void priv_SetKi( PID_Parameters_T *pkThis, float NewValue );
-static void priv_SetKd( PID_Parameters_T *pkThis, float NewValue );
-static float priv_GetKp( PID_Parameters_T *pkThis);
-static float priv_GetKi( PID_Parameters_T *pkThis);
-static float priv_GetKd( PID_Parameters_T *pkThis);
-
 //-----------------------Private functions-----------------------------//
 /*!
  * Value may vary between 0 and 1000.
@@ -155,36 +148,6 @@ static float priv_GetOmega( EncoderParameters_T *pkThis )
    return pkThis->Omega;
 }
 
-static void priv_SetKp( PID_Parameters_T *pkThis, float NewValue )
-{
-   pkThis->Kp = NewValue;
-}
-
-static void priv_SetKi( PID_Parameters_T *pkThis, float NewValue )
-{
-   pkThis->Ki = NewValue;
-}
-
-static void priv_SetKd( PID_Parameters_T *pkThis, float NewValue )
-{
-   pkThis->Kd = NewValue;
-}
-
-static float priv_GetKp( PID_Parameters_T *pkThis)
-{
-   return ( pkThis->Kp );
-}
-
-static float priv_GetKi( PID_Parameters_T *pkThis)
-{
-   return ( pkThis->Ki );
-}
-
-static float priv_GetKd( PID_Parameters_T *pkThis)
-{
-   return ( pkThis->Kd );
-}
-
 //-----------------------Public functions------------------------------//
 void InitializeEncoders()
 {
@@ -241,19 +204,6 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.GetKp = priv_GetKp;
-   oPID_Angle.GetKi = priv_GetKi;
-   oPID_Angle.GetKd = priv_GetKd;
-   oPID_Angle.SetKp = priv_SetKp;
-   oPID_Angle.SetKi = priv_SetKi;
-   oPID_Angle.SetKd = priv_SetKd;
-
    PID_Initialize( &oPID_Omega );
-   oPID_Omega.GetKp = priv_GetKp;
-   oPID_Omega.GetKi = priv_GetKi;
-   oPID_Omega.GetKd = priv_GetKd;
-   oPID_Omega.SetKp = priv_SetKp;
-   oPID_Omega.SetKi = priv_SetKi;
-   oPID_Omega.SetKd = priv_SetKd;
 }
 

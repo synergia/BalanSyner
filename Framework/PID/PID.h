@@ -29,7 +29,9 @@ typedef struct
    PID_Parameters_T Parameters;   /*! Structure with gains */
 
    void ( *ApplyPid )( PID_Parameters_T *PID, float ReadValue );
-   void ( *ChangeDstValue )( PID_Parameters_T *PID, float NewValue );
+
+   void ( *SetDstValue )( PID_Parameters_T *PID, float NewValue );
+   float ( *GetDstValue )( PID_Parameters_T *PID );
 
    void ( *SetKp )( PID_Parameters_T *pkThis, float NewValue );
    void ( *SetKi )( PID_Parameters_T *pkThis, float NewValue );

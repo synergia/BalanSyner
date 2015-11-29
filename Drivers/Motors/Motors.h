@@ -12,6 +12,10 @@
 #include "../PinDefines.h"
 #include "../Framework/PID/PID.h"
 
+//-----------------------Public defines-------------------------------//
+
+//-----------------------Public macros--------------------------------//
+
 //-----------------------Public typedefs------------------------------//
 typedef enum
 {
@@ -66,10 +70,6 @@ typedef struct
    //TODO void get angle
    void ( *SetAngle )( ServoSelector_T ServoSelector, float Angle );
 }Servos_C;
-
-//-----------------------Public defines-------------------------------//
-
-//-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
 Encoder_C oEncoderLeft;
