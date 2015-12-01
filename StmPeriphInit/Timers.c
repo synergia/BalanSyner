@@ -8,13 +8,13 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private defines-------------------------------//
-#define _SYSTICK_FREQ         SYSTICK_FREQUENCY_HZ
+#define _SYSTICK_FREQ            SYSTICK_FREQUENCY_HZ
 
-#define _PWM_SERVO_RESOLUTION 7200  //Hz ->servo angle range 180st, 1 => 0,5st
-#define _PWM_SERVO_FREQUENCY  50    //Hz
+#define _PWM_SERVO_RESOLUTION    7200  //Hz ->servo angle range 180st, 1 => 0,5st
+#define _PWM_SERVO_FREQUENCY     50    //Hz
 
 #define  _PWM_MOTOR_RESOLUTION   1000
-#define _PWM_MOTOR_FREQUENCY  3600  //Hz
+#define  _PWM_MOTOR_FREQUENCY    3600  //Hz
 
 //-----------------------Private macros--------------------------------//
 
@@ -32,7 +32,7 @@ static void priv_InitializeMotors()
 {
    TIM_TimeBaseInitTypeDef timerInitStructure;
 
-    timerInitStructure.TIM_Prescaler = (_SYSTICK_FREQ/(_PWM_MOTOR_FREQUENCY*_PWM_MOTOR_RESOLUTION) )-1;
+    timerInitStructure.TIM_Prescaler = ( _SYSTICK_FREQ / ( _PWM_MOTOR_FREQUENCY * _PWM_MOTOR_RESOLUTION ) )-1;
     timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
     timerInitStructure.TIM_Period = _PWM_MOTOR_RESOLUTION-1;
     timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
@@ -42,7 +42,7 @@ static void priv_InitializeMotors()
 
     TIM_OCInitTypeDef outputChannelInit = {0,};
     outputChannelInit.TIM_OCMode = TIM_OCMode_PWM1;
-    outputChannelInit.TIM_Pulse = 3600;
+    outputChannelInit.TIM_Pulse = _PWM_MOTOR_FREQUENCY;
     outputChannelInit.TIM_OutputState = TIM_OutputState_Enable;
     outputChannelInit.TIM_OCPolarity = TIM_OCPolarity_High;
 
@@ -99,7 +99,7 @@ static void priv_InitializeEncoderLeft()
    PrescalerValue = (uint16_t) 0;
 
    /* Time base configuration */
-   timerInitStructure.TIM_Period = 1023;
+   timerInitStructure.TIM_Period = 3000;
    timerInitStructure.TIM_Prescaler = 0;
    timerInitStructure.TIM_ClockDivision = 0;
    timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -124,10 +124,10 @@ static void priv_InitializeEncoderRight()
 
    /* Compute the prescaler value */
    uint16_t PrescalerValue = 0;
-   PrescalerValue = (uint16_t) ((SystemCoreClock ) / 6000000) - 1;
+   PrescalerValue = (uint16_t) 0;
 
    /* Time base configuration */
-   timerInitStructure.TIM_Period = 399;
+   timerInitStructure.TIM_Period = 3000;
    timerInitStructure.TIM_Prescaler = 0;
    timerInitStructure.TIM_ClockDivision = 0;
    timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;

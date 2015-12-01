@@ -71,8 +71,8 @@ typedef enum
  */
 #define TIM_AF_MOTOR       GPIO_AF_2
 #define TIM_MOTORS         TIM1
-#define MOT1_PWM_CHANNEL   CCR1
-#define MOT2_PWM_CHANNEL   CCR2
+#define MOT1_PWM_CHANNEL   CCR2
+#define MOT2_PWM_CHANNEL   CCR1
 
 #define MOT1_DIRA_GPIO     GPIOC
 #define MOT1_DIRA_PIN      GPIO_Pin_12
@@ -100,13 +100,13 @@ typedef enum
 #define MOT2_DIRB_GPIO     GPIOB
 #define MOT2_DIRB_PIN      GPIO_Pin_8
 
-#define MOT1_PWM_GPIO      GPIOC
-#define MOT1_PWM_PIN       GPIO_Pin_1
-#define MOT1_PWM_SOURCE    GPIO_PinSource1
-
 #define MOT2_PWM_GPIO      GPIOC
-#define MOT2_PWM_PIN       GPIO_Pin_0
-#define MOT2_PWM_SOURCE    GPIO_PinSource0
+#define MOT2_PWM_PIN       GPIO_Pin_1
+#define MOT2_PWM_SOURCE    GPIO_PinSource1
+
+#define MOT1_PWM_GPIO      GPIOC
+#define MOT1_PWM_PIN       GPIO_Pin_0
+#define MOT1_PWM_SOURCE    GPIO_PinSource0
 
 /*!< ENCODER 2 */
 #define TIM_ENC2           TIM2

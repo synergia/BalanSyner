@@ -55,6 +55,7 @@ typedef struct
 {
    EncoderParameters_T Parameters;
 
+   float ( *Perform )( EncoderParameters_T *pkThis );
    float ( *GetOmega )( EncoderParameters_T *pkThis );
    void ( *SetCounter )( TIM_TypeDef *TIMx, uint32_t NewValue );
 }Encoder_C;
@@ -62,7 +63,7 @@ typedef struct
 typedef struct
 {
    //TODO void get speed
-   void ( *SetSpeed )( MotorSelector_T Motor, uint16_t Value, uint8_t Direction );
+   void ( *SetSpeed )( MotorSelector_T Motor, float Value );
 }Motors_C;
 
 typedef struct

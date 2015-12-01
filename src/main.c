@@ -96,36 +96,44 @@ int main(void)
    }
 #endif
 
+   oMotor.SetSpeed( SelectMotorLeft, 0.0f );
    while (1)
    {
-#if 0
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'T');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '+');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'N');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'M');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'E');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, '=');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 'A');
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0d);
-      oBluetooth.PushFifo(&oBluetooth.oBtTxFifo, 0x0a);
 
-      oBluetooth.SendFifo();
-#endif
    }
    return 0;
 }
 
 //-----------------------Public functions------------------------------//
-inline void MainTask16ms()
+void priv_SendC( float Value, uint8_t Address )
+{
+   uint8_t Command[] = { 0xFF, 0xFF, Address, 0, 0, 0, 0, 1 };
+
+   uint32_t transport_bits = *( ( uint32_t* ) &Value );
+   *(uint32_t *) &Command[3] = transport_bits;
+
+   uint8_t i = 0;
+   while ( 8 > i )
+   {
+      oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
+   }
+   oBluetooth.SendFifo();
+}
+
+void MainTask8ms()
 {
    /*! Measure angle of the robot */
    oMpuKalman.ApplyFilter();
 
    /*! Apply PID filter to motors to get required angle (output of omega regulator) */
-   oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered);
-   // MOTOR_PWM = oPID_Angle.Paramteres.U TODO:write it
+   oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
+
+   oMotor.SetSpeed( SelectMotorLeft, oPID_Angle.Parameters.OutSignal );
+}
+
+void MainTask16ms()
+{
+   LED1_Toggle;
 
 #if 0
    static float f=0.0f;
@@ -144,36 +152,22 @@ inline void MainTask16ms()
 #endif
 }
 
-inline void MainTask128ms()
+void MainTask128ms()
 {
-#if 0
-   uint8_t Command[] = { 0xFF, 0xFF, 101, 0, 0, 0, 0, 1 };
-
-   float Value = oMpuKalman.GetKalmanQAngle();
-
-   uint32_t transport_bits = *( ( uint32_t* ) &Value );
-   *(uint32_t *) &Command[3] = transport_bits;
-
-   priv_SendCommandBT( Command );
-
-#endif
-
-#if 0
-   static uint16_t i=300;
-   oMotor.SetSpeed(SelectMotorLeft, i, DirectionCW);
-   oMotor.SetSpeed(SelectMotorRight, i, DirectionCW);
-   i += 5;
-   if(900 < i) i=300;
-#endif
-
+   LED2_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Logic_CheckInputs();
 
    /*! Calculate mean omega of the robot */
-   float OmegaMean = ( oEncoderLeft.GetOmega( &oEncoderLeft.Parameters )
-                      +oEncoderRight.GetOmega( &oEncoderRight.Parameters )
+   float OmegaMean = ( oEncoderLeft.Perform( &oEncoderLeft.Parameters )
+                      +oEncoderRight.Perform( &oEncoderRight.Parameters )
                      ) / 2;
 
+   priv_SendC(oEncoderLeft.Parameters.Omega, 5);
+
+#if 1
    /*! Apply PID filter to motors to get required omega */
-   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
+   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, oEncoderLeft.Parameters.Omega );
+   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal );
+#endif
 }

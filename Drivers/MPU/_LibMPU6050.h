@@ -214,11 +214,11 @@ MPU6050_errorstatus MPU6050_Set_Clock(MPU6050_Clock_Select clock);
 
 MPU6050_errorstatus MPU6050_Get_Gyro_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_Gyro_Data(float* X, float* Y, float* Z);
-inline MPU6050_errorstatus MPU6050_Get_GyroX_Data( float *DegPerSecond );
+inline MPU6050_errorstatus MPU6050_Get_GyroY_Data( float *DegPerSecond );
 
 MPU6050_errorstatus MPU6050_Get_Accel_Data_Raw(int16_t* X, int16_t* Y, int16_t* Z);
 MPU6050_errorstatus MPU6050_Get_Accel_Data(float* X, float* Y, float* Z);
-inline MPU6050_errorstatus MPU6050_Get_AccAngleYZ_Data( float* Angle );
+inline MPU6050_errorstatus MPU6050_Get_AccAngleXZ_Data( float* Angle );
 
 int16_t MPU6050_Get_Temperature(void);
 

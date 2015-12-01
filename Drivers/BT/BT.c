@@ -97,9 +97,10 @@ void InitializeBT()
    Fifo_Initialize( &oBluetooth.oBtTxFifo, oBluetooth.kBtTxBuffer, BtTxElementSize, BtTxBufferSize );
    Fifo_Initialize( &oBluetooth.oBtRxFifo, oBluetooth.kBtRxBuffer, BtRxElementSize, BtRxBufferSize );
 }
-
+#include "../Drivers/LEDs/LED.h"
 void BtRxInterruptCallback()
 {
+   LED3_Toggle;
    oBluetooth.PushFifo( &oBluetooth.oBtRxFifo, USART_BT->RDR );
 }
 

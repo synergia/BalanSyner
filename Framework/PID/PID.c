@@ -5,9 +5,9 @@
 #include "PID.h"
 
 //-----------------------Private typedefs------------------------------//
-#define Kp_Def    1;
-#define Ki_Def    0;
-#define Kd_Def    0;
+#define Kp_Def    1.0f;
+#define Ki_Def    0.0f;
+#define Kd_Def    0.0f;
 
 //-----------------------Private defines-------------------------------//
 

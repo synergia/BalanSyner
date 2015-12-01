@@ -25,7 +25,7 @@ void InitializeUSART(USART_TypeDef* USARTx)
 
    if( USARTx == USART_BT )
    {
-      usart_conf.USART_BaudRate = 9600u;
+      usart_conf.USART_BaudRate = 38400u;
       USART_Init( USART_BT, &usart_conf );
       USART_ITConfig(USART_BT, USART_IT_RXNE, ENABLE); /*! Receiver interrupts enable */
       USART_BT->CR3 |= USART_CR3_OVRDIS;

@@ -50,6 +50,7 @@ typedef enum
    WritePidOmegaKi         = 108u,
    WritePidOmegaKd         = 109u,
    WritePidDstOmega        = 110u,
+   WriteOmega              = 150u, //TODO: delete it
 
 }Addresses_T;
 //-----------------------Private variables-----------------------------//
@@ -85,6 +86,7 @@ static void priv_WritePidOmegaKp( uint8_t *Command );
 static void priv_WritePidOmegaKi( uint8_t *Command );
 static void priv_WritePidOmegaKd( uint8_t *Command );
 static void priv_WritePidDstOmega( uint8_t *Command );
+static void priv_WriteOmega( uint8_t *Command );
 
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
@@ -250,6 +252,10 @@ static void priv_WritePidDstOmega( uint8_t *Command )
    oPID_Omega.SetDstValue( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
 }
 
+static void priv_WriteOmega( uint8_t *Command )
+{
+   oMotor.SetSpeed( SelectMotorLeft, priv_CommandToFloat( Command ) );
+}
 //-----------------------Public functions------------------------------//
 /*!
  * fn:            Logic_CheckInputs
@@ -276,6 +282,7 @@ static void priv_WritePidDstOmega( uint8_t *Command )
  *
  *    PB - parity check TODO: implement some
  */
+#include "../Drivers/LEDs/LED.h"
 void Logic_CheckInputs()
 {
    priv_SendDummy();
@@ -312,6 +319,7 @@ void Logic_CheckInputs()
 
             if( priv_CheckParityBits() == Command[5] )
             {
+               LED4_Toggle;
                switch( Command[0] )
                {
                   case ReadKalmanQAngle:
@@ -387,7 +395,9 @@ void Logic_CheckInputs()
                   case WritePidDstOmega:
                      priv_WritePidDstOmega( &Command[1] );
                      break;
-
+                  case WriteOmega:
+                     priv_WriteOmega( &Command[1] );
+                     break;
                   default:
                      break;
                }

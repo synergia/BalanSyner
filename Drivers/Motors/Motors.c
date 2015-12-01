@@ -25,6 +25,7 @@
 #define CounterDef         1500u /*! Must be less than (tim->period)/2 so counter wont overflow */
 #define TicksPerRevolution 1200u
 #define AnglePerTick       0.3f
+#define RpmPerTIck         0.05f
 
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
@@ -33,8 +34,10 @@
 extern float DT_slow;
 
 //-----------------------Private prototypes----------------------------//
-static void priv_MotorSetSpeed(MotorSelector_T Motor, uint16_t Value, uint8_t Direction);
+static void priv_MotorSetSpeed(MotorSelector_T Motor, float Value );
+static float priv_EncoderPerform( EncoderParameters_T *pkThis );
 static float priv_GetOmega( EncoderParameters_T *pkThis );
+
 static void priv_ServoSetAngle(ServoSelector_T Servo, float Angle);
 
 static void priv_SetAngleArmLeft(uint16_t Angle);
@@ -44,17 +47,17 @@ static void priv_SetAngleCamVer(uint16_t Angle);
 
 //-----------------------Private functions-----------------------------//
 /*!
- * Value may vary between 0 and 1000.
+ * Value may vary between -1000 and 1000.
  */
-static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, uint8_t Direction)
+static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
 {
-   //todo: handle direction
-   if( Value <= 1000u && Value >= 0u )
+   if( Value <= 1000 && Value >= -1000 )
    {
+      uint8_t Sign = ( Value > 0 );
       switch (MotorSelector)
       {
       case SelectMotorLeft:
-         if( DirectionCW == Direction )
+         if( Sign )
          {
             GPIO_SetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
             GPIO_ResetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
@@ -64,10 +67,10 @@ static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, ui
             GPIO_ResetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
             GPIO_SetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
          }
-         TIM_MOTORS->MOT1_PWM_CHANNEL = Value;
+         TIM_MOTORS->MOT1_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;
          break;
       case SelectMotorRight:
-         if( DirectionCW == Direction )
+         if( Sign )
          {
             GPIO_SetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
             GPIO_ResetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
@@ -77,7 +80,7 @@ static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, ui
             GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
             GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
          }
-         TIM_MOTORS->MOT2_PWM_CHANNEL = Value;
+         TIM_MOTORS->MOT2_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;;
          break;
       default:
          break;
@@ -86,7 +89,7 @@ static void priv_MotorSetSpeed(MotorSelector_T MotorSelector, uint16_t Value, ui
 }
 
 /*!
- * Value may vary between -90.0 and +90.0. Resolution 0.5.
+ * Value may vary between -180 and +180.0. Resolution 0.5.
  */
 static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
 {
@@ -134,17 +137,23 @@ static void priv_SetAngleCamVer(uint16_t Angle)
    TIM_SERVOS->SERVO_VER_PWM_CHANNEL = Angle;
 }
 
-static float priv_GetOmega( EncoderParameters_T *pkThis )
+static float priv_EncoderPerform( EncoderParameters_T *pkThis )
 {
    /*! How many ticks since last iteration */
    int16_t DeltaTicks = GetCounter( pkThis->TIMx ) - CounterDef;
 
    /*! Calculate angular speed of shaft */
-   pkThis->Omega = ( DeltaTicks * AnglePerTick ) / pkThis->Dt; /*!< Shaft Omega [degrees/second] */
+   //pkThis->Omega = ( DeltaTicks * AnglePerTick ) / pkThis->Dt; /*!< Shaft Omega [degrees/second] */
+   pkThis->Omega = ( DeltaTicks * RpmPerTIck ) / pkThis->Dt; /*!< Shaft Omega [RPM] */
 
    /*! Reset counter so it cannot get out of range */
    SetCounter( pkThis->TIMx, CounterDef );
 
+   return ( pkThis->Omega );
+}
+
+static float priv_GetOmega( EncoderParameters_T *pkThis )
+{
    return pkThis->Omega;
 }
 
@@ -162,6 +171,7 @@ void InitializeEncoders()
    oEncoderLeft.Parameters.TIMx = TIM_ENC1;
    oEncoderLeft.Parameters.Counter = CounterDef;
    oEncoderLeft.Parameters.Omega = 0u;
+   oEncoderLeft.Perform = priv_EncoderPerform;
    oEncoderLeft.GetOmega = priv_GetOmega;
    oEncoderLeft.SetCounter = SetCounter; /*! Timer function */
 
@@ -169,6 +179,7 @@ void InitializeEncoders()
    oEncoderRight.Parameters.TIMx = TIM_ENC2;
    oEncoderRight.Parameters.Counter = CounterDef;
    oEncoderRight.Parameters.Omega = 0u;
+   oEncoderRight.Perform = priv_EncoderPerform;
    oEncoderRight.GetOmega = priv_GetOmega;
    oEncoderRight.SetCounter = SetCounter; /*! Timer function */
 }
@@ -204,6 +215,13 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 30.0f );
+   oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 5.0f );
+
    PID_Initialize( &oPID_Omega );
+   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.005f );
+   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.001f );
+   oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
 }
 

@@ -40,8 +40,8 @@ static void priv_MpuGetFilteredData()
 
 static void priv_MpuGetRawData()
 {
-   MPU6050_Get_AccAngleYZ_Data( &oMpuKalman.AngleRaw );
-   MPU6050_Get_GyroX_Data( &oMpuKalman.GyroRaw ); //Gyro [deg/second]
+   MPU6050_Get_AccAngleXZ_Data( &oMpuKalman.AngleRaw );
+   MPU6050_Get_GyroY_Data( &oMpuKalman.GyroRaw ); //Gyro [deg/second]
 }
 
 static float priv_ReadKalmanQAngle()
