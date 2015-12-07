@@ -57,6 +57,10 @@ int main(void)
    InitializeClock();
    InitializeSysTick();
 
+#ifdef _USE_DISPLAY
+   InitializeDisplay();
+#endif
+
 #ifdef _USE_MOTORS
    InitializeMotors();
 #endif
@@ -141,20 +145,21 @@ void MainTask8ms()
       PWM = oPID_Angle.Parameters.OutSignal;
       if( 0 < oMpuKalman.AngleFiltered )
       {
-         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.75;// + MinPwmToReact;
+         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.5;// + MinPwmToReact;
       }
       else
       {
-         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.75;// - MinPwmToReact;
+         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.5;// - MinPwmToReact;
       }
-      /*if( 60 < PWM )
+
+      if( 1000 < PWM )
       {
-         PWM += MinPwmToReact;
+         PWM = 1000;
       }
-      else if ( -60 > PWM )
+      else if ( -1000 > PWM )
       {
-         PWM -= MinPwmToReact;
-      }*/
+         PWM = -1000;
+      }
 
 
       oMotor.SetSpeed( SelectMotorLeft, PWM );
