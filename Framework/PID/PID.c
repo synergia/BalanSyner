@@ -31,9 +31,44 @@ static void priv_PID_Apply( PID_Parameters_T *PID, float ReadValue )
 {
    PID->e = PID->DstValue - ReadValue;
    PID->e_sum += PID->e;
-   PID->OutSignal = PID->Kp * PID->e
-                  + PID->Ki * PID->e_sum
-                  + PID->Kd * ( PID->e - PID->e_last );
+
+   /*!< Check if integral error doesn't exceed boundaries */
+   if( PID->e_sum > PID->iWindUp )
+   {
+      PID->e_sum = PID->iWindUp;
+   }
+   else if( PID->e_sum < -PID->iWindUp )
+   {
+      PID->e_sum = -PID->iWindUp;
+   }
+
+   /*! Do math only if needed */
+   PID->OutSignal = 0;
+   if( 0 != PID->Kp )
+   {
+      PID->OutSignal = PID->Kp * PID->e;
+   }
+
+   if( 0 != PID->Ki )
+   {
+      PID->OutSignal += PID->Ki * PID->e_sum;
+   }
+
+   if( 0 != PID->Kd )
+   {
+      PID->OutSignal += PID->Kd * ( PID->e - PID->e_last );
+   }
+
+   /*! Windup prevention */
+   if( PID->OutSignal > PID->MaxOutSignal )
+   {
+      PID->OutSignal = PID->MaxOutSignal;
+   }
+   else if( PID->OutSignal < -PID->MaxOutSignal )
+   {
+      PID->OutSignal = -PID->MaxOutSignal;
+   }
+
    PID->e_last = PID->e;
 }
 
@@ -84,11 +119,11 @@ void PID_Initialize( PID_Struct_C *PID )
    PID->Parameters.Ki = Ki_Def;
    PID->Parameters.Kd = Kd_Def;
 
-   PID->Parameters.e          = 0;
-   PID->Parameters.e_sum      = 0;
-   PID->Parameters.e_last     = 0;
-   PID->Parameters.OutSignal  = 0;
-   PID->Parameters.DstValue   = 0;
+   PID->Parameters.e          = 0.0f;
+   PID->Parameters.e_sum      = 0.0f;
+   PID->Parameters.e_last     = 0.0f;
+   PID->Parameters.OutSignal  = 0.0f;
+   PID->Parameters.DstValue   = 0.0f;
 
    PID->ApplyPid = priv_PID_Apply;
 
@@ -101,3 +136,4 @@ void PID_Initialize( PID_Struct_C *PID )
    PID->SetKi = priv_SetKi;
    PID->SetKd = priv_SetKd;
 }
+

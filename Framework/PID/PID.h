@@ -19,8 +19,10 @@ typedef struct
 
    float e;             /*! Current error */
    float e_sum;         /*! Summarized error */
+   float iWindUp;       /*! Max value of e_sum */
    float e_last;        /*! Last error */
    float OutSignal;     /*! Output signal */
+   float MaxOutSignal;  /*! Maximum output signal */
    float DstValue;      /*! Value to be reached by regulator */
 }PID_Parameters_T;
 

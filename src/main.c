@@ -35,6 +35,7 @@
 #include "../Drivers/Motors/Motors.h"
 
 #include "Logic.h"
+#include "../Framework/PID/PID_Usr.h"
 
 //-----------------------Private typedefs------------------------------//
 
@@ -50,6 +51,9 @@ int main(void);
 //-----------------------Private functions-----------------------------//
 int main(void)
 {
+   uint16_t i;
+   for( i = 0; i < 64000; i++) asm("nop");
+
    InitializeClock();
    InitializeSysTick();
 
@@ -96,7 +100,10 @@ int main(void)
    }
 #endif
 
+
    oMotor.SetSpeed( SelectMotorLeft, 0.0f );
+   oServosArm.SetAngle( SelectServoArmLeft, 0.0f );
+   oServosArm.SetAngle( SelectServoArmRight, 30.0f );
    while (1)
    {
 
@@ -119,21 +126,133 @@ void priv_SendC( float Value, uint8_t Address )
    }
    oBluetooth.SendFifo();
 }
-
+volatile float PWM;
 void MainTask8ms()
 {
    /*! Measure angle of the robot */
    oMpuKalman.ApplyFilter();
 
-   /*! Apply PID filter to motors to get required angle (output of omega regulator) */
-   oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
+   /*! Stop motors when robot falls */
+   if( oMpuKalman.AngleFiltered < 50.0f && oMpuKalman.AngleFiltered > -50.0f )
+   {
+      /*! Apply PID filter to motors to get required angle (output of omega regulator) */
+      oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
 
-   oMotor.SetSpeed( SelectMotorLeft, oPID_Angle.Parameters.OutSignal );
+      PWM = oPID_Angle.Parameters.OutSignal;
+      if( 0 < oMpuKalman.AngleFiltered )
+      {
+         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.75;// + MinPwmToReact;
+      }
+      else
+      {
+         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.75;// - MinPwmToReact;
+      }
+      /*if( 60 < PWM )
+      {
+         PWM += MinPwmToReact;
+      }
+      else if ( -60 > PWM )
+      {
+         PWM -= MinPwmToReact;
+      }*/
+
+
+      oMotor.SetSpeed( SelectMotorLeft, PWM );
+      oMotor.SetSpeed( SelectMotorRight, PWM );
+   }
+   else
+   {
+      oMotor.SetSpeed( SelectMotorLeft, 0.0f );
+      oMotor.SetSpeed( SelectMotorRight, 0.0f );
+   }
 }
 
 void MainTask16ms()
 {
+
+#if 0
+   static uint8_t Selector = 0;
+   switch ( Selector++ )
+   {
+      case 0:
+   priv_SendC( oPID_Omega.Parameters.e_sum, 2);
+         break;
+      case 1:
+   priv_SendC( oPID_Omega.Parameters.e, 3);
+         break;
+      case 2:
+         priv_SendC( oPID_Omega.Parameters.OutSignal + AngleOffset, 12);
+         break;
+      default:
+         break;
+   }
+   if( Selector > 2 ) Selector  = 0;
+#endif
+
+#if 1
+   static uint8_t Selector = 0;
+   switch ( Selector++ )
+   {
+      case 0:
+   priv_SendC( oMpuKalman.AngleFiltered, 2);
+         break;
+      case 1:
+   priv_SendC( oPID_Angle.Parameters.Kp, 6);
+         break;
+      case 2:
+   priv_SendC( oPID_Angle.Parameters.Ki, 7);
+         break;
+      case 3:
+   priv_SendC( oPID_Angle.Parameters.Kd, 8);
+         break;
+      case 4:
+   priv_SendC( oEncoderLeft.Parameters.Omega, 4);
+         break;
+      case 5:
+   priv_SendC( oPID_Omega.Parameters.Kp, 9);
+         break;
+      case 6:
+   priv_SendC( oPID_Omega.Parameters.Ki, 10);
+         break;
+      case 7:
+   priv_SendC( oPID_Omega.Parameters.Kd, 11);
+         break;
+      case 8:
+   priv_SendC( oPID_Omega.Parameters.OutSignal + AngleOffset, 12);
+         break;
+      case 9:
+   priv_SendC( oPID_Omega.Parameters.OutSignal, 13);
+         break;
+      case 10:
+   priv_SendC( oPID_Angle.Parameters.OutSignal, 14);
+         break;
+      case 11:
+   priv_SendC( oPID_Omega.Parameters.e_sum, 15);
+         break;
+      case 12:
+   priv_SendC( PWM, 16);
+         break;
+      default:
+         break;
+   }
+   if( Selector > 12 ) Selector  = 0;
+#endif
+}
+
+void MainTask40ms()
+{
    LED1_Toggle;
+
+#if 1
+   /*! Calculate mean omega of the robot */
+   float OmegaMean = ( oEncoderLeft.Perform( &oEncoderLeft.Parameters )
+                     + oEncoderRight.Perform( &oEncoderRight.Parameters )
+                     ) / 2;
+
+   /*! Apply PID filter to motors to get required omega */
+   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
+   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset );
+#endif
 
 #if 0
    static float f=0.0f;
@@ -148,7 +267,6 @@ void MainTask16ms()
       if(f<=-180) up=1;
    }
    oServosArm.SetAngle(SelectServoArmLeft, f);
-
 #endif
 }
 
@@ -157,17 +275,4 @@ void MainTask128ms()
    LED2_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Logic_CheckInputs();
-
-   /*! Calculate mean omega of the robot */
-   float OmegaMean = ( oEncoderLeft.Perform( &oEncoderLeft.Parameters )
-                      +oEncoderRight.Perform( &oEncoderRight.Parameters )
-                     ) / 2;
-
-   priv_SendC(oEncoderLeft.Parameters.Omega, 5);
-
-#if 1
-   /*! Apply PID filter to motors to get required omega */
-   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, oEncoderLeft.Parameters.Omega );
-   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal );
-#endif
 }

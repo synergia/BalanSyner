@@ -72,13 +72,13 @@ static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
       case SelectMotorRight:
          if( Sign )
          {
-            GPIO_SetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
-            GPIO_ResetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
+            GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
+            GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
          }
          else
          {
-            GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
-            GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
+            GPIO_SetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
+            GPIO_ResetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
          }
          TIM_MOTORS->MOT2_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;;
          break;
@@ -215,13 +215,17 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.SetKp( &oPID_Angle.Parameters, 30.0f );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 40.0f );
    oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
-   oPID_Angle.SetKd( &oPID_Angle.Parameters, 5.0f );
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 1.0f );
+   oPID_Angle.Parameters.MaxOutSignal = 1000.0f; /*!< Max output PWM = 1000. */
+   oPID_Angle.Parameters.iWindUp = 200;
 
    PID_Initialize( &oPID_Omega );
    oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.005f );
-   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.001f );
+   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.05f );
    oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
+   oPID_Omega.Parameters.MaxOutSignal = 35.0f; /*!< Max output angle = 30deg. */
+   oPID_Omega.Parameters.iWindUp = 250;
 }
 

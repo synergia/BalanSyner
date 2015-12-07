@@ -14,6 +14,7 @@
 //-----------------------Private prototypes----------------------------//
 extern void MainTask8ms();
 extern void MainTask16ms();
+extern void MainTask40ms();
 extern void MainTask128ms();
 
 //-----------------------Private functions-----------------------------//
@@ -29,18 +30,25 @@ void InitializeSysTick()
 
 void SysTick_Handler(void)
 {
-   static uint16_t Counter = 128;
+   static uint16_t Counter = 384;
 
    //-------------------------8ms tasks-------------------------------------//
    --Counter;
 
    MainTask8ms();
 
-   //-------------------------8ms tasks-------------------------------------//
+   //-------------------------16ms tasks------------------------------------//
 
    if( 0 == ( Counter % 2 ) )
    {
       MainTask16ms();
+   }
+
+   //-------------------------40ms tasks-------------------------------------//
+
+   if( 0 == ( Counter % 5 ) )
+   {
+      MainTask40ms();
    }
 
    //-------------------------128ms tasks-------------------------------------//
@@ -52,7 +60,7 @@ void SysTick_Handler(void)
    //-------------------------1000ms(1Hz) tasks-------------------------------------//
    if( 0 == Counter )
    {
-      Counter = 128;
+      Counter = 384;
    }
 
 }

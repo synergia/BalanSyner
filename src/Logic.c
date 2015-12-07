@@ -9,6 +9,7 @@
 #include "stm32f30x.h"
 #include "Logic.h"
 
+#include "../Drivers/LEDs/LED.h"
 #include "../Drivers/BT/BT.h"
 #include "../Drivers/MPU/MPU.h"
 #include "../Drivers/Motors/Motors.h"
@@ -51,6 +52,8 @@ typedef enum
    WritePidOmegaKd         = 109u,
    WritePidDstOmega        = 110u,
    WriteOmega              = 150u, //TODO: delete it
+   WriteStepStart          = 151u, //TODO: delete it
+   WriteStepStop           = 152u, //TODO: delete it
 
 }Addresses_T;
 //-----------------------Private variables-----------------------------//
@@ -282,13 +285,20 @@ static void priv_WriteOmega( uint8_t *Command )
  *
  *    PB - parity check TODO: implement some
  */
-#include "../Drivers/LEDs/LED.h"
 void Logic_CheckInputs()
 {
    priv_SendDummy();
+   static uint8_t uSafetyCounter = 0;
+#if 0
+   uSafetyCounter++;
+   if(uSafetyCounter>5)
+   {
+      oMotor.SetSpeed( SelectMotorLeft, 0.0f );
+      oMotor.SetSpeed( SelectMotorRight, 0.0f );
+   }
+#endif
    while( 0u != oBluetooth.IsFifoEmpty( &oBluetooth.oBtRxFifo ) )
    {
-
       /*!
        * Check for first start byte
        */
@@ -397,6 +407,16 @@ void Logic_CheckInputs()
                      break;
                   case WriteOmega:
                      priv_WriteOmega( &Command[1] );
+                     break;
+                  case WriteStepStart:
+                     uSafetyCounter=0;
+                     oMotor.SetSpeed( SelectMotorLeft, 300.0f );
+                     oMotor.SetSpeed( SelectMotorRight, 300.0f );
+                     break;
+                  case WriteStepStop:
+                     oMotor.SetSpeed( SelectMotorLeft, 0.0f );
+                     oMotor.SetSpeed( SelectMotorRight, 0.0f );
+
                      break;
                   default:
                      break;
