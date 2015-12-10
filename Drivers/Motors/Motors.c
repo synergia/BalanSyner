@@ -96,21 +96,21 @@ static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
    if( -180 > Angle ) Angle = -180;
    if(  180 < Angle ) Angle =  180;
 
-   Angle = (uint16_t) 2*(Angle)+540;
+   Angle = (uint16_t) 2 * ( Angle ) + 540;
 
-   switch (ServoSelector)
+   switch ( ServoSelector )
    {
    case SelectServoArmLeft:
-      priv_SetAngleArmLeft(Angle);
+      priv_SetAngleArmLeft( Angle );
       break;
    case SelectServoArmRight:
-      priv_SetAngleArmRight(Angle);
+      priv_SetAngleArmRight( Angle );
       break;
    case SelectServoCamHor:
-      priv_SetAngleCamHor(Angle);
+      priv_SetAngleCamHor( Angle );
       break;
    case SelectServoCamVer:
-      priv_SetAngleCamVer(Angle);
+      priv_SetAngleCamVer( Angle );
       break;
    default:
       break;
@@ -168,7 +168,6 @@ void InitializeEncoders()
    /*! Software */
    oEncoderLeft.Parameters.Dt = DT_slow;
    oEncoderLeft.Parameters.TIMx = TIM_ENC1;
-   oEncoderLeft.Parameters.Counter = CounterDef;
    oEncoderLeft.Parameters.Omega = 0u;
    oEncoderLeft.Perform = priv_EncoderPerform;
    oEncoderLeft.GetOmega = priv_GetOmega;
@@ -176,7 +175,7 @@ void InitializeEncoders()
 
    oEncoderRight.Parameters.Dt = DT_slow;
    oEncoderRight.Parameters.TIMx = TIM_ENC2;
-   oEncoderRight.Parameters.Counter = CounterDef;
+
    oEncoderRight.Parameters.Omega = 0u;
    oEncoderRight.Perform = priv_EncoderPerform;
    oEncoderRight.GetOmega = priv_GetOmega;
@@ -214,16 +213,16 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.SetKp( &oPID_Angle.Parameters, 40.0f );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 32.0f );
    oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
-   oPID_Angle.SetKd( &oPID_Angle.Parameters, 17.0f );
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 5.0f );
    oPID_Angle.Parameters.MaxOutSignal = 1000.0f; /*!< Max output PWM = 1000. */
    oPID_Angle.Parameters.iWindUp = 0;
 
    PID_Initialize( &oPID_Omega );
    oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.005f );
    oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.095f );
-   oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.09f );
+   oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
    oPID_Omega.Parameters.MaxOutSignal = 35.0f; /*!< Max output angle = 30deg. */
    oPID_Omega.Parameters.iWindUp = 150;
 }

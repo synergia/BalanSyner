@@ -4,9 +4,9 @@
 #include "../Drivers/PinDefines.h"
 #include "_LibMPU6050.h"
 #include "MPU.h"
-#include "GPIO.h"
-#include "I2C.h"
-#include "RCC.h"
+#include "../StmPeriphInit/GPIO.h"
+#include "../StmPeriphInit/I2C.h"
+#include "../StmPeriphInit/RCC.h"
 #include "../Framework/Kalman/KalmanFilter.h"
 
 //-----------------------Private typedefs------------------------------//

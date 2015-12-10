@@ -47,7 +47,6 @@ typedef struct
 {
    float Dt;
    float Omega;
-   uint16_t Counter;
    TIM_TypeDef * TIMx;     /*!< which timer */
 }EncoderParameters_T;
 
