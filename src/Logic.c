@@ -36,7 +36,7 @@ typedef enum
    ReadPidAngleKi       = 7u,
    ReadPidAngleKd       = 8u,
    ReadPidOmegaKp       = 9u,
-   ReadPidOmegaKi       = 10u,
+   ReadPidOmegaKi       = 18u,
    ReadPidOmegaKd       = 11u,
    ReadPidDstOmega      = 12u,
 

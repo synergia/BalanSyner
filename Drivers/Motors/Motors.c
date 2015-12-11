@@ -26,6 +26,9 @@
 #define TicksPerRevolution 1200u
 #define AnglePerTick       0.3f
 #define RpmPerTIck         0.05f
+#define WheelDiameter      8.0f /*! [cm] */
+#define Pi                 3.14159256359
+#define CmPerTick          ( WheelDiameter * Pi / TicksPerRevolution )
 
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
@@ -144,6 +147,7 @@ static float priv_EncoderPerform( EncoderParameters_T *pkThis )
 
    /*! Calculate angular speed of shaft */
    pkThis->Omega = ( DeltaTicks * RpmPerTIck ) / pkThis->Dt; /*!< Shaft Omega [RPM] */
+   pkThis->Distance += ( DeltaTicks * CmPerTick );
 
    /*! Reset counter so it cannot get out of range */
    SetCounter( pkThis->TIMx, CounterDef );
@@ -169,14 +173,15 @@ void InitializeEncoders()
    oEncoderLeft.Parameters.Dt = DT_slow;
    oEncoderLeft.Parameters.TIMx = TIM_ENC1;
    oEncoderLeft.Parameters.Omega = 0u;
+   oEncoderLeft.Parameters.Distance = 0u;
    oEncoderLeft.Perform = priv_EncoderPerform;
    oEncoderLeft.GetOmega = priv_GetOmega;
    oEncoderLeft.SetCounter = SetCounter; /*! Timer function */
 
    oEncoderRight.Parameters.Dt = DT_slow;
    oEncoderRight.Parameters.TIMx = TIM_ENC2;
-
    oEncoderRight.Parameters.Omega = 0u;
+   oEncoderRight.Parameters.Distance = 0u;
    oEncoderRight.Perform = priv_EncoderPerform;
    oEncoderRight.GetOmega = priv_GetOmega;
    oEncoderRight.SetCounter = SetCounter; /*! Timer function */
@@ -213,17 +218,19 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.SetKp( &oPID_Angle.Parameters, 32.0f );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 18.1f );
    oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
-   oPID_Angle.SetKd( &oPID_Angle.Parameters, 5.0f );
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 120.0f );
    oPID_Angle.Parameters.MaxOutSignal = 1000.0f; /*!< Max output PWM = 1000. */
-   oPID_Angle.Parameters.iWindUp = 0;
+   oPID_Angle.Parameters.iWindUp = 0.0f;
+   oPID_Angle.Parameters.dWindUp = 500.0f;
 
    PID_Initialize( &oPID_Omega );
-   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.005f );
-   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.095f );
+   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.234f );
+   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.011f );
    oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
-   oPID_Omega.Parameters.MaxOutSignal = 35.0f; /*!< Max output angle = 30deg. */
-   oPID_Omega.Parameters.iWindUp = 150;
+   oPID_Omega.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
+   oPID_Omega.Parameters.iWindUp = 280.0f;
+   oPID_Omega.Parameters.dWindUp = 150.0f;
 }
 

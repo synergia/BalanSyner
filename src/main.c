@@ -143,13 +143,15 @@ void MainTask8ms()
       oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
 
       PWM = oPID_Angle.Parameters.OutSignal;
+      if     ( 0 < PWM && PWM <  64 ) PWM =  (PWM/10)*(PWM/10);
+      else if( 0 > PWM && PWM > -64 ) PWM = -(PWM/10)*(PWM/10);
       if( 0 < oMpuKalman.AngleFiltered )
       {
-         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.5;// + MinPwmToReact;
+         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 0.5;// - MinPwmToReact;
       }
       else
       {
-         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) / 1.5;// - MinPwmToReact;
+         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 0.5;// + MinPwmToReact;
       }
 
       if( 1000 < PWM )
@@ -217,7 +219,7 @@ void MainTask16ms()
    priv_SendC( oPID_Omega.Parameters.Kp, 9);
          break;
       case 6:
-   priv_SendC( oPID_Omega.Parameters.Ki, 10);
+   priv_SendC( oPID_Omega.Parameters.Ki, 18);
          break;
       case 7:
    priv_SendC( oPID_Omega.Parameters.Kd, 11);
@@ -237,14 +239,17 @@ void MainTask16ms()
       case 12:
    priv_SendC( PWM, 16);
          break;
+      case 13:
+   priv_SendC( oEncoderLeft.Parameters.Distance, 17);
+         break;
       default:
          break;
    }
-   if( Selector > 12 ) Selector  = 0;
+   if( Selector > 13 ) Selector  = 0;
 #endif
 }
 
-void MainTask40ms()
+void MainTask32ms()
 {
    LED1_Toggle;
 

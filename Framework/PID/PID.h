@@ -21,6 +21,7 @@ typedef struct
    float e_sum;         /*! Summarized error */
    float iWindUp;       /*! Max value of e_sum */
    float e_last;        /*! Last error */
+   float dWindUp;       /*! Max derivative signal */
    float OutSignal;     /*! Output signal */
    float MaxOutSignal;  /*! Maximum output signal */
    float DstValue;      /*! Value to be reached by regulator */

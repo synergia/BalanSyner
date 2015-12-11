@@ -47,6 +47,7 @@ typedef struct
 {
    float Dt;
    float Omega;
+   float Distance;
    TIM_TypeDef * TIMx;     /*!< which timer */
 }EncoderParameters_T;
 
@@ -55,6 +56,7 @@ typedef struct
    EncoderParameters_T Parameters;
 
    float ( *Perform )( EncoderParameters_T *pkThis );
+   float ( *GetDistance )( EncoderParameters_T *pkThis );
    float ( *GetOmega )( EncoderParameters_T *pkThis );
    void ( *SetCounter )( TIM_TypeDef *TIMx, uint32_t NewValue );
 }Encoder_C;

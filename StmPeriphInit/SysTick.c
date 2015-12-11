@@ -14,7 +14,7 @@
 //-----------------------Private prototypes----------------------------//
 extern void MainTask8ms();
 extern void MainTask16ms();
-extern void MainTask40ms();
+extern void MainTask32ms();
 extern void MainTask128ms();
 
 //-----------------------Private functions-----------------------------//
@@ -46,9 +46,9 @@ void SysTick_Handler(void)
 
    //-------------------------40ms tasks-------------------------------------//
 
-   if( 0 == ( Counter % 5 ) )
+   if( 0 == ( Counter % 4 ) )
    {
-      MainTask40ms();
+      MainTask32ms();
    }
 
    //-------------------------128ms tasks-------------------------------------//

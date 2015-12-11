@@ -34,40 +34,33 @@ static void priv_PID_Apply( PID_Parameters_T *PID, float ReadValue )
 
    /*!< Check if integral error doesn't exceed boundaries */
    if( PID->e_sum > PID->iWindUp )
-   {
       PID->e_sum = PID->iWindUp;
-   }
    else if( PID->e_sum < -PID->iWindUp )
-   {
       PID->e_sum = -PID->iWindUp;
-   }
 
    /*! Do math only if needed */
    PID->OutSignal = 0;
    if( 0 != PID->Kp )
-   {
       PID->OutSignal = PID->Kp * PID->e;
-   }
 
    if( 0 != PID->Ki )
-   {
       PID->OutSignal += PID->Ki * PID->e_sum;
-   }
 
    if( 0 != PID->Kd )
    {
-      PID->OutSignal += PID->Kd * ( PID->e - PID->e_last );
+      float dOut = PID->Kd * ( PID->e - PID->e_last );
+
+      if( dOut > PID->dWindUp )        dOut = PID->dWindUp;
+      else if( dOut < -PID->dWindUp )  dOut = -PID->dWindUp;
+
+      PID->OutSignal += dOut;
    }
 
    /*! Windup prevention */
    if( PID->OutSignal > PID->MaxOutSignal )
-   {
       PID->OutSignal = PID->MaxOutSignal;
-   }
    else if( PID->OutSignal < -PID->MaxOutSignal )
-   {
       PID->OutSignal = -PID->MaxOutSignal;
-   }
 
    PID->e_last = PID->e;
 }
