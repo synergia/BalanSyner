@@ -30,6 +30,9 @@
 #define Pi                 3.14159256359
 #define CmPerTick          ( WheelDiameter * Pi / TicksPerRevolution )
 
+#define SerHorOffset       10.0f
+#define SerVerOffset       64.0f
+
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
 
@@ -60,7 +63,7 @@ static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
       switch (MotorSelector)
       {
       case SelectMotorLeft:
-         if( Sign )
+         if( !Sign )
          {
             GPIO_SetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
             GPIO_ResetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
@@ -73,7 +76,7 @@ static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
          TIM_MOTORS->MOT1_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;
          break;
       case SelectMotorRight:
-         if( Sign )
+         if( !Sign )
          {
             GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
             GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
@@ -99,21 +102,19 @@ static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
    if( -180 > Angle ) Angle = -180;
    if(  180 < Angle ) Angle =  180;
 
-   Angle = (uint16_t) 2 * ( Angle ) + 540;
-
    switch ( ServoSelector )
    {
    case SelectServoArmLeft:
-      priv_SetAngleArmLeft( Angle );
+      priv_SetAngleArmLeft( (uint16_t) 2 * ( Angle ) + 540 );
       break;
    case SelectServoArmRight:
-      priv_SetAngleArmRight( Angle );
+      priv_SetAngleArmRight( (uint16_t) 2 * ( -Angle ) + 540 );
       break;
    case SelectServoCamHor:
-      priv_SetAngleCamHor( Angle );
+      priv_SetAngleCamHor( (uint16_t) 2 * ( Angle + SerHorOffset ) + 540 );
       break;
    case SelectServoCamVer:
-      priv_SetAngleCamVer( Angle );
+      priv_SetAngleCamVer( (uint16_t) 4 * ( -Angle ) + 540 + SerVerOffset );
       break;
    default:
       break;
@@ -212,7 +213,7 @@ void InitializeServos()
    InitializeGPIO(DriverSelectServosCam);
 
    /*! Software */
-   oServosArm.SetAngle = priv_ServoSetAngle;
+   oServos.SetAngle = priv_ServoSetAngle;
 }
 
 void InitializePIDs()
@@ -230,7 +231,7 @@ void InitializePIDs()
    oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.011f );
    oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
    oPID_Omega.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
-   oPID_Omega.Parameters.iWindUp = 280.0f;
+   oPID_Omega.Parameters.iWindUp = 350.0f;
    oPID_Omega.Parameters.dWindUp = 150.0f;
 }
 

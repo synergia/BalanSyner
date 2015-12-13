@@ -34,7 +34,7 @@ typedef struct
 }KalmanStruct;
 
 //-----------------------Private defines-------------------------------//
-#define Q_AngleDef      0.00653f
+#define Q_AngleDef      0.013f
 #define R_MeasureDef    0.42703f
 
 //-----------------------Private macros--------------------------------//

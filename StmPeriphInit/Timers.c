@@ -109,10 +109,7 @@ static void priv_InitializeEncoderLeft()
    /* Prescaler configuration */
    TIM_PrescalerConfig(TIM_ENC1, PrescalerValue, TIM_PSCReloadMode_Immediate);
 
-   TIM_EncoderInterfaceConfig(TIM_ENC1, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
-
-   /* TIM Interrupts enable */
-   //TIM_ITConfig(TIM_ENC1, TIM_IT_Update, ENABLE);
+   TIM_EncoderInterfaceConfig(TIM_ENC1, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Falling);
 
    /* TIM3 enable counter */
    TIM_Cmd(TIM_ENC1, ENABLE);
@@ -138,9 +135,6 @@ static void priv_InitializeEncoderRight()
    TIM_PrescalerConfig(TIM_ENC2, PrescalerValue, TIM_PSCReloadMode_Immediate);
 
    TIM_EncoderInterfaceConfig(TIM_ENC2, TIM_EncoderMode_TI12, TIM_ICPolarity_Rising, TIM_ICPolarity_Rising);
-
-   /* TIM Interrupts enable */
-   TIM_ITConfig(TIM_ENC2, TIM_IT_Update, ENABLE);
 
    /* TIM3 enable counter */
    TIM_Cmd(TIM_ENC2, ENABLE);

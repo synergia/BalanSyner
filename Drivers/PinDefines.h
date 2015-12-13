@@ -80,7 +80,7 @@ typedef enum
 #define MOT1_DIRB_PIN      GPIO_Pin_5
 
 /*!< ENCODER 1 */
-#define TIM_AF_ENCODER     GPIO_AF_2
+#define TIM_AF_ENC1     GPIO_AF_2
 
 #define TIM_ENC1           TIM4
 #define TIM_ENC1_IRQn      TIM4_IRQn
@@ -109,6 +109,8 @@ typedef enum
 #define MOT1_PWM_SOURCE    GPIO_PinSource0
 
 /*!< ENCODER 2 */
+#define TIM_AF_ENC2        GPIO_AF_1
+
 #define TIM_ENC2           TIM2
 #define TIM_ENC2_IRQn      TIM2_IRQn
 #define ENC2A_CHANNEL      CCR1

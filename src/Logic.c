@@ -51,10 +51,9 @@ typedef enum
    WritePidOmegaKi         = 108u,
    WritePidOmegaKd         = 109u,
    WritePidDstOmega        = 110u,
-   WriteOmega              = 150u, //TODO: delete it
-   WriteStepStart          = 151u, //TODO: delete it
-   WriteStepStop           = 152u, //TODO: delete it
-
+   WriteArmAngle           = 111u,
+   WriteSerHor             = 112u,
+   WriteSerVer             = 113u,
 }Addresses_T;
 //-----------------------Private variables-----------------------------//
 
@@ -89,7 +88,9 @@ static void priv_WritePidOmegaKp( uint8_t *Command );
 static void priv_WritePidOmegaKi( uint8_t *Command );
 static void priv_WritePidOmegaKd( uint8_t *Command );
 static void priv_WritePidDstOmega( uint8_t *Command );
-static void priv_WriteOmega( uint8_t *Command );
+static void priv_WriteArmAngle( uint8_t *Command );
+static void priv_WriteSerHor( uint8_t *Command );
+static void priv_WriteSerVer( uint8_t *Command );
 
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
@@ -255,10 +256,22 @@ static void priv_WritePidDstOmega( uint8_t *Command )
    oPID_Omega.SetDstValue( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
 }
 
-static void priv_WriteOmega( uint8_t *Command )
+static void priv_WriteArmAngle( uint8_t *Command )
 {
-   oMotor.SetSpeed( SelectMotorLeft, priv_CommandToFloat( Command ) );
+   oServos.SetAngle( SelectServoArmLeft, priv_CommandToFloat( Command ) );
+   oServos.SetAngle( SelectServoArmRight, priv_CommandToFloat( Command ) );
 }
+
+static void priv_WriteSerHor( uint8_t *Command )
+{
+   oServos.SetAngle( SelectServoCamHor, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WriteSerVer( uint8_t *Command )
+{
+   oServos.SetAngle( SelectServoCamVer, priv_CommandToFloat( Command ) );
+}
+
 //-----------------------Public functions------------------------------//
 /*!
  * fn:            Logic_CheckInputs
@@ -376,7 +389,7 @@ void Logic_CheckInputs()
                      priv_WriteKalmanQAngleDef();
                      break;
                   case WriteKalmanQAngle:
-                     priv_WriteKalmanQAngle( &Command[1] ); //send addres of first value byte
+                     priv_WriteKalmanQAngle( &Command[1] ); //send address of first value byte
                      break;
                   case WriteKalmanRMeasureDef:
                      priv_WriteKalmanRMeasureDef();
@@ -405,18 +418,14 @@ void Logic_CheckInputs()
                   case WritePidDstOmega:
                      priv_WritePidDstOmega( &Command[1] );
                      break;
-                  case WriteOmega:
-                     priv_WriteOmega( &Command[1] );
+                  case WriteArmAngle:
+                     priv_WriteArmAngle( &Command[1] );
                      break;
-                  case WriteStepStart:
-                     uSafetyCounter=0;
-                     oMotor.SetSpeed( SelectMotorLeft, 300.0f );
-                     oMotor.SetSpeed( SelectMotorRight, 300.0f );
+                  case WriteSerHor:
+                     priv_WriteSerHor( &Command[1] );
                      break;
-                  case WriteStepStop:
-                     oMotor.SetSpeed( SelectMotorLeft, 0.0f );
-                     oMotor.SetSpeed( SelectMotorRight, 0.0f );
-
+                  case WriteSerVer:
+                     priv_WriteSerVer( &Command[1] );
                      break;
                   default:
                      break;

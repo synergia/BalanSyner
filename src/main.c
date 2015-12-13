@@ -106,8 +106,8 @@ int main(void)
 
 
    oMotor.SetSpeed( SelectMotorLeft, 0.0f );
-   oServosArm.SetAngle( SelectServoArmLeft, 0.0f );
-   oServosArm.SetAngle( SelectServoArmRight, 30.0f );
+   oServos.SetAngle( SelectServoArmLeft, 0.0f );
+   oServos.SetAngle( SelectServoArmRight, 0.0f );
    while (1)
    {
 
@@ -143,8 +143,8 @@ void MainTask8ms()
       oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
 
       PWM = oPID_Angle.Parameters.OutSignal;
-      if     ( 0 < PWM && PWM <  64 ) PWM =  (PWM/10)*(PWM/10);
-      else if( 0 > PWM && PWM > -64 ) PWM = -(PWM/10)*(PWM/10);
+      if     ( 0 < PWM && PWM <  64 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
+      else if( 0 > PWM && PWM > -64 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
       if( 0 < oMpuKalman.AngleFiltered )
       {
          PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 0.5;// - MinPwmToReact;
@@ -163,7 +163,6 @@ void MainTask8ms()
          PWM = -1000;
       }
 
-
       oMotor.SetSpeed( SelectMotorLeft, PWM );
       oMotor.SetSpeed( SelectMotorRight, PWM );
    }
@@ -172,31 +171,40 @@ void MainTask8ms()
       oMotor.SetSpeed( SelectMotorLeft, 0.0f );
       oMotor.SetSpeed( SelectMotorRight, 0.0f );
    }
+
+   /*!
+    * Set servo cam vertical
+    */
+   //if( -35.0f < oMpuKalman.AngleFiltered && 60.0f > oMpuKalman.AngleFiltered)
+      //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
 }
 
 void MainTask16ms()
 {
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-   priv_SendC( oPID_Omega.Parameters.e_sum, 2);
+         priv_SendC( oMpuKalman.GyroRaw, 19 );
          break;
       case 1:
-   priv_SendC( oPID_Omega.Parameters.e, 3);
+         priv_SendC( oMpuKalman.AngleRaw, 3 );
          break;
       case 2:
-         priv_SendC( oPID_Omega.Parameters.OutSignal + AngleOffset, 12);
+         priv_SendC( oMpuKalman.AngleFiltered, 2 );
+         break;
+      case 3:
+         priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
          break;
       default:
          break;
    }
-   if( Selector > 2 ) Selector  = 0;
+   if( Selector > 0 ) Selector  = 0;
 #endif
 
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -213,7 +221,7 @@ void MainTask16ms()
    priv_SendC( oPID_Angle.Parameters.Kd, 8);
          break;
       case 4:
-   priv_SendC( oEncoderLeft.Parameters.Omega, 4);
+   priv_SendC( oEncoderRight.Parameters.Omega, 4);
          break;
       case 5:
    priv_SendC( oPID_Omega.Parameters.Kp, 9);
@@ -260,24 +268,10 @@ void MainTask32ms()
                      ) / 2;
 
    /*! Apply PID filter to motors to get required omega */
-   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
-   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset );
+   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, -OmegaMean );
+   //oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal );
 #endif
 
-#if 0
-   static float f=0.0f;
-   static uint8_t up = 1;
-   if(up)
-   {
-      f += 1;
-      if(f>=180) up=0;
-   }
-   else{
-      f -= 1;
-      if(f<=-180) up=1;
-   }
-   oServosArm.SetAngle(SelectServoArmLeft, f);
-#endif
 }
 
 void MainTask128ms()

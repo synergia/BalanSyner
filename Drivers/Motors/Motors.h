@@ -77,7 +77,7 @@ typedef struct
 Encoder_C oEncoderLeft;
 Encoder_C oEncoderRight;
 Motors_C oMotor;
-Servos_C oServosArm;
+Servos_C oServos;
 PID_Struct_C oPID_Omega;
 PID_Struct_C oPID_Angle;
 

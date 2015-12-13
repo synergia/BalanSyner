@@ -198,18 +198,18 @@ if(errorstatus != 0){
    int16_t Z = (zhigh << 8 | zlow);
 
    static float tempAngle=0;
-   tempAngle = radiansToDegrees( atanf( ( (float)X )/ ( (float)Z ) ) );
-   if(   ( X < 0 && tempAngle < 0 )
-      || ( X > 0 && tempAngle > 0 )
+   tempAngle = radiansToDegrees( atanf( ( (float)Z )/ ( (float)X ) ) );
+   if(   ( Z < 0 && tempAngle < 0 )
+      || ( Z > 0 && tempAngle > 0 )
       )
    {
       *Angle = tempAngle;
    }
-   else if( X > 0 && tempAngle < 0 )
+   else if( Z > 0 && tempAngle < 0 )
    {
       *Angle = 180 + tempAngle;
    }
-   else if( X < 0 && tempAngle > 0 )
+   else if( Z < 0 && tempAngle > 0 )
    {
       *Angle = -180 + tempAngle;
    }
@@ -245,9 +245,25 @@ inline MPU6050_errorstatus MPU6050_Get_GyroY_Data( float *DegPerSecond )
 #endif
 
    static uint16_t Range = 1000;
-   int16_t Y = ( yhigh << 8 | ylow );
-   *DegPerSecond = -( float )( ( ( float ) Y * Range ) / ( 1 << 15 ) ) - GYRO_OFFSET; //measured value
+   int16_t Y = (int16_t)( yhigh << 8 | ylow );
 
+   static float Last=0;
+   *DegPerSecond =  ( float )( ( ( float ) Y * Range ) / ( 1 << 15 ) );
+
+
+   if(   ( *DegPerSecond >  7.6f && *DegPerSecond <  7.87f)
+      || ( *DegPerSecond < -7.6f && *DegPerSecond > -7.87f) )
+   {
+      if( Last < 1 && Last > -1 )
+      {
+         *DegPerSecond = Last;
+      }
+      else
+      {
+         Last = *DegPerSecond;
+      }
+   }
+   *DegPerSecond -= GYRO_OFFSET;
    return errorstatus;
 }
 

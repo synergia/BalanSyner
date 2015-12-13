@@ -185,26 +185,26 @@ static void priv_InitializeEncoders()
    GPIO_InitTypeDef GPIO_InitStruct;
 
    /*! ENCODER 1 */
-   GPIO_PinAFConfig(ENC1_GPIO, ENC1A_SOURCE, TIM_AF_ENCODER);
-   GPIO_PinAFConfig(ENC1_GPIO, ENC1B_SOURCE, TIM_AF_ENCODER);
+   GPIO_PinAFConfig( ENC1_GPIO, ENC1A_SOURCE, TIM_AF_ENC1 );
+   GPIO_PinAFConfig( ENC1_GPIO, ENC1B_SOURCE, TIM_AF_ENC1 );
 
    GPIO_InitStruct.GPIO_Pin =  ENC1A_PIN | ENC1B_PIN;
    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
-   GPIO_Init(ENC1_GPIO, &GPIO_InitStruct);
+   GPIO_Init( ENC1_GPIO, &GPIO_InitStruct );
 
    /*! ENCODER 2 */
-   GPIO_PinAFConfig(ENC2_GPIO, ENC2A_SOURCE, TIM_AF_ENCODER);
-   GPIO_PinAFConfig(ENC2_GPIO, ENC2B_SOURCE, TIM_AF_ENCODER);
+   GPIO_PinAFConfig( ENC2_GPIO, ENC2A_SOURCE, TIM_AF_ENC2 );
+   GPIO_PinAFConfig( ENC2_GPIO, ENC2B_SOURCE, TIM_AF_ENC2 );
 
    GPIO_InitStruct.GPIO_Pin =  ENC2A_PIN | ENC2B_PIN;
    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
    GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
    GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
-   GPIO_Init(ENC2_GPIO, &GPIO_InitStruct);
+   GPIO_Init( ENC2_GPIO, &GPIO_InitStruct );
 }
 
 //-----------------------Public functions------------------------------//
