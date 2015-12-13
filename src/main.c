@@ -108,6 +108,7 @@ int main(void)
    oMotor.SetSpeed( SelectMotorLeft, 0.0f );
    oServos.SetAngle( SelectServoArmLeft, 0.0f );
    oServos.SetAngle( SelectServoArmRight, 0.0f );
+   oServos.SetAngle( SelectServoCamVer, 0.0f );
    while (1)
    {
 
@@ -137,22 +138,28 @@ void MainTask8ms()
    oMpuKalman.ApplyFilter();
 
    /*! Stop motors when robot falls */
-   if( oMpuKalman.AngleFiltered < 50.0f && oMpuKalman.AngleFiltered > -50.0f )
+   if( oMpuKalman.AngleFiltered < 45.0f && oMpuKalman.AngleFiltered > -45.0f )
    {
       /*! Apply PID filter to motors to get required angle (output of omega regulator) */
       oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
 
       PWM = oPID_Angle.Parameters.OutSignal;
-      if     ( 0 < PWM && PWM <  64 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
-      else if( 0 > PWM && PWM > -64 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
-      if( 0 < oMpuKalman.AngleFiltered )
+      if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
+      else if( 0 > PWM && PWM > -100 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
+      if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
       {
-         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 0.5;// - MinPwmToReact;
+         if(PWM >  110) PWM =  110;
+         if(PWM < -110) PWM = -110;
+      }
+      /*if( 0 < oMpuKalman.AngleFiltered )
+      {
+         PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
       }
       else
       {
-         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 0.5;// + MinPwmToReact;
-      }
+         PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
+      }*/
+
 
       if( 1000 < PWM )
       {
@@ -175,25 +182,22 @@ void MainTask8ms()
    /*!
     * Set servo cam vertical
     */
-   //if( -35.0f < oMpuKalman.AngleFiltered && 60.0f > oMpuKalman.AngleFiltered)
-      //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+   //if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
+     //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
 }
 
 void MainTask16ms()
 {
 
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oMpuKalman.GyroRaw, 19 );
+         priv_SendC( oMpuKalman.AngleFiltered, 2 );
          break;
       case 1:
-         priv_SendC( oMpuKalman.AngleRaw, 3 );
-         break;
-      case 2:
-         priv_SendC( oMpuKalman.AngleFiltered, 2 );
+         priv_SendC( oMpuKalman.AngleRaw, 4 );
          break;
       case 3:
          priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
@@ -201,10 +205,10 @@ void MainTask16ms()
       default:
          break;
    }
-   if( Selector > 0 ) Selector  = 0;
+   if( Selector > 1 ) Selector  = 0;
 #endif
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -212,10 +216,10 @@ void MainTask16ms()
    priv_SendC( oMpuKalman.AngleFiltered, 2);
          break;
       case 1:
-   priv_SendC( oPID_Angle.Parameters.Kp, 6);
+   priv_SendC( PWM, 16);
          break;
       case 2:
-   priv_SendC( oPID_Angle.Parameters.Ki, 7);
+   priv_SendC( oPID_Omega.Parameters.e_sum, 15);
          break;
       case 3:
    priv_SendC( oPID_Angle.Parameters.Kd, 8);
@@ -226,34 +230,34 @@ void MainTask16ms()
       case 5:
    priv_SendC( oPID_Omega.Parameters.Kp, 9);
          break;
-      case 6:
+      case 9:
    priv_SendC( oPID_Omega.Parameters.Ki, 18);
          break;
-      case 7:
+      case 6:
    priv_SendC( oPID_Omega.Parameters.Kd, 11);
          break;
-      case 8:
-   priv_SendC( oPID_Omega.Parameters.OutSignal + AngleOffset, 12);
+      case 7:
+   priv_SendC( oPID_Omega.Parameters.OutSignal+AngleOffset, 12);
          break;
-      case 9:
+      case 84:
    priv_SendC( oPID_Omega.Parameters.OutSignal, 13);
          break;
-      case 10:
+      case 83:
    priv_SendC( oPID_Angle.Parameters.OutSignal, 14);
          break;
-      case 11:
-   priv_SendC( oPID_Omega.Parameters.e_sum, 15);
+      case 82:
+         priv_SendC( oPID_Angle.Parameters.Ki, 7);
          break;
-      case 12:
-   priv_SendC( PWM, 16);
+      case 8:
+   priv_SendC( oPID_Angle.Parameters.Kp, 6);
          break;
-      case 13:
+      case 81:
    priv_SendC( oEncoderLeft.Parameters.Distance, 17);
          break;
       default:
          break;
    }
-   if( Selector > 13 ) Selector  = 0;
+   if( Selector > 9 ) Selector  = 0;
 #endif
 }
 
@@ -268,8 +272,8 @@ void MainTask32ms()
                      ) / 2;
 
    /*! Apply PID filter to motors to get required omega */
-   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, -OmegaMean );
-   //oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal );
+   oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
+   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset);
 #endif
 
 }

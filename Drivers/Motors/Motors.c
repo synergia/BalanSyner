@@ -31,7 +31,7 @@
 #define CmPerTick          ( WheelDiameter * Pi / TicksPerRevolution )
 
 #define SerHorOffset       10.0f
-#define SerVerOffset       64.0f
+#define SerVerOffset       30.0f
 
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
@@ -111,7 +111,7 @@ static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
       priv_SetAngleArmRight( (uint16_t) 2 * ( -Angle ) + 540 );
       break;
    case SelectServoCamHor:
-      priv_SetAngleCamHor( (uint16_t) 2 * ( Angle + SerHorOffset ) + 540 );
+      priv_SetAngleCamHor( (uint16_t) 4 * ( Angle + SerHorOffset ) + 540 );
       break;
    case SelectServoCamVer:
       priv_SetAngleCamVer( (uint16_t) 4 * ( -Angle ) + 540 + SerVerOffset );
@@ -219,19 +219,19 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.SetKp( &oPID_Angle.Parameters, 18.1f );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 55.0f );
    oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
-   oPID_Angle.SetKd( &oPID_Angle.Parameters, 120.0f );
-   oPID_Angle.Parameters.MaxOutSignal = 1000.0f; /*!< Max output PWM = 1000. */
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 60.0f );
+   oPID_Angle.Parameters.MaxOutSignal = 800.0f; /*!< Max output PWM = 1000. */
    oPID_Angle.Parameters.iWindUp = 0.0f;
    oPID_Angle.Parameters.dWindUp = 500.0f;
 
    PID_Initialize( &oPID_Omega );
-   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.234f );
-   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.011f );
+   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.043f );
+   oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.0038f );
    oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
    oPID_Omega.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
-   oPID_Omega.Parameters.iWindUp = 350.0f;
+   oPID_Omega.Parameters.iWindUp = 150.0f;
    oPID_Omega.Parameters.dWindUp = 150.0f;
 }
 
