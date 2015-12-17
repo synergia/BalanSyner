@@ -27,12 +27,13 @@
 
 #include "../StmPeriphInit/SysTick.h"
 
+#include "../Drivers/Battery/Battery.h"
+#include "../Drivers/BT/BT.h"
 #include "../Drivers/Clock/clock.h"
 #include "../Drivers/LEDs/LED.h"
-#include "../Drivers/BT/BT.h"
-#include "../Drivers/Wifi/Wifi.h"
-#include "../Drivers/MPU/MPU.h"
 #include "../Drivers/Motors/Motors.h"
+#include "../Drivers/MPU/MPU.h"
+#include "../Drivers/Wifi/Wifi.h"
 
 #include "Logic.h"
 #include "../Framework/PID/PID_Usr.h"
@@ -63,6 +64,10 @@ int main(void)
 
 #ifdef _USE_MOTORS
    InitializeMotors();
+#endif
+
+#ifdef _USE_ADC_BATTERY
+   InitializeBattery();
 #endif
 
 #ifdef _USE_ENCODERS
@@ -189,12 +194,12 @@ void MainTask8ms()
 void MainTask16ms()
 {
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oMpuKalman.AngleFiltered, 2 );
+         priv_SendC( oBattery.GetVoltage(), 2 );
          break;
       case 1:
          priv_SendC( oMpuKalman.AngleRaw, 4 );
@@ -205,10 +210,10 @@ void MainTask16ms()
       default:
          break;
    }
-   if( Selector > 1 ) Selector  = 0;
+   if( Selector > 0 ) Selector  = 0;
 #endif
 
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -246,7 +251,7 @@ void MainTask16ms()
    priv_SendC( oPID_Angle.Parameters.OutSignal, 14);
          break;
       case 82:
-         priv_SendC( oPID_Angle.Parameters.Ki, 7);
+   priv_SendC( oPID_Angle.Parameters.Ki, 7);
          break;
       case 8:
    priv_SendC( oPID_Angle.Parameters.Kp, 6);

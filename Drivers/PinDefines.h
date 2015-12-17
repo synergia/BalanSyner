@@ -19,6 +19,8 @@ typedef enum
    DriverSelectServosArm,
    DriverSelectServosCam,
    DriverSelectEncoders,
+   DriverSelectBattery,
+   DriverSelectSharp,
 } DriverSelector_T;
 
 //-----------------------Public defines-------------------------------//
@@ -31,7 +33,7 @@ typedef enum
 #define _USE_LED_14
 //#define _USE_LED_EYE
 //#define _USE_LED_NUCLEO
-
+#define _USE_ADC_BATTERY
 #define _USE_BT
 //#define _USE_WIFI
 //#define _USE_PI
@@ -154,15 +156,17 @@ typedef enum
 /*!
  * ADC
  */
+#define ADC_SHARP          ADC4
 #define ADC_SHARP_GPIO     GPIOB
 #define ADC_SHARP_PIN      GPIO_Pin_15
+#define ADC_SHARP_SOURCE   GPIO_PinSource15
+#define ADC_SHARP_CHANNEL  ADC_Channel_5
 
-#define ADC_BATTERY_GPIO   GPIOB
-#define ADC_BATTERY_PIN    GPIO_Pin_14
-
-#define ADC_SHARP_CHANNEL  ADC4_IN5
-#define ADC_BATTERY_CHANNEL   ADC4_IN4
-#define ADC_IRQn        ADC4_IRQn
+#define ADC_BATTERY           ADC4
+#define ADC_BATTERY_GPIO      GPIOB
+#define ADC_BATTERY_PIN       GPIO_Pin_14
+#define ADC_BATTERY_SOURCE    GPIO_PinSource14
+#define ADC_BATTERY_CHANNEL   ADC_Channel_4
 
 /*!
  * USART

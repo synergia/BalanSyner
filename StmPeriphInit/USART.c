@@ -116,7 +116,6 @@ void USART1_IRQHandler( void )
 //   USART1InterruptCallback();
 }
 
-#include "../Drivers/LEDs/LED.h"
 void USART2_IRQHandler( void )
 {
    if( USART_GetITStatus( USART2, USART_IT_RXNE ) )

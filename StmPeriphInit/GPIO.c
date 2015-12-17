@@ -23,6 +23,8 @@ static void priv_InitializeMpu();
 static void priv_InitializeMotors();
 static void priv_InitializeServosArm();
 static void priv_InitializeServosCam();
+static void priv_InitializeBattery();
+static void priv_InitializeSharp();
 
 //-----------------------Private functions-----------------------------//
 static void priv_InitializeLed14()
@@ -207,6 +209,26 @@ static void priv_InitializeEncoders()
    GPIO_Init( ENC2_GPIO, &GPIO_InitStruct );
 }
 
+static void priv_InitializeBattery()
+{
+   GPIO_InitTypeDef GPIO_InitStructure;
+
+   GPIO_InitStructure.GPIO_Pin = ADC_BATTERY_PIN ;
+   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+   GPIO_Init(ADC_BATTERY_GPIO, &GPIO_InitStructure);
+}
+
+static void priv_InitializeSharp()
+{
+   GPIO_InitTypeDef GPIO_InitStructure;
+
+   GPIO_InitStructure.GPIO_Pin = ADC_SHARP_PIN ;
+   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+   GPIO_Init(ADC_SHARP_GPIO, &GPIO_InitStructure);
+}
+
 //-----------------------Public functions------------------------------//
 void InitializeGPIO(uint8_t GPIO_Selector)
 {
@@ -244,6 +266,12 @@ void InitializeGPIO(uint8_t GPIO_Selector)
       break;
    case DriverSelectEncoders:
       priv_InitializeEncoders();
+      break;
+   case DriverSelectBattery:
+      priv_InitializeBattery();
+      break;
+   case DriverSelectSharp:
+      priv_InitializeSharp();
       break;
    default:
       break;
