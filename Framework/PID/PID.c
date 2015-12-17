@@ -48,12 +48,12 @@ static void priv_PID_Apply( PID_Parameters_T *PID, float ReadValue )
 
    if( 0 != PID->Kd )
    {
-      float dOut = PID->Kd * ( PID->e - PID->e_last );
+      float dOut = ( PID->e - PID->e_last );
 
-      if( dOut > PID->dWindUp )        dOut = PID->dWindUp;
+      if( dOut > PID->dWindUp )        dOut =  PID->dWindUp;
       else if( dOut < -PID->dWindUp )  dOut = -PID->dWindUp;
 
-      PID->OutSignal += dOut;
+      PID->OutSignal += PID->Kd * dOut;
    }
 
    /*! Windup prevention */

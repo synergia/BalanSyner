@@ -7,7 +7,17 @@
 //-----------------------Public typedefs------------------------------//
 typedef struct
 {
-   float ( *GetVoltage ) ( void );
+   float Voltage;
+   float ChargedPercent;
+}BatteryParameters_T;
+
+typedef struct
+{
+   BatteryParameters_T Parameters;
+
+   void ( *AdjustPwm ) ( float *Pwm );
+   float ( *GetVoltage ) ( BatteryParameters_T *pkThis );
+   void ( *Perform ) ( BatteryParameters_T *pkThis );
 }Battery_C;
 
 //-----------------------Public defines-------------------------------//

@@ -136,9 +136,10 @@ void priv_SendC( float Value, uint8_t Address )
    }
    oBluetooth.SendFifo();
 }
-volatile float PWM;
+
 void MainTask8ms()
 {
+   float PWM;
    /*! Measure angle of the robot */
    oMpuKalman.ApplyFilter();
 
@@ -149,13 +150,15 @@ void MainTask8ms()
       oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
 
       PWM = oPID_Angle.Parameters.OutSignal;
+      oBattery.AdjustPwm( &PWM );
+
       if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
       else if( 0 > PWM && PWM > -100 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
-      if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
+      /*if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
       {
          if(PWM >  110) PWM =  110;
          if(PWM < -110) PWM = -110;
-      }
+      }*/
       /*if( 0 < oMpuKalman.AngleFiltered )
       {
          PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
@@ -187,19 +190,19 @@ void MainTask8ms()
    /*!
     * Set servo cam vertical
     */
-   //if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
-     //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+   if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
+     oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
 }
 
 void MainTask16ms()
 {
 
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oBattery.GetVoltage(), 2 );
+         priv_SendC( oBattery.Parameters.Voltage, 2 );
          break;
       case 1:
          priv_SendC( oMpuKalman.AngleRaw, 4 );
@@ -210,10 +213,10 @@ void MainTask16ms()
       default:
          break;
    }
-   if( Selector > 0 ) Selector  = 0;
+   if( Selector > 0 ) Selector = 0;
 #endif
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -221,7 +224,7 @@ void MainTask16ms()
    priv_SendC( oMpuKalman.AngleFiltered, 2);
          break;
       case 1:
-   priv_SendC( PWM, 16);
+   priv_SendC( oPID_Angle.Parameters.Kp, 6);
          break;
       case 2:
    priv_SendC( oPID_Omega.Parameters.e_sum, 15);
@@ -235,13 +238,13 @@ void MainTask16ms()
       case 5:
    priv_SendC( oPID_Omega.Parameters.Kp, 9);
          break;
-      case 9:
+      case 6:
    priv_SendC( oPID_Omega.Parameters.Ki, 18);
          break;
-      case 6:
+      case 7:
    priv_SendC( oPID_Omega.Parameters.Kd, 11);
          break;
-      case 7:
+      case 8:
    priv_SendC( oPID_Omega.Parameters.OutSignal+AngleOffset, 12);
          break;
       case 84:
@@ -250,19 +253,16 @@ void MainTask16ms()
       case 83:
    priv_SendC( oPID_Angle.Parameters.OutSignal, 14);
          break;
-      case 82:
+      case 9:
    priv_SendC( oPID_Angle.Parameters.Ki, 7);
          break;
-      case 8:
-   priv_SendC( oPID_Angle.Parameters.Kp, 6);
-         break;
-      case 81:
-   priv_SendC( oEncoderLeft.Parameters.Distance, 17);
+      case 10:
+   priv_SendC( oPID_Angle.Parameters.e_sum, 20);
          break;
       default:
          break;
    }
-   if( Selector > 9 ) Selector  = 0;
+   if( Selector > 10 ) Selector  = 0;
 #endif
 }
 
@@ -288,4 +288,5 @@ void MainTask128ms()
    LED2_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Logic_CheckInputs();
+   oBattery.Perform( &oBattery.Parameters );
 }

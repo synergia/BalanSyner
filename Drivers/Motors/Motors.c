@@ -219,17 +219,17 @@ void InitializeServos()
 void InitializePIDs()
 {
    PID_Initialize( &oPID_Angle );
-   oPID_Angle.SetKp( &oPID_Angle.Parameters, 55.0f );
-   oPID_Angle.SetKi( &oPID_Angle.Parameters, 0.0f );
-   oPID_Angle.SetKd( &oPID_Angle.Parameters, 60.0f );
+   oPID_Angle.SetKp( &oPID_Angle.Parameters, 40.0f );
+   oPID_Angle.SetKi( &oPID_Angle.Parameters, 2.5f );
+   oPID_Angle.SetKd( &oPID_Angle.Parameters, 100.0f );
    oPID_Angle.Parameters.MaxOutSignal = 800.0f; /*!< Max output PWM = 1000. */
-   oPID_Angle.Parameters.iWindUp = 0.0f;
-   oPID_Angle.Parameters.dWindUp = 500.0f;
+   oPID_Angle.Parameters.iWindUp = 25.0f;
+   oPID_Angle.Parameters.dWindUp = 300.0f;
 
    PID_Initialize( &oPID_Omega );
-   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.043f );
+   oPID_Omega.SetKp( &oPID_Omega.Parameters, 0.035f );
    oPID_Omega.SetKi( &oPID_Omega.Parameters, 0.0038f );
-   oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0f );
+   oPID_Omega.SetKd( &oPID_Omega.Parameters, 0.0012f );
    oPID_Omega.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
    oPID_Omega.Parameters.iWindUp = 150.0f;
    oPID_Omega.Parameters.dWindUp = 150.0f;

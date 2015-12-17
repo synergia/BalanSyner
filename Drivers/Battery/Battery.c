@@ -32,14 +32,24 @@
 static float BatteryVoltageBuffer[MeanLength];
 
 //-----------------------Private prototypes----------------------------//
-static float pub_GetVoltage();
+static void pub_Perform( BatteryParameters_T *pkThis );
+static void pub_AdjustPwm( float *PWM );
+
 static float priv_GetNewMean( float NewValue );
 
 //-----------------------Private functions-----------------------------//
-static float pub_GetVoltage()
+static void pub_Perform( BatteryParameters_T *pkThis )
 {
-   /* Get ADCx converted data */
-   return ( priv_GetNewMean ( (float)GetVoltage( ADC_GetConversionValue( ADC_BATTERY ) ) ) );
+   pkThis->Voltage = priv_GetNewMean ( (float)GetVoltage( ADC_GetConversionValue( ADC_BATTERY ) ) );
+}
+
+static void pub_AdjustPwm( float *PWM )
+{
+   if( MinBatteryVoltage < oBattery.Parameters.Voltage )
+   {
+      *PWM *= MaxBatteryVoltage / oBattery.Parameters.Voltage;
+   }
+   else *PWM = 0;
 }
 
 static float priv_GetNewMean( float NewValue )
@@ -83,6 +93,7 @@ void InitializeBattery()
 
    //-------------SOFTWARE-------------//
    priv_MeanBufferInitialize();
-   oBattery.GetVoltage = pub_GetVoltage;
+   oBattery.Perform = pub_Perform;
+   oBattery.AdjustPwm = pub_AdjustPwm;
 }
 
