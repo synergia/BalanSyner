@@ -1,27 +1,23 @@
 /*
- * Logic.h
+ * Communicator.h
  *
  *  Created on: Nov 22, 2015
  *      Author: Kuba
  */
 
-#ifndef Logic_H_
-#define Logic_H_
+#ifndef Communicator_H_
+#define Communicator_H_
 
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 
 //-----------------------Private defines-------------------------------//
+#define true   1
+#define false  0
 
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private typedefs------------------------------//
-typedef struct
-{
-   uint8_t  BatteryDischarged;
-   uint8_t  RobotStanding;
-   uint8_t  ConnectionEstablished;
-}RobotStates_T;
 
 //-----------------------Private variables-----------------------------//
 
@@ -30,5 +26,6 @@ typedef struct
 //-----------------------Private functions-----------------------------//
 
 //-----------------------Public functions------------------------------//
+void Communicator_CheckInputs();
 
-#endif /* Logic_H_ */
+#endif /* Communicator_H_ */
