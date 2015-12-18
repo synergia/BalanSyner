@@ -1,30 +1,25 @@
-#ifndef BATTERY_H_
-#define BATTERY_H_
+#ifndef SHARP_H_
+#define SHARP_H_
 
 //-----------------------Includes-------------------------------------//
 #include "../Drivers/PinDefines.h"
 
 //-----------------------Public typedefs------------------------------//
-
-
 typedef struct
 {
-   float Voltage;
-   float ChargedPercent;
-
-   void ( *AdjustPwm ) ( float *Pwm );
-   float ( *GetVoltage ) ( void );
-   void ( *Perform ) ( void );
-}Battery_C;
+   float Distance;
+   float Omega;
+   void ( *Perform )( void );
+}Sharp_C;
 
 //-----------------------Public defines-------------------------------//
 
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public variables-----------------------------//
-Battery_C oBattery;
+Sharp_C oSharp;
 
 //-----------------------Public prototypes----------------------------//
-void InitializeBattery();
+void InitializeSharp();
 
 #endif

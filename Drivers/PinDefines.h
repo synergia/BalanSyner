@@ -34,6 +34,7 @@ typedef enum
 //#define _USE_LED_EYE
 //#define _USE_LED_NUCLEO
 #define _USE_ADC_BATTERY
+#define _USE_ADC_SHARP
 #define _USE_BT
 //#define _USE_WIFI
 //#define _USE_PI

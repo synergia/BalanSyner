@@ -33,6 +33,7 @@
 #include "../Drivers/LEDs/LED.h"
 #include "../Drivers/Motors/Motors.h"
 #include "../Drivers/MPU/MPU.h"
+#include "../Drivers/ProximitySensor/Sharp.h"
 #include "../Drivers/Wifi/Wifi.h"
 
 #include "Logic.h"
@@ -68,6 +69,10 @@ int main(void)
 
 #ifdef _USE_ADC_BATTERY
    InitializeBattery();
+#endif
+
+#ifdef _USE_ADC_SHARP
+   InitializeSharp();
 #endif
 
 #ifdef _USE_ENCODERS
@@ -111,9 +116,11 @@ int main(void)
 
 
    oMotor.SetSpeed( SelectMotorLeft, 0.0f );
+   oMotor.SetSpeed( SelectMotorRight, 0.0f );
    oServos.SetAngle( SelectServoArmLeft, 0.0f );
    oServos.SetAngle( SelectServoArmRight, 0.0f );
    oServos.SetAngle( SelectServoCamVer, 0.0f );
+   oServos.SetAngle( SelectServoCamHor, 0.0f );
    while (1)
    {
 
@@ -178,8 +185,8 @@ void MainTask8ms()
          PWM = -1000;
       }
 
-      oMotor.SetSpeed( SelectMotorLeft, PWM );
-      oMotor.SetSpeed( SelectMotorRight, PWM );
+      //oMotor.SetSpeed( SelectMotorLeft, PWM );
+      //oMotor.SetSpeed( SelectMotorRight, PWM );
    }
    else
    {
@@ -191,21 +198,25 @@ void MainTask8ms()
     * Set servo cam vertical
     */
    if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
-     oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+   {
+      //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+   }
 }
 
 void MainTask16ms()
 {
+   oBattery.Perform();
+   oSharp.Perform();
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oBattery.Parameters.Voltage, 2 );
+         priv_SendC( oSharp.Distance, 2 );
          break;
       case 1:
-         priv_SendC( oMpuKalman.AngleRaw, 4 );
+         priv_SendC( oBattery.Voltage, 4 );
          break;
       case 3:
          priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
@@ -213,10 +224,10 @@ void MainTask16ms()
       default:
          break;
    }
-   if( Selector > 0 ) Selector = 0;
+   if( Selector > 1 ) Selector = 0;
 #endif
 
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -278,9 +289,8 @@ void MainTask32ms()
 
    /*! Apply PID filter to motors to get required omega */
    oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
-   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset);
+   oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset) ;
 #endif
-
 }
 
 void MainTask128ms()
@@ -288,5 +298,5 @@ void MainTask128ms()
    LED2_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Logic_CheckInputs();
-   oBattery.Perform( &oBattery.Parameters );
+   //oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Distance);
 }
