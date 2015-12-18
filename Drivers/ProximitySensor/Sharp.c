@@ -21,6 +21,7 @@
 #define MeanDefDistanceValue  ( (MinSharpDistance + MaxSharpDistance ) / 2 ) /*! [cm] */
 #define a   ( 24602.8f )
 #define b   ( 264.252f )
+
 //-----------------------Private macros--------------------------------//
 #define GetDistance( ReadValue ) ( ((ReadValue > MinSharpReadValue) && (ReadValue < MaxSharpReadValue)) ? \
                                     ( a / ( ReadValue - b) ) : ( 0 ) )
@@ -38,11 +39,8 @@ static float priv_GetNewMean( float NewValue );
 //-----------------------Private functions-----------------------------//
 static void pub_Perform()
 {
-   ADC_RegularChannelConfig(ADC4, ADC_SHARP_CHANNEL, 1, ADC_SampleTime_61Cycles5);
-   ADC_StartConversion(ADC4);
+   oSharp.Distance = priv_GetNewMean( (float)GetDistance( AdcBufferTable[SharpIndex] ) );
 
-   while (!ADC_GetFlagStatus(ADC4, ADC_FLAG_EOC));
-   oSharp.Distance = priv_GetNewMean( (float)GetDistance( ADC_GetConversionValue( ADC_SHARP ) ) );
    if( 0 < oSharp.Distance && 10 > oSharp.Distance )        oSharp.Omega = -50;
    else if( 15 < oSharp.Distance && 30 > oSharp.Distance )  oSharp.Omega =  50;
    else oSharp.Omega = 0;

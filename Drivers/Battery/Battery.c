@@ -40,11 +40,7 @@ static float priv_GetNewMean( float NewValue );
 //-----------------------Private functions-----------------------------//
 static void pub_Perform( void )
 {
-   ADC_RegularChannelConfig(ADC4, ADC_BATTERY_CHANNEL, 1, ADC_SampleTime_61Cycles5);
-   ADC_StartConversion(ADC4);
-
-   while (!ADC_GetFlagStatus(ADC4, ADC_FLAG_EOC));
-   oBattery.Voltage = priv_GetNewMean ( (float)GetVoltage( ADC_GetConversionValue( ADC_BATTERY ) ) );
+   oBattery.Voltage = priv_GetNewMean ( (float)GetVoltage( AdcBufferTable[BatteryIndex] ) );
 }
 
 static void pub_AdjustPwm( float *PWM )

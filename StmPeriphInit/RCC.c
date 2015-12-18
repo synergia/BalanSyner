@@ -25,8 +25,7 @@ static void priv_InitializeMotors();
 static void priv_InitializeServosArm();
 static void priv_InitializeServosCam();
 static void priv_InitializeEncoders();
-static void priv_InitializeBattery();
-static void priv_InitializeSharp();
+static void priv_InitializeAdc();
 
 //-----------------------Private functions-----------------------------//
 static void priv_InitializeMPU()
@@ -101,18 +100,12 @@ static void priv_InitializeEncoders()
    RCC_APB1PeriphClockCmd( RCC_APB1Periph_TIM2, ENABLE );
 }
 
-static void priv_InitializeBattery()
+static void priv_InitializeAdc()
 {
    RCC_ADCCLKConfig( RCC_ADC34PLLCLK_Div10 );
    RCC_AHBPeriphClockCmd( RCC_AHBPeriph_GPIOB, ENABLE );
    RCC_AHBPeriphClockCmd( RCC_AHBPeriph_ADC34, ENABLE );
-}
-
-static void priv_InitializeSharp()
-{
-   RCC_ADCCLKConfig( RCC_ADC34PLLCLK_Div10 );
-   RCC_AHBPeriphClockCmd( RCC_AHBPeriph_GPIOB, ENABLE );
-   RCC_AHBPeriphClockCmd( RCC_AHBPeriph_ADC34, ENABLE );
+   RCC_AHBPeriphClockCmd( RCC_AHBPeriph_DMA2, ENABLE );
 }
 
 //-----------------------Public functions------------------------------//
@@ -154,10 +147,8 @@ void InitializeRCC( uint8_t RCC_Selector )
       priv_InitializeEncoders();
       break;
    case DriverSelectBattery:
-      priv_InitializeBattery();
-      break;
    case DriverSelectSharp:
-      priv_InitializeSharp();
+      priv_InitializeAdc();
       break;
    default:
       break;

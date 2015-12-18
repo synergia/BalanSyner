@@ -212,7 +212,7 @@ void MainTask16ms()
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oSharp.Omega, 2 );
+         priv_SendC( oBattery.Voltage, 2 );
          break;
       case 1:
          priv_SendC( oSharp.Distance, 4 );
