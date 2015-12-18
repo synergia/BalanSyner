@@ -185,8 +185,8 @@ void MainTask8ms()
          PWM = -1000;
       }
 
-      //oMotor.SetSpeed( SelectMotorLeft, PWM );
-      //oMotor.SetSpeed( SelectMotorRight, PWM );
+      oMotor.SetSpeed( SelectMotorLeft, PWM );
+      oMotor.SetSpeed( SelectMotorRight, PWM );
    }
    else
    {
@@ -199,24 +199,23 @@ void MainTask8ms()
     */
    if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
    {
-      //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+      oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
    }
+   else
+      oServos.SetAngle( SelectServoCamVer, 0.0f );
 }
 
 void MainTask16ms()
 {
-   oBattery.Perform();
-   oSharp.Perform();
-
 #if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oSharp.Distance, 2 );
+         priv_SendC( oSharp.Omega, 2 );
          break;
       case 1:
-         priv_SendC( oBattery.Voltage, 4 );
+         priv_SendC( oSharp.Distance, 4 );
          break;
       case 3:
          priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
@@ -298,5 +297,7 @@ void MainTask128ms()
    LED2_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Logic_CheckInputs();
-   //oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Distance);
+   oBattery.Perform();
+   oSharp.Perform();
+   oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Omega );
 }

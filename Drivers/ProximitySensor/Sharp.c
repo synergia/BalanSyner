@@ -9,16 +9,16 @@
 
 //-----------------------Private defines-------------------------------//
 #define MeanLength            10u
-#define MeanDefDistanceValue  45.0f /*! [cm] */
 
-#define MinSharpVoltage    ( 0.4f )
-#define MaxSharpVoltage    ( 3.1f )
-#define AdcVoltage         ( 3.21f )
-#define MaxAdcValue        ( 4095.0f )
-#define MinSharpReadValue  ( MaxAdcValue * MinSharpVoltage / AdcVoltage )
-#define MaxSharpReadValue  ( MaxAdcValue * MaxSharpVoltage / AdcVoltage )
-#define MinSharpDistance   ( 7.0f )    /*! [cm] */
-#define MaxSharpDistance   ( 80.0f )   /*! [cm] */
+#define MinSharpVoltage       ( 0.4f )
+#define MaxSharpVoltage       ( 3.1f )
+#define AdcVoltage            ( 3.21f )
+#define MaxAdcValue           ( 4095.0f )
+#define MinSharpReadValue     ( MaxAdcValue * MinSharpVoltage / AdcVoltage )
+#define MaxSharpReadValue     ( MaxAdcValue * MaxSharpVoltage / AdcVoltage )
+#define MinSharpDistance      ( 7.0f )    /*! [cm] */
+#define MaxSharpDistance      ( 20.0f )   /*! [cm] */
+#define MeanDefDistanceValue  ( (MinSharpDistance + MaxSharpDistance ) / 2 ) /*! [cm] */
 #define a   ( 24602.8f )
 #define b   ( 264.252f )
 //-----------------------Private macros--------------------------------//
@@ -43,7 +43,9 @@ static void pub_Perform()
 
    while (!ADC_GetFlagStatus(ADC4, ADC_FLAG_EOC));
    oSharp.Distance = priv_GetNewMean( (float)GetDistance( ADC_GetConversionValue( ADC_SHARP ) ) );
-   oSharp.Omega = ( 0 != oSharp.Distance ) ? ( oSharp.Distance - MeanDefDistanceValue ) : ( 0 );
+   if( 0 < oSharp.Distance && 10 > oSharp.Distance )        oSharp.Omega = -50;
+   else if( 15 < oSharp.Distance && 30 > oSharp.Distance )  oSharp.Omega =  50;
+   else oSharp.Omega = 0;
 }
 
 static float priv_GetNewMean( float NewValue )
