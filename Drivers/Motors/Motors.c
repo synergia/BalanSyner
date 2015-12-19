@@ -171,21 +171,21 @@ void InitializeEncoders()
    InitializeGPIO( DriverSelectEncoders );
 
    /*! Software */
-   oEncoderLeft.Parameters.Dt = DT_slow;
-   oEncoderLeft.Parameters.TIMx = TIM_ENC1;
-   oEncoderLeft.Parameters.Omega = 0u;
-   oEncoderLeft.Parameters.Distance = 0u;
-   oEncoderLeft.Perform = priv_EncoderPerform;
-   oEncoderLeft.GetOmega = priv_GetOmega;
-   oEncoderLeft.SetCounter = SetCounter; /*! Timer function */
+   oEncoder_Left.Parameters.Dt = DT_slow;
+   oEncoder_Left.Parameters.TIMx = TIM_ENC1;
+   oEncoder_Left.Parameters.Omega = 0u;
+   oEncoder_Left.Parameters.Distance = 0u;
+   oEncoder_Left.Perform = priv_EncoderPerform;
+   oEncoder_Left.GetOmega = priv_GetOmega;
+   oEncoder_Left.SetCounter = SetCounter; /*! Timer function */
 
-   oEncoderRight.Parameters.Dt = DT_slow;
-   oEncoderRight.Parameters.TIMx = TIM_ENC2;
-   oEncoderRight.Parameters.Omega = 0u;
-   oEncoderRight.Parameters.Distance = 0u;
-   oEncoderRight.Perform = priv_EncoderPerform;
-   oEncoderRight.GetOmega = priv_GetOmega;
-   oEncoderRight.SetCounter = SetCounter; /*! Timer function */
+   oEncoder_Right.Parameters.Dt = DT_slow;
+   oEncoder_Right.Parameters.TIMx = TIM_ENC2;
+   oEncoder_Right.Parameters.Omega = 0u;
+   oEncoder_Right.Parameters.Distance = 0u;
+   oEncoder_Right.Perform = priv_EncoderPerform;
+   oEncoder_Right.GetOmega = priv_GetOmega;
+   oEncoder_Right.SetCounter = SetCounter; /*! Timer function */
 }
 
 void InitializeMotors()
@@ -233,5 +233,13 @@ void InitializePIDs()
    oPID_Omega.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
    oPID_Omega.Parameters.iWindUp = 150.0f;
    oPID_Omega.Parameters.dWindUp = 150.0f;
+
+   PID_Initialize( &oPID_Rotation );
+   oPID_Rotation.SetKp( &oPID_Rotation.Parameters, 0.2f );
+   oPID_Rotation.SetKi( &oPID_Rotation.Parameters, 0.1f );
+   oPID_Rotation.SetKd( &oPID_Rotation.Parameters, 0.0f );
+   oPID_Rotation.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
+   oPID_Rotation.Parameters.iWindUp = 300.0f;
+   oPID_Rotation.Parameters.dWindUp = 150.0f;
 }
 

@@ -74,11 +74,12 @@ typedef struct
 }Servos_C;
 
 //-----------------------Public variables-----------------------------//
-Encoder_C oEncoderLeft;
-Encoder_C oEncoderRight;
+Encoder_C oEncoder_Left;
+Encoder_C oEncoder_Right;
 Motors_C oMotor;
 Servos_C oServos;
 PID_Struct_C oPID_Omega;
+PID_Struct_C oPID_Rotation;
 PID_Struct_C oPID_Angle;
 
 //-----------------------Public prototypes----------------------------//

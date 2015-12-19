@@ -153,12 +153,12 @@ static void priv_ReadRawAngle()
 
 static void priv_ReadOmegaLeft()
 {
-   priv_SendCommandBT( oEncoderLeft.GetOmega( &oEncoderLeft.Parameters ), ReadOmegaLeft );
+   priv_SendCommandBT( oEncoder_Left.GetOmega( &oEncoder_Left.Parameters ), ReadOmegaLeft );
 }
 
 static void priv_ReadOmegaRight()
 {
-   priv_SendCommandBT( oEncoderRight.GetOmega( &oEncoderRight.Parameters ), ReadOmegaRight );
+   priv_SendCommandBT( oEncoder_Right.GetOmega( &oEncoder_Right.Parameters ), ReadOmegaRight );
 }
 
 static void priv_ReadPidAngleKp()

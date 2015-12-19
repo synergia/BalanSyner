@@ -95,8 +95,8 @@ void MainTask8ms()
          PWM = -1000;
       }
 
-      //oMotor.SetSpeed( SelectMotorLeft, PWM );
-      //oMotor.SetSpeed( SelectMotorRight, PWM );
+      oMotor.SetSpeed( SelectMotorLeft, PWM + oPID_Rotation.Parameters.OutSignal );
+      oMotor.SetSpeed( SelectMotorRight, PWM - oPID_Rotation.Parameters.OutSignal );
    }
    else
    {
@@ -122,10 +122,10 @@ void MainTask16ms()
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oBattery.Voltage, 2 );
+         priv_SendC( oPID_Rotation.Parameters.OutSignal, 2 );
          break;
       case 1:
-         priv_SendC( oSharp.Distance, 4 );
+         priv_SendC( oPID_Rotation.Parameters.e_sum, 4 );
          break;
       case 3:
          priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
@@ -153,7 +153,7 @@ void MainTask16ms()
    priv_SendC( oPID_Angle.Parameters.Kd, 8);
          break;
       case 4:
-   priv_SendC( oEncoderRight.Parameters.Omega, 4);
+   priv_SendC( oEncoder_Right.Parameters.Omega, 4);
          break;
       case 5:
    priv_SendC( oPID_Omega.Parameters.Kp, 9);
@@ -192,12 +192,17 @@ void MainTask32ms()
 
 #if 1
    /*! Calculate mean omega of the robot */
-   float OmegaMean = ( oEncoderLeft.Perform( &oEncoderLeft.Parameters )
-                     + oEncoderRight.Perform( &oEncoderRight.Parameters )
+   float OmegaMean = ( oEncoder_Left.Perform( &oEncoder_Left.Parameters )
+                     + oEncoder_Right.Perform( &oEncoder_Right.Parameters )
                      ) / 2;
+
+   float OmegaDiff = ( oEncoder_Left.GetOmega( &oEncoder_Left.Parameters )
+                     - oEncoder_Right.GetOmega( &oEncoder_Right.Parameters )
+                     );
 
    /*! Apply PID filter to motors to get required omega */
    oPID_Omega.ApplyPid( &oPID_Omega.Parameters, OmegaMean );
+   oPID_Rotation.ApplyPid( &oPID_Rotation.Parameters, OmegaDiff );
    oPID_Angle.SetDstValue( &oPID_Angle.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset) ;
 #endif
 }
