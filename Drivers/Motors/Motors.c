@@ -236,10 +236,10 @@ void InitializePIDs()
 
    PID_Initialize( &oPID_Rotation );
    oPID_Rotation.SetKp( &oPID_Rotation.Parameters, 0.2f );
-   oPID_Rotation.SetKi( &oPID_Rotation.Parameters, 0.1f );
+   oPID_Rotation.SetKi( &oPID_Rotation.Parameters, 0.2f );
    oPID_Rotation.SetKd( &oPID_Rotation.Parameters, 0.0f );
-   oPID_Rotation.Parameters.MaxOutSignal = 15.0f; /*!< Max output angle = 30deg. */
-   oPID_Rotation.Parameters.iWindUp = 300.0f;
+   oPID_Rotation.Parameters.MaxOutSignal = 400.0f; /*!< Max output angle = 30deg. */
+   oPID_Rotation.Parameters.iWindUp = 500.0f;
    oPID_Rotation.Parameters.dWindUp = 150.0f;
 }
 

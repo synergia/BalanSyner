@@ -117,7 +117,7 @@ void MainTask8ms()
 
 void MainTask16ms()
 {
-#if 1
+#if 0
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
@@ -136,7 +136,7 @@ void MainTask16ms()
    if( Selector > 1 ) Selector = 0;
 #endif
 
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {

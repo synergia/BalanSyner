@@ -50,10 +50,14 @@ typedef enum
    WritePidOmegaKp         = 107u,
    WritePidOmegaKi         = 108u,
    WritePidOmegaKd         = 109u,
-   WritePidDstOmega        = 110u,
-   WriteArmAngle           = 111u,
-   WriteSerHor             = 112u,
-   WriteSerVer             = 113u,
+   WritePidRotationKp      = 110u,
+   WritePidRotationKi      = 111u,
+   WritePidRotationKd      = 112u,
+   WritePidDstOmega        = 113u,
+   WritePidDstRotation     = 114u,
+   WriteArmAngle           = 115u,
+   WriteSerHor             = 116u,
+   WriteSerVer             = 117u,
 }Addresses_T;
 
 //-----------------------Private variables-----------------------------//
@@ -88,7 +92,11 @@ static void priv_WritePidAngleKd( uint8_t *Command );
 static void priv_WritePidOmegaKp( uint8_t *Command );
 static void priv_WritePidOmegaKi( uint8_t *Command );
 static void priv_WritePidOmegaKd( uint8_t *Command );
+static void priv_WritePidRotationKp( uint8_t *Command );
+static void priv_WritePidRotationKi( uint8_t *Command );
+static void priv_WritePidRotationKd( uint8_t *Command );
 static void priv_WritePidDstOmega( uint8_t *Command );
+static void priv_WritePidDstRotation( uint8_t *Command );
 static void priv_WriteArmAngle( uint8_t *Command );
 static void priv_WriteSerHor( uint8_t *Command );
 static void priv_WriteSerVer( uint8_t *Command );
@@ -252,9 +260,29 @@ static void priv_WritePidOmegaKd( uint8_t *Command )
    oPID_Omega.SetKd( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
 }
 
+static void priv_WritePidRotationKp( uint8_t *Command )
+{
+   oPID_Rotation.SetKp( &oPID_Rotation.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidRotationKi( uint8_t *Command )
+{
+   oPID_Rotation.SetKi( &oPID_Rotation.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidRotationKd( uint8_t *Command )
+{
+   oPID_Rotation.SetKd( &oPID_Rotation.Parameters, priv_CommandToFloat( Command ) );
+}
+
 static void priv_WritePidDstOmega( uint8_t *Command )
 {
    oPID_Omega.SetDstValue( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
+}
+
+static void priv_WritePidDstRotation( uint8_t *Command )
+{
+   oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters, priv_CommandToFloat( Command ) );
 }
 
 static void priv_WriteArmAngle( uint8_t *Command )
@@ -416,8 +444,20 @@ void Communicator_CheckInputs()
                   case WritePidOmegaKd:
                      priv_WritePidOmegaKd( &Command[1] );
                      break;
+                  case WritePidRotationKp:
+                     priv_WritePidRotationKp( &Command[1] );
+                     break;
+                  case WritePidRotationKi:
+                     priv_WritePidRotationKi( &Command[1] );
+                     break;
+                  case WritePidRotationKd:
+                     priv_WritePidRotationKd( &Command[1] );
+                     break;
                   case WritePidDstOmega:
                      priv_WritePidDstOmega( &Command[1] );
+                     break;
+                  case WritePidDstRotation:
+                     priv_WritePidDstRotation( &Command[1] );
                      break;
                   case WriteArmAngle:
                      priv_WriteArmAngle( &Command[1] );
