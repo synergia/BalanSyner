@@ -31,7 +31,7 @@ typedef enum
 #define _USE_ENCODERS
 #define _USE_SERVOS
 #define _USE_LED_14
-//#define _USE_LED_EYE
+#define _USE_LED_EYE
 //#define _USE_LED_NUCLEO
 #define _USE_ADC_BATTERY
 #define _USE_ADC_SHARP
@@ -43,8 +43,8 @@ typedef enum
 /*!
  * LEDs
  */
-#define LED_NUCLEO_GPIO       GPIOA
-#define LED_NUCLEO_PIN        GPIO_Pin_5
+#define LEDNUCLEO_GPIO       GPIOA
+#define LEDNUCLEO_PIN        GPIO_Pin_5
 #define LED1_GPIO             GPIOB
 #define LED1_PIN              GPIO_Pin_12
 #define LED2_GPIO             GPIOB
@@ -53,8 +53,8 @@ typedef enum
 #define LED3_PIN              GPIO_Pin_10
 #define LED4_GPIO             GPIOA
 #define LED4_PIN              GPIO_Pin_11
-#define LED_EYE_GPIO          GPIOA
-#define LED_EYE_PIN           GPIO_Pin_12
+#define LEDEYE_GPIO          GPIOA
+#define LEDEYE_PIN           GPIO_Pin_12
 
 /*!
  * Buttons

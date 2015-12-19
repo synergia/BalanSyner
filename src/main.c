@@ -114,8 +114,8 @@ int main(void)
 
    oMotor.SetSpeed( SelectMotorLeft, 0.0f );
    oMotor.SetSpeed( SelectMotorRight, 0.0f );
-   oServos.SetAngle( SelectServoArmLeft, 0.0f );
-   oServos.SetAngle( SelectServoArmRight, 0.0f );
+   oServos.SetAngle( SelectServoArmLeft, 160.0f );
+   oServos.SetAngle( SelectServoArmRight, -160.0f );
    oServos.SetAngle( SelectServoCamVer, 0.0f );
    oServos.SetAngle( SelectServoCamHor, 0.0f );
    while (1)

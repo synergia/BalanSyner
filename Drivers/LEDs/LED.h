@@ -32,6 +32,11 @@
 #define LED4_SetOn   GPIO_ResetBits(LED4_GPIO, LED4_PIN)
 #define LED4_IsOn    GPIO_ReadOutputDataBit(LED4_GPIO, LED4_PIN)
 #define LED4_Toggle  (LED4_IsOn ? LED4_SetOn : LED4_SetOff )
+
+#define LEDEYE_SetOff  GPIO_SetBits(LEDEYE_GPIO, LEDEYE_PIN)
+#define LEDEYE_SetOn   GPIO_ResetBits(LEDEYE_GPIO, LEDEYE_PIN)
+#define LEDEYE_IsOn    GPIO_ReadOutputDataBit(LEDEYE_GPIO, LEDEYE_PIN)
+#define LEDEYE_Toggle  (LEDEYE_IsOn ? LEDEYE_SetOn : LEDEYE_SetOff )
 //TODO: Add macros for every each LED, operate on registers, not functions
 
 //-----------------------Public variables-----------------------------//

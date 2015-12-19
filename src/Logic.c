@@ -95,8 +95,8 @@ void MainTask8ms()
          PWM = -1000;
       }
 
-      oMotor.SetSpeed( SelectMotorLeft, PWM );
-      oMotor.SetSpeed( SelectMotorRight, PWM );
+      //oMotor.SetSpeed( SelectMotorLeft, PWM );
+      //oMotor.SetSpeed( SelectMotorRight, PWM );
    }
    else
    {
@@ -107,7 +107,7 @@ void MainTask8ms()
    /*!
     * Set servo cam vertical
     */
-   if( -35.0f < oMpuKalman.AngleFiltered && 40.0f > oMpuKalman.AngleFiltered)
+   if( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered)
    {
       oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
    }
@@ -205,9 +205,10 @@ void MainTask32ms()
 void MainTask128ms()
 {
    LED2_Toggle;
+   LEDEYE_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
    Communicator_CheckInputs();
    oBattery.Perform();
    oSharp.Perform();
-   oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Omega );
+   //oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Omega );
 }

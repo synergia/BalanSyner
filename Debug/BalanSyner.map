@@ -1449,8 +1449,6 @@ Discarded input sections
  .bss           0x00000000        0x0 Drivers\LEDs\LED.o
  .text.InitializeLedNucleo
                 0x00000000       0x14 Drivers\LEDs\LED.o
- .text.InitializeLedEye
-                0x00000000       0x14 Drivers\LEDs\LED.o
  .text          0x00000000        0x0 Drivers\Clock\clock.o
  .data          0x00000000        0x0 Drivers\Clock\clock.o
  .bss           0x00000000        0x0 Drivers\Clock\clock.o
@@ -1569,7 +1567,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x08000000                g_pfnVectors
                 0x08000194                . = ALIGN (0x4)
 
-.text           0x08000198     0x616c
+.text           0x08000198     0x6178
                 0x08000198                . = ALIGN (0x4)
  *(.text)
  .text          0x08000198       0x40 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
@@ -1687,653 +1685,656 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x08000bd8                DMA2_Channel3_IRQHandler
                 0x08000bd8                EXTI2_TSC_IRQHandler
                 0x08000bd8                TIM1_BRK_TIM15_IRQHandler
- .text.main     0x08000bdc       0x9c src\main.o
+ .text.main     0x08000bdc       0xa8 src\main.o
                 0x08000bdc                main
  .text.priv_SendC
-                0x08000c78       0x80 src\Logic.o
-                0x08000c78                priv_SendC
+                0x08000c84       0x80 src\Logic.o
+                0x08000c84                priv_SendC
  .text.MainTask8ms
-                0x08000cf8      0x1d4 src\Logic.o
-                0x08000cf8                MainTask8ms
+                0x08000d04      0x1ac src\Logic.o
+                0x08000d04                MainTask8ms
  .text.MainTask16ms
-                0x08000ecc       0x74 src\Logic.o
-                0x08000ecc                MainTask16ms
+                0x08000eb0       0x74 src\Logic.o
+                0x08000eb0                MainTask16ms
  .text.MainTask32ms
-                0x08000f40       0xa0 src\Logic.o
-                0x08000f40                MainTask32ms
+                0x08000f24       0xa0 src\Logic.o
+                0x08000f24                MainTask32ms
  .text.MainTask128ms
-                0x08000fe0       0x60 src\Logic.o
-                0x08000fe0                MainTask128ms
+                0x08000fc4       0x74 src\Logic.o
+                0x08000fc4                MainTask128ms
  .text.priv_SendDummy
-                0x08001040       0x14 src\Communicator.o
-                0x08001040                priv_SendDummy
+                0x08001038       0x14 src\Communicator.o
+                0x08001038                priv_SendDummy
  .text.priv_CheckParityBits
-                0x08001054       0x10 src\Communicator.o
-                0x08001054                priv_CheckParityBits
+                0x0800104c       0x10 src\Communicator.o
+                0x0800104c                priv_CheckParityBits
  .text.priv_SendCommandBT
-                0x08001064       0x80 src\Communicator.o
+                0x0800105c       0x80 src\Communicator.o
  .text.priv_CommandToFloat
-                0x080010e4       0x28 src\Communicator.o
+                0x080010dc       0x28 src\Communicator.o
  .text.priv_ReadKalmanQAngle
-                0x0800110c       0x20 src\Communicator.o
+                0x08001104       0x20 src\Communicator.o
  .text.priv_ReadKalmanRMeasure
-                0x0800112c       0x20 src\Communicator.o
+                0x08001124       0x20 src\Communicator.o
  .text.priv_ReadFilteredAngle
-                0x0800114c       0x1c src\Communicator.o
+                0x08001144       0x1c src\Communicator.o
  .text.priv_ReadRawAngle
-                0x08001168       0x1c src\Communicator.o
+                0x08001160       0x1c src\Communicator.o
  .text.priv_ReadOmegaLeft
-                0x08001184       0x20 src\Communicator.o
+                0x0800117c       0x20 src\Communicator.o
  .text.priv_ReadOmegaRight
-                0x080011a4       0x20 src\Communicator.o
+                0x0800119c       0x20 src\Communicator.o
  .text.priv_ReadPidAngleKp
-                0x080011c4       0x20 src\Communicator.o
+                0x080011bc       0x20 src\Communicator.o
  .text.priv_ReadPidAngleKi
-                0x080011e4       0x20 src\Communicator.o
+                0x080011dc       0x20 src\Communicator.o
  .text.priv_ReadPidAngleKd
-                0x08001204       0x20 src\Communicator.o
+                0x080011fc       0x20 src\Communicator.o
  .text.priv_ReadPidOmegaKp
-                0x08001224       0x20 src\Communicator.o
+                0x0800121c       0x20 src\Communicator.o
  .text.priv_ReadPidOmegaKi
-                0x08001244       0x20 src\Communicator.o
+                0x0800123c       0x20 src\Communicator.o
  .text.priv_ReadPidOmegaKd
-                0x08001264       0x20 src\Communicator.o
+                0x0800125c       0x20 src\Communicator.o
  .text.privReadPidDstOmega
-                0x08001284       0x20 src\Communicator.o
+                0x0800127c       0x20 src\Communicator.o
  .text.priv_WriteKalmanQAngle
-                0x080012a4       0x28 src\Communicator.o
+                0x0800129c       0x28 src\Communicator.o
  .text.priv_WriteKalmanQAngleDef
-                0x080012cc       0x10 src\Communicator.o
+                0x080012c4       0x10 src\Communicator.o
  .text.priv_WriteKalmanRMeasure
-                0x080012dc       0x28 src\Communicator.o
+                0x080012d4       0x28 src\Communicator.o
  .text.priv_WriteKalmanRMeasureDef
-                0x08001304       0x10 src\Communicator.o
+                0x080012fc       0x10 src\Communicator.o
  .text.priv_WritePidAngleKp
-                0x08001314       0x28 src\Communicator.o
+                0x0800130c       0x28 src\Communicator.o
  .text.priv_WritePidAngleKi
-                0x0800133c       0x28 src\Communicator.o
+                0x08001334       0x28 src\Communicator.o
  .text.priv_WritePidAngleKd
-                0x08001364       0x28 src\Communicator.o
+                0x0800135c       0x28 src\Communicator.o
  .text.priv_WritePidOmegaKp
-                0x0800138c       0x28 src\Communicator.o
+                0x08001384       0x28 src\Communicator.o
  .text.priv_WritePidOmegaKi
-                0x080013b4       0x28 src\Communicator.o
+                0x080013ac       0x28 src\Communicator.o
  .text.priv_WritePidOmegaKd
-                0x080013dc       0x28 src\Communicator.o
+                0x080013d4       0x28 src\Communicator.o
  .text.priv_WritePidDstOmega
-                0x08001404       0x28 src\Communicator.o
+                0x080013fc       0x28 src\Communicator.o
  .text.priv_WriteArmAngle
-                0x0800142c       0x40 src\Communicator.o
+                0x08001424       0x40 src\Communicator.o
  .text.priv_WriteSerHor
-                0x0800146c       0x28 src\Communicator.o
+                0x08001464       0x28 src\Communicator.o
  .text.priv_WriteSerVer
-                0x08001494       0x28 src\Communicator.o
+                0x0800148c       0x28 src\Communicator.o
  .text.Communicator_CheckInputs
-                0x080014bc      0x3b4 src\Communicator.o
-                0x080014bc                Communicator_CheckInputs
+                0x080014b4      0x3b4 src\Communicator.o
+                0x080014b4                Communicator_CheckInputs
  .text.InitializeUSART
-                0x08001870       0xb0 StmPeriphInit\USART.o
-                0x08001870                InitializeUSART
+                0x08001868       0xb0 StmPeriphInit\USART.o
+                0x08001868                InitializeUSART
  .text.USART1_IRQHandler
-                0x08001920        0xc StmPeriphInit\USART.o
-                0x08001920                USART1_IRQHandler
+                0x08001918        0xc StmPeriphInit\USART.o
+                0x08001918                USART1_IRQHandler
  .text.USART2_IRQHandler
-                0x0800192c       0x20 StmPeriphInit\USART.o
-                0x0800192c                USART2_IRQHandler
+                0x08001924       0x20 StmPeriphInit\USART.o
+                0x08001924                USART2_IRQHandler
  .text.USART3_IRQHandler
-                0x0800194c        0xc StmPeriphInit\USART.o
-                0x0800194c                USART3_IRQHandler
+                0x08001944        0xc StmPeriphInit\USART.o
+                0x08001944                USART3_IRQHandler
  .text.priv_InitializeMotors
-                0x08001958       0x98 StmPeriphInit\Timers.o
+                0x08001950       0x98 StmPeriphInit\Timers.o
  .text.priv_InitializeServos
-                0x080019f0       0xbc StmPeriphInit\Timers.o
+                0x080019e8       0xbc StmPeriphInit\Timers.o
  .text.priv_InitializeEncoderLeft
-                0x08001aac       0x54 StmPeriphInit\Timers.o
+                0x08001aa4       0x54 StmPeriphInit\Timers.o
  .text.priv_InitializeEncoderRight
-                0x08001b00       0x58 StmPeriphInit\Timers.o
+                0x08001af8       0x58 StmPeriphInit\Timers.o
  .text.InitializeTimers
-                0x08001b58       0x50 StmPeriphInit\Timers.o
-                0x08001b58                InitializeTimers
+                0x08001b50       0x50 StmPeriphInit\Timers.o
+                0x08001b50                InitializeTimers
  .text.GetCounter
-                0x08001ba8       0x18 StmPeriphInit\Timers.o
-                0x08001ba8                GetCounter
+                0x08001ba0       0x18 StmPeriphInit\Timers.o
+                0x08001ba0                GetCounter
  .text.SetCounter
-                0x08001bc0       0x1c StmPeriphInit\Timers.o
-                0x08001bc0                SetCounter
+                0x08001bb8       0x1c StmPeriphInit\Timers.o
+                0x08001bb8                SetCounter
  .text.TIM4_IRQHandler
-                0x08001bdc       0x20 StmPeriphInit\Timers.o
-                0x08001bdc                TIM4_IRQHandler
+                0x08001bd4       0x20 StmPeriphInit\Timers.o
+                0x08001bd4                TIM4_IRQHandler
  .text.NVIC_SetPriority
-                0x08001bfc       0x54 StmPeriphInit\SysTick.o
+                0x08001bf4       0x54 StmPeriphInit\SysTick.o
  .text.SysTick_Config
-                0x08001c50       0x44 StmPeriphInit\SysTick.o
+                0x08001c48       0x44 StmPeriphInit\SysTick.o
  .text.InitializeSysTick
-                0x08001c94       0x24 StmPeriphInit\SysTick.o
-                0x08001c94                InitializeSysTick
+                0x08001c8c       0x24 StmPeriphInit\SysTick.o
+                0x08001c8c                InitializeSysTick
  .text.SysTick_Handler
-                0x08001cb8       0x60 StmPeriphInit\SysTick.o
-                0x08001cb8                SysTick_Handler
+                0x08001cb0       0x60 StmPeriphInit\SysTick.o
+                0x08001cb0                SysTick_Handler
  .text.priv_InitializeMPU
-                0x08001d18       0x24 StmPeriphInit\RCC.o
+                0x08001d10       0x24 StmPeriphInit\RCC.o
  .text.priv_InitializeLedNucleo
-                0x08001d3c       0x10 StmPeriphInit\RCC.o
+                0x08001d34       0x10 StmPeriphInit\RCC.o
  .text.priv_InitializeLed14
-                0x08001d4c       0x1c StmPeriphInit\RCC.o
+                0x08001d44       0x1c StmPeriphInit\RCC.o
  .text.priv_InitializeLedEye
-                0x08001d68       0x10 StmPeriphInit\RCC.o
+                0x08001d60       0x10 StmPeriphInit\RCC.o
  .text.priv_InitializeBt
-                0x08001d78       0x1c StmPeriphInit\RCC.o
+                0x08001d70       0x1c StmPeriphInit\RCC.o
  .text.priv_InitializeWifi
-                0x08001d94       0x1c StmPeriphInit\RCC.o
+                0x08001d8c       0x1c StmPeriphInit\RCC.o
  .text.priv_InitializePi
-                0x08001db0       0x1c StmPeriphInit\RCC.o
+                0x08001da8       0x1c StmPeriphInit\RCC.o
  .text.priv_InitializeMotors
-                0x08001dcc       0x24 StmPeriphInit\RCC.o
+                0x08001dc4       0x24 StmPeriphInit\RCC.o
  .text.priv_InitializeServosArm
-                0x08001df0       0x18 StmPeriphInit\RCC.o
+                0x08001de8       0x18 StmPeriphInit\RCC.o
  .text.priv_InitializeServosCam
-                0x08001e08       0x24 StmPeriphInit\RCC.o
+                0x08001e00       0x24 StmPeriphInit\RCC.o
  .text.priv_InitializeEncoders
-                0x08001e2c       0x2c StmPeriphInit\RCC.o
+                0x08001e24       0x2c StmPeriphInit\RCC.o
  .text.priv_InitializeAdc
-                0x08001e58       0x2c StmPeriphInit\RCC.o
+                0x08001e50       0x2c StmPeriphInit\RCC.o
  .text.InitializeRCC
-                0x08001e84       0x9c StmPeriphInit\RCC.o
-                0x08001e84                InitializeRCC
+                0x08001e7c       0x9c StmPeriphInit\RCC.o
+                0x08001e7c                InitializeRCC
  .text.NVIC_EnableIRQ
-                0x08001f20       0x30 StmPeriphInit\NVIC.o
+                0x08001f18       0x30 StmPeriphInit\NVIC.o
  .text.priv_InitializeBt
-                0x08001f50       0x30 StmPeriphInit\NVIC.o
+                0x08001f48       0x30 StmPeriphInit\NVIC.o
  .text.InitializeNVIC
-                0x08001f80       0x28 StmPeriphInit\NVIC.o
-                0x08001f80                InitializeNVIC
+                0x08001f78       0x28 StmPeriphInit\NVIC.o
+                0x08001f78                InitializeNVIC
  .text.InitializeI2C
-                0x08001fa8       0x48 StmPeriphInit\I2C.o
-                0x08001fa8                InitializeI2C
+                0x08001fa0       0x48 StmPeriphInit\I2C.o
+                0x08001fa0                InitializeI2C
  .text.priv_InitializeLed14
-                0x08001ff0       0x5c StmPeriphInit\GPIO.o
+                0x08001fe8       0x5c StmPeriphInit\GPIO.o
  .text.priv_InitializeLedEye
-                0x0800204c       0x28 StmPeriphInit\GPIO.o
+                0x08002044       0x28 StmPeriphInit\GPIO.o
  .text.priv_InitializeLedNucleo
-                0x08002074       0x24 StmPeriphInit\GPIO.o
+                0x0800206c       0x24 StmPeriphInit\GPIO.o
  .text.priv_InitializeBt
-                0x08002098       0x54 StmPeriphInit\GPIO.o
+                0x08002090       0x54 StmPeriphInit\GPIO.o
  .text.priv_InitializeWifi
-                0x080020ec        0xc StmPeriphInit\GPIO.o
+                0x080020e4        0xc StmPeriphInit\GPIO.o
  .text.priv_InitializePi
-                0x080020f8        0xc StmPeriphInit\GPIO.o
+                0x080020f0        0xc StmPeriphInit\GPIO.o
  .text.priv_InitializeMpu
-                0x08002104       0x58 StmPeriphInit\GPIO.o
+                0x080020fc       0x58 StmPeriphInit\GPIO.o
  .text.priv_InitializeMotors
-                0x0800215c       0x9c StmPeriphInit\GPIO.o
+                0x08002154       0x9c StmPeriphInit\GPIO.o
  .text.priv_InitializeServosArm
-                0x080021f8       0x50 StmPeriphInit\GPIO.o
+                0x080021f0       0x50 StmPeriphInit\GPIO.o
  .text.priv_InitializeServosCam
-                0x08002248       0x58 StmPeriphInit\GPIO.o
+                0x08002240       0x58 StmPeriphInit\GPIO.o
  .text.priv_InitializeEncoders
-                0x080022a0       0x7c StmPeriphInit\GPIO.o
+                0x08002298       0x7c StmPeriphInit\GPIO.o
  .text.priv_InitializeBattery
-                0x0800231c       0x28 StmPeriphInit\GPIO.o
+                0x08002314       0x28 StmPeriphInit\GPIO.o
  .text.priv_InitializeSharp
-                0x08002344       0x28 StmPeriphInit\GPIO.o
+                0x0800233c       0x28 StmPeriphInit\GPIO.o
  .text.InitializeGPIO
-                0x0800236c       0xa4 StmPeriphInit\GPIO.o
-                0x0800236c                InitializeGPIO
+                0x08002364       0xa4 StmPeriphInit\GPIO.o
+                0x08002364                InitializeGPIO
  .text.InitializeADC
-                0x08002410      0x15c StmPeriphInit\ADC.o
-                0x08002410                InitializeADC
+                0x08002408      0x15c StmPeriphInit\ADC.o
+                0x08002408                InitializeADC
  .text.USART_Init
-                0x0800256c      0x174 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x0800256c                USART_Init
+                0x08002564      0x174 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x08002564                USART_Init
  .text.USART_StructInit
-                0x080026e0       0x38 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x080026e0                USART_StructInit
+                0x080026d8       0x38 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x080026d8                USART_StructInit
  .text.USART_Cmd
-                0x08002718       0x38 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x08002718                USART_Cmd
+                0x08002710       0x38 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x08002710                USART_Cmd
  .text.USART_SendData
-                0x08002750       0x24 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x08002750                USART_SendData
+                0x08002748       0x24 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x08002748                USART_SendData
  .text.USART_ITConfig
-                0x08002774       0x84 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x08002774                USART_ITConfig
+                0x0800276c       0x84 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x0800276c                USART_ITConfig
  .text.USART_GetFlagStatus
-                0x080027f8       0x34 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x080027f8                USART_GetFlagStatus
+                0x080027f0       0x34 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x080027f0                USART_GetFlagStatus
  .text.USART_GetITStatus
-                0x0800282c       0xa0 Framework\stm32f30x\src\stm32f30x_usart.o
-                0x0800282c                USART_GetITStatus
+                0x08002824       0xa0 Framework\stm32f30x\src\stm32f30x_usart.o
+                0x08002824                USART_GetITStatus
  .text.TIM_TimeBaseInit
-                0x080028cc      0x100 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x080028cc                TIM_TimeBaseInit
+                0x080028c4      0x100 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x080028c4                TIM_TimeBaseInit
  .text.TIM_PrescalerConfig
-                0x080029cc       0x28 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x080029cc                TIM_PrescalerConfig
- .text.TIM_Cmd  0x080029f4       0x40 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x080029f4                TIM_Cmd
+                0x080029c4       0x28 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x080029c4                TIM_PrescalerConfig
+ .text.TIM_Cmd  0x080029ec       0x40 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x080029ec                TIM_Cmd
  .text.TIM_OC1Init
-                0x08002a34      0x118 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002a34                TIM_OC1Init
+                0x08002a2c      0x118 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002a2c                TIM_OC1Init
  .text.TIM_OC2Init
-                0x08002b4c      0x100 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002b4c                TIM_OC2Init
+                0x08002b44      0x100 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002b44                TIM_OC2Init
  .text.TIM_OC3Init
-                0x08002c4c       0xfc Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002c4c                TIM_OC3Init
+                0x08002c44       0xfc Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002c44                TIM_OC3Init
  .text.TIM_OC4Init
-                0x08002d48       0xc0 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002d48                TIM_OC4Init
+                0x08002d40       0xc0 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002d40                TIM_OC4Init
  .text.TIM_OC1PreloadConfig
-                0x08002e08       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002e08                TIM_OC1PreloadConfig
+                0x08002e00       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002e00                TIM_OC1PreloadConfig
  .text.TIM_OC2PreloadConfig
-                0x08002e40       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002e40                TIM_OC2PreloadConfig
+                0x08002e38       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002e38                TIM_OC2PreloadConfig
  .text.TIM_OC3PreloadConfig
-                0x08002e78       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002e78                TIM_OC3PreloadConfig
+                0x08002e70       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002e70                TIM_OC3PreloadConfig
  .text.TIM_OC4PreloadConfig
-                0x08002eb0       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002eb0                TIM_OC4PreloadConfig
+                0x08002ea8       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002ea8                TIM_OC4PreloadConfig
  .text.TIM_CtrlPWMOutputs
-                0x08002ee8       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002ee8                TIM_CtrlPWMOutputs
+                0x08002ee0       0x38 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002ee0                TIM_CtrlPWMOutputs
  .text.TIM_GetITStatus
-                0x08002f20       0x54 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002f20                TIM_GetITStatus
+                0x08002f18       0x54 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002f18                TIM_GetITStatus
  .text.TIM_ClearITPendingBit
-                0x08002f74       0x24 Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002f74                TIM_ClearITPendingBit
+                0x08002f6c       0x24 Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002f6c                TIM_ClearITPendingBit
  .text.TIM_EncoderInterfaceConfig
-                0x08002f98       0x8c Framework\stm32f30x\src\stm32f30x_tim.o
-                0x08002f98                TIM_EncoderInterfaceConfig
+                0x08002f90       0x8c Framework\stm32f30x\src\stm32f30x_tim.o
+                0x08002f90                TIM_EncoderInterfaceConfig
  .text.RCC_HSICmd
-                0x08003024       0x20 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003024                RCC_HSICmd
+                0x0800301c       0x20 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x0800301c                RCC_HSICmd
  .text.RCC_PLLConfig
-                0x08003044       0x34 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003044                RCC_PLLConfig
+                0x0800303c       0x34 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x0800303c                RCC_PLLConfig
  .text.RCC_PLLCmd
-                0x08003078       0x20 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003078                RCC_PLLCmd
+                0x08003070       0x20 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003070                RCC_PLLCmd
  .text.RCC_SYSCLKConfig
-                0x08003098       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003098                RCC_SYSCLKConfig
+                0x08003090       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003090                RCC_SYSCLKConfig
  .text.RCC_HCLKConfig
-                0x080030d0       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x080030d0                RCC_HCLKConfig
+                0x080030c8       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x080030c8                RCC_HCLKConfig
  .text.RCC_PCLK1Config
-                0x08003108       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003108                RCC_PCLK1Config
+                0x08003100       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003100                RCC_PCLK1Config
  .text.RCC_PCLK2Config
-                0x08003140       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003140                RCC_PCLK2Config
+                0x08003138       0x38 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003138                RCC_PCLK2Config
  .text.RCC_GetClocksFreq
-                0x08003178      0x5b0 Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003178                RCC_GetClocksFreq
+                0x08003170      0x5b0 Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003170                RCC_GetClocksFreq
  .text.RCC_ADCCLKConfig
-                0x08003728       0x4c Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003728                RCC_ADCCLKConfig
+                0x08003720       0x4c Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x08003720                RCC_ADCCLKConfig
  .text.RCC_AHBPeriphClockCmd
-                0x08003774       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x08003774                RCC_AHBPeriphClockCmd
+                0x0800376c       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x0800376c                RCC_AHBPeriphClockCmd
  .text.RCC_APB2PeriphClockCmd
-                0x080037b0       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x080037b0                RCC_APB2PeriphClockCmd
+                0x080037a8       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x080037a8                RCC_APB2PeriphClockCmd
  .text.RCC_APB1PeriphClockCmd
-                0x080037ec       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
-                0x080037ec                RCC_APB1PeriphClockCmd
+                0x080037e4       0x3c Framework\stm32f30x\src\stm32f30x_rcc.o
+                0x080037e4                RCC_APB1PeriphClockCmd
  .text.NVIC_PriorityGroupConfig
-                0x08003828       0x24 Framework\stm32f30x\src\stm32f30x_misc.o
-                0x08003828                NVIC_PriorityGroupConfig
+                0x08003820       0x24 Framework\stm32f30x\src\stm32f30x_misc.o
+                0x08003820                NVIC_PriorityGroupConfig
  .text.NVIC_Init
-                0x0800384c       0xc0 Framework\stm32f30x\src\stm32f30x_misc.o
-                0x0800384c                NVIC_Init
+                0x08003844       0xc0 Framework\stm32f30x\src\stm32f30x_misc.o
+                0x08003844                NVIC_Init
  .text.SysTick_CLKSourceConfig
-                0x0800390c       0x38 Framework\stm32f30x\src\stm32f30x_misc.o
-                0x0800390c                SysTick_CLKSourceConfig
+                0x08003904       0x38 Framework\stm32f30x\src\stm32f30x_misc.o
+                0x08003904                SysTick_CLKSourceConfig
  .text.I2C_Init
-                0x08003944       0xc8 Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003944                I2C_Init
- .text.I2C_Cmd  0x08003a0c       0x38 Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003a0c                I2C_Cmd
+                0x0800393c       0xc8 Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x0800393c                I2C_Init
+ .text.I2C_Cmd  0x08003a04       0x38 Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003a04                I2C_Cmd
  .text.I2C_SlaveAddressConfig
-                0x08003a44       0x40 Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003a44                I2C_SlaveAddressConfig
+                0x08003a3c       0x40 Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003a3c                I2C_SlaveAddressConfig
  .text.I2C_TransferHandling
-                0x08003a84       0x58 Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003a84                I2C_TransferHandling
+                0x08003a7c       0x58 Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003a7c                I2C_TransferHandling
  .text.I2C_SendData
-                0x08003adc       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003adc                I2C_SendData
+                0x08003ad4       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003ad4                I2C_SendData
  .text.I2C_ReceiveData
-                0x08003af8       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003af8                I2C_ReceiveData
+                0x08003af0       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003af0                I2C_ReceiveData
  .text.I2C_GetFlagStatus
-                0x08003b14       0x40 Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003b14                I2C_GetFlagStatus
+                0x08003b0c       0x40 Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003b0c                I2C_GetFlagStatus
  .text.I2C_ClearFlag
-                0x08003b54       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
-                0x08003b54                I2C_ClearFlag
+                0x08003b4c       0x1c Framework\stm32f30x\src\stm32f30x_i2c.o
+                0x08003b4c                I2C_ClearFlag
  .text.GPIO_Init
-                0x08003b70      0x130 Framework\stm32f30x\src\stm32f30x_gpio.o
-                0x08003b70                GPIO_Init
+                0x08003b68      0x130 Framework\stm32f30x\src\stm32f30x_gpio.o
+                0x08003b68                GPIO_Init
  .text.GPIO_ReadOutputDataBit
-                0x08003ca0       0x38 Framework\stm32f30x\src\stm32f30x_gpio.o
-                0x08003ca0                GPIO_ReadOutputDataBit
+                0x08003c98       0x38 Framework\stm32f30x\src\stm32f30x_gpio.o
+                0x08003c98                GPIO_ReadOutputDataBit
  .text.GPIO_SetBits
-                0x08003cd8       0x1c Framework\stm32f30x\src\stm32f30x_gpio.o
-                0x08003cd8                GPIO_SetBits
+                0x08003cd0       0x1c Framework\stm32f30x\src\stm32f30x_gpio.o
+                0x08003cd0                GPIO_SetBits
  .text.GPIO_ResetBits
-                0x08003cf4       0x1c Framework\stm32f30x\src\stm32f30x_gpio.o
-                0x08003cf4                GPIO_ResetBits
+                0x08003cec       0x1c Framework\stm32f30x\src\stm32f30x_gpio.o
+                0x08003cec                GPIO_ResetBits
  .text.GPIO_PinAFConfig
-                0x08003d10       0x8c Framework\stm32f30x\src\stm32f30x_gpio.o
-                0x08003d10                GPIO_PinAFConfig
+                0x08003d08       0x8c Framework\stm32f30x\src\stm32f30x_gpio.o
+                0x08003d08                GPIO_PinAFConfig
  .text.DMA_DeInit
-                0x08003d9c      0x178 Framework\stm32f30x\src\stm32f30x_dma.o
-                0x08003d9c                DMA_DeInit
+                0x08003d94      0x178 Framework\stm32f30x\src\stm32f30x_dma.o
+                0x08003d94                DMA_DeInit
  .text.DMA_Init
-                0x08003f14       0x80 Framework\stm32f30x\src\stm32f30x_dma.o
-                0x08003f14                DMA_Init
- .text.DMA_Cmd  0x08003f94       0x38 Framework\stm32f30x\src\stm32f30x_dma.o
-                0x08003f94                DMA_Cmd
+                0x08003f0c       0x80 Framework\stm32f30x\src\stm32f30x_dma.o
+                0x08003f0c                DMA_Init
+ .text.DMA_Cmd  0x08003f8c       0x38 Framework\stm32f30x\src\stm32f30x_dma.o
+                0x08003f8c                DMA_Cmd
  .text.ADC_Init
-                0x08003fcc       0x80 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08003fcc                ADC_Init
+                0x08003fc4       0x80 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08003fc4                ADC_Init
  .text.ADC_StructInit
-                0x0800404c       0x44 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x0800404c                ADC_StructInit
+                0x08004044       0x44 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004044                ADC_StructInit
  .text.ADC_CommonInit
-                0x08004090       0x9c Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004090                ADC_CommonInit
- .text.ADC_Cmd  0x0800412c       0x38 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x0800412c                ADC_Cmd
+                0x08004088       0x9c Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004088                ADC_CommonInit
+ .text.ADC_Cmd  0x08004124       0x38 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004124                ADC_Cmd
  .text.ADC_StartCalibration
-                0x08004164       0x20 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004164                ADC_StartCalibration
+                0x0800415c       0x20 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x0800415c                ADC_StartCalibration
  .text.ADC_SelectCalibrationMode
-                0x08004184       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004184                ADC_SelectCalibrationMode
+                0x0800417c       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
+                0x0800417c                ADC_SelectCalibrationMode
  .text.ADC_GetCalibrationStatus
-                0x080041b0       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
-                0x080041b0                ADC_GetCalibrationStatus
+                0x080041a8       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
+                0x080041a8                ADC_GetCalibrationStatus
  .text.ADC_VoltageRegulatorCmd
-                0x080041dc       0x44 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x080041dc                ADC_VoltageRegulatorCmd
+                0x080041d4       0x44 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x080041d4                ADC_VoltageRegulatorCmd
  .text.ADC_RegularChannelConfig
-                0x08004220      0x1e4 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004220                ADC_RegularChannelConfig
+                0x08004218      0x1e4 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004218                ADC_RegularChannelConfig
  .text.ADC_StartConversion
-                0x08004404       0x20 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004404                ADC_StartConversion
+                0x080043fc       0x20 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x080043fc                ADC_StartConversion
  .text.ADC_DMACmd
-                0x08004424       0x38 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004424                ADC_DMACmd
+                0x0800441c       0x38 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x0800441c                ADC_DMACmd
  .text.ADC_DMAConfig
-                0x0800445c       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
-                0x0800445c                ADC_DMAConfig
+                0x08004454       0x2c Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004454                ADC_DMAConfig
  .text.ADC_GetFlagStatus
-                0x08004488       0x34 Framework\stm32f30x\src\stm32f30x_adc.o
-                0x08004488                ADC_GetFlagStatus
+                0x08004480       0x34 Framework\stm32f30x\src\stm32f30x_adc.o
+                0x08004480                ADC_GetFlagStatus
  .text.priv_PID_Apply
-                0x080044bc      0x1c0 Framework\PID\PID.o
+                0x080044b4      0x1c0 Framework\PID\PID.o
  .text.priv_SetDstValue
-                0x0800467c       0x1c Framework\PID\PID.o
+                0x08004674       0x1c Framework\PID\PID.o
  .text.priv_GetDstValue
-                0x08004698       0x20 Framework\PID\PID.o
+                0x08004690       0x20 Framework\PID\PID.o
  .text.priv_SetKp
-                0x080046b8       0x1c Framework\PID\PID.o
+                0x080046b0       0x1c Framework\PID\PID.o
  .text.priv_SetKi
-                0x080046d4       0x1c Framework\PID\PID.o
+                0x080046cc       0x1c Framework\PID\PID.o
  .text.priv_SetKd
-                0x080046f0       0x1c Framework\PID\PID.o
+                0x080046e8       0x1c Framework\PID\PID.o
  .text.priv_GetKp
-                0x0800470c       0x20 Framework\PID\PID.o
+                0x08004704       0x20 Framework\PID\PID.o
  .text.priv_GetKi
-                0x0800472c       0x20 Framework\PID\PID.o
+                0x08004724       0x20 Framework\PID\PID.o
  .text.priv_GetKd
-                0x0800474c       0x20 Framework\PID\PID.o
+                0x08004744       0x20 Framework\PID\PID.o
  .text.PID_Initialize
-                0x0800476c       0xac Framework\PID\PID.o
-                0x0800476c                PID_Initialize
+                0x08004764       0xac Framework\PID\PID.o
+                0x08004764                PID_Initialize
  .text.KalmanInitialize
-                0x08004818       0x80 Framework\Kalman\KalmanFilter.o
-                0x08004818                KalmanInitialize
+                0x08004810       0x80 Framework\Kalman\KalmanFilter.o
+                0x08004810                KalmanInitialize
  .text.KalmanGetValue
-                0x08004898      0x210 Framework\Kalman\KalmanFilter.o
-                0x08004898                KalmanGetValue
+                0x08004890      0x210 Framework\Kalman\KalmanFilter.o
+                0x08004890                KalmanGetValue
  .text.KalmanSetQAngle
-                0x08004aa8       0x20 Framework\Kalman\KalmanFilter.o
-                0x08004aa8                KalmanSetQAngle
+                0x08004aa0       0x20 Framework\Kalman\KalmanFilter.o
+                0x08004aa0                KalmanSetQAngle
  .text.KalmanSetRMeasure
-                0x08004ac8       0x20 Framework\Kalman\KalmanFilter.o
-                0x08004ac8                KalmanSetRMeasure
+                0x08004ac0       0x20 Framework\Kalman\KalmanFilter.o
+                0x08004ac0                KalmanSetRMeasure
  .text.KalmanSetRMeasureDef
-                0x08004ae8       0x1c Framework\Kalman\KalmanFilter.o
-                0x08004ae8                KalmanSetRMeasureDef
+                0x08004ae0       0x1c Framework\Kalman\KalmanFilter.o
+                0x08004ae0                KalmanSetRMeasureDef
  .text.KalmanSetQAngleDef
-                0x08004b04       0x1c Framework\Kalman\KalmanFilter.o
-                0x08004b04                KalmanSetQAngleDef
+                0x08004afc       0x1c Framework\Kalman\KalmanFilter.o
+                0x08004afc                KalmanSetQAngleDef
  .text.KalmanGetQAngle
-                0x08004b20       0x1c Framework\Kalman\KalmanFilter.o
-                0x08004b20                KalmanGetQAngle
+                0x08004b18       0x1c Framework\Kalman\KalmanFilter.o
+                0x08004b18                KalmanGetQAngle
  .text.KalmanGetRMeasure
-                0x08004b3c       0x1c Framework\Kalman\KalmanFilter.o
-                0x08004b3c                KalmanGetRMeasure
+                0x08004b34       0x1c Framework\Kalman\KalmanFilter.o
+                0x08004b34                KalmanGetRMeasure
  .text.Fifo_Initialize
-                0x08004b58       0x38 Framework\Fifo\Fifo.o
-                0x08004b58                Fifo_Initialize
+                0x08004b50       0x38 Framework\Fifo\Fifo.o
+                0x08004b50                Fifo_Initialize
  .text.Fifo_Push
-                0x08004b90       0xb0 Framework\Fifo\Fifo.o
-                0x08004b90                Fifo_Push
+                0x08004b88       0xb0 Framework\Fifo\Fifo.o
+                0x08004b88                Fifo_Push
  .text.Fifo_Pop
-                0x08004c40       0x78 Framework\Fifo\Fifo.o
-                0x08004c40                Fifo_Pop
+                0x08004c38       0x78 Framework\Fifo\Fifo.o
+                0x08004c38                Fifo_Pop
  .text.Fifo_IsEmpty
-                0x08004cb8       0x24 Framework\Fifo\Fifo.o
-                0x08004cb8                Fifo_IsEmpty
+                0x08004cb0       0x24 Framework\Fifo\Fifo.o
+                0x08004cb0                Fifo_IsEmpty
  .text.Fifo_IsFull
-                0x08004cdc       0x28 Framework\Fifo\Fifo.o
-                0x08004cdc                Fifo_IsFull
+                0x08004cd4       0x28 Framework\Fifo\Fifo.o
+                0x08004cd4                Fifo_IsFull
  .text.pub_Perform
-                0x08004d04       0xf8 Drivers\ProximitySensor\Sharp.o
+                0x08004cfc       0xf8 Drivers\ProximitySensor\Sharp.o
  .text.priv_GetNewMean
-                0x08004dfc       0xa0 Drivers\ProximitySensor\Sharp.o
+                0x08004df4       0xa0 Drivers\ProximitySensor\Sharp.o
  .text.priv_MeanBufferInitialize
-                0x08004e9c       0x38 Drivers\ProximitySensor\Sharp.o
+                0x08004e94       0x38 Drivers\ProximitySensor\Sharp.o
  .text.InitializeSharp
-                0x08004ed4       0x2c Drivers\ProximitySensor\Sharp.o
-                0x08004ed4                InitializeSharp
+                0x08004ecc       0x2c Drivers\ProximitySensor\Sharp.o
+                0x08004ecc                InitializeSharp
  .text.priv_MotorSetSpeed
-                0x08004f00      0x128 Drivers\Motors\Motors.o
+                0x08004ef8      0x128 Drivers\Motors\Motors.o
  .text.priv_ServoSetAngle
-                0x08005028      0x11c Drivers\Motors\Motors.o
+                0x08005020      0x11c Drivers\Motors\Motors.o
  .text.priv_SetAngleArmLeft
-                0x08005144       0x20 Drivers\Motors\Motors.o
+                0x0800513c       0x20 Drivers\Motors\Motors.o
  .text.priv_SetAngleArmRight
-                0x08005164       0x20 Drivers\Motors\Motors.o
+                0x0800515c       0x20 Drivers\Motors\Motors.o
  .text.priv_SetAngleCamHor
-                0x08005184       0x20 Drivers\Motors\Motors.o
+                0x0800517c       0x20 Drivers\Motors\Motors.o
  .text.priv_SetAngleCamVer
-                0x080051a4       0x20 Drivers\Motors\Motors.o
- *fill*         0x080051c4        0x4 
+                0x0800519c       0x20 Drivers\Motors\Motors.o
+ *fill*         0x080051bc        0x4 
  .text.priv_EncoderPerform
-                0x080051c8       0xc0 Drivers\Motors\Motors.o
+                0x080051c0       0xc0 Drivers\Motors\Motors.o
  .text.priv_GetOmega
-                0x08005288       0x20 Drivers\Motors\Motors.o
+                0x08005280       0x20 Drivers\Motors\Motors.o
  .text.InitializeEncoders
-                0x080052a8       0xa0 Drivers\Motors\Motors.o
-                0x080052a8                InitializeEncoders
+                0x080052a0       0xa0 Drivers\Motors\Motors.o
+                0x080052a0                InitializeEncoders
  .text.InitializeMotors
-                0x08005348       0x30 Drivers\Motors\Motors.o
-                0x08005348                InitializeMotors
+                0x08005340       0x30 Drivers\Motors\Motors.o
+                0x08005340                InitializeMotors
  .text.InitializeServos
-                0x08005378       0x3c Drivers\Motors\Motors.o
-                0x08005378                InitializeServos
+                0x08005370       0x3c Drivers\Motors\Motors.o
+                0x08005370                InitializeServos
  .text.InitializePIDs
-                0x080053b4       0xb0 Drivers\Motors\Motors.o
-                0x080053b4                InitializePIDs
+                0x080053ac       0xb0 Drivers\Motors\Motors.o
+                0x080053ac                InitializePIDs
  .text.MPU6050_Initialization
-                0x08005464       0x34 Drivers\MPU\_LibMPU6050.o
-                0x08005464                MPU6050_Initialization
+                0x0800545c       0x34 Drivers\MPU\_LibMPU6050.o
+                0x0800545c                MPU6050_Initialization
  .text.MPU6050_Gyro_Set_Range
-                0x08005498       0x3c Drivers\MPU\_LibMPU6050.o
-                0x08005498                MPU6050_Gyro_Set_Range
+                0x08005490       0x3c Drivers\MPU\_LibMPU6050.o
+                0x08005490                MPU6050_Gyro_Set_Range
  .text.MPU6050_Accel_Set_Range
-                0x080054d4       0x3c Drivers\MPU\_LibMPU6050.o
-                0x080054d4                MPU6050_Accel_Set_Range
+                0x080054cc       0x3c Drivers\MPU\_LibMPU6050.o
+                0x080054cc                MPU6050_Accel_Set_Range
  .text.MPU6050_Set_Clock
-                0x08005510       0x28 Drivers\MPU\_LibMPU6050.o
-                0x08005510                MPU6050_Set_Clock
+                0x08005508       0x28 Drivers\MPU\_LibMPU6050.o
+                0x08005508                MPU6050_Set_Clock
  .text.MPU6050_Get_AccAngleXZ_Data
-                0x08005538      0x190 Drivers\MPU\_LibMPU6050.o
-                0x08005538                MPU6050_Get_AccAngleXZ_Data
+                0x08005530      0x190 Drivers\MPU\_LibMPU6050.o
+                0x08005530                MPU6050_Get_AccAngleXZ_Data
  .text.MPU6050_Get_GyroY_Data
-                0x080056c8      0x134 Drivers\MPU\_LibMPU6050.o
-                0x080056c8                MPU6050_Get_GyroY_Data
+                0x080056c0      0x134 Drivers\MPU\_LibMPU6050.o
+                0x080056c0                MPU6050_Get_GyroY_Data
  .text.MPU6050_Read
-                0x080057fc      0x16c Drivers\MPU\_LibMPU6050.o
-                0x080057fc                MPU6050_Read
+                0x080057f4      0x16c Drivers\MPU\_LibMPU6050.o
+                0x080057f4                MPU6050_Read
  .text.MPU6050_Write
-                0x08005968      0x144 Drivers\MPU\_LibMPU6050.o
-                0x08005968                MPU6050_Write
+                0x08005960      0x144 Drivers\MPU\_LibMPU6050.o
+                0x08005960                MPU6050_Write
  .text.priv_MpuGetFilteredData
-                0x08005aac       0x30 Drivers\MPU\MPU.o
+                0x08005aa4       0x30 Drivers\MPU\MPU.o
  .text.priv_MpuGetRawData
-                0x08005adc       0x1c Drivers\MPU\MPU.o
+                0x08005ad4       0x1c Drivers\MPU\MPU.o
  .text.priv_ReadKalmanQAngle
-                0x08005af8       0x14 Drivers\MPU\MPU.o
+                0x08005af0       0x14 Drivers\MPU\MPU.o
  .text.priv_ReadKalmanRMeasure
-                0x08005b0c       0x14 Drivers\MPU\MPU.o
+                0x08005b04       0x14 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanQAngle
-                0x08005b20       0x18 Drivers\MPU\MPU.o
+                0x08005b18       0x18 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanRMeasure
-                0x08005b38       0x18 Drivers\MPU\MPU.o
+                0x08005b30       0x18 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanQAngleDef
-                0x08005b50        0xc Drivers\MPU\MPU.o
+                0x08005b48        0xc Drivers\MPU\MPU.o
  .text.priv_WriteKalmanRMeasureDef
-                0x08005b5c        0xc Drivers\MPU\MPU.o
+                0x08005b54        0xc Drivers\MPU\MPU.o
  .text.InitializeMPU
-                0x08005b68       0x78 Drivers\MPU\MPU.o
-                0x08005b68                InitializeMPU
+                0x08005b60       0x78 Drivers\MPU\MPU.o
+                0x08005b60                InitializeMPU
  .text.InitializeLed14
-                0x08005be0       0x14 Drivers\LEDs\LED.o
-                0x08005be0                InitializeLed14
+                0x08005bd8       0x14 Drivers\LEDs\LED.o
+                0x08005bd8                InitializeLed14
+ .text.InitializeLedEye
+                0x08005bec       0x14 Drivers\LEDs\LED.o
+                0x08005bec                InitializeLedEye
  .text.InitializeClock
-                0x08005bf4       0x48 Drivers\Clock\clock.o
-                0x08005bf4                InitializeClock
+                0x08005c00       0x48 Drivers\Clock\clock.o
+                0x08005c00                InitializeClock
  .text.pub_Perform
-                0x08005c3c       0x4c Drivers\Battery\Battery.o
+                0x08005c48       0x4c Drivers\Battery\Battery.o
  .text.pub_AdjustPwm
-                0x08005c88       0x58 Drivers\Battery\Battery.o
+                0x08005c94       0x58 Drivers\Battery\Battery.o
  .text.priv_GetNewMean
-                0x08005ce0       0xa4 Drivers\Battery\Battery.o
+                0x08005cec       0xa4 Drivers\Battery\Battery.o
  .text.priv_MeanBufferInitialize
-                0x08005d84       0x38 Drivers\Battery\Battery.o
+                0x08005d90       0x38 Drivers\Battery\Battery.o
  .text.InitializeBattery
-                0x08005dbc       0x34 Drivers\Battery\Battery.o
-                0x08005dbc                InitializeBattery
+                0x08005dc8       0x34 Drivers\Battery\Battery.o
+                0x08005dc8                InitializeBattery
  .text.priv_BtPushFifo
-                0x08005df0       0x24 Drivers\BT\BT.o
+                0x08005dfc       0x24 Drivers\BT\BT.o
  .text.priv_BtFifoPop
-                0x08005e14       0x1c Drivers\BT\BT.o
+                0x08005e20       0x1c Drivers\BT\BT.o
  .text.priv_BtSendFifo
-                0x08005e30       0x34 Drivers\BT\BT.o
+                0x08005e3c       0x34 Drivers\BT\BT.o
  .text.priv_BtFifoIsEmpty
-                0x08005e64       0x24 Drivers\BT\BT.o
+                0x08005e70       0x24 Drivers\BT\BT.o
  .text.priv_BtSend8
-                0x08005e88       0x34 Drivers\BT\BT.o
+                0x08005e94       0x34 Drivers\BT\BT.o
  .text.priv_BtSendMeasuredData
-                0x08005ebc      0x148 Drivers\BT\BT.o
+                0x08005ec8      0x148 Drivers\BT\BT.o
  .text.InitializeBT
-                0x08006004       0x88 Drivers\BT\BT.o
-                0x08006004                InitializeBT
+                0x08006010       0x88 Drivers\BT\BT.o
+                0x08006010                InitializeBT
  .text.BtRxInterruptCallback
-                0x0800608c       0x54 Drivers\BT\BT.o
-                0x0800608c                BtRxInterruptCallback
+                0x08006098       0x54 Drivers\BT\BT.o
+                0x08006098                BtRxInterruptCallback
  .text.__libc_init_array
-                0x080060e0       0x4c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
-                0x080060e0                __libc_init_array
- .text.atanf    0x0800612c      0x1b0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
-                0x0800612c                atanf
- .text.fabsf    0x080062dc        0xe c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_fabs.o)
-                0x080062dc                fabsf
+                0x080060ec       0x4c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                0x080060ec                __libc_init_array
+ .text.atanf    0x08006138      0x1b0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006138                atanf
+ .text.fabsf    0x080062e8        0xe c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_fabs.o)
+                0x080062e8                fabsf
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x080062ea        0x2 
- .eh_frame      0x080062ec        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ *fill*         0x080062f6        0x2 
+ .eh_frame      0x080062f8        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
  *(.init)
- .init          0x080062ec        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x080062ec                _init
- .init          0x080062f0        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ .init          0x080062f8        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x080062f8                _init
+ .init          0x080062fc        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x080062f8        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x080062f8                _fini
- .fini          0x080062fc        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
-                0x08006304                . = ALIGN (0x4)
-                0x08006304                _etext = .
+ .fini          0x08006304        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08006304                _fini
+ .fini          0x08006308        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x08006310                . = ALIGN (0x4)
+                0x08006310                _etext = .
 
-.vfp11_veneer   0x08006304        0x0
+.vfp11_veneer   0x08006310        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08006304        0x0
+.v4_bx          0x08006310        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x08006304        0x0
+.iplt           0x08006310        0x0
  .iplt          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.rodata         0x08006304       0x28
-                0x08006304                . = ALIGN (0x4)
+.rodata         0x08006310       0x28
+                0x08006310                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.DT_fast
-                0x08006304        0x4 src\main.o
-                0x08006304                DT_fast
+                0x08006310        0x4 src\main.o
+                0x08006310                DT_fast
  .rodata.DT_slow
-                0x08006308        0x4 src\main.o
-                0x08006308                DT_slow
+                0x08006314        0x4 src\main.o
+                0x08006314                DT_slow
  .rodata.atanlo
-                0x0800630c       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006318       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
  .rodata.atanhi
-                0x0800631c       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
-                0x0800632c                . = ALIGN (0x4)
+                0x08006328       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006338                . = ALIGN (0x4)
 
-.rel.dyn        0x0800632c        0x0
+.rel.dyn        0x08006338        0x0
  .rel.iplt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x0800632c        0x0
-                0x0800632c                __exidx_start = .
+.ARM            0x08006338        0x0
+                0x08006338                __exidx_start = .
  *(.ARM.exidx*)
-                0x0800632c                __exidx_end = .
+                0x08006338                __exidx_end = .
 
-.preinit_array  0x0800632c        0x0
-                0x0800632c                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x08006338        0x0
+                0x08006338                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x0800632c                PROVIDE (__preinit_array_end, .)
+                0x08006338                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x0800632c        0x4
-                0x0800632c                PROVIDE (__init_array_start, .)
+.init_array     0x08006338        0x4
+                0x08006338                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x0800632c        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
-                0x08006330                PROVIDE (__init_array_end, .)
+ .init_array    0x08006338        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x0800633c                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08006330        0x4
-                0x08006330                PROVIDE (__fini_array_start, .)
+.fini_array     0x0800633c        0x4
+                0x0800633c                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08006330        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
-                0x08006334                PROVIDE (__fini_array_end, .)
-                0x08006334                _sidata = LOADADDR (.data)
+ .fini_array    0x0800633c        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08006340                PROVIDE (__fini_array_end, .)
+                0x08006340                _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x3c load address 0x08006334
+.data           0x20000000       0x3c load address 0x08006340
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -2353,12 +2354,12 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x2000003c                . = ALIGN (0x4)
  *fill*         0x2000003a        0x2 
                 0x2000003c                _edata = .
-                0x08006370                _siccmram = LOADADDR (.ccmram)
+                0x0800637c                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x2000003c        0x0 load address 0x08006370
+.igot.plt       0x2000003c        0x0 load address 0x0800637c
  .igot.plt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x08006370
+.ccmram         0x10000000        0x0 load address 0x0800637c
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _sccmram = .
  *(.ccmram)
@@ -2684,39 +2685,39 @@ OUTPUT(BalanSyner.elf elf32-littlearm)
  .debug_ranges  0x00001048       0x30 Drivers\Battery\Battery.o
  .debug_ranges  0x00001078       0x48 Drivers\BT\BT.o
 
-.debug_line     0x00000000     0x69d8
+.debug_line     0x00000000     0x69ea
  .debug_line    0x00000000      0x203 src\system_stm32f30x.o
  .debug_line    0x00000203       0x7b src\startup_stm32f303xe.o
- .debug_line    0x0000027e      0x2ad src\main.o
- .debug_line    0x0000052b      0x345 src\Logic.o
- .debug_line    0x00000870      0x4f1 src\Communicator.o
- .debug_line    0x00000d61      0x2a0 StmPeriphInit\USART.o
- .debug_line    0x00001001      0x2bb StmPeriphInit\Timers.o
- .debug_line    0x000012bc      0x1e7 StmPeriphInit\SysTick.o
- .debug_line    0x000014a3      0x2bb StmPeriphInit\RCC.o
- .debug_line    0x0000175e      0x25d StmPeriphInit\NVIC.o
- .debug_line    0x000019bb      0x205 StmPeriphInit\I2C.o
- .debug_line    0x00001bc0      0x388 StmPeriphInit\GPIO.o
- .debug_line    0x00001f48      0x25e StmPeriphInit\ADC.o
- .debug_line    0x000021a6      0x630 Framework\stm32f30x\src\stm32f30x_usart.o
- .debug_line    0x000027d6      0xc63 Framework\stm32f30x\src\stm32f30x_tim.o
- .debug_line    0x00003439      0x632 Framework\stm32f30x\src\stm32f30x_rcc.o
- .debug_line    0x00003a6b      0x26e Framework\stm32f30x\src\stm32f30x_misc.o
- .debug_line    0x00003cd9      0x583 Framework\stm32f30x\src\stm32f30x_i2c.o
- .debug_line    0x0000425c      0x341 Framework\stm32f30x\src\stm32f30x_gpio.o
- .debug_line    0x0000459d      0x319 Framework\stm32f30x\src\stm32f30x_dma.o
- .debug_line    0x000048b6      0x7b6 Framework\stm32f30x\src\stm32f30x_adc.o
- .debug_line    0x0000506c      0x232 Framework\PID\PID.o
- .debug_line    0x0000529e      0x1fd Framework\Kalman\KalmanFilter.o
- .debug_line    0x0000549b      0x1d4 Framework\Fifo\Fifo.o
- .debug_line    0x0000566f      0x27f Drivers\ProximitySensor\Sharp.o
- .debug_line    0x000058ee      0x33e Drivers\Motors\Motors.o
- .debug_line    0x00005c2c      0x33a Drivers\MPU\_LibMPU6050.o
- .debug_line    0x00005f66      0x229 Drivers\MPU\MPU.o
- .debug_line    0x0000618f      0x19b Drivers\LEDs\LED.o
- .debug_line    0x0000632a      0x19a Drivers\Clock\clock.o
- .debug_line    0x000064c4      0x269 Drivers\Battery\Battery.o
- .debug_line    0x0000672d      0x2ab Drivers\BT\BT.o
+ .debug_line    0x0000027e      0x2ae src\main.o
+ .debug_line    0x0000052c      0x356 src\Logic.o
+ .debug_line    0x00000882      0x4f1 src\Communicator.o
+ .debug_line    0x00000d73      0x2a0 StmPeriphInit\USART.o
+ .debug_line    0x00001013      0x2bb StmPeriphInit\Timers.o
+ .debug_line    0x000012ce      0x1e7 StmPeriphInit\SysTick.o
+ .debug_line    0x000014b5      0x2bb StmPeriphInit\RCC.o
+ .debug_line    0x00001770      0x25d StmPeriphInit\NVIC.o
+ .debug_line    0x000019cd      0x205 StmPeriphInit\I2C.o
+ .debug_line    0x00001bd2      0x388 StmPeriphInit\GPIO.o
+ .debug_line    0x00001f5a      0x25e StmPeriphInit\ADC.o
+ .debug_line    0x000021b8      0x630 Framework\stm32f30x\src\stm32f30x_usart.o
+ .debug_line    0x000027e8      0xc63 Framework\stm32f30x\src\stm32f30x_tim.o
+ .debug_line    0x0000344b      0x632 Framework\stm32f30x\src\stm32f30x_rcc.o
+ .debug_line    0x00003a7d      0x26e Framework\stm32f30x\src\stm32f30x_misc.o
+ .debug_line    0x00003ceb      0x583 Framework\stm32f30x\src\stm32f30x_i2c.o
+ .debug_line    0x0000426e      0x341 Framework\stm32f30x\src\stm32f30x_gpio.o
+ .debug_line    0x000045af      0x319 Framework\stm32f30x\src\stm32f30x_dma.o
+ .debug_line    0x000048c8      0x7b6 Framework\stm32f30x\src\stm32f30x_adc.o
+ .debug_line    0x0000507e      0x232 Framework\PID\PID.o
+ .debug_line    0x000052b0      0x1fd Framework\Kalman\KalmanFilter.o
+ .debug_line    0x000054ad      0x1d4 Framework\Fifo\Fifo.o
+ .debug_line    0x00005681      0x27f Drivers\ProximitySensor\Sharp.o
+ .debug_line    0x00005900      0x33e Drivers\Motors\Motors.o
+ .debug_line    0x00005c3e      0x33a Drivers\MPU\_LibMPU6050.o
+ .debug_line    0x00005f78      0x229 Drivers\MPU\MPU.o
+ .debug_line    0x000061a1      0x19b Drivers\LEDs\LED.o
+ .debug_line    0x0000633c      0x19a Drivers\Clock\clock.o
+ .debug_line    0x000064d6      0x269 Drivers\Battery\Battery.o
+ .debug_line    0x0000673f      0x2ab Drivers\BT\BT.o
 
 .debug_str      0x00000000     0x4b79
  .debug_str     0x00000000      0x2f6 src\system_stm32f30x.o
@@ -3244,6 +3245,7 @@ InitializeI2C                                     StmPeriphInit\I2C.o
 InitializeLed14                                   Drivers\LEDs\LED.o
                                                   src\main.o
 InitializeLedEye                                  Drivers\LEDs\LED.o
+                                                  src\main.o
 InitializeLedNucleo                               Drivers\LEDs\LED.o
 InitializeMPU                                     Drivers\MPU\MPU.o
                                                   src\main.o

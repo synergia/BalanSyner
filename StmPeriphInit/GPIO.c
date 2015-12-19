@@ -52,8 +52,8 @@ static void priv_InitializeLedEye()
    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;   // to save power
 
-   GPIO_InitStruct.GPIO_Pin = LED_EYE_PIN;
-   GPIO_Init(LED_EYE_GPIO, &GPIO_InitStruct);
+   GPIO_InitStruct.GPIO_Pin = LEDEYE_PIN;
+   GPIO_Init(LEDEYE_GPIO, &GPIO_InitStruct);
 }
 
 static void priv_InitializeLedNucleo()
@@ -62,8 +62,8 @@ static void priv_InitializeLedNucleo()
    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;   // to save power
 
-   GPIO_InitStruct.GPIO_Pin = LED_NUCLEO_PIN;
-   GPIO_Init(LED_NUCLEO_GPIO, &GPIO_InitStruct);
+   GPIO_InitStruct.GPIO_Pin = LEDNUCLEO_PIN;
+   GPIO_Init(LEDNUCLEO_GPIO, &GPIO_InitStruct);
 }
 
 static void priv_InitializeBt()
