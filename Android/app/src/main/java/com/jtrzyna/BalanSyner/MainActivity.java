@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
     private final static int ERROR = -1;
     private final static int TERMINATE = -2;
     private final static int _MAX_PROGRESS = 200;
-    private final static int _TIME_INTERVAL = 250; //ms
+    private final static int _TIME_INTERVAL = 100; //ms
     private final static byte _START = (byte)0xFF;
     private final static byte _ADDRESS_SPEED = 113;
     private final static byte _ADDRESS_ROTATION = 114;

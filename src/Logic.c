@@ -28,10 +28,13 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private variables-----------------------------//
+/*! Create structure with states and initialize to its default values */
 RobotStates_T kRobotStates = {
    .BatteryDischarged = true,
    .RobotStanding = false,
-   .ConnectionEstablished = false
+   .ConnectionEstablished = false,
+   .Moving = false,
+   .PlatformInRange = false
 };
 
 //-----------------------Private prototypes----------------------------//
@@ -39,34 +42,28 @@ RobotStates_T kRobotStates = {
 //-----------------------Private functions-----------------------------//
 
 //-----------------------Public functions------------------------------//
-void priv_SendC( float Value, uint8_t Address )
-{
-   uint8_t Command[] = { 0xFF, 0xFF, Address, 0, 0, 0, 0, 1 };
-
-   uint32_t transport_bits = *( ( uint32_t* ) &Value );
-   *(uint32_t *) &Command[3] = transport_bits;
-
-   uint8_t i = 0;
-   while ( 8 > i )
-   {
-      oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
-   }
-   oBluetooth.SendFifo();
-}
-
 void MainTask8ms()
 {
    float PWM;
+
    /*! Measure angle of the robot */
    oMpuKalman.ApplyFilter();
 
-   /*! Stop motors when robot falls */
-   if( oMpuKalman.AngleFiltered < 45.0f && oMpuKalman.AngleFiltered > -45.0f )
+   /*! Check if robot is standing */
+   kRobotStates.RobotStanding = ( -45.0f < oMpuKalman.AngleFiltered && 45.0f > oMpuKalman.AngleFiltered );
+   kRobotStates.PlatformInRange = ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
+   kRobotStates.Moving = !( 0 != oPID_Omega.GetDstValue || 0 != oPID_Rotation.GetDstValue);
+
+   /*! Execute standing functionality */
+   if( kRobotStates.RobotStanding )
    {
       /*! Apply PID filter to motors to get required angle (output of omega regulator) */
       oPID_Angle.ApplyPid( &oPID_Angle.Parameters, oMpuKalman.AngleFiltered );
+      oPID_AngleMoving.ApplyPid( &oPID_AngleMoving.Parameters, oMpuKalman.AngleFiltered );
 
-      PWM = oPID_Angle.Parameters.OutSignal;
+      ( false == kRobotStates.Moving ) ? (PWM = oPID_Angle.Parameters.OutSignal )
+                                       : (PWM = oPID_AngleMoving.Parameters.OutSignal );
+
       oBattery.AdjustPwm( &PWM );
 
       if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
@@ -85,7 +82,6 @@ void MainTask8ms()
          PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
       }*/
 
-
       if( 1000 < PWM )
       {
          PWM = 1000;
@@ -98,16 +94,15 @@ void MainTask8ms()
       oMotor.SetSpeed( SelectMotorLeft, PWM + oPID_Rotation.Parameters.OutSignal );
       oMotor.SetSpeed( SelectMotorRight, PWM - oPID_Rotation.Parameters.OutSignal );
    }
+   /*! Stop motors if robot falls */
    else
    {
       oMotor.SetSpeed( SelectMotorLeft, 0.0f );
       oMotor.SetSpeed( SelectMotorRight, 0.0f );
    }
 
-   /*!
-    * Set servo cam vertical
-    */
-   if( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered)
+   /*! Set servo cam vertical */
+   if( kRobotStates.PlatformInRange )
    {
       oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
    }
@@ -122,13 +117,13 @@ void MainTask16ms()
    switch ( Selector++ )
    {
       case 0:
-         priv_SendC( oPID_Rotation.Parameters.OutSignal, 2 );
+         pub_SendCommandBT( oPID_Rotation.Parameters.OutSignal, 2 );
          break;
       case 1:
-         priv_SendC( oPID_Rotation.Parameters.e_sum, 4 );
+         pub_SendCommandBT( oPID_Rotation.Parameters.e_sum, 4 );
          break;
       case 3:
-         priv_SendC( oPID_Omega.Parameters.OutSignal, 12);
+         pub_SendCommandBT( oPID_Omega.Parameters.OutSignal, 12);
          break;
       default:
          break;
@@ -141,43 +136,43 @@ void MainTask16ms()
    switch ( Selector++ )
    {
       case 0:
-   priv_SendC( oMpuKalman.AngleFiltered, 2);
+   pub_SendCommandBT( oMpuKalman.AngleFiltered, ReadFilteredAngle);
          break;
       case 1:
-   priv_SendC( oPID_Angle.Parameters.Kp, 6);
+   pub_SendCommandBT( oPID_Angle.Parameters.Kp, ReadPidAngleKp);
          break;
       case 2:
-   priv_SendC( oPID_Omega.Parameters.e_sum, 15);
+   pub_SendCommandBT( oPID_Omega.Parameters.e_sum, 15);
          break;
       case 3:
-   priv_SendC( oPID_Angle.Parameters.Kd, 8);
+   pub_SendCommandBT( oPID_Angle.Parameters.Kd, ReadPidAngleKd);
          break;
       case 4:
-   priv_SendC( oEncoder_Right.Parameters.Omega, 4);
+   pub_SendCommandBT( oEncoder_Right.Parameters.Omega, ReadOmegaRight);
          break;
       case 5:
-   priv_SendC( oPID_Omega.Parameters.Kp, 9);
+   pub_SendCommandBT( oPID_Omega.Parameters.Kp, ReadPidOmegaKp);
          break;
       case 6:
-   priv_SendC( oPID_Omega.Parameters.Ki, 18);
+   pub_SendCommandBT( oPID_Omega.Parameters.Ki, ReadPidOmegaKi);
          break;
       case 7:
-   priv_SendC( oPID_Omega.Parameters.Kd, 11);
+   pub_SendCommandBT( oPID_Omega.Parameters.Kd, ReadPidOmegaKd);
          break;
       case 8:
-   priv_SendC( oPID_Omega.Parameters.OutSignal+AngleOffset, 12);
+   pub_SendCommandBT( oPID_Omega.Parameters.OutSignal+AngleOffset, 12);
          break;
       case 84:
-   priv_SendC( oPID_Omega.Parameters.OutSignal, 13);
+   pub_SendCommandBT( oPID_Omega.Parameters.OutSignal, 13);
          break;
       case 83:
-   priv_SendC( oPID_Angle.Parameters.OutSignal, 14);
+   pub_SendCommandBT( oPID_Angle.Parameters.OutSignal, 14);
          break;
       case 9:
-   priv_SendC( oPID_Angle.Parameters.Ki, 7);
+   pub_SendCommandBT( oPID_Angle.Parameters.Ki, ReadPidAngleKi);
          break;
       case 10:
-   priv_SendC( oPID_Angle.Parameters.e_sum, 20);
+   pub_SendCommandBT( oPID_Angle.Parameters.e_sum, 20);
          break;
       default:
          break;
@@ -209,10 +204,21 @@ void MainTask32ms()
 
 void MainTask128ms()
 {
-   LED2_Toggle;
-   LEDEYE_Toggle;
    /*! Check if any command from USART or buttons came and save buffer to struct. ADCx2. */
-   Communicator_CheckInputs();
+   kRobotStates.ConnectionEstablished = Communicator_CheckInputs();
+
+   if( kRobotStates.ConnectionEstablished )
+   {
+      LEDEYE_Toggle;
+   }
+   else
+   {
+      oPID_Omega.SetDstValue( &oPID_Omega.Parameters, 0.0f );
+      oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters, 0.0f );
+   }
+
+   LED2_Toggle;
+
    oBattery.Perform();
    oSharp.Perform();
    //oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Omega );

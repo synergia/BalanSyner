@@ -24,48 +24,12 @@
 //-----------------------Private macros--------------------------------//
 
 //-----------------------Private typedefs------------------------------//
-typedef enum
-{
-   ReadKalmanQAngle     = 0u,
-   ReadKalmanRMeasure   = 1u,
-   ReadFilteredAngle    = 2u,
-   ReadRawAngle         = 3u,
-   ReadOmegaLeft        = 4u,
-   ReadOmegaRight       = 5u,
-   ReadPidAngleKp       = 6u,
-   ReadPidAngleKi       = 7u,
-   ReadPidAngleKd       = 8u,
-   ReadPidOmegaKp       = 9u,
-   ReadPidOmegaKi       = 18u,
-   ReadPidOmegaKd       = 11u,
-   ReadPidDstOmega      = 12u,
-
-   WriteKalmanQAngleDef    = 100u,
-   WriteKalmanQAngle       = 101u,
-   WriteKalmanRMeasureDef  = 102u,
-   WriteKalmanRMeasure     = 103u,
-   WritePidAngleKp         = 104u,
-   WritePidAngleKi         = 105u,
-   WritePidAngleKd         = 106u,
-   WritePidOmegaKp         = 107u,
-   WritePidOmegaKi         = 108u,
-   WritePidOmegaKd         = 109u,
-   WritePidRotationKp      = 110u,
-   WritePidRotationKi      = 111u,
-   WritePidRotationKd      = 112u,
-   WritePidDstOmega        = 113u,
-   WritePidDstRotation     = 114u,
-   WriteArmAngle           = 115u,
-   WriteSerHor             = 116u,
-   WriteSerVer             = 117u,
-}Addresses_T;
 
 //-----------------------Private variables-----------------------------//
 
 //-----------------------Private prototypes----------------------------//
 void priv_SendDummy();
 uint8_t priv_CheckParityBits();
-static void priv_SendCommandBT( float Value, Addresses_T Address );
 static float priv_CommandToFloat( uint8_t *Command );
 
 static void priv_ReadKalmanQAngle();
@@ -104,27 +68,12 @@ static void priv_WriteSerVer( uint8_t *Command );
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
 {
-   priv_SendCommandBT( 0.0f, 255u );
+   pub_SendCommandBT( 0.0f, 255u );
 }
 
 uint8_t priv_CheckParityBits()
 {
    return 1;
-}
-
-static void priv_SendCommandBT( float Value, Addresses_T Address )
-{
-   uint8_t Command[] = { 0xFF, 0xFF, Address, 0, 0, 0, 0, PARITY_BIT_TEMP };
-
-   uint32_t transport_bits = *( ( uint32_t* ) &Value );
-   *(uint32_t *) &Command[3] = transport_bits;
-
-   uint8_t i = 0;
-   while ( COMMAND_LENGTH > i )
-   {
-      oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
-   }
-   oBluetooth.SendFifo();
 }
 
 static float priv_CommandToFloat( uint8_t *Command )
@@ -141,67 +90,67 @@ static float priv_CommandToFloat( uint8_t *Command )
  */
 static void priv_ReadKalmanQAngle()
 {
-   priv_SendCommandBT( oMpuKalman.GetKalmanQAngle(), ReadKalmanQAngle );
+   pub_SendCommandBT( oMpuKalman.GetKalmanQAngle(), ReadKalmanQAngle );
 }
 
 static void priv_ReadKalmanRMeasure()
 {
-   priv_SendCommandBT( oMpuKalman.GetKalmanRMeasure(), ReadKalmanRMeasure );
+   pub_SendCommandBT( oMpuKalman.GetKalmanRMeasure(), ReadKalmanRMeasure );
 }
 
 static void priv_ReadFilteredAngle()
 {
-   priv_SendCommandBT( oMpuKalman.AngleFiltered, ReadFilteredAngle );
+   pub_SendCommandBT( oMpuKalman.AngleFiltered, ReadFilteredAngle );
 }
 
 static void priv_ReadRawAngle()
 {
-   priv_SendCommandBT( oMpuKalman.AngleRaw, ReadRawAngle );
+   pub_SendCommandBT( oMpuKalman.AngleRaw, ReadRawAngle );
 }
 
 static void priv_ReadOmegaLeft()
 {
-   priv_SendCommandBT( oEncoder_Left.GetOmega( &oEncoder_Left.Parameters ), ReadOmegaLeft );
+   pub_SendCommandBT( oEncoder_Left.GetOmega( &oEncoder_Left.Parameters ), ReadOmegaLeft );
 }
 
 static void priv_ReadOmegaRight()
 {
-   priv_SendCommandBT( oEncoder_Right.GetOmega( &oEncoder_Right.Parameters ), ReadOmegaRight );
+   pub_SendCommandBT( oEncoder_Right.GetOmega( &oEncoder_Right.Parameters ), ReadOmegaRight );
 }
 
 static void priv_ReadPidAngleKp()
 {
-   priv_SendCommandBT( oPID_Angle.GetKp( &oPID_Angle.Parameters ), ReadPidAngleKp );
+   pub_SendCommandBT( oPID_Angle.GetKp( &oPID_Angle.Parameters ), ReadPidAngleKp );
 }
 
 static void priv_ReadPidAngleKi()
 {
-   priv_SendCommandBT( oPID_Angle.GetKi( &oPID_Angle.Parameters ), ReadPidAngleKi );
+   pub_SendCommandBT( oPID_Angle.GetKi( &oPID_Angle.Parameters ), ReadPidAngleKi );
 }
 
 static void priv_ReadPidAngleKd()
 {
-   priv_SendCommandBT( oPID_Angle.GetKd( &oPID_Angle.Parameters ), ReadPidAngleKd );
+   pub_SendCommandBT( oPID_Angle.GetKd( &oPID_Angle.Parameters ), ReadPidAngleKd );
 }
 
 static void priv_ReadPidOmegaKp()
 {
-   priv_SendCommandBT( oPID_Omega.GetKp( &oPID_Omega.Parameters ), ReadPidOmegaKp );
+   pub_SendCommandBT( oPID_Omega.GetKp( &oPID_Omega.Parameters ), ReadPidOmegaKp );
 }
 
 static void priv_ReadPidOmegaKi()
 {
-   priv_SendCommandBT( oPID_Omega.GetKi( &oPID_Omega.Parameters ), ReadPidOmegaKi );
+   pub_SendCommandBT( oPID_Omega.GetKi( &oPID_Omega.Parameters ), ReadPidOmegaKi );
 }
 
 static void priv_ReadPidOmegaKd()
 {
-   priv_SendCommandBT( oPID_Omega.GetKd( &oPID_Omega.Parameters ), ReadPidOmegaKd );
+   pub_SendCommandBT( oPID_Omega.GetKd( &oPID_Omega.Parameters ), ReadPidOmegaKd );
 }
 
 static void privReadPidDstOmega()
 {
-   priv_SendCommandBT( oPID_Omega.GetDstValue( &oPID_Omega.Parameters ), ReadPidDstOmega );
+   pub_SendCommandBT( oPID_Omega.GetDstValue( &oPID_Omega.Parameters ), ReadPidDstOmega );
 }
 /*!
  *-------------------------------------------------------------------------------------
@@ -302,6 +251,21 @@ static void priv_WriteSerVer( uint8_t *Command )
 }
 
 //-----------------------Public functions------------------------------//
+void pub_SendCommandBT( float Value, Addresses_T Address )
+{
+   uint8_t Command[] = { 0xFF, 0xFF, Address, 0, 0, 0, 0, PARITY_BIT_TEMP };
+
+   uint32_t transport_bits = *( ( uint32_t* ) &Value );
+   *(uint32_t *) &Command[3] = transport_bits;
+
+   uint8_t i = 0;
+   while ( COMMAND_LENGTH > i )
+   {
+      oBluetooth.PushFifo( &oBluetooth.oBtTxFifo, *( Command + i++ ) );
+   }
+   oBluetooth.SendFifo();
+}
+
 /*!
  * fn:            Communicator_CheckInputs
  * Description:   This function checks whether external command came. The protocol is as follows:
@@ -327,18 +291,11 @@ static void priv_WriteSerVer( uint8_t *Command )
  *
  *    PB - parity check TODO: implement some
  */
-void Communicator_CheckInputs()
+uint8_t Communicator_CheckInputs()
 {
-   priv_SendDummy();
-#if 0
-   static uint8_t uSafetyCounter = 0;
-   uSafetyCounter++;
-   if(uSafetyCounter>5)
-   {
-      oMotor.SetSpeed( SelectMotorLeft, 0.0f );
-      oMotor.SetSpeed( SelectMotorRight, 0.0f );
-   }
-#endif
+   //priv_SendDummy();
+   /*! if uSafetyCounter equals 0, it means that connection is not established */
+   uint8_t uSafetyCounter = 0;
    while( 0u != oBluetooth.IsFifoEmpty( &oBluetooth.oBtRxFifo ) )
    {
       /*!
@@ -364,13 +321,14 @@ void Communicator_CheckInputs()
             uint8_t Command[6];
             uint8_t Counter;
             /*! Copy buffer to Command array */
-            for( Counter = 0u ;  Counter < 6u; Counter++ )
+            for( Counter = 0u; Counter < 6u; Counter++ )
             {
-               oBluetooth.PopFifo( &oBluetooth.oBtRxFifo, &Command[ Counter ] );
+               oBluetooth.PopFifo( &oBluetooth.oBtRxFifo, &Command[Counter] );
             }
 
             if( priv_CheckParityBits() == Command[5] )
             {
+               uSafetyCounter = 1;
                LED4_Toggle;
                switch( Command[0] )
                {
@@ -475,5 +433,6 @@ void Communicator_CheckInputs()
          }
       }
    }
+   return uSafetyCounter;
 }
 

@@ -117,7 +117,7 @@ int main(void)
    oServos.SetAngle( SelectServoArmLeft, 0.0f );
    oServos.SetAngle( SelectServoArmRight, 0.0f );
    oServos.SetAngle( SelectServoCamVer, 0.0f );
-   oServos.SetAngle( SelectServoCamHor, 0.0f );
+   oServos.SetAngle( SelectServoCamHor, -15.0f );
    while (1)
    {
 

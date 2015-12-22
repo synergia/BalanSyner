@@ -80,7 +80,8 @@ Motors_C oMotor;
 Servos_C oServos;
 PID_Struct_C oPID_Omega;
 PID_Struct_C oPID_Rotation;
-PID_Struct_C oPID_Angle;
+PID_Struct_C oPID_Angle;         /*! Gains used when robot is not moving */
+PID_Struct_C oPID_AngleMoving;   /*! Gains used when robot is moving */
 
 //-----------------------Public prototypes----------------------------//
 void InitializeEncoders();

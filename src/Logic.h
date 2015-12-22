@@ -18,9 +18,11 @@
 //-----------------------Private typedefs------------------------------//
 typedef struct
 {
-   uint8_t  BatteryDischarged;
-   uint8_t  RobotStanding;
-   uint8_t  ConnectionEstablished;
+   uint8_t BatteryDischarged;       /*! true if battery voltage is above set point */
+   uint8_t RobotStanding;           /*! true if filtered angle is in standing range */
+   uint8_t ConnectionEstablished;   /*! true if received message is last checking input iteration */
+   uint8_t PlatformInRange;         /*! true if angle is in safe range */
+   uint8_t Moving;                  /*! true if OmegaDst or rotation differ from 0 */
 }RobotStates_T;
 
 //-----------------------Private variables-----------------------------//
