@@ -25,27 +25,30 @@ import java.nio.ByteBuffer;
 public class MainActivity extends Activity {
 
     private final static String _DEV_NAME = "K";
-    public final static int REQUEST_ENABLE_BT = 3;
-    public final static int _MSG_TEXT_BUTTON_CONNECT = 5;
-    public final static int SUCCESS_CONNECT = 6;
-    public final static int ERROR = -1;
-    public final static int TERMINATE = -2;
+    private final static int REQUEST_ENABLE_BT = 3;
+    private final static int _MSG_TEXT_BUTTON_CONNECT = 5;
+    private final static int SUCCESS_CONNECT = 6;
+    private final static int ERROR = -1;
+    private final static int TERMINATE = -2;
     private final static int _MAX_PROGRESS = 200;
     private final static int _TIME_INTERVAL = 250; //ms
+    private final static byte _START = (byte)0xFF;
+    private final static byte _ADDRESS_SPEED = 113;
+    private final static byte _ADDRESS_ROTATION = 114;
+    private final static byte _PARITY = 0x01;
 
-    //button
+    //UI
     ToggleButton buttonConnect;
+
     TextView textSpeed;
+    TextView textRotation;
+
     SeekBar seekSpeed;
+    SeekBar seekRotation;
 
     private BtManager btManager;
 
-    public final static byte _START = (byte)0xFF;
-    public final static byte _ADDRESS_SPEED = 113;
-    public final static byte _ADDRESS_ROTATION = 114;
-    public final static byte _PARITY = 0x01;
-
-
+    //Global variables
     private float speed=0;
     private float rotation=0;
     private static boolean DISCOVERY_STARTED = false;
@@ -58,7 +61,6 @@ public class MainActivity extends Activity {
         public void run() {
             /* do what you need to do */
             textSpeed.setText(String.valueOf(speed));
-
             byte[] valueSpeed = ByteBuffer.allocate(4).putFloat(speed).array();
             btManager.sendMessage(_START);
             btManager.sendMessage(_START);
@@ -69,6 +71,7 @@ public class MainActivity extends Activity {
             btManager.sendMessage(valueSpeed [0]);
             btManager.sendMessage(_PARITY);
 
+            textRotation.setText(String.valueOf(rotation));
             byte[] valueRotation = ByteBuffer.allocate(4).putFloat(rotation).array();
             btManager.sendMessage(_START);
             btManager.sendMessage(_START);
@@ -197,7 +200,7 @@ public class MainActivity extends Activity {
     }
 
     void initSeekBars(){
-        seekSpeed = (SeekBar) findViewById(R.id.SpeedBar);
+        seekSpeed = (SeekBar) findViewById(R.id.SeekSpeed);
 
         seekSpeed.setMax(_MAX_PROGRESS);
         seekSpeed.setProgress(0); // Set initial progress value
@@ -207,21 +210,36 @@ public class MainActivity extends Activity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 speed = progress-_MAX_PROGRESS/2;
             }
-
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                speed =0;
+            }
+        });
 
+        seekRotation = (SeekBar) findViewById(R.id.SeekRotation);
+
+        seekRotation.setMax(_MAX_PROGRESS);
+        seekRotation.setProgress(0); // Set initial progress value
+
+        seekRotation.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                rotation = progress-_MAX_PROGRESS/2;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                rotation = 0;
             }
         });
     }
 
     void initTextViews(){
-        textSpeed = (TextView) findViewById(R.id.SpeedText);
+        textSpeed = (TextView) findViewById(R.id.TextSpeed);
+        textRotation = (TextView) findViewById(R.id.TextRotation);
     }
 
 

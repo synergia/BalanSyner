@@ -14,11 +14,17 @@
         android:layout_toStartOf="@+id/linearLayout"
         android:layout_toLeftOf="@+id/linearLayout">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotation"
+            android:id="@+id/TextRotation" />
+
         <SeekBar
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:id="@+id/RotationBar"/>
+            android:id="@+id/SeekRotation"/>
     </LinearLayout>
 
     <LinearLayout
@@ -35,12 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:text="Speed"
-            android:id="@+id/SpeedText" />
+            android:id="@+id/TextSpeed" />
 
         <SeekBar
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:id="@+id/SpeedBar"
+            android:id="@+id/SeekSpeed"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.95"
             android:rotation="270" />
