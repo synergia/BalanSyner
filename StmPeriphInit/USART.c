@@ -120,7 +120,9 @@ void USART2_IRQHandler( void )
 {
    if( USART_GetITStatus( USART2, USART_IT_RXNE ) )
    {
+      USART2->CR1 &= ~USART_CR1_RE;
       USART2InterruptCallback();
+      USART2->CR1 |= USART_CR1_RE;
    }
 }
 

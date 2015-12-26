@@ -45,14 +45,14 @@ typedef enum
  */
 #define LEDNUCLEO_GPIO       GPIOA
 #define LEDNUCLEO_PIN        GPIO_Pin_5
-#define LED1_GPIO             GPIOB
-#define LED1_PIN              GPIO_Pin_12
-#define LED2_GPIO             GPIOB
-#define LED2_PIN              GPIO_Pin_13
-#define LED3_GPIO             GPIOA
-#define LED3_PIN              GPIO_Pin_10
-#define LED4_GPIO             GPIOA
-#define LED4_PIN              GPIO_Pin_11
+#define LED1_GPIO            GPIOB
+#define LED1_PIN             GPIO_Pin_12
+#define LED2_GPIO            GPIOB
+#define LED2_PIN             GPIO_Pin_13
+#define LED3_GPIO            GPIOA
+#define LED3_PIN             GPIO_Pin_10
+#define LED4_GPIO            GPIOA
+#define LED4_PIN             GPIO_Pin_11
 #define LEDEYE_GPIO          GPIOA
 #define LEDEYE_PIN           GPIO_Pin_12
 

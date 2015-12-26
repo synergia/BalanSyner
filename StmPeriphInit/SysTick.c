@@ -1,13 +1,12 @@
-
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 #include "SysTick.h"
 
-//-----------------------Private typedefs------------------------------//
-
 //-----------------------Private defines-------------------------------//
 
 //-----------------------Private macros--------------------------------//
+
+//-----------------------Private typedefs------------------------------//
 
 //-----------------------Private variables-----------------------------//
 
@@ -23,12 +22,12 @@ extern void MainTask128ms();
 
 void InitializeSysTick()
 {
-   SysTick_Config(SYSTICK_FREQUENCY_KHZ>>0);
-   SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-   NVIC_SetPriority(SysTick_IRQn, 0x0);
+   SysTick_Config( SYSTICK_FREQUENCY_KHZ >> 0 );
+   SysTick_CLKSourceConfig( SysTick_CLKSource_HCLK_Div8 );
+   NVIC_SetPriority( SysTick_IRQn, 0x0 );
 }
 
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
    static uint16_t Counter = 384;
 

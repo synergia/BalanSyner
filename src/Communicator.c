@@ -293,6 +293,7 @@ void pub_SendCommandBT( float Value, Addresses_T Address )
  */
 uint8_t Communicator_CheckInputs()
 {
+   USART2->CR1 &= ~USART_CR1_RXNEIE;
    //priv_SendDummy();
    /*! if uSafetyCounter equals 0, it means that connection is not established */
    uint8_t uSafetyCounter = 0;
@@ -433,6 +434,7 @@ uint8_t Communicator_CheckInputs()
          }
       }
    }
+   USART2->CR1 |= USART_CR1_RXNEIE;
    return uSafetyCounter;
 }
 

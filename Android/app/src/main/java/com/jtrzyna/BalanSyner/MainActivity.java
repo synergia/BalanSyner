@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
     private final static int ERROR = -1;
     private final static int TERMINATE = -2;
     private final static int _MAX_PROGRESS = 200;
-    private final static int _TIME_INTERVAL = 100; //ms
+    private final static int _TIME_INTERVAL = 50; //ms
     private final static byte _START = (byte)0xFF;
     private final static byte _ADDRESS_SPEED = 113;
     private final static byte _ADDRESS_ROTATION = 114;
@@ -59,28 +59,31 @@ public class MainActivity extends Activity {
     private Runnable timeRunnable = new Runnable() {
         @Override
         public void run() {
-            /* do what you need to do */
+
             textSpeed.setText(String.valueOf(speed));
             byte[] valueSpeed = ByteBuffer.allocate(4).putFloat(speed).array();
-            btManager.sendMessage(_START);
-            btManager.sendMessage(_START);
-            btManager.sendMessage(_ADDRESS_SPEED);
-            btManager.sendMessage(valueSpeed [3]);
-            btManager.sendMessage(valueSpeed [2]);
-            btManager.sendMessage(valueSpeed [1]);
-            btManager.sendMessage(valueSpeed [0]);
-            btManager.sendMessage(_PARITY);
+            int[] message = new int[16];
+            message[0] = _START;
+            message[1] = _START;
+            message[2] = _ADDRESS_SPEED;
+            message[3] = valueSpeed[3];
+            message[4] = valueSpeed[2];
+            message[5] = valueSpeed[1];
+            message[6] = valueSpeed[0];
+            message[7] = _PARITY;
 
             textRotation.setText(String.valueOf(rotation));
             byte[] valueRotation = ByteBuffer.allocate(4).putFloat(rotation).array();
-            btManager.sendMessage(_START);
-            btManager.sendMessage(_START);
-            btManager.sendMessage(_ADDRESS_ROTATION);
-            btManager.sendMessage(valueRotation [3]);
-            btManager.sendMessage(valueRotation [2]);
-            btManager.sendMessage(valueRotation [1]);
-            btManager.sendMessage(valueRotation [0]);
-            btManager.sendMessage(_PARITY);
+
+            message[8] = _START;
+            message[9] = _START;
+            message[10] = _ADDRESS_ROTATION;
+            message[11] = valueRotation[3];
+            message[12] = valueRotation[2];
+            message[13] = valueRotation[1];
+            message[14] = valueRotation[0];
+            message[15] = _PARITY;
+            btManager.sendMessage(message);
 
             /* and here comes the "trick" */
             timeHandler.postDelayed(this, _TIME_INTERVAL);
