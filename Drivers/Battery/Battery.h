@@ -13,8 +13,8 @@ typedef struct
    float ChargedPercent;
 
    void ( *AdjustPwm ) ( float *Pwm );
-   float ( *GetVoltage ) ( void );
    void ( *Perform ) ( void );
+   uint8_t ( *IsDischarged ) ( void );
 }Battery_C;
 
 //-----------------------Public defines-------------------------------//

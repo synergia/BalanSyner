@@ -23,8 +23,9 @@
 #define ReadAdcRange       ( MaxAdcReadValue - MinAdcReadValue )
 
 //-----------------------Private macros--------------------------------//
-#define GetPercent( ReadValue )  ( (ReadValue - MinAdcReadValue) / ReadAdcRange * 100 )
-#define GetVoltage( ReadValue )  ( ReadValue / MaxAdcValue * AdcVoltage / VoltageDiverter )
+#define GetPercentFromVoltage( Voltage )  ( (Voltage - MinBatteryVoltage)                   \
+                                          / ( MaxBatteryVoltage - MinBatteryVoltage ) * 100 )
+#define GetVoltage( ReadValue )           ( ReadValue / MaxAdcValue * AdcVoltage / VoltageDiverter )
 
 //-----------------------Private typedefs------------------------------//
 
@@ -34,13 +35,16 @@ static float BatteryVoltageBuffer[MeanLength];
 //-----------------------Private prototypes----------------------------//
 static void pub_Perform( void );
 static void pub_AdjustPwm( float *PWM );
+static uint8_t pub_IsDischarged( void );
 
 static float priv_GetNewMean( float NewValue );
 
 //-----------------------Private functions-----------------------------//
 static void pub_Perform( void )
 {
+   /*! Voltage level is transferred through DMA and read from AdcBufferTable */
    oBattery.Voltage = priv_GetNewMean ( (float)GetVoltage( AdcBufferTable[BatteryIndex] ) );
+   oBattery.ChargedPercent = (float)GetPercentFromVoltage( oBattery.Voltage );
 }
 
 static void pub_AdjustPwm( float *PWM )
@@ -50,6 +54,12 @@ static void pub_AdjustPwm( float *PWM )
       *PWM *= MaxBatteryVoltage / oBattery.Voltage;
    }
    else *PWM = 0;
+}
+
+static uint8_t pub_IsDischarged( void )
+{
+   /*! returns true when battery voltage is below MinBatteryVoltage */
+   return ( oBattery.Voltage <= MinBatteryVoltage );
 }
 
 static float priv_GetNewMean( float NewValue )
@@ -96,4 +106,5 @@ void InitializeBattery()
    priv_MeanBufferInitialize();
    oBattery.Perform = pub_Perform;
    oBattery.AdjustPwm = pub_AdjustPwm;
+   oBattery.IsDischarged = pub_IsDischarged;
 }
