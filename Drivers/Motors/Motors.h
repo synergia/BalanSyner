@@ -75,14 +75,17 @@ typedef struct
 
 typedef struct
 {
-   //TODO void get angle
-   void ( *SetAngle )( ServoSelector_T ServoSelector, float Angle );
+   /*! Sets servo do desired angle */
+   void ( *SetAngleArmLeft )( float Angle );
+   void ( *SetAngleArmRight )( float Angle );
+   void ( *SetAngleCamHor )( float Angle );
+   void ( *SetAngleCamVer )( float Angle );
 }Servos_C;
 
 //-----------------------Public variables-----------------------------//
 extern Encoders_C oEncoders;
 extern Motors_C oMotors;
-Servos_C oServos;
+extern Servos_C oServos;
 
 PID_Struct_C oPID_Omega;
 PID_Struct_C oPID_Rotation;

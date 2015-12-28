@@ -32,7 +32,7 @@
 #define SerVerOffset       30.0f
 
 //-----------------------Private macros--------------------------------//
-#define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
+#define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2 * (ANGLE) + 540 )
 
 //-----------------------Private typedefs------------------------------//
 
@@ -54,6 +54,8 @@ Motors_C oMotors = {
    .TableMean_SpeedDst = {0}
 };
 
+Servos_C oServos;
+
 //-----------------------Private prototypes----------------------------//
 static float pub_MotorGetNewSpeedDst( float NewValue );
 static float pub_MotorGetNewRotationDst( float NewValue );
@@ -63,12 +65,10 @@ static void  pub_EncoderPerform( void );
 static float pub_GetOmegaLeft( void );
 static float pub_GetOmegaRight( void );
 
-static void priv_ServoSetAngle(ServoSelector_T Servo, float Angle);
-
-static void priv_SetAngleArmLeft(uint16_t Angle);
-static void priv_SetAngleArmRight(uint16_t Angle);
-static void priv_SetAngleCamHor(uint16_t Angle);
-static void priv_SetAngleCamVer(uint16_t Angle);
+static void pub_SetAngleArmLeft( float Angle );
+static void pub_SetAngleArmRight( float Angle );
+static void priv_SetAngleCamHor( float Angle );
+static void pub_SetAngleCamVer( float Angle );
 
 //-----------------------Private functions-----------------------------//
 static float pub_MotorGetNewSpeedDst( float NewValue )
@@ -164,48 +164,32 @@ static void pub_MotorSetSpeedRight( float Value )
 /*!
  * Value may vary between -180 and +180.0. Resolution 0.5.
  */
-static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
+static void pub_SetAngleArmLeft( float Angle )
 {
    if( -180.0f > Angle ) Angle = -180.0f;
    if(  180.0f < Angle ) Angle =  180.0f;
-
-   switch ( ServoSelector )
-   {
-   case SelectServoArmLeft:
-      priv_SetAngleArmLeft( (uint16_t) 2 * ( Angle ) + 540 );
-      break;
-   case SelectServoArmRight:
-      priv_SetAngleArmRight( (uint16_t) 2 * ( -Angle ) + 540 );
-      break;
-   case SelectServoCamHor:
-      priv_SetAngleCamHor( (uint16_t) 4 * ( Angle + SerHorOffset ) + 540 );
-      break;
-   case SelectServoCamVer:
-      priv_SetAngleCamVer( (uint16_t) 4 * ( -Angle ) + 540 + SerVerOffset );
-      break;
-   default:
-      break;
-   }
+   TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = (uint16_t) 2 * ( Angle ) + 540;
 }
 
-static void priv_SetAngleArmLeft(uint16_t Angle)
+static void pub_SetAngleArmRight( float Angle )
 {
-   TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = Angle;
+   if( -180.0f > Angle ) Angle = -180.0f;
+   if(  180.0f < Angle ) Angle =  180.0f;
+   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 2 * ( -Angle ) + 540;
 }
 
-static void priv_SetAngleArmRight(uint16_t Angle)
+static void priv_SetAngleCamHor( float Angle )
 {
-   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = Angle;
+   if( -180.0f > Angle ) Angle = -180.0f;
+   if(  180.0f < Angle ) Angle =  180.0f;
+   TIM_SERVOS->SERVO_HOR_PWM_CHANNEL = (uint16_t) 4 * ( Angle + SerHorOffset ) + 540;
 }
 
-static void priv_SetAngleCamHor(uint16_t Angle)
+static void pub_SetAngleCamVer( float Angle )
 {
-   TIM_SERVOS->SERVO_HOR_PWM_CHANNEL = Angle;
-}
-
-static void priv_SetAngleCamVer(uint16_t Angle)
-{
-   TIM_SERVOS->SERVO_VER_PWM_CHANNEL = Angle;
+   if( -180.0f > Angle ) Angle = -180.0f;
+   if(  180.0f < Angle ) Angle =  180.0f;
+   TIM_SERVOS->SERVO_VER_PWM_CHANNEL = (uint16_t) 4 * ( -Angle ) + 540 + SerVerOffset;
 }
 
 static void pub_EncoderPerform( void )
@@ -255,10 +239,10 @@ void InitializeEncoders()
    /*! Software */
    oEncoders.Dt = DT_slow;
 
-   oEncoders.Perform = pub_EncoderPerform;
-   oEncoders.GetOmegaLeft = pub_GetOmegaLeft;
+   oEncoders.Perform       = pub_EncoderPerform;
+   oEncoders.GetOmegaLeft  = pub_GetOmegaLeft;
    oEncoders.GetOmegaRight = pub_GetOmegaRight;
-   oEncoders.SetCounter = priv_SetCounter; /*! Timer function */
+   oEncoders.SetCounter    = priv_SetCounter; /*! Timer function */
 }
 
 void InitializeMotors()
@@ -289,7 +273,10 @@ void InitializeServos()
    InitializeGPIO(DriverSelectServosCam);
 
    /*! Software */
-   oServos.SetAngle = priv_ServoSetAngle;
+   oServos.SetAngleArmLeft  = pub_SetAngleArmLeft;
+   oServos.SetAngleArmRight = pub_SetAngleArmRight;
+   oServos.SetAngleCamHor   = priv_SetAngleCamHor;
+   oServos.SetAngleCamVer   = pub_SetAngleCamVer;
 }
 
 void InitializePIDs()

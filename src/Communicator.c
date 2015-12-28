@@ -240,18 +240,18 @@ static void priv_WritePidDstRotation( uint8_t *Command )
 
 static void priv_WriteArmAngle( uint8_t *Command )
 {
-   oServos.SetAngle( SelectServoArmLeft, priv_CommandToFloat( Command ) );
-   oServos.SetAngle( SelectServoArmRight, priv_CommandToFloat( Command ) );
+   oServos.SetAngleArmLeft( priv_CommandToFloat( Command ) );
+   oServos.SetAngleArmRight( priv_CommandToFloat( Command ) );
 }
 
 static void priv_WriteSerHor( uint8_t *Command )
 {
-   oServos.SetAngle( SelectServoCamHor, priv_CommandToFloat( Command ) );
+   oServos.SetAngleCamHor( priv_CommandToFloat( Command ) );
 }
 
 static void priv_WriteSerVer( uint8_t *Command )
 {
-   oServos.SetAngle( SelectServoCamVer, priv_CommandToFloat( Command ) );
+   oServos.SetAngleCamVer( priv_CommandToFloat( Command ) );
 }
 
 //-----------------------Public functions------------------------------//

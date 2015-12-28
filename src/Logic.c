@@ -109,7 +109,7 @@ void MainTask8ms()
       {
          //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
       }
-      else oServos.SetAngle( SelectServoCamVer, 0.0f );
+      else oServos.SetAngleCamVer( 0.0f );
 
    }
 }

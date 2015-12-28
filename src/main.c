@@ -114,10 +114,10 @@ int main(void)
 
    oMotors.SetSpeedLeft( 0.0f );
    oMotors.SetSpeedRight( 0.0f );
-   oServos.SetAngle( SelectServoArmLeft, 0.0f );
-   oServos.SetAngle( SelectServoArmRight, 0.0f );
-   oServos.SetAngle( SelectServoCamVer, 0.0f );
-   oServos.SetAngle( SelectServoCamHor, -15.0f );
+   oServos.SetAngleArmLeft( 0.0f );
+   oServos.SetAngleArmRight( 0.0f );
+   oServos.SetAngleCamVer( 0.0f );
+   oServos.SetAngleCamHor( -15.0f );
    while (1)
    {
 
