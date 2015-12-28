@@ -37,21 +37,31 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private variables-----------------------------//
+/*! DT_slow defines interval between encoder readings */
+extern float DT_slow;
+
+Encoders_C oEncoders = {
+   .DistanceLeft = 0.0f,
+   .DistanceRight = 0.0f,
+   .OmegaLeft = 0.0f,
+   .OmegaRight = 0.0f,
+   .TIMxLeft = TIM_ENC1,
+   .TIMxRight = TIM_ENC2,
+};
+
 Motors_C oMotors = {
    .TableMean_RotationDst = {0},
    .TableMean_SpeedDst = {0}
 };
 
-/*! DT_slow defines interval between encoder readings */
-extern float DT_slow;
-
 //-----------------------Private prototypes----------------------------//
 static float pub_MotorGetNewSpeedDst( float NewValue );
 static float pub_MotorGetNewRotationDst( float NewValue );
-static void pub_MotorSetSpeedLeft( float Value );
-static void pub_MotorSetSpeedRight( float Value );
-static float priv_EncoderPerform( EncoderParameters_T *pkThis );
-static float priv_GetOmega( EncoderParameters_T *pkThis );
+static void  pub_MotorSetSpeedLeft( float Value );
+static void  pub_MotorSetSpeedRight( float Value );
+static void  pub_EncoderPerform( void );
+static float pub_GetOmegaLeft( void );
+static float pub_GetOmegaRight( void );
 
 static void priv_ServoSetAngle(ServoSelector_T Servo, float Angle);
 
@@ -198,24 +208,39 @@ static void priv_SetAngleCamVer(uint16_t Angle)
    TIM_SERVOS->SERVO_VER_PWM_CHANNEL = Angle;
 }
 
-static float priv_EncoderPerform( EncoderParameters_T *pkThis )
+static void pub_EncoderPerform( void )
 {
+   /*! ------------------------LEFT ENCODER-------------------------*/
    /*! How many ticks since last iteration */
-   int16_t DeltaTicks = GetCounter( pkThis->TIMx ) - CounterDef;
+   int16_t DeltaTicks = GetCounter( oEncoders.TIMxLeft ) - CounterDef;
 
    /*! Calculate angular speed of shaft */
-   pkThis->Omega = ( DeltaTicks * RpmPerTIck ) / pkThis->Dt; /*!< Shaft Omega [RPM] */
-   pkThis->Distance += ( DeltaTicks * CmPerTick );
+   oEncoders.OmegaLeft = ( DeltaTicks * RpmPerTIck ) / oEncoders.Dt; /*!< Shaft Omega [RPM] */
+   oEncoders.DistanceLeft += ( DeltaTicks * CmPerTick );
 
    /*! Reset counter so it cannot get out of range */
-   SetCounter( pkThis->TIMx, CounterDef );
+   priv_SetCounter( oEncoders.TIMxLeft, CounterDef );
 
-   return ( pkThis->Omega );
+   /*! ------------------------RIGHT ENCODER------------------------*/
+   /*! How many ticks since last iteration */
+   DeltaTicks = GetCounter( oEncoders.TIMxRight ) - CounterDef;
+
+   /*! Calculate angular speed of shaft */
+   oEncoders.OmegaRight = ( DeltaTicks * RpmPerTIck ) / oEncoders.Dt; /*!< Shaft Omega [RPM] */
+   oEncoders.DistanceRight += ( DeltaTicks * CmPerTick );
+
+   /*! Reset counter so it cannot get out of range */
+   priv_SetCounter( oEncoders.TIMxRight, CounterDef );
 }
 
-static float priv_GetOmega( EncoderParameters_T *pkThis )
+static float pub_GetOmegaLeft( void )
 {
-   return pkThis->Omega;
+   return ( oEncoders.OmegaLeft );
+}
+
+static float pub_GetOmegaRight( void )
+{
+   return ( oEncoders.OmegaRight );
 }
 
 //-----------------------Public functions------------------------------//
@@ -228,21 +253,12 @@ void InitializeEncoders()
    InitializeGPIO( DriverSelectEncoders );
 
    /*! Software */
-   oEncoder_Left.Parameters.Dt = DT_slow;
-   oEncoder_Left.Parameters.TIMx = TIM_ENC1;
-   oEncoder_Left.Parameters.Omega = 0u;
-   oEncoder_Left.Parameters.Distance = 0u;
-   oEncoder_Left.Perform = priv_EncoderPerform;
-   oEncoder_Left.GetOmega = priv_GetOmega;
-   oEncoder_Left.SetCounter = SetCounter; /*! Timer function */
+   oEncoders.Dt = DT_slow;
 
-   oEncoder_Right.Parameters.Dt = DT_slow;
-   oEncoder_Right.Parameters.TIMx = TIM_ENC2;
-   oEncoder_Right.Parameters.Omega = 0u;
-   oEncoder_Right.Parameters.Distance = 0u;
-   oEncoder_Right.Perform = priv_EncoderPerform;
-   oEncoder_Right.GetOmega = priv_GetOmega;
-   oEncoder_Right.SetCounter = SetCounter; /*! Timer function */
+   oEncoders.Perform = pub_EncoderPerform;
+   oEncoders.GetOmegaLeft = pub_GetOmegaLeft;
+   oEncoders.GetOmegaRight = pub_GetOmegaRight;
+   oEncoders.SetCounter = priv_SetCounter; /*! Timer function */
 }
 
 void InitializeMotors()

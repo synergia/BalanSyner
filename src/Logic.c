@@ -191,13 +191,9 @@ void MainTask32ms()
 
 #if 1
    /*! Calculate mean omega of the robot */
-   float OmegaMean = ( oEncoder_Left.Perform ( &oEncoder_Left.Parameters )
-                     + oEncoder_Right.Perform( &oEncoder_Right.Parameters )
-                     ) / 2;
-
-   float OmegaDiff = ( oEncoder_Left.GetOmega ( &oEncoder_Left.Parameters )
-                     - oEncoder_Right.GetOmega( &oEncoder_Right.Parameters )
-                     );
+   oEncoders.Perform();
+   float OmegaMean = ( oEncoders.GetOmegaLeft() + oEncoders.GetOmegaRight() ) / 2;
+   float OmegaDiff = ( oEncoders.GetOmegaLeft() - oEncoders.GetOmegaRight() );
 
    /*! Apply PID filter to motors to get required omega */
    oPID_Omega.ApplyPid   ( &oPID_Omega.Parameters,    OmegaMean );

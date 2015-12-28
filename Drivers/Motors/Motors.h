@@ -34,12 +34,6 @@ typedef enum
 
 typedef enum
 {
-   SelectEncoderLeft,
-   SelectEncoderRight,
-}EncoderSelector_T;
-
-typedef enum
-{
    SelectServoArmLeft,
    SelectServoArmRight,
    SelectServoCamHor,
@@ -49,20 +43,20 @@ typedef enum
 typedef struct
 {
    float Dt;
-   float Omega;
-   float Distance;
-   TIM_TypeDef * TIMx;     /*!< which timer */
-}EncoderParameters_T;
+   float OmegaLeft;
+   float OmegaRight;
+   float DistanceLeft;
+   float DistanceRight;
+   TIM_TypeDef * TIMxLeft;     /*!< which timer */
+   TIM_TypeDef * TIMxRight;    /*!< which timer */
 
-typedef struct
-{
-   EncoderParameters_T Parameters;
-
-   float ( *Perform )( EncoderParameters_T *pkThis );
-   float ( *GetDistance )( EncoderParameters_T *pkThis );
-   float ( *GetOmega )( EncoderParameters_T *pkThis );
+   void ( *Perform )( void );
+   float ( *GetDistanceLeft )( void );
+   float ( *GetDistanceRight )( void );
+   float ( *GetOmegaLeft )( void );
+   float ( *GetOmegaRight )( void );
    void ( *SetCounter )( TIM_TypeDef *TIMx, uint32_t NewValue );
-}Encoder_C;
+}Encoders_C;
 
 typedef struct
 {
@@ -86,10 +80,10 @@ typedef struct
 }Servos_C;
 
 //-----------------------Public variables-----------------------------//
-Encoder_C oEncoder_Left;
-Encoder_C oEncoder_Right;
+extern Encoders_C oEncoders;
 extern Motors_C oMotors;
 Servos_C oServos;
+
 PID_Struct_C oPID_Omega;
 PID_Struct_C oPID_Rotation;
 PID_Struct_C oPID_Angle;         /*! Gains used when robot is not moving */

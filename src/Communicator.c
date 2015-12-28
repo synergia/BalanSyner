@@ -110,12 +110,12 @@ static void priv_ReadRawAngle()
 
 static void priv_ReadOmegaLeft()
 {
-   pub_SendCommandBT( oEncoder_Left.GetOmega( &oEncoder_Left.Parameters ), ReadOmegaLeft );
+   pub_SendCommandBT( oEncoders.GetOmegaLeft(), ReadOmegaLeft );
 }
 
 static void priv_ReadOmegaRight()
 {
-   pub_SendCommandBT( oEncoder_Right.GetOmega( &oEncoder_Right.Parameters ), ReadOmegaRight );
+   pub_SendCommandBT( oEncoders.GetOmegaRight(), ReadOmegaRight );
 }
 
 static void priv_ReadPidAngleKp()
