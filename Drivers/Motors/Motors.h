@@ -13,16 +13,19 @@
 #include "../Framework/PID/PID.h"
 
 //-----------------------Public defines-------------------------------//
+#define SpeedMeanLength    5u
+#define RotationMeanLength 5u
 
+#if ( 2 > SpeedMeanLength )
+   #error "SpeedMeanLength must be greater than 2"
+#endif
+
+#if ( 2 > RotationMeanLength )
+   #error "RotationMeanLength must be greater than 2"
+#endif
 //-----------------------Public macros--------------------------------//
 
 //-----------------------Public typedefs------------------------------//
-typedef enum
-{
-   SelectMotorLeft,
-   SelectMotorRight,
-}MotorSelector_T;
-
 typedef enum
 {
    DirectionCW,
@@ -63,8 +66,17 @@ typedef struct
 
 typedef struct
 {
-   //TODO void get speed
-   void ( *SetSpeed )( MotorSelector_T Motor, float Value );
+   /*! This table is used to calculate mean values */
+   float TableMean_SpeedDst[SpeedMeanLength];
+   float TableMean_RotationDst[RotationMeanLength];
+
+   /*! Calculate mean value and returns it */
+   float ( *GetNewRotationDst )( float Value );
+   float ( *GetNewSpeedDst )( float Value );
+
+   /*! Sets PWM */
+   void ( *SetSpeedLeft )( float Value );
+   void ( *SetSpeedRight )( float Value );
 }Motors_C;
 
 typedef struct
@@ -76,7 +88,7 @@ typedef struct
 //-----------------------Public variables-----------------------------//
 Encoder_C oEncoder_Left;
 Encoder_C oEncoder_Right;
-Motors_C oMotor;
+extern Motors_C oMotors;
 Servos_C oServos;
 PID_Struct_C oPID_Omega;
 PID_Struct_C oPID_Rotation;

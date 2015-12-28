@@ -52,8 +52,8 @@ void MainTask8ms()
       /*! Measure angle of the robot */
       oMpuKalman.ApplyFilter();
 
-      /*! Check if robot is standing */
-      kRobotStates.RobotStanding = ( -45.0f < oMpuKalman.AngleFiltered && 45.0f > oMpuKalman.AngleFiltered );
+      /*! Check robot state */
+      kRobotStates.RobotStanding   = ( -45.0f < oMpuKalman.AngleFiltered && 45.0f > oMpuKalman.AngleFiltered );
       kRobotStates.PlatformInRange = ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
       kRobotStates.Moving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
                             && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
@@ -75,11 +75,12 @@ void MainTask8ms()
 
          if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
          else if( 0 > PWM && PWM > -100 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
-         /*! if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
+
+         /*!if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
          {
             if(PWM >  110) PWM =  110;
             if(PWM < -110) PWM = -110;
-         } */
+         }
          if( 0.0f < oMpuKalman.AngleFiltered )
          {
             PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
@@ -87,26 +88,26 @@ void MainTask8ms()
          else
          {
             PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
-         }
+         }*/
 
          /*! Check if PWM is within boundaries */
-         ( 1000 < PWM ) ? ( PWM = 1000 ) : ( ( -1000 > PWM ) ? ( PWM = -1000 ) : ( PWM ) );
+         ( 1000.0f < PWM ) ? ( PWM = 1000.0f ) : ( ( -1000.0f > PWM ) ? ( PWM = -1000.0f ) : ( PWM ) );
 
-         oMotor.SetSpeed( SelectMotorLeft,  PWM + oPID_Rotation.Parameters.OutSignal );
-         oMotor.SetSpeed( SelectMotorRight, PWM - oPID_Rotation.Parameters.OutSignal );
+         oMotors.SetSpeedLeft( PWM + oPID_Rotation.Parameters.OutSignal );
+         oMotors.SetSpeedRight( PWM - oPID_Rotation.Parameters.OutSignal );
       }
 
       /*! Stop motors if robot falls */
       else
       {
-         oMotor.SetSpeed( SelectMotorLeft, 0.0f );
-         oMotor.SetSpeed( SelectMotorRight, 0.0f );
+         oMotors.SetSpeedLeft( 0.0f );
+         oMotors.SetSpeedRight( 0.0f );
       }
 
       /*! Set servo cam vertical */
       if( kRobotStates.PlatformInRange )
       {
-         oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+         //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
       }
       else oServos.SetAngle( SelectServoCamVer, 0.0f );
 

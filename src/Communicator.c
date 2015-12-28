@@ -226,12 +226,16 @@ static void priv_WritePidRotationKd( uint8_t *Command )
 
 static void priv_WritePidDstOmega( uint8_t *Command )
 {
-   oPID_Omega.SetDstValue( &oPID_Omega.Parameters, priv_CommandToFloat( Command ) );
+   oPID_Omega.SetDstValue( &oPID_Omega.Parameters,
+                           oMotors.GetNewSpeedDst( priv_CommandToFloat( Command ) )
+                         );
 }
 
 static void priv_WritePidDstRotation( uint8_t *Command )
 {
-   oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters, priv_CommandToFloat( Command ) );
+   oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters,
+                              oMotors.GetNewRotationDst( priv_CommandToFloat( Command ) )
+                            );
 }
 
 static void priv_WriteArmAngle( uint8_t *Command )

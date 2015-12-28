@@ -14,8 +14,6 @@
 #include "../StmPeriphInit/GPIO.h"
 #include "../StmPeriphInit/NVIC.h"
 
-//-----------------------Private typedefs------------------------------//
-
 //-----------------------Private defines-------------------------------//
 /*!
  * For max speed 500RPM and DT=0.128s and encoder resolution 1200 ticks per shaft revolution,
@@ -36,11 +34,22 @@
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2u*(ANGLE)+540u )
 
+//-----------------------Private typedefs------------------------------//
+
 //-----------------------Private variables-----------------------------//
+Motors_C oMotors = {
+   .TableMean_RotationDst = {0},
+   .TableMean_SpeedDst = {0}
+};
+
+/*! DT_slow defines interval between encoder readings */
 extern float DT_slow;
 
 //-----------------------Private prototypes----------------------------//
-static void priv_MotorSetSpeed(MotorSelector_T Motor, float Value );
+static float pub_MotorGetNewSpeedDst( float NewValue );
+static float pub_MotorGetNewRotationDst( float NewValue );
+static void pub_MotorSetSpeedLeft( float Value );
+static void pub_MotorSetSpeedRight( float Value );
 static float priv_EncoderPerform( EncoderParameters_T *pkThis );
 static float priv_GetOmega( EncoderParameters_T *pkThis );
 
@@ -52,45 +61,93 @@ static void priv_SetAngleCamHor(uint16_t Angle);
 static void priv_SetAngleCamVer(uint16_t Angle);
 
 //-----------------------Private functions-----------------------------//
+static float pub_MotorGetNewSpeedDst( float NewValue )
+{
+   uint8_t Counter;
+   /*! Shifting buffer one position right (>>) */
+   for( Counter = SpeedMeanLength - 2u; Counter != 0u; Counter-- )
+   {
+      oMotors.TableMean_SpeedDst[Counter + 1u] = oMotors.TableMean_SpeedDst[Counter];
+   }
+   oMotors.TableMean_SpeedDst[1] = oMotors.TableMean_SpeedDst[0];
+   oMotors.TableMean_SpeedDst[0] = NewValue;
+
+   /*! Add last measurements */
+   float Sum = 0.0f;
+   for( Counter = SpeedMeanLength - 1u; Counter != 0u; Counter-- )
+   {
+      Sum += oMotors.TableMean_SpeedDst[Counter];
+   }
+   Sum += oMotors.TableMean_SpeedDst[0];
+
+   /*! return mean */
+   return ( Sum / SpeedMeanLength );
+}
+
+static float pub_MotorGetNewRotationDst( float NewValue )
+{
+   uint8_t Counter;
+   /*! Shifting buffer one position right (>>) */
+   for( Counter = RotationMeanLength - 2u; Counter != 0u; Counter-- )
+   {
+      oMotors.TableMean_RotationDst[Counter + 1u] = oMotors.TableMean_RotationDst[Counter];
+   }
+   oMotors.TableMean_RotationDst[1] = oMotors.TableMean_RotationDst[0];
+   oMotors.TableMean_RotationDst[0] = NewValue;
+
+   /*! Add last measurements */
+   float Sum = 0.0f;
+   for( Counter = RotationMeanLength - 1u; Counter != 0u; Counter-- )
+   {
+      Sum += oMotors.TableMean_RotationDst[Counter];
+   }
+   Sum += oMotors.TableMean_RotationDst[0];
+
+   /*! return mean */
+   return ( Sum / RotationMeanLength );
+}
+
 /*!
  * Value may vary between -1000 and 1000.
  */
-static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
+static void pub_MotorSetSpeedLeft( float Value )
 {
-   if( Value <= 1000 && Value >= -1000 )
+   if( Value <= 1000.0f && Value >= -1000.0f )
    {
-      uint8_t Sign = ( Value > 0 );
-      switch (MotorSelector)
+      uint8_t Sign = ( Value > 0.0f );
+      if( !Sign )
       {
-      case SelectMotorLeft:
-         if( !Sign )
-         {
-            GPIO_SetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
-            GPIO_ResetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
-         }
-         else
-         {
-            GPIO_ResetBits( MOT1_DIRA_GPIO,MOT1_DIRA_PIN );
-            GPIO_SetBits( MOT1_DIRB_GPIO,MOT1_DIRB_PIN );
-         }
-         TIM_MOTORS->MOT1_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;
-         break;
-      case SelectMotorRight:
-         if( !Sign )
-         {
-            GPIO_ResetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
-            GPIO_SetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
-         }
-         else
-         {
-            GPIO_SetBits( MOT2_DIRA_GPIO,MOT2_DIRA_PIN );
-            GPIO_ResetBits( MOT2_DIRB_GPIO,MOT2_DIRB_PIN );
-         }
-         TIM_MOTORS->MOT2_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;;
-         break;
-      default:
-         break;
+         GPIO_SetBits( MOT1_DIRA_GPIO, MOT1_DIRA_PIN );
+         GPIO_ResetBits( MOT1_DIRB_GPIO, MOT1_DIRB_PIN );
       }
+      else
+      {
+         GPIO_ResetBits( MOT1_DIRA_GPIO, MOT1_DIRA_PIN );
+         GPIO_SetBits( MOT1_DIRB_GPIO, MOT1_DIRB_PIN );
+      }
+      TIM_MOTORS->MOT1_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;
+   }
+}
+
+/*!
+ * Value may vary between -1000 and 1000.
+ */
+static void pub_MotorSetSpeedRight( float Value )
+{
+   if( Value <= 1000.0f && Value >= -1000.0f )
+   {
+      uint8_t Sign = ( Value > 0.0f );
+      if( !Sign )
+      {
+         GPIO_ResetBits( MOT2_DIRA_GPIO, MOT2_DIRA_PIN );
+         GPIO_SetBits( MOT2_DIRB_GPIO, MOT2_DIRB_PIN );
+      }
+      else
+      {
+         GPIO_SetBits( MOT2_DIRA_GPIO, MOT2_DIRA_PIN );
+         GPIO_ResetBits( MOT2_DIRB_GPIO, MOT2_DIRB_PIN );
+      }
+      TIM_MOTORS->MOT2_PWM_CHANNEL = Sign ? (uint16_t) Value : (uint16_t) -Value;
    }
 }
 
@@ -99,8 +156,8 @@ static void priv_MotorSetSpeed( MotorSelector_T MotorSelector, float Value )
  */
 static void priv_ServoSetAngle(ServoSelector_T ServoSelector, float Angle)
 {
-   if( -180 > Angle ) Angle = -180;
-   if(  180 < Angle ) Angle =  180;
+   if( -180.0f > Angle ) Angle = -180.0f;
+   if(  180.0f < Angle ) Angle =  180.0f;
 
    switch ( ServoSelector )
    {
@@ -197,7 +254,10 @@ void InitializeMotors()
 
    /*! Software */
    InitializePIDs();
-   oMotor.SetSpeed = priv_MotorSetSpeed;
+   oMotors.GetNewRotationDst = pub_MotorGetNewRotationDst;
+   oMotors.GetNewSpeedDst    = pub_MotorGetNewSpeedDst;
+   oMotors.SetSpeedLeft      = pub_MotorSetSpeedLeft;
+   oMotors.SetSpeedRight     = pub_MotorSetSpeedRight;
 }
 
 void InitializeServos()
@@ -250,4 +310,3 @@ void InitializePIDs()
    oPID_Rotation.Parameters.iWindUp = 500.0f;
    oPID_Rotation.Parameters.dWindUp = 150.0f;
 }
-

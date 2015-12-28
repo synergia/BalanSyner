@@ -43,7 +43,7 @@ static float priv_GetNewMean( float NewValue );
 static void pub_Perform( void )
 {
    /*! Voltage level is transferred through DMA and read from AdcBufferTable */
-   oBattery.Voltage = priv_GetNewMean ( (float)GetVoltage( AdcBufferTable[BatteryIndex] ) );
+   oBattery.Voltage = priv_GetNewMean( (float)GetVoltage( AdcBufferTable[BatteryIndex] ) );
    oBattery.ChargedPercent = (float)GetPercentFromVoltage( oBattery.Voltage );
 }
 
@@ -53,7 +53,7 @@ static void pub_AdjustPwm( float *PWM )
    {
       *PWM *= MaxBatteryVoltage / oBattery.Voltage;
    }
-   else *PWM = 0;
+   else *PWM = 0.0f;
 }
 
 static uint8_t pub_IsDischarged( void )
@@ -66,16 +66,16 @@ static float priv_GetNewMean( float NewValue )
 {
    uint8_t Counter;
    /*! Shifting buffer one position right (>>) */
-   for( Counter = MeanLength - 2; Counter != 0; Counter-- )
+   for( Counter = MeanLength - 2u; Counter != 0u; Counter-- )
    {
-      BatteryVoltageBuffer[Counter + 1] =  BatteryVoltageBuffer[Counter];
+      BatteryVoltageBuffer[Counter + 1u] =  BatteryVoltageBuffer[Counter];
    }
    BatteryVoltageBuffer[1] =  BatteryVoltageBuffer[0];
    BatteryVoltageBuffer[0] = NewValue;
 
    /*! Add last measurements */
-   float Sum = 0;
-   for( Counter = MeanLength - 1; Counter != 0; Counter-- )
+   float Sum = 0.0f;
+   for( Counter = MeanLength - 1u; Counter != 0; Counter-- )
    {
       Sum += BatteryVoltageBuffer[Counter];
    }
@@ -88,7 +88,7 @@ static float priv_GetNewMean( float NewValue )
 static void priv_MeanBufferInitialize()
 {
    uint8_t Counter;
-   for( Counter = 0; Counter <= MeanLength; Counter++ )
+   for( Counter = 0u; Counter <= MeanLength; Counter++ )
    {
       BatteryVoltageBuffer[Counter] =  MeanDefVoltageValue;
    }
