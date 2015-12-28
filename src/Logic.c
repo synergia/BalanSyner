@@ -79,15 +79,15 @@ void MainTask8ms()
          {
             if(PWM >  110) PWM =  110;
             if(PWM < -110) PWM = -110;
-         }
-         if( 0 < oMpuKalman.AngleFiltered )
+         } */
+         if( 0.0f < oMpuKalman.AngleFiltered )
          {
             PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
          }
          else
          {
             PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
-         }*/
+         }
 
          /*! Check if PWM is within boundaries */
          ( 1000 < PWM ) ? ( PWM = 1000 ) : ( ( -1000 > PWM ) ? ( PWM = -1000 ) : ( PWM ) );
@@ -201,7 +201,8 @@ void MainTask32ms()
    /*! Apply PID filter to motors to get required omega */
    oPID_Omega.ApplyPid   ( &oPID_Omega.Parameters,    OmegaMean );
    oPID_Rotation.ApplyPid( &oPID_Rotation.Parameters, OmegaDiff );
-   oPID_Angle.SetDstValue( &oPID_Angle.Parameters,    oPID_Omega.Parameters.OutSignal + AngleOffset);
+   oPID_Angle.SetDstValue      ( &oPID_Angle.Parameters,       oPID_Omega.Parameters.OutSignal + AngleOffset );
+   oPID_AngleMoving.SetDstValue( &oPID_AngleMoving.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset );
 #endif
 }
 

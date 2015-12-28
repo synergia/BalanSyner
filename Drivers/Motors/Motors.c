@@ -228,7 +228,7 @@ void InitializePIDs()
 
    PID_Initialize( &oPID_AngleMoving );
    oPID_AngleMoving.SetKp( &oPID_AngleMoving.Parameters, 38.0f );
-   oPID_AngleMoving.SetKi( &oPID_AngleMoving.Parameters, 4.5f );
+   oPID_AngleMoving.SetKi( &oPID_AngleMoving.Parameters, 2.5f );
    oPID_AngleMoving.SetKd( &oPID_AngleMoving.Parameters, 250.0f );
    oPID_AngleMoving.Parameters.MaxOutSignal = 800.0f; /*!< Max output PWM = 800 + VoltageAdjust */
    oPID_AngleMoving.Parameters.iWindUp = 25.0f;
