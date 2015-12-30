@@ -171,13 +171,10 @@ void priv_SetCounter( TIM_TypeDef *TIMx, uint32_t NewValue )
    TIMx->CNT = NewValue;
 }
 
-#include "../Drivers/LEDs/LED.h"
-//TODO:delete it
 void TIM4_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
   {
-     //LED_NUCLEO_IsOn ? LED_Nucleo_SetOn : LED_Nucleo_SetOff;
      TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
   }
 }

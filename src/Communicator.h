@@ -34,6 +34,7 @@ typedef enum
    ReadPidOmegaKd       = 11u,
    ReadPidDstOmega      = 12u,
 
+   /*! ----------------- MANUAL CONTROL ----------- */
    WriteKalmanQAngleDef    = 100u,
    WriteKalmanQAngle       = 101u,
    WriteKalmanRMeasureDef  = 102u,
@@ -52,6 +53,13 @@ typedef enum
    WriteArmAngle           = 115u,
    WriteSerHor             = 116u,
    WriteSerVer             = 117u,
+
+   /*! ----------------- AUTO CONTROL ---------------- */
+   PauseRobot              = 130u, //Stops motors, standing like R2D2
+   ResumeRobot             = 131u, //Starts motors, arms up
+   LayDown                 = 132u, //Pause+lay
+   StandUp                 = 131u,
+
 }Addresses_T;
 
 //-----------------------Public variables-----------------------------//

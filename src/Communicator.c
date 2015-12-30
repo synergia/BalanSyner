@@ -300,7 +300,7 @@ uint8_t Communicator_CheckInputs()
    USART2->CR1 &= ~USART_CR1_RXNEIE;
    //priv_SendDummy();
    /*! if uSafetyCounter equals 0, it means that connection is not established */
-   uint8_t uSafetyCounter = 0;
+   uint8_t uSafetyCounter = 0u;
    while( 0u != oBluetooth.IsFifoEmpty( &oBluetooth.oBtRxFifo ) )
    {
       /*!
@@ -333,7 +333,7 @@ uint8_t Communicator_CheckInputs()
 
             if( priv_CheckParityBits() == Command[5] )
             {
-               uSafetyCounter = 1;
+               uSafetyCounter = 1u;
                LED4_Toggle;
                switch( Command[0] )
                {

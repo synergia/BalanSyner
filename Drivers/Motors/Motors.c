@@ -41,17 +41,17 @@
 extern float DT_slow;
 
 Encoders_C oEncoders = {
-   .DistanceLeft = 0.0f,
+   .DistanceLeft  = 0.0f,
    .DistanceRight = 0.0f,
-   .OmegaLeft = 0.0f,
-   .OmegaRight = 0.0f,
-   .TIMxLeft = TIM_ENC1,
-   .TIMxRight = TIM_ENC2,
+   .OmegaLeft     = 0.0f,
+   .OmegaRight    = 0.0f,
+   .TIMxLeft      = TIM_ENC1,
+   .TIMxRight     = TIM_ENC2,
 };
 
 Motors_C oMotors = {
    .TableMean_RotationDst = {0},
-   .TableMean_SpeedDst = {0}
+   .TableMean_SpeedDst    = {0}
 };
 
 Servos_C oServos;
@@ -67,7 +67,7 @@ static float pub_GetOmegaRight( void );
 
 static void pub_SetAngleArmLeft( float Angle );
 static void pub_SetAngleArmRight( float Angle );
-static void priv_SetAngleCamHor( float Angle );
+static void pub_SetAngleCamHor( float Angle );
 static void pub_SetAngleCamVer( float Angle );
 
 //-----------------------Private functions-----------------------------//
@@ -163,6 +163,7 @@ static void pub_MotorSetSpeedRight( float Value )
 
 /*!
  * Value may vary between -180 and +180.0. Resolution 0.5.
+ * TODO: boundaries for cam, use macro
  */
 static void pub_SetAngleArmLeft( float Angle )
 {
@@ -178,7 +179,7 @@ static void pub_SetAngleArmRight( float Angle )
    TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 2 * ( -Angle ) + 540;
 }
 
-static void priv_SetAngleCamHor( float Angle )
+static void pub_SetAngleCamHor( float Angle )
 {
    if( -180.0f > Angle ) Angle = -180.0f;
    if(  180.0f < Angle ) Angle =  180.0f;
@@ -275,7 +276,7 @@ void InitializeServos()
    /*! Software */
    oServos.SetAngleArmLeft  = pub_SetAngleArmLeft;
    oServos.SetAngleArmRight = pub_SetAngleArmRight;
-   oServos.SetAngleCamHor   = priv_SetAngleCamHor;
+   oServos.SetAngleCamHor   = pub_SetAngleCamHor;
    oServos.SetAngleCamVer   = pub_SetAngleCamVer;
 }
 

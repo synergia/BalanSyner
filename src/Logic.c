@@ -29,87 +29,154 @@
 
 //-----------------------Private variables-----------------------------//
 /*! Create structure with states and initialize to its default values */
-RobotStates_T kRobotStates = {
+RobotProperties_T kRobotProperties = {
    .BatteryDischarged = true,
-   .RobotStanding = false,
    .ConnectionEstablished = false,
    .Moving = false,
-   .PlatformInRange = false
+   .PlatformInRange = false,
+
+   .StateUserRequested = RobotStateUser_Balancing
 };
 
 //-----------------------Private prototypes----------------------------//
+static void priv_EventBalancing();
+static void priv_CheckActualState();
 
 //-----------------------Private functions-----------------------------//
+static void priv_CheckActualState()
+{
+   /*! Check robot actual state */
+   if( -15.0f < oMpuKalman.AngleFiltered && 15.0f > oMpuKalman.AngleFiltered )
+   {
+      kRobotProperties.StateActual = RobotStateActual_StandsUp;
+   }
+   else if( -45.0f > oMpuKalman.AngleFiltered || 45.0f < oMpuKalman.AngleFiltered )
+   {
+      kRobotProperties.StateActual = RobotStateActual_LiesDown;
+   }
+   else
+   {
+      kRobotProperties.StateActual = RobotStateActual_Unspecified;
+   }
+
+   kRobotProperties.PlatformInRange = ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
+   kRobotProperties.Moving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
+                             && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
+                              );
+
+   /*! Show off */
+   ( true == kRobotProperties.Moving ) ? ( LEDEYE_SetOn ) : ( LEDEYE_SetOff );
+}
+
+static void priv_EventBalancing()
+{
+   /*! Execute standing functionality */
+   float PWM;
+   /*! Apply PID filter to motors to get required angle (output of omega regulator) */
+   oPID_Angle.ApplyPid      ( &oPID_Angle.Parameters,       oMpuKalman.AngleFiltered );
+   oPID_AngleMoving.ApplyPid( &oPID_AngleMoving.Parameters, oMpuKalman.AngleFiltered );
+
+   ( false == kRobotProperties.Moving ) ? ( PWM = oPID_Angle.Parameters.OutSignal )
+                                        : ( PWM = oPID_AngleMoving.Parameters.OutSignal );
+
+   oBattery.AdjustPwm( &PWM );
+
+   if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
+   else if( 0 > PWM && PWM > -100 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
+
+   /*!if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
+   {
+     if(PWM >  110) PWM =  110;
+     if(PWM < -110) PWM = -110;
+   }
+   if( 0.0f < oMpuKalman.AngleFiltered )
+   {
+     PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
+   }
+   else
+   {
+     PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
+   }*/
+
+   /*! Check if PWM is within boundaries */
+   ( 1000.0f < PWM ) ? ( PWM = 1000.0f ) : ( ( -1000.0f > PWM ) ? ( PWM = -1000.0f ) : ( PWM ) );
+
+   oMotors.SetSpeedLeft(  PWM + oPID_Rotation.Parameters.OutSignal );
+   oMotors.SetSpeedRight( PWM - oPID_Rotation.Parameters.OutSignal );
+
+
+   /*! Set servo cam vertical */
+   if( kRobotProperties.PlatformInRange )
+   {
+      //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+   }
+   else oServos.SetAngleCamVer( 0.0f );
+}
 
 //-----------------------Public functions------------------------------//
 void MainTask8ms()
 {
+   /*! Measure angle of the robot */
+   oMpuKalman.ApplyFilter();
+
    /*! Perform action only if battery in not discharged */
-   if( false == kRobotStates.BatteryDischarged )
+   if( false == kRobotProperties.BatteryDischarged )
    {
-      float PWM;
+#if 1
+      priv_CheckActualState();
 
-      /*! Measure angle of the robot */
-      oMpuKalman.ApplyFilter();
-
-      /*! Check robot state */
-      kRobotStates.RobotStanding   = ( -45.0f < oMpuKalman.AngleFiltered && 45.0f > oMpuKalman.AngleFiltered );
-      kRobotStates.PlatformInRange = ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
-      kRobotStates.Moving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
-                            && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
-                             );
-
-      ( true == kRobotStates.Moving ) ? ( LEDEYE_SetOn ) : ( LEDEYE_SetOff );
-
-      /*! Execute standing functionality */
-      if( kRobotStates.RobotStanding )
+      /*! This switch checks which state is requested by user */
+      switch( kRobotProperties.StateUserRequested )
       {
-         /*! Apply PID filter to motors to get required angle (output of omega regulator) */
-         oPID_Angle.ApplyPid      ( &oPID_Angle.Parameters,       oMpuKalman.AngleFiltered );
-         oPID_AngleMoving.ApplyPid( &oPID_AngleMoving.Parameters, oMpuKalman.AngleFiltered );
+         case RobotStateUser_Balancing:
+            switch( kRobotProperties.StateActual )
+            {
+               case RobotStateActual_LiesDown:
+                  oMotors.SetSpeedLeft(  0.0f );
+                  oMotors.SetSpeedRight( 0.0f );
+                  //TODO: Reset PIDs
+                  kRobotProperties.StateRequested = RobotStateRequested_StandingUp;
+                  break;
 
-         ( false == kRobotStates.Moving ) ? ( PWM = oPID_Angle.Parameters.OutSignal )
-                                          : ( PWM = oPID_AngleMoving.Parameters.OutSignal );
+               case RobotStateActual_StandsUp:
+                  kRobotProperties.StateRequested = RobotStateRequested_Balancing;
 
-         oBattery.AdjustPwm( &PWM );
-
-         if     ( 0 < PWM && PWM <  100 ) PWM =  ( PWM / 10 ) * ( PWM / 10 );
-         else if( 0 > PWM && PWM > -100 ) PWM = -( PWM / 10 ) * ( PWM / 10 );
-
-         /*!if( oPID_Angle.Parameters.e < 2.0 && oPID_Angle.Parameters.e > -2.0 )
-         {
-            if(PWM >  110) PWM =  110;
-            if(PWM < -110) PWM = -110;
-         }
-         if( 0.0f < oMpuKalman.AngleFiltered )
-         {
-            PWM -= ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// - MinPwmToReact;
-         }
-         else
-         {
-            PWM += ( oMpuKalman.AngleFiltered ) * ( oMpuKalman.AngleFiltered ) * 3;// + MinPwmToReact;
-         }*/
-
-         /*! Check if PWM is within boundaries */
-         ( 1000.0f < PWM ) ? ( PWM = 1000.0f ) : ( ( -1000.0f > PWM ) ? ( PWM = -1000.0f ) : ( PWM ) );
-
-         oMotors.SetSpeedLeft( PWM + oPID_Rotation.Parameters.OutSignal );
-         oMotors.SetSpeedRight( PWM - oPID_Rotation.Parameters.OutSignal );
+               default:
+                  /*! When robot falls down, StateActual = LaysDown and StateRequested = StandingUp.
+                   * When angle is close to 0, StateActual = StandsUp and StateRequested = Balancing
+                   * Then robot will balance until StateActual = LiesDown. When angle is greater than
+                   * Standing and less than laying, default case is triggered and nothing changes */
+                  break;
+            }
+            break;
+            case RobotStateUser_LiesDown:
+               break;
+            case RobotStateUser_StandsUp:
+               break;
+            default:
+               break;
       }
 
-      /*! Stop motors if robot falls */
-      else
+      /*! This switch executes internal requests from the application */
+      switch( kRobotProperties.StateRequested )
       {
-         oMotors.SetSpeedLeft( 0.0f );
-         oMotors.SetSpeedRight( 0.0f );
-      }
+         case RobotStateRequested_LiesDown:
+            //Motors off
+            //ArmsUp
+            break;
+         case RobotStateRequested_StandingUp:
 
-      /*! Set servo cam vertical */
-      if( kRobotStates.PlatformInRange )
-      {
-         //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
+            break;
+         case RobotStateRequested_StandsUp:
+            break;
+         case RobotStateRequested_Balancing:
+            priv_EventBalancing();
+            break;
+         default:
+            break;
       }
-      else oServos.SetAngleCamVer( 0.0f );
+#endif
+
 
    }
 }
@@ -210,12 +277,12 @@ void MainTask128ms()
    oSharp.Perform();
 
    /*! Check if battery is discharged */
-   kRobotStates.BatteryDischarged = oBattery.IsDischarged();
+   kRobotProperties.BatteryDischarged = oBattery.IsDischarged();
 
    /*! Check if any command from USART or buttons came and save buffer to the struct. ADCx2. */
-   kRobotStates.ConnectionEstablished = Communicator_CheckInputs();
+   kRobotProperties.ConnectionEstablished = Communicator_CheckInputs();
 
-   if( kRobotStates.ConnectionEstablished )
+   if( kRobotProperties.ConnectionEstablished )
    {
       LED4_Toggle;
    }
