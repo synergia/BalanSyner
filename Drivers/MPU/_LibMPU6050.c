@@ -41,7 +41,10 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private defines-------------------------------//
-#define radiansToDegrees(angleRadians) (angleRadians * 180.0 / M_PI)
+#define radiansToDegrees( angleRadians ) ( angleRadians * 180.0 / M_PI )
+#define GYRO_OFFSET     ( -0.12156f ) //measured value
+#define ANGLE_OFFSET    ( 4.85f )
+
 #define _NoError
 #define _BALANSYNER
 
@@ -213,7 +216,7 @@ if(errorstatus != 0){
    {
       *Angle = -180 + tempAngle;
    }
-
+   *Angle += ANGLE_OFFSET;
    return errorstatus;
 }
 

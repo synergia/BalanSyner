@@ -8,6 +8,7 @@
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 #include "Logic.h"
+#include "RobotStates.h"
 
 #include "../Drivers/Battery/Battery.h"
 #include "../Drivers/BT/BT.h"
@@ -35,18 +36,22 @@ RobotProperties_T kRobotProperties = {
    .Moving = false,
    .PlatformInRange = false,
 
-   .StateUserRequested = RobotStateUser_Balancing
+   .StateUserRequested = RobotStateUser_LiesDown
 };
 
 //-----------------------Private prototypes----------------------------//
 static void priv_EventBalancing();
+static void priv_EventStandingUp();
+static void priv_EventArmsUp();
+static void priv_EventArmsDown();
+static void priv_EventMotorsStop();
 static void priv_CheckActualState();
 
 //-----------------------Private functions-----------------------------//
 static void priv_CheckActualState()
 {
    /*! Check robot actual state */
-   if( -15.0f < oMpuKalman.AngleFiltered && 15.0f > oMpuKalman.AngleFiltered )
+   if( -18.0f < oMpuKalman.AngleFiltered && 18.0f > oMpuKalman.AngleFiltered )
    {
       kRobotProperties.StateActual = RobotStateActual_StandsUp;
    }
@@ -113,6 +118,42 @@ static void priv_EventBalancing()
    else oServos.SetAngleCamVer( 0.0f );
 }
 
+static void priv_EventStandingUp()
+{
+   if( !time3072msPassed )
+   {
+      if( 0 < oMpuKalman.AngleFiltered )
+      {
+         oServos.SetAngleArmLeft ( 82.0f );
+         oServos.SetAngleArmRight( 82.0f );
+      }
+      else
+      {
+         oServos.SetAngleArmLeft ( -82.0f );
+         oServos.SetAngleArmRight( -82.0f );
+      }
+   }
+}
+
+static void priv_EventArmsUp()
+{
+   oServos.SetAngleArmLeft ( 0.0f );
+   oServos.SetAngleArmRight( 0.0f );
+}
+
+static void priv_EventArmsDown()
+{
+   oServos.SetAngleArmLeft ( -80.0f );
+   oServos.SetAngleArmRight( -80.0f );
+}
+
+static void priv_EventMotorsStop()
+{
+   //TODO: Reset PIDs
+   oMotors.SetSpeedLeft( 0.0f );
+   oMotors.SetSpeedRight( 0.0f );
+}
+
 //-----------------------Public functions------------------------------//
 void MainTask8ms()
 {
@@ -132,9 +173,6 @@ void MainTask8ms()
             switch( kRobotProperties.StateActual )
             {
                case RobotStateActual_LiesDown:
-                  oMotors.SetSpeedLeft(  0.0f );
-                  oMotors.SetSpeedRight( 0.0f );
-                  //TODO: Reset PIDs
                   kRobotProperties.StateRequested = RobotStateRequested_StandingUp;
                   break;
 
@@ -150,8 +188,19 @@ void MainTask8ms()
             }
             break;
             case RobotStateUser_LiesDown:
+               kRobotProperties.StateRequested = RobotStateRequested_LyingDown;
                break;
             case RobotStateUser_StandsUp:
+               switch( kRobotProperties.StateActual )
+               {
+                  case RobotStateActual_LiesDown:
+                     kRobotProperties.StateRequested = RobotStateRequested_StandingUp;
+                     break;
+
+                  case RobotStateActual_StandsUp:
+                  default:
+                     break;
+               }
                break;
             default:
                break;
@@ -160,38 +209,42 @@ void MainTask8ms()
       /*! This switch executes internal requests from the application */
       switch( kRobotProperties.StateRequested )
       {
-         case RobotStateRequested_LiesDown:
-            //Motors off
-            //ArmsUp
+         case RobotStateRequested_TiltBack:
+            priv_EventArmsDown();
+            oPID_Angle.SetDstValue( &oPID_Angle.Parameters, -15.0f );
+            oPID_Omega.SetDstValue( &oPID_Omega.Parameters, 0.0f );
+            break;
+         case RobotStateRequested_LyingDown:
+            priv_EventMotorsStop();
+            priv_EventArmsUp();
             break;
          case RobotStateRequested_StandingUp:
-
-            break;
-         case RobotStateRequested_StandsUp:
+            priv_EventMotorsStop();
+            priv_EventStandingUp();
             break;
          case RobotStateRequested_Balancing:
             priv_EventBalancing();
+            priv_EventArmsUp();
             break;
          default:
             break;
       }
 #endif
 
-
    }
 }
 
 void MainTask16ms()
 {
-#if 0
+#if 1
    static uint8_t Selector = 0;
    switch ( Selector++ )
    {
       case 0:
-         pub_SendCommandBT( oBattery.ChargedPercent, 2 );
+         pub_SendCommandBT( oMpuKalman.AngleFiltered, ReadFilteredAngle );
          break;
       case 1:
-         pub_SendCommandBT( oPID_Rotation.Parameters.e_sum, 4 );
+         pub_SendCommandBT( oPID_Angle.Parameters.OutSignal, 4 );
          break;
       case 3:
          pub_SendCommandBT( oPID_Omega.Parameters.OutSignal, 12);
@@ -288,8 +341,8 @@ void MainTask128ms()
    }
    else
    {
-      //oPID_Omega.SetDstValue   ( &oPID_Omega.Parameters,    0.0f );
-      //oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters, 0.0f );
+      oPID_Omega.SetDstValue   ( &oPID_Omega.Parameters,    0.0f );
+      oPID_Rotation.SetDstValue( &oPID_Rotation.Parameters, 0.0f );
    }
 
    //oPID_Omega.SetDstValue( &oPID_Omega.Parameters, oSharp.Omega );

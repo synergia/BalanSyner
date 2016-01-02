@@ -11,7 +11,7 @@
 //-----------------------Includes-------------------------------------//
 
 //-----------------------Public defines-------------------------------//
-#define AngleOffset        -0.9f /*! Because the fact that center of the mass of the robot is not
+#define AngleOffset        3.95f /*! Because the fact that center of the mass of the robot is not
                                      straight above wheels axis, default angle should not be 0 */
 
 #define MinPwmToReact      50.0f /*! Below this value wheels don't turn */

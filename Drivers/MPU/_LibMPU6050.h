@@ -82,7 +82,6 @@ typedef enum{
 }MPU6050_Clock_Select;
 
 //-----------------------Public defines-------------------------------//
-#define GYRO_OFFSET 		(-0.12156f) //measured value
 
 /* Register map */
 #define SELF_TEST_X			0x0D

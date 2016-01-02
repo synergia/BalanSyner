@@ -55,10 +55,9 @@ typedef enum
    WriteSerVer             = 117u,
 
    /*! ----------------- AUTO CONTROL ---------------- */
-   PauseRobot              = 130u, //Stops motors, standing like R2D2
-   ResumeRobot             = 131u, //Starts motors, arms up
-   LayDown                 = 132u, //Pause+lay
-   StandUp                 = 131u,
+   AutoBalance             = 130u,
+   AutoStandsUp            = 131u,
+   AutoLiesDown            = 132u,
 
 }Addresses_T;
 

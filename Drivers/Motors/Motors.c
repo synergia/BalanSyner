@@ -162,34 +162,38 @@ static void pub_MotorSetSpeedRight( float Value )
 }
 
 /*!
- * Value may vary between -180 and +180.0. Resolution 0.5.
+ * Value may vary between -90 and +90.
  * TODO: boundaries for cam, use macro
  */
 static void pub_SetAngleArmLeft( float Angle )
 {
-   if( -180.0f > Angle ) Angle = -180.0f;
-   if(  180.0f < Angle ) Angle =  180.0f;
-   TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = (uint16_t) 2 * ( Angle ) + 540;
+   static float Value = 0;
+   if( Angle > Value ) Value += 0.75f;
+   if( Angle < Value ) Value -= 0.75f;
+
+   if( -90.0f > Value ) Value = -90.0f;
+   if(  90.0f < Value ) Value =  90.0f;
+   TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = (uint16_t) 4 * ( Value ) + 540;
 }
 
 static void pub_SetAngleArmRight( float Angle )
 {
-   if( -180.0f > Angle ) Angle = -180.0f;
-   if(  180.0f < Angle ) Angle =  180.0f;
-   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 2 * ( -Angle ) + 540;
+   if( -90.0f > Angle ) Angle = -90.0f;
+   if(  90.0f < Angle ) Angle =  90.0f;
+   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 4 * ( -Angle ) + 540;
 }
 
 static void pub_SetAngleCamHor( float Angle )
 {
-   if( -180.0f > Angle ) Angle = -180.0f;
-   if(  180.0f < Angle ) Angle =  180.0f;
+   if( -90.0f > Angle ) Angle = -90.0f;
+   if(  90.0f < Angle ) Angle =  90.0f;
    TIM_SERVOS->SERVO_HOR_PWM_CHANNEL = (uint16_t) 4 * ( Angle + SerHorOffset ) + 540;
 }
 
 static void pub_SetAngleCamVer( float Angle )
 {
-   if( -180.0f > Angle ) Angle = -180.0f;
-   if(  180.0f < Angle ) Angle =  180.0f;
+   if( -90.0f > Angle ) Angle = -90.0f;
+   if(  90.0f < Angle ) Angle =  90.0f;
    TIM_SERVOS->SERVO_VER_PWM_CHANNEL = (uint16_t) 4 * ( -Angle ) + 540 + SerVerOffset;
 }
 
@@ -249,9 +253,9 @@ void InitializeEncoders()
 void InitializeMotors()
 {
    /*! Physical initialization */
-   InitializeRCC(DriverSelectMotors);
-   InitializeTimers(TIM_MOTORS);
-   InitializeGPIO(DriverSelectMotors);
+   InitializeRCC( DriverSelectMotors );
+   InitializeTimers( TIM_MOTORS );
+   InitializeGPIO( DriverSelectMotors );
 
    /*! Software */
    InitializePIDs();
@@ -264,14 +268,13 @@ void InitializeMotors()
 void InitializeServos()
 {
    /*! Physical initialization */
-   InitializeRCC(DriverSelectServosArm);
-   InitializeTimers(TIM_SERVOS);
-   InitializeGPIO(DriverSelectServosArm);
+   InitializeRCC( DriverSelectServosArm );
+   InitializeRCC( DriverSelectServosCam );
 
-   /*! Physical initialization */
-   InitializeRCC(DriverSelectServosCam);
-   InitializeTimers(TIM_SERVOS);
-   InitializeGPIO(DriverSelectServosCam);
+   InitializeTimers( TIM_SERVOS );
+
+   InitializeGPIO( DriverSelectServosArm );
+   InitializeGPIO( DriverSelectServosCam );
 
    /*! Software */
    oServos.SetAngleArmLeft  = pub_SetAngleArmLeft;

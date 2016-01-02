@@ -8,6 +8,7 @@
 //-----------------------Includes-------------------------------------//
 #include "stm32f30x.h"
 #include "Communicator.h"
+#include "RobotStates.h"
 
 #include "../Drivers/LEDs/LED.h"
 #include "../Drivers/BT/BT.h"
@@ -26,6 +27,7 @@
 //-----------------------Private typedefs------------------------------//
 
 //-----------------------Private variables-----------------------------//
+extern RobotProperties_T kRobotProperties;
 
 //-----------------------Private prototypes----------------------------//
 void priv_SendDummy();
@@ -64,6 +66,10 @@ static void priv_WritePidDstRotation( uint8_t *Command );
 static void priv_WriteArmAngle( uint8_t *Command );
 static void priv_WriteSerHor( uint8_t *Command );
 static void priv_WriteSerVer( uint8_t *Command );
+
+static void priv_AutoBalance();
+static void priv_AutoStandsUp();
+static void priv_AutoLiesDown();
 
 //-----------------------Private functions-----------------------------//
 void priv_SendDummy()
@@ -254,6 +260,21 @@ static void priv_WriteSerVer( uint8_t *Command )
    oServos.SetAngleCamVer( priv_CommandToFloat( Command ) );
 }
 
+static void priv_AutoBalance()
+{
+   kRobotProperties.StateUserRequested = RobotStateUser_Balancing;
+}
+
+static void priv_AutoStandsUp()
+{
+   kRobotProperties.StateUserRequested = RobotStateUser_StandsUp;
+}
+
+static void priv_AutoLiesDown()
+{
+   kRobotProperties.StateUserRequested = RobotStateUser_LiesDown;
+}
+
 //-----------------------Public functions------------------------------//
 void pub_SendCommandBT( float Value, Addresses_T Address )
 {
@@ -431,6 +452,17 @@ uint8_t Communicator_CheckInputs()
                   case WriteSerVer:
                      priv_WriteSerVer( &Command[1] );
                      break;
+
+                  case AutoBalance:
+                     priv_AutoBalance();
+                     break;
+                  case AutoStandsUp:
+                     priv_AutoStandsUp();
+                     break;
+                  case AutoLiesDown:
+                     priv_AutoLiesDown();
+                     break;
+
                   default:
                      break;
                }
