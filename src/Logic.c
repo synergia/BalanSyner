@@ -23,6 +23,7 @@
 #include "../Framework/PID/PID_Usr.h"
 
 //-----------------------Private defines-------------------------------//
+#define Time1600ms   200u  /*! Only if loop period is 8ms!! */
 
 //-----------------------Private macros--------------------------------//
 
@@ -33,10 +34,10 @@
 RobotProperties_T kRobotProperties = {
    .BatteryDischarged = true,
    .ConnectionEstablished = false,
-   .Moving = false,
-   .PlatformInRange = false,
+   .IsMoving = false,
+   .IsPlatformInRange = false,
 
-   .StateUserRequested = RobotStateUser_LiesDown
+   .StateUserRequested = RobotStateUser_Balancing
 };
 
 //-----------------------Private prototypes----------------------------//
@@ -51,26 +52,21 @@ static void priv_CheckActualState();
 static void priv_CheckActualState()
 {
    /*! Check robot actual state */
-   if( -18.0f < oMpuKalman.AngleFiltered && 18.0f > oMpuKalman.AngleFiltered )
-   {
-      kRobotProperties.StateActual = RobotStateActual_StandsUp;
-   }
-   else if( -45.0f > oMpuKalman.AngleFiltered || 45.0f < oMpuKalman.AngleFiltered )
-   {
-      kRobotProperties.StateActual = RobotStateActual_LiesDown;
-   }
-   else
-   {
-      kRobotProperties.StateActual = RobotStateActual_Unspecified;
-   }
+   kRobotProperties.IsInStandingRange =
+      ( -18.0f < oMpuKalman.AngleFiltered && 18.0f > oMpuKalman.AngleFiltered );
 
-   kRobotProperties.PlatformInRange = ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
-   kRobotProperties.Moving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
+   kRobotProperties.IsLying =
+      ( -45.0f > oMpuKalman.AngleFiltered || 45.0f < oMpuKalman.AngleFiltered );
+
+   kRobotProperties.IsPlatformInRange =
+      ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
+
+   kRobotProperties.IsMoving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
                              && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
-                              );
+                                );
 
    /*! Show off */
-   ( true == kRobotProperties.Moving ) ? ( LEDEYE_SetOn ) : ( LEDEYE_SetOff );
+   ( true == kRobotProperties.IsMoving ) ? ( LEDEYE_SetOn ) : ( LEDEYE_SetOff );
 }
 
 static void priv_EventBalancing()
@@ -81,7 +77,7 @@ static void priv_EventBalancing()
    oPID_Angle.ApplyPid      ( &oPID_Angle.Parameters,       oMpuKalman.AngleFiltered );
    oPID_AngleMoving.ApplyPid( &oPID_AngleMoving.Parameters, oMpuKalman.AngleFiltered );
 
-   ( false == kRobotProperties.Moving ) ? ( PWM = oPID_Angle.Parameters.OutSignal )
+   ( false == kRobotProperties.IsMoving ) ? ( PWM = oPID_Angle.Parameters.OutSignal )
                                         : ( PWM = oPID_AngleMoving.Parameters.OutSignal );
 
    oBattery.AdjustPwm( &PWM );
@@ -111,7 +107,7 @@ static void priv_EventBalancing()
 
 
    /*! Set servo cam vertical */
-   if( kRobotProperties.PlatformInRange )
+   if( kRobotProperties.IsPlatformInRange )
    {
       //oServos.SetAngle( SelectServoCamVer, oMpuKalman.AngleFiltered );
    }
@@ -120,19 +116,17 @@ static void priv_EventBalancing()
 
 static void priv_EventStandingUp()
 {
-   if( !time3072msPassed )
+   if( 0 < oMpuKalman.AngleFiltered )
    {
-      if( 0 < oMpuKalman.AngleFiltered )
-      {
-         oServos.SetAngleArmLeft ( 82.0f );
-         oServos.SetAngleArmRight( 82.0f );
-      }
-      else
-      {
-         oServos.SetAngleArmLeft ( -82.0f );
-         oServos.SetAngleArmRight( -82.0f );
-      }
+      oServos.SetAngleArmLeft ( 82.0f );
+      oServos.SetAngleArmRight( 82.0f );
    }
+   else
+   {
+      oServos.SetAngleArmLeft ( -82.0f );
+      oServos.SetAngleArmRight( -82.0f );
+   }
+
 }
 
 static void priv_EventArmsUp()
@@ -143,8 +137,8 @@ static void priv_EventArmsUp()
 
 static void priv_EventArmsDown()
 {
-   oServos.SetAngleArmLeft ( -80.0f );
-   oServos.SetAngleArmRight( -80.0f );
+   oServos.SetAngleArmLeft ( -82.0f );
+   oServos.SetAngleArmRight( -82.0f );
 }
 
 static void priv_EventMotorsStop()
@@ -170,64 +164,61 @@ void MainTask8ms()
       switch( kRobotProperties.StateUserRequested )
       {
          case RobotStateUser_Balancing:
-            switch( kRobotProperties.StateActual )
+            if( kRobotProperties.IsLying )
             {
-               case RobotStateActual_LiesDown:
-                  kRobotProperties.StateRequested = RobotStateRequested_StandingUp;
+               priv_EventMotorsStop();
+               if( SequenceBalancing_StandsUp != kRobotProperties.SequenceBalancing )
+                  kRobotProperties.SequenceBalancing = SequenceBalancing_Wait1600ms;
+               kRobotProperties.IsBalancing = false;
+            }
+
+            static int16_t CounterWait1600ms = Time1600ms;
+            switch( kRobotProperties.SequenceBalancing )
+            {
+               case SequenceBalancing_Wait1600ms:
+                  /*! if done, go to the next step */
+                  if( 0 == --CounterWait1600ms )
+                  {
+                     CounterWait1600ms = Time1600ms;
+                     kRobotProperties.SequenceBalancing = SequenceBalancing_StandsUp;
+                  }
                   break;
 
-               case RobotStateActual_StandsUp:
-                  kRobotProperties.StateRequested = RobotStateRequested_Balancing;
+               case SequenceBalancing_StandsUp:
+                  priv_EventStandingUp();
+                  /*! if done, go to the next step */
+                  if( kRobotProperties.IsInStandingRange )
+                     kRobotProperties.SequenceBalancing = SequenceBalancing_Balances;
+                  break;
 
+               case SequenceBalancing_Balances:
+                  priv_EventBalancing();
+                  priv_EventArmsUp();
                default:
-                  /*! When robot falls down, StateActual = LaysDown and StateRequested = StandingUp.
-                   * When angle is close to 0, StateActual = StandsUp and StateRequested = Balancing
-                   * Then robot will balance until StateActual = LiesDown. When angle is greater than
-                   * Standing and less than laying, default case is triggered and nothing changes */
                   break;
             }
             break;
             case RobotStateUser_LiesDown:
-               kRobotProperties.StateRequested = RobotStateRequested_LyingDown;
-               break;
-            case RobotStateUser_StandsUp:
-               switch( kRobotProperties.StateActual )
+               switch ( kRobotProperties.SequenceLyingDown )
                {
-                  case RobotStateActual_LiesDown:
-                     kRobotProperties.StateRequested = RobotStateRequested_StandingUp;
+                  case SequenceLyingDown_SpreadArms:
                      break;
-
-                  case RobotStateActual_StandsUp:
+                  case SequenceLyingDown_TiltBack:
+                     break;
+                  case SequenceLyingDown_MotorsOff:
+                     break;
+                  case SequenceLyingDown_ArmsDown:
+                     break;
+                  case SequenceLyingDown_ArmsUp:
+                     break;
                   default:
                      break;
                }
                break;
+            case RobotStateUser_StandsUp:
+               break;
             default:
                break;
-      }
-
-      /*! This switch executes internal requests from the application */
-      switch( kRobotProperties.StateRequested )
-      {
-         case RobotStateRequested_TiltBack:
-            priv_EventArmsDown();
-            oPID_Angle.SetDstValue( &oPID_Angle.Parameters, -15.0f );
-            oPID_Omega.SetDstValue( &oPID_Omega.Parameters, 0.0f );
-            break;
-         case RobotStateRequested_LyingDown:
-            priv_EventMotorsStop();
-            priv_EventArmsUp();
-            break;
-         case RobotStateRequested_StandingUp:
-            priv_EventMotorsStop();
-            priv_EventStandingUp();
-            break;
-         case RobotStateRequested_Balancing:
-            priv_EventBalancing();
-            priv_EventArmsUp();
-            break;
-         default:
-            break;
       }
 #endif
 

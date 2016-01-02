@@ -200,7 +200,7 @@ if(errorstatus != 0){
    int16_t X = (xhigh << 8 | xlow);
    int16_t Z = (zhigh << 8 | zlow);
 
-   static float tempAngle=0;
+   float tempAngle = 0.0f;
    tempAngle = radiansToDegrees( atanf( ( (float)Z )/ ( (float)X ) ) );
    if(   ( Z < 0 && tempAngle < 0 )
       || ( Z > 0 && tempAngle > 0 )
@@ -247,10 +247,10 @@ inline MPU6050_errorstatus MPU6050_Get_GyroY_Data( float *DegPerSecond )
    }
 #endif
 
-   static uint16_t Range = 1000;
+   uint16_t Range = 1000.0f;
    int16_t Y = (int16_t)( yhigh << 8 | ylow );
 
-   static float Last=0;
+   float Last = 0.0f;
    *DegPerSecond =  ( float )( ( ( float ) Y * Range ) / ( 1 << 15 ) );
 
 

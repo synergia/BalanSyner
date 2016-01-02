@@ -2,6 +2,7 @@
 #define SYSTICK_H_
 
 //-----------------------Includes-------------------------------------//
+#include <stdbool.h>
 
 //-----------------------Public defines-------------------------------//
 #define SYSTICK_FREQUENCY_HZ  72000000

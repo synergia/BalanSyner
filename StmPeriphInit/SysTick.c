@@ -65,7 +65,6 @@ void SysTick_Handler( void )
 }
 
 //-----------------------Public functions------------------------------//
-
 void InitializeSysTick()
 {
    SysTick_Config( SYSTICK_FREQUENCY_KHZ >> 0 );
