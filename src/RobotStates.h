@@ -20,33 +20,26 @@
 /*! States that can only be changed by user, using command */
 typedef enum
 {
-   RobotStateUser_LiesDown,
-   RobotStateUser_StandsUp,
-   RobotStateUser_Balancing
-}RobotStateUser_T;
+   StateRequested_LiesDown,
+   StateRequested_StandsUp,
+   StateRequested_Balancing
+}StateRequested_T;
 
-/*! States that depends on measurements from MPU */
+/*! States that can be reached by robot */
 typedef enum
 {
-   SequenceBalancing_Wait1600ms,
-   SequenceBalancing_StandsUp,
-   SequenceBalancing_Balances
-}SequenceBalancing_T;
-
-typedef enum
-{
-   SequenceLyingDown_SpreadArms,
-   SequenceLyingDown_TiltBack,
-   SequenceLyingDown_MotorsOff,
-   SequenceLyingDown_ArmsDown,
-   SequenceLyingDown_ArmsUp,
-}SequenceLyingDown_T;
+   RobotStates_WaitForStanding,
+   RobotStates_StandsUp,
+   RobotStates_Balances,
+   RobotStates_LiesDown,
+   RobotStates_ArmsBackDown
+}RobotStates_T;
 
 typedef struct
 {
    bool BatteryDischarged;       /*! true if battery voltage is above set point */
    bool ConnectionEstablished;   /*! true if received message is last checking input iteration */
-   bool IsPlatformInRange;         /*! true if angle is in safe range */
+   bool IsPlatformInRange;       /*! true if angle is in safe range */
 
    /*! Only available when StateActual == Balancing */
    bool IsMoving;                  /*! true if OmegaDst or rotation differ from 0 */
@@ -54,10 +47,10 @@ typedef struct
    bool IsBalancing;
    bool IsLying;
 
-   uint8_t StateUserRequested;   /*! Type of RobotStateUser_T */
-
-   uint8_t SequenceBalancing;
-   uint8_t SequenceLyingDown;
+   uint16_t Timer_StandingUp;
+   uint16_t Timer_BalToStand;
+   StateRequested_T StateRequested;   /*! Type of StateRequested_T */
+   RobotStates_T StateActive;
 
 }RobotProperties_T;
 

@@ -24,6 +24,14 @@
 
 //-----------------------Private defines-------------------------------//
 #define Time1600ms   200u  /*! Only if loop period is 8ms!! */
+#define Time1000ms   125u  /*! Only if loop period is 8ms!! */
+
+#define TimerBalToStandDef Time1000ms
+#define TimerStandingUpDef Time1600ms
+
+#define AngleStanding   ( 80.0f )
+#define AngleMax        ( 90.0f )
+#define AngleTiltBack   ( -10.0f )
 
 //-----------------------Private macros--------------------------------//
 
@@ -37,14 +45,23 @@ RobotProperties_T kRobotProperties = {
    .IsMoving = false,
    .IsPlatformInRange = false,
 
-   .StateUserRequested = RobotStateUser_Balancing
+   .Timer_BalToStand = TimerBalToStandDef,
+   .Timer_StandingUp = TimerStandingUpDef,
+
+   .StateRequested = StateRequested_Balancing,
+   .StateActive = RobotStates_Balances
 };
 
 //-----------------------Private prototypes----------------------------//
-static void priv_EventBalancing();
-static void priv_EventStandingUp();
+static void priv_StateBalancing();
+static void priv_StateStandsUp();
+static void priv_StateArmsBackDown();
+static void priv_StateLiesDown();
+static void priv_StateWaitForStanding();
+
+static void priv_EventMotorsBalancing();
 static void priv_EventArmsUp();
-static void priv_EventArmsDown();
+static void priv_EventArmsMaxDown();
 static void priv_EventMotorsStop();
 static void priv_CheckActualState();
 
@@ -62,14 +79,89 @@ static void priv_CheckActualState()
       ( -20.0f < oMpuKalman.AngleFiltered && 30.0f > oMpuKalman.AngleFiltered );
 
    kRobotProperties.IsMoving = !( ( 0.0f == oPID_Omega.GetDstValue( &oPID_Omega.Parameters ) )
-                             && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
+                               && ( 0.0f == oPID_Rotation.GetDstValue( &oPID_Rotation.Parameters ) )
                                 );
 
    /*! Show off */
    ( true == kRobotProperties.IsMoving ) ? ( LEDEYE_SetOn ) : ( LEDEYE_SetOff );
 }
 
-static void priv_EventBalancing()
+static void priv_StateBalancing()
+{
+   priv_EventMotorsBalancing();
+   priv_EventArmsUp();
+}
+
+static void priv_StateStandsUp()
+{
+   priv_EventMotorsStop();
+   if( 0 < oMpuKalman.AngleFiltered )
+   {
+      oServos.SetAngleArmLeft ( AngleStanding );
+      oServos.SetAngleArmRight( AngleStanding );
+   }
+   else
+   {
+      oServos.SetAngleArmLeft ( -AngleStanding );
+      oServos.SetAngleArmRight( -AngleStanding );
+   }
+}
+
+static void priv_StateLiesDown()
+{
+   priv_EventMotorsStop();
+   priv_EventArmsUp();
+}
+
+static void priv_StateWaitForStanding()
+{
+   priv_EventMotorsStop();
+   priv_EventArmsUp();
+   if( 0 != kRobotProperties.Timer_StandingUp )
+   {
+      --kRobotProperties.Timer_StandingUp;
+   }
+}
+
+static void priv_StateArmsBackDown()
+{
+   priv_EventMotorsBalancing();
+   oServos.SetAngleArmLeft ( -AngleStanding );
+   oServos.SetAngleArmRight( -AngleStanding );
+   if( 0u != kRobotProperties.Timer_BalToStand )
+   {
+      --kRobotProperties.Timer_BalToStand;
+   }
+}
+
+static void priv_EventArmsMaxDown()
+{
+   if( 0.0f < oMpuKalman.AngleFiltered )
+   {
+      oServos.SetAngleArmLeft ( AngleMax );
+      oServos.SetAngleArmRight( AngleMax );
+   }
+   else
+   {
+      oServos.SetAngleArmLeft ( -AngleMax );
+      oServos.SetAngleArmRight( -AngleMax );
+   }
+}
+
+static void priv_EventArmsUp()
+{
+   oServos.SetAngleArmLeft ( 0.0f );
+   oServos.SetAngleArmRight( 0.0f );
+}
+
+static void priv_EventMotorsStop()
+{
+   //TODO: Reset PIDs
+   oMotors.SetSpeedLeft( 0.0f );
+   oMotors.SetSpeedRight( 0.0f );
+}
+
+static void priv_EventMotorsBalancing()
 {
    /*! Execute standing functionality */
    float PWM;
@@ -78,7 +170,7 @@ static void priv_EventBalancing()
    oPID_AngleMoving.ApplyPid( &oPID_AngleMoving.Parameters, oMpuKalman.AngleFiltered );
 
    ( false == kRobotProperties.IsMoving ) ? ( PWM = oPID_Angle.Parameters.OutSignal )
-                                        : ( PWM = oPID_AngleMoving.Parameters.OutSignal );
+                                          : ( PWM = oPID_AngleMoving.Parameters.OutSignal );
 
    oBattery.AdjustPwm( &PWM );
 
@@ -114,40 +206,6 @@ static void priv_EventBalancing()
    else oServos.SetAngleCamVer( 0.0f );
 }
 
-static void priv_EventStandingUp()
-{
-   if( 0 < oMpuKalman.AngleFiltered )
-   {
-      oServos.SetAngleArmLeft ( 82.0f );
-      oServos.SetAngleArmRight( 82.0f );
-   }
-   else
-   {
-      oServos.SetAngleArmLeft ( -82.0f );
-      oServos.SetAngleArmRight( -82.0f );
-   }
-
-}
-
-static void priv_EventArmsUp()
-{
-   oServos.SetAngleArmLeft ( 0.0f );
-   oServos.SetAngleArmRight( 0.0f );
-}
-
-static void priv_EventArmsDown()
-{
-   oServos.SetAngleArmLeft ( -82.0f );
-   oServos.SetAngleArmRight( -82.0f );
-}
-
-static void priv_EventMotorsStop()
-{
-   //TODO: Reset PIDs
-   oMotors.SetSpeedLeft( 0.0f );
-   oMotors.SetSpeedRight( 0.0f );
-}
-
 //-----------------------Public functions------------------------------//
 void MainTask8ms()
 {
@@ -161,64 +219,104 @@ void MainTask8ms()
       priv_CheckActualState();
 
       /*! This switch checks which state is requested by user */
-      switch( kRobotProperties.StateUserRequested )
+      switch( kRobotProperties.StateActive )
       {
-         case RobotStateUser_Balancing:
-            if( kRobotProperties.IsLying )
+         case RobotStates_ArmsBackDown:
+            priv_StateArmsBackDown();
+            if( ( 0u == kRobotProperties.Timer_BalToStand ) && ( AngleTiltBack > oMpuKalman.AngleFiltered ) &&
+                  ( ( StateRequested_LiesDown == kRobotProperties.StateRequested )
+                 || ( StateRequested_StandsUp == kRobotProperties.StateRequested )
+                  )
+              )
             {
-               priv_EventMotorsStop();
-               if( SequenceBalancing_StandsUp != kRobotProperties.SequenceBalancing )
-                  kRobotProperties.SequenceBalancing = SequenceBalancing_Wait1600ms;
-               kRobotProperties.IsBalancing = false;
+               kRobotProperties.StateActive = RobotStates_StandsUp;
             }
-
-            static int16_t CounterWait1600ms = Time1600ms;
-            switch( kRobotProperties.SequenceBalancing )
+            /*! Tilt back */
+            else if( ( 0u == kRobotProperties.Timer_BalToStand ) &&
+                     ( ( StateRequested_LiesDown == kRobotProperties.StateRequested )
+                    || ( StateRequested_StandsUp == kRobotProperties.StateRequested )
+                     )
+                   )
             {
-               case SequenceBalancing_Wait1600ms:
-                  /*! if done, go to the next step */
-                  if( 0 == --CounterWait1600ms )
-                  {
-                     CounterWait1600ms = Time1600ms;
-                     kRobotProperties.SequenceBalancing = SequenceBalancing_StandsUp;
-                  }
-                  break;
-
-               case SequenceBalancing_StandsUp:
-                  priv_EventStandingUp();
-                  /*! if done, go to the next step */
-                  if( kRobotProperties.IsInStandingRange )
-                     kRobotProperties.SequenceBalancing = SequenceBalancing_Balances;
-                  break;
-
-               case SequenceBalancing_Balances:
-                  priv_EventBalancing();
-                  priv_EventArmsUp();
-               default:
-                  break;
+               oPID_Omega.Parameters.DstValue = 0.0f;
+               oPID_Rotation.Parameters.DstValue = 0.0f;
+               oPID_Angle.Parameters.DstValue = AngleTiltBack;
+            }
+            if( StateRequested_Balancing == kRobotProperties.StateRequested )
+            {
+               kRobotProperties.StateActive = RobotStates_Balances;
+               kRobotProperties.Timer_BalToStand = TimerBalToStandDef;
             }
             break;
-            case RobotStateUser_LiesDown:
-               switch ( kRobotProperties.SequenceLyingDown )
-               {
-                  case SequenceLyingDown_SpreadArms:
-                     break;
-                  case SequenceLyingDown_TiltBack:
-                     break;
-                  case SequenceLyingDown_MotorsOff:
-                     break;
-                  case SequenceLyingDown_ArmsDown:
-                     break;
-                  case SequenceLyingDown_ArmsUp:
-                     break;
-                  default:
-                     break;
-               }
-               break;
-            case RobotStateUser_StandsUp:
-               break;
-            default:
-               break;
+
+         case RobotStates_Balances:
+            priv_StateBalancing();
+            if( true == kRobotProperties.IsLying )
+            {
+               kRobotProperties.StateActive = RobotStates_LiesDown;
+            }
+            else if(  ( StateRequested_LiesDown == kRobotProperties.StateRequested )
+                   || ( StateRequested_StandsUp == kRobotProperties.StateRequested )
+                   )
+            {
+               kRobotProperties.StateActive = RobotStates_ArmsBackDown;
+            }
+            break;
+
+         case RobotStates_LiesDown:
+            priv_StateLiesDown();
+            if( StateRequested_Balancing == kRobotProperties.StateRequested )
+            {
+               kRobotProperties.Timer_StandingUp = TimerStandingUpDef;
+               kRobotProperties.StateActive = RobotStates_WaitForStanding;
+            }
+            else if( StateRequested_StandsUp == kRobotProperties.StateRequested )
+            {
+               kRobotProperties.StateActive = RobotStates_StandsUp;
+            }
+            break;
+
+         case RobotStates_StandsUp:
+            priv_StateStandsUp();
+            if( StateRequested_LiesDown == kRobotProperties.StateRequested )
+            {
+               kRobotProperties.StateActive = RobotStates_LiesDown;
+            }
+            if( ( StateRequested_Balancing == kRobotProperties.StateRequested )
+             && ( true == kRobotProperties.IsInStandingRange )
+              )
+            {
+               kRobotProperties.Timer_BalToStand = TimerBalToStandDef;
+               kRobotProperties.StateActive = RobotStates_Balances;
+            }
+            else if( ( StateRequested_Balancing == kRobotProperties.StateRequested )
+                  && ( false == kRobotProperties.IsInStandingRange )
+                   )
+            {
+               priv_EventArmsMaxDown();
+            }
+            break;
+
+         case RobotStates_WaitForStanding:
+            priv_StateWaitForStanding();
+            if(  ( ( 0u == kRobotProperties.Timer_StandingUp )
+                && ( StateRequested_Balancing == kRobotProperties.StateRequested )
+                 )
+                || ( StateRequested_StandsUp == kRobotProperties.StateRequested )
+              )
+            {
+               kRobotProperties.StateActive = RobotStates_StandsUp;
+               kRobotProperties.Timer_StandingUp = TimerStandingUpDef;
+            }
+            if( StateRequested_LiesDown == kRobotProperties.StateRequested)
+            {
+               kRobotProperties.StateActive = RobotStates_LiesDown;
+               kRobotProperties.Timer_StandingUp = TimerStandingUpDef;
+            }
+            break;
+
+         default:
+            break;
       }
 #endif
 

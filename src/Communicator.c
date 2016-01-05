@@ -262,17 +262,17 @@ static void priv_WriteSerVer( uint8_t *Command )
 
 static void priv_AutoBalance()
 {
-   kRobotProperties.StateUserRequested = RobotStateUser_Balancing;
+   kRobotProperties.StateRequested = StateRequested_Balancing;
 }
 
 static void priv_AutoStandsUp()
 {
-   kRobotProperties.StateUserRequested = RobotStateUser_StandsUp;
+   kRobotProperties.StateRequested = StateRequested_StandsUp;
 }
 
 static void priv_AutoLiesDown()
 {
-   kRobotProperties.StateUserRequested = RobotStateUser_LiesDown;
+   kRobotProperties.StateRequested = StateRequested_LiesDown;
 }
 
 //-----------------------Public functions------------------------------//
