@@ -1570,7 +1570,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x08000000                g_pfnVectors
                 0x08000194                . = ALIGN (0x4)
 
-.text           0x08000198     0x6b68
+.text           0x08000198     0x6bc8
                 0x08000198                . = ALIGN (0x4)
  *(.text)
  .text          0x08000198       0x40 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
@@ -2186,196 +2186,196 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
  .text.pub_SetAngleArmLeft
                 0x080057fc       0xd8 Drivers\Motors\Motors.o
  .text.pub_SetAngleArmRight
-                0x080058d4       0x7c Drivers\Motors\Motors.o
+                0x080058d4       0xdc Drivers\Motors\Motors.o
  .text.pub_SetAngleCamHor
-                0x08005950       0x80 Drivers\Motors\Motors.o
+                0x080059b0       0x80 Drivers\Motors\Motors.o
  .text.pub_SetAngleCamVer
-                0x080059d0       0x84 Drivers\Motors\Motors.o
- *fill*         0x08005a54        0x4 
+                0x08005a30       0x84 Drivers\Motors\Motors.o
+ *fill*         0x08005ab4        0x4 
  .text.pub_EncoderPerform
-                0x08005a58      0x140 Drivers\Motors\Motors.o
+                0x08005ab8      0x140 Drivers\Motors\Motors.o
  .text.pub_GetOmegaLeft
-                0x08005b98       0x1c Drivers\Motors\Motors.o
+                0x08005bf8       0x1c Drivers\Motors\Motors.o
  .text.pub_GetOmegaRight
-                0x08005bb4       0x1c Drivers\Motors\Motors.o
+                0x08005c14       0x1c Drivers\Motors\Motors.o
  .text.InitializeEncoders
-                0x08005bd0       0x5c Drivers\Motors\Motors.o
-                0x08005bd0                InitializeEncoders
+                0x08005c30       0x5c Drivers\Motors\Motors.o
+                0x08005c30                InitializeEncoders
  .text.InitializeMotors
-                0x08005c2c       0x4c Drivers\Motors\Motors.o
-                0x08005c2c                InitializeMotors
+                0x08005c8c       0x4c Drivers\Motors\Motors.o
+                0x08005c8c                InitializeMotors
  .text.InitializeServos
-                0x08005c78       0x54 Drivers\Motors\Motors.o
-                0x08005c78                InitializeServos
+                0x08005cd8       0x54 Drivers\Motors\Motors.o
+                0x08005cd8                InitializeServos
  .text.InitializePIDs
-                0x08005ccc      0x144 Drivers\Motors\Motors.o
-                0x08005ccc                InitializePIDs
+                0x08005d2c      0x144 Drivers\Motors\Motors.o
+                0x08005d2c                InitializePIDs
  .text.MPU6050_Initialization
-                0x08005e10       0x34 Drivers\MPU\_LibMPU6050.o
-                0x08005e10                MPU6050_Initialization
+                0x08005e70       0x34 Drivers\MPU\_LibMPU6050.o
+                0x08005e70                MPU6050_Initialization
  .text.MPU6050_Gyro_Set_Range
-                0x08005e44       0x3c Drivers\MPU\_LibMPU6050.o
-                0x08005e44                MPU6050_Gyro_Set_Range
+                0x08005ea4       0x3c Drivers\MPU\_LibMPU6050.o
+                0x08005ea4                MPU6050_Gyro_Set_Range
  .text.MPU6050_Accel_Set_Range
-                0x08005e80       0x3c Drivers\MPU\_LibMPU6050.o
-                0x08005e80                MPU6050_Accel_Set_Range
+                0x08005ee0       0x3c Drivers\MPU\_LibMPU6050.o
+                0x08005ee0                MPU6050_Accel_Set_Range
  .text.MPU6050_Set_Clock
-                0x08005ebc       0x28 Drivers\MPU\_LibMPU6050.o
-                0x08005ebc                MPU6050_Set_Clock
- *fill*         0x08005ee4        0x4 
+                0x08005f1c       0x28 Drivers\MPU\_LibMPU6050.o
+                0x08005f1c                MPU6050_Set_Clock
+ *fill*         0x08005f44        0x4 
  .text.MPU6050_Get_AccAngleXZ_Data
-                0x08005ee8      0x198 Drivers\MPU\_LibMPU6050.o
-                0x08005ee8                MPU6050_Get_AccAngleXZ_Data
+                0x08005f48      0x198 Drivers\MPU\_LibMPU6050.o
+                0x08005f48                MPU6050_Get_AccAngleXZ_Data
  .text.MPU6050_Get_GyroY_Data
-                0x08006080      0x12c Drivers\MPU\_LibMPU6050.o
-                0x08006080                MPU6050_Get_GyroY_Data
+                0x080060e0      0x12c Drivers\MPU\_LibMPU6050.o
+                0x080060e0                MPU6050_Get_GyroY_Data
  .text.MPU6050_Read
-                0x080061ac      0x16c Drivers\MPU\_LibMPU6050.o
-                0x080061ac                MPU6050_Read
+                0x0800620c      0x16c Drivers\MPU\_LibMPU6050.o
+                0x0800620c                MPU6050_Read
  .text.MPU6050_Write
-                0x08006318      0x144 Drivers\MPU\_LibMPU6050.o
-                0x08006318                MPU6050_Write
+                0x08006378      0x144 Drivers\MPU\_LibMPU6050.o
+                0x08006378                MPU6050_Write
  .text.priv_MpuGetFilteredData
-                0x0800645c       0x30 Drivers\MPU\MPU.o
+                0x080064bc       0x30 Drivers\MPU\MPU.o
  .text.priv_MpuGetRawData
-                0x0800648c       0x1c Drivers\MPU\MPU.o
+                0x080064ec       0x1c Drivers\MPU\MPU.o
  .text.priv_ReadKalmanQAngle
-                0x080064a8       0x14 Drivers\MPU\MPU.o
+                0x08006508       0x14 Drivers\MPU\MPU.o
  .text.priv_ReadKalmanRMeasure
-                0x080064bc       0x14 Drivers\MPU\MPU.o
+                0x0800651c       0x14 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanQAngle
-                0x080064d0       0x18 Drivers\MPU\MPU.o
+                0x08006530       0x18 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanRMeasure
-                0x080064e8       0x18 Drivers\MPU\MPU.o
+                0x08006548       0x18 Drivers\MPU\MPU.o
  .text.priv_WriteKalmanQAngleDef
-                0x08006500        0xc Drivers\MPU\MPU.o
+                0x08006560        0xc Drivers\MPU\MPU.o
  .text.priv_WriteKalmanRMeasureDef
-                0x0800650c        0xc Drivers\MPU\MPU.o
+                0x0800656c        0xc Drivers\MPU\MPU.o
  .text.InitializeMPU
-                0x08006518       0x78 Drivers\MPU\MPU.o
-                0x08006518                InitializeMPU
+                0x08006578       0x78 Drivers\MPU\MPU.o
+                0x08006578                InitializeMPU
  .text.InitializeLed14
-                0x08006590       0x14 Drivers\LEDs\LED.o
-                0x08006590                InitializeLed14
+                0x080065f0       0x14 Drivers\LEDs\LED.o
+                0x080065f0                InitializeLed14
  .text.InitializeLedEye
-                0x080065a4       0x14 Drivers\LEDs\LED.o
-                0x080065a4                InitializeLedEye
+                0x08006604       0x14 Drivers\LEDs\LED.o
+                0x08006604                InitializeLedEye
  .text.InitializeClock
-                0x080065b8       0x48 Drivers\Clock\clock.o
-                0x080065b8                InitializeClock
+                0x08006618       0x48 Drivers\Clock\clock.o
+                0x08006618                InitializeClock
  .text.pub_Perform
-                0x08006600       0x78 Drivers\Battery\Battery.o
+                0x08006660       0x78 Drivers\Battery\Battery.o
  .text.pub_AdjustPwm
-                0x08006678       0x58 Drivers\Battery\Battery.o
+                0x080066d8       0x58 Drivers\Battery\Battery.o
  .text.pub_IsDischarged
-                0x080066d0       0x2c Drivers\Battery\Battery.o
+                0x08006730       0x2c Drivers\Battery\Battery.o
  .text.priv_GetNewMean
-                0x080066fc       0xa4 Drivers\Battery\Battery.o
+                0x0800675c       0xa4 Drivers\Battery\Battery.o
  .text.priv_MeanBufferInitialize
-                0x080067a0       0x38 Drivers\Battery\Battery.o
+                0x08006800       0x38 Drivers\Battery\Battery.o
  .text.InitializeBattery
-                0x080067d8       0x40 Drivers\Battery\Battery.o
-                0x080067d8                InitializeBattery
+                0x08006838       0x40 Drivers\Battery\Battery.o
+                0x08006838                InitializeBattery
  .text.priv_BtPushFifo
-                0x08006818       0x24 Drivers\BT\BT.o
+                0x08006878       0x24 Drivers\BT\BT.o
  .text.priv_BtFifoPop
-                0x0800683c       0x1c Drivers\BT\BT.o
+                0x0800689c       0x1c Drivers\BT\BT.o
  .text.priv_BtSendFifo
-                0x08006858       0x34 Drivers\BT\BT.o
+                0x080068b8       0x34 Drivers\BT\BT.o
  .text.priv_BtFifoIsEmpty
-                0x0800688c       0x24 Drivers\BT\BT.o
+                0x080068ec       0x24 Drivers\BT\BT.o
  .text.priv_BtSend8
-                0x080068b0       0x34 Drivers\BT\BT.o
+                0x08006910       0x34 Drivers\BT\BT.o
  .text.priv_BtSendMeasuredData
-                0x080068e4      0x148 Drivers\BT\BT.o
+                0x08006944      0x148 Drivers\BT\BT.o
  .text.InitializeBT
-                0x08006a2c       0x88 Drivers\BT\BT.o
-                0x08006a2c                InitializeBT
+                0x08006a8c       0x88 Drivers\BT\BT.o
+                0x08006a8c                InitializeBT
  .text.BtRxInterruptCallback
-                0x08006ab4       0x28 Drivers\BT\BT.o
-                0x08006ab4                BtRxInterruptCallback
+                0x08006b14       0x28 Drivers\BT\BT.o
+                0x08006b14                BtRxInterruptCallback
  .text.__libc_init_array
-                0x08006adc       0x4c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
-                0x08006adc                __libc_init_array
- .text.atanf    0x08006b28      0x1b0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
-                0x08006b28                atanf
- .text.fabsf    0x08006cd8        0xe c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_fabs.o)
-                0x08006cd8                fabsf
+                0x08006b3c       0x4c c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_s.a(lib_a-init.o)
+                0x08006b3c                __libc_init_array
+ .text.atanf    0x08006b88      0x1b0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006b88                atanf
+ .text.fabsf    0x08006d38        0xe c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_fabs.o)
+                0x08006d38                fabsf
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x08006ce6        0x2 
- .eh_frame      0x08006ce8        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+ *fill*         0x08006d46        0x2 
+ .eh_frame      0x08006d48        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
  *(.init)
- .init          0x08006ce8        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x08006ce8                _init
- .init          0x08006cec        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+ .init          0x08006d48        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08006d48                _init
+ .init          0x08006d4c        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x08006cf4        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
-                0x08006cf4                _fini
- .fini          0x08006cf8        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
-                0x08006d00                . = ALIGN (0x4)
-                0x08006d00                _etext = .
+ .fini          0x08006d54        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crti.o
+                0x08006d54                _fini
+ .fini          0x08006d58        0x8 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
+                0x08006d60                . = ALIGN (0x4)
+                0x08006d60                _etext = .
 
-.vfp11_veneer   0x08006d00        0x0
+.vfp11_veneer   0x08006d60        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08006d00        0x0
+.v4_bx          0x08006d60        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x08006d00        0x0
+.iplt           0x08006d60        0x0
  .iplt          0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.rodata         0x08006d00       0x28
-                0x08006d00                . = ALIGN (0x4)
+.rodata         0x08006d60       0x28
+                0x08006d60                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.DT_fast
-                0x08006d00        0x4 src\main.o
-                0x08006d00                DT_fast
+                0x08006d60        0x4 src\main.o
+                0x08006d60                DT_fast
  .rodata.DT_slow
-                0x08006d04        0x4 src\main.o
-                0x08006d04                DT_slow
+                0x08006d64        0x4 src\main.o
+                0x08006d64                DT_slow
  .rodata.atanlo
-                0x08006d08       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006d68       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
  .rodata.atanhi
-                0x08006d18       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
-                0x08006d28                . = ALIGN (0x4)
+                0x08006d78       0x10 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libm.a(lib_a-sf_atan.o)
+                0x08006d88                . = ALIGN (0x4)
 
-.rel.dyn        0x08006d28        0x0
+.rel.dyn        0x08006d88        0x0
  .rel.iplt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08006d28        0x0
-                0x08006d28                __exidx_start = .
+.ARM            0x08006d88        0x0
+                0x08006d88                __exidx_start = .
  *(.ARM.exidx*)
-                0x08006d28                __exidx_end = .
+                0x08006d88                __exidx_end = .
 
-.preinit_array  0x08006d28        0x0
-                0x08006d28                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x08006d88        0x0
+                0x08006d88                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x08006d28                PROVIDE (__preinit_array_end, .)
+                0x08006d88                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08006d28        0x4
-                0x08006d28                PROVIDE (__init_array_start, .)
+.init_array     0x08006d88        0x4
+                0x08006d88                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x08006d28        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
-                0x08006d2c                PROVIDE (__init_array_end, .)
+ .init_array    0x08006d88        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08006d8c                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08006d2c        0x4
-                0x08006d2c                PROVIDE (__fini_array_start, .)
+.fini_array     0x08006d8c        0x4
+                0x08006d8c                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08006d2c        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
-                0x08006d30                PROVIDE (__fini_array_end, .)
-                0x08006d30                _sidata = LOADADDR (.data)
+ .fini_array    0x08006d8c        0x4 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
+                0x08006d90                PROVIDE (__fini_array_end, .)
+                0x08006d90                _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x7c load address 0x08006d30
+.data           0x20000000       0x7c load address 0x08006d90
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -2398,12 +2398,12 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x20000078                MPU6050_Timeout
                 0x2000007c                . = ALIGN (0x4)
                 0x2000007c                _edata = .
-                0x08006dac                _siccmram = LOADADDR (.ccmram)
+                0x08006e0c                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x2000007c        0x0 load address 0x08006dac
+.igot.plt       0x2000007c        0x0 load address 0x08006e0c
  .igot.plt      0x00000000        0x0 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x08006dac
+.ccmram         0x10000000        0x0 load address 0x08006e0c
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _sccmram = .
  *(.ccmram)
@@ -2412,7 +2412,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x10000000                _eccmram = .
                 0x10000000                . = ALIGN (0x4)
 
-.bss            0x2000007c      0x49c
+.bss            0x2000007c      0x4a0
                 0x2000007c                _sbss = .
                 0x2000007c                __bss_start__ = _sbss
  *(.bss)
@@ -2431,42 +2431,44 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x200000f8                oMotors
  .bss.Value.7464
                 0x20000130        0x4 Drivers\Motors\Motors.o
+ .bss.Value.7468
+                0x20000134        0x4 Drivers\Motors\Motors.o
  .bss.BatteryVoltageBuffer
-                0x20000134      0x190 Drivers\Battery\Battery.o
+                0x20000138      0x190 Drivers\Battery\Battery.o
  *(COMMON)
- COMMON         0x200002c4      0x234 src\main.o
-                0x200002c4                oBluetooth
-                0x20000370                oSharp
-                0x2000037c                oPID_Rotation
-                0x200003cc                oBattery
-                0x200003e0                oPID_AngleMoving
-                0x20000430                oPID_Omega
-                0x20000480                oPID_Angle
-                0x200004d0                oMpuKalman
- COMMON         0x200004f8        0x4 src\Logic.o
-                0x200004f8                time3072msPassed
-                0x200004f9                time32msPassed
-                0x200004fa                time16msPassed
-                0x200004fb                time128msPassed
- COMMON         0x200004fc        0x4 StmPeriphInit\ADC.o
-                0x200004fc                AdcBufferTable
- COMMON         0x20000500       0x10 Drivers\Motors\Motors.o
-                0x20000500                oServos
- COMMON         0x20000510        0x8 Drivers\MPU\_LibMPU6050.o
-                0x20000510                dataStruct
-                0x20000518                . = ALIGN (0x4)
-                0x20000518                _ebss = .
-                0x20000518                __bss_end__ = _ebss
+ COMMON         0x200002c8      0x234 src\main.o
+                0x200002c8                oBluetooth
+                0x20000374                oSharp
+                0x20000380                oPID_Rotation
+                0x200003d0                oBattery
+                0x200003e4                oPID_AngleMoving
+                0x20000434                oPID_Omega
+                0x20000484                oPID_Angle
+                0x200004d4                oMpuKalman
+ COMMON         0x200004fc        0x4 src\Logic.o
+                0x200004fc                time3072msPassed
+                0x200004fd                time32msPassed
+                0x200004fe                time16msPassed
+                0x200004ff                time128msPassed
+ COMMON         0x20000500        0x4 StmPeriphInit\ADC.o
+                0x20000500                AdcBufferTable
+ COMMON         0x20000504       0x10 Drivers\Motors\Motors.o
+                0x20000504                oServos
+ COMMON         0x20000514        0x8 Drivers\MPU\_LibMPU6050.o
+                0x20000514                dataStruct
+                0x2000051c                . = ALIGN (0x4)
+                0x2000051c                _ebss = .
+                0x2000051c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000518      0x200
-                0x20000518                . = ALIGN (0x4)
-                0x20000518                PROVIDE (end, .)
-                0x20000518                PROVIDE (_end, .)
-                0x20000518                . = (. + _Min_Heap_Size)
-                0x20000718                . = (. + _Min_Stack_Size)
- *fill*         0x20000518      0x200 
-                0x20000718                . = ALIGN (0x4)
+                0x2000051c      0x200
+                0x2000051c                . = ALIGN (0x4)
+                0x2000051c                PROVIDE (end, .)
+                0x2000051c                PROVIDE (_end, .)
+                0x2000051c                . = (. + _Min_Heap_Size)
+                0x2000071c                . = (. + _Min_Stack_Size)
+ *fill*         0x2000051c      0x200 
+                0x2000071c                . = ALIGN (0x4)
 
 .memory_b1_text
  *(.mb1text)
@@ -2566,7 +2568,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/.
                 0x00000860       0x22 c:/program files (x86)/atollic/truestudio for arm lite 5.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/4.8.3/armv7e-m/fpu/crtn.o
 OUTPUT(BalanSyner.elf elf32-littlearm)
 
-.debug_info     0x00000000     0xdffd
+.debug_info     0x00000000     0xe00f
  .debug_info    0x00000000      0x49c src\system_stm32f30x.o
  .debug_info    0x0000049c       0x88 src\startup_stm32f303xe.o
  .debug_info    0x00000524      0x67e src\main.o
@@ -2592,13 +2594,13 @@ OUTPUT(BalanSyner.elf elf32-littlearm)
  .debug_info    0x0000bb49      0x237 Framework\Kalman\KalmanFilter.o
  .debug_info    0x0000bd80      0x27b Framework\Fifo\Fifo.o
  .debug_info    0x0000bffb      0x240 Drivers\ProximitySensor\Sharp.o
- .debug_info    0x0000c23b      0x982 Drivers\Motors\Motors.o
- .debug_info    0x0000cbbd      0x5a4 Drivers\MPU\_LibMPU6050.o
- .debug_info    0x0000d161      0x2c2 Drivers\MPU\MPU.o
- .debug_info    0x0000d423      0x124 Drivers\LEDs\LED.o
- .debug_info    0x0000d547      0x281 Drivers\Clock\clock.o
- .debug_info    0x0000d7c8      0x2b3 Drivers\Battery\Battery.o
- .debug_info    0x0000da7b      0x582 Drivers\BT\BT.o
+ .debug_info    0x0000c23b      0x994 Drivers\Motors\Motors.o
+ .debug_info    0x0000cbcf      0x5a4 Drivers\MPU\_LibMPU6050.o
+ .debug_info    0x0000d173      0x2c2 Drivers\MPU\MPU.o
+ .debug_info    0x0000d435      0x124 Drivers\LEDs\LED.o
+ .debug_info    0x0000d559      0x281 Drivers\Clock\clock.o
+ .debug_info    0x0000d7da      0x2b3 Drivers\Battery\Battery.o
+ .debug_info    0x0000da8d      0x582 Drivers\BT\BT.o
 
 .debug_abbrev   0x00000000     0x2ad9
  .debug_abbrev  0x00000000      0x147 src\system_stm32f30x.o
@@ -2734,7 +2736,7 @@ OUTPUT(BalanSyner.elf elf32-littlearm)
  .debug_ranges  0x000010e0       0x38 Drivers\Battery\Battery.o
  .debug_ranges  0x00001118       0x48 Drivers\BT\BT.o
 
-.debug_line     0x00000000     0x6cf1
+.debug_line     0x00000000     0x6d02
  .debug_line    0x00000000      0x203 src\system_stm32f30x.o
  .debug_line    0x00000203       0x7b src\startup_stm32f303xe.o
  .debug_line    0x0000027e      0x272 src\main.o
@@ -2760,13 +2762,13 @@ OUTPUT(BalanSyner.elf elf32-littlearm)
  .debug_line    0x000054e6      0x1fd Framework\Kalman\KalmanFilter.o
  .debug_line    0x000056e3      0x1d4 Framework\Fifo\Fifo.o
  .debug_line    0x000058b7      0x27f Drivers\ProximitySensor\Sharp.o
- .debug_line    0x00005b36      0x402 Drivers\Motors\Motors.o
- .debug_line    0x00005f38      0x33f Drivers\MPU\_LibMPU6050.o
- .debug_line    0x00006277      0x229 Drivers\MPU\MPU.o
- .debug_line    0x000064a0      0x19b Drivers\LEDs\LED.o
- .debug_line    0x0000663b      0x19a Drivers\Clock\clock.o
- .debug_line    0x000067d5      0x27e Drivers\Battery\Battery.o
- .debug_line    0x00006a53      0x29e Drivers\BT\BT.o
+ .debug_line    0x00005b36      0x413 Drivers\Motors\Motors.o
+ .debug_line    0x00005f49      0x33f Drivers\MPU\_LibMPU6050.o
+ .debug_line    0x00006288      0x229 Drivers\MPU\MPU.o
+ .debug_line    0x000064b1      0x19b Drivers\LEDs\LED.o
+ .debug_line    0x0000664c      0x19a Drivers\Clock\clock.o
+ .debug_line    0x000067e6      0x27e Drivers\Battery\Battery.o
+ .debug_line    0x00006a64      0x29e Drivers\BT\BT.o
 
 .debug_str      0x00000000     0x4ea2
  .debug_str     0x00000000      0x2f6 src\system_stm32f30x.o

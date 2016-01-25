@@ -31,6 +31,9 @@
 #define SerHorOffset       10.0f
 #define SerVerOffset       30.0f
 
+#define AngleMax           ( 90.0f )
+#define AngleStep          ( 0.75f )
+
 //-----------------------Private macros--------------------------------//
 #define ANGLE_TO_PWM_VALUE(ANGLE)   ( 2 * (ANGLE) + 540 )
 
@@ -168,19 +171,23 @@ static void pub_MotorSetSpeedRight( float Value )
 static void pub_SetAngleArmLeft( float Angle )
 {
    static float Value = 0;
-   if( Angle > Value ) Value += 0.75f;
-   if( Angle < Value ) Value -= 0.75f;
+   if( Angle > Value ) Value += AngleStep;
+   if( Angle < Value ) Value -= AngleStep;
 
-   if( -90.0f > Value ) Value = -90.0f;
-   if(  90.0f < Value ) Value =  90.0f;
+   if( -AngleMax > Value ) Value = -AngleMax;
+   if(  AngleMax < Value ) Value =  AngleMax;
    TIM_SERVOS->SERVO_ARM_L_PWM_CHANNEL = (uint16_t) 4 * ( Value ) + 540;
 }
 
 static void pub_SetAngleArmRight( float Angle )
 {
-   if( -90.0f > Angle ) Angle = -90.0f;
-   if(  90.0f < Angle ) Angle =  90.0f;
-   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 4 * ( -Angle ) + 540;
+   static float Value = 0;
+   if( Angle > Value ) Value += AngleStep;
+   if( Angle < Value ) Value -= AngleStep;
+
+   if( -AngleMax > Value ) Value = -AngleMax;
+   if(  AngleMax < Value ) Value =  AngleMax;
+   TIM_SERVOS->SERVO_ARM_P_PWM_CHANNEL = (uint16_t) 4 * ( -Value ) + 540;
 }
 
 static void pub_SetAngleCamHor( float Angle )

@@ -215,7 +215,6 @@ void MainTask8ms()
    /*! Perform action only if battery in not discharged */
    if( false == kRobotProperties.BatteryDischarged )
    {
-#if 1
       priv_CheckActualState();
 
       /*! This switch checks which state is requested by user */
@@ -318,8 +317,6 @@ void MainTask8ms()
          default:
             break;
       }
-#endif
-
    }
 }
 
@@ -398,7 +395,6 @@ void MainTask32ms()
 {
    LED1_Toggle;
 
-#if 1
    /*! Calculate mean omega of the robot */
    oEncoders.Perform();
    float OmegaMean = ( oEncoders.GetOmegaLeft() + oEncoders.GetOmegaRight() ) / 2;
@@ -409,7 +405,6 @@ void MainTask32ms()
    oPID_Rotation.ApplyPid( &oPID_Rotation.Parameters, OmegaDiff );
    oPID_Angle.SetDstValue      ( &oPID_Angle.Parameters,       oPID_Omega.Parameters.OutSignal + AngleOffset );
    oPID_AngleMoving.SetDstValue( &oPID_AngleMoving.Parameters, oPID_Omega.Parameters.OutSignal + AngleOffset );
-#endif
 }
 
 void MainTask128ms()

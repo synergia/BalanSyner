@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,12 +34,20 @@ public class MainActivity extends Activity {
     private final static int _MAX_PROGRESS = 200;
     private final static int _TIME_INTERVAL = 50; //ms
     private final static byte _START = (byte)0xFF;
+
     private final static byte _ADDRESS_SPEED = 113;
     private final static byte _ADDRESS_ROTATION = 114;
+    private final static int  _ADDRESS_LAYDOWN = 132;
+    private final static int  _ADDRESS_PAUSE = 131;
+    private final static int  _ADDRESS_BALANCE = 130;
+
     private final static byte _PARITY = 0x01;
 
     //UI
     ToggleButton buttonConnect;
+    Button buttonLayDown;
+    Button buttonPause;
+    Button buttonBalance;
 
     TextView textSpeed;
     TextView textRotation;
@@ -49,8 +58,9 @@ public class MainActivity extends Activity {
     private BtManager btManager;
 
     //Global variables
-    private float speed=0;
-    private float rotation=0;
+    private int     address = 0;
+    private float   speed = 0;
+    private float   rotation = 0;
     private static boolean DISCOVERY_STARTED = false;
     private static boolean foundBTTarget = false;
 
@@ -65,7 +75,7 @@ public class MainActivity extends Activity {
             int[] message = new int[16];
             message[0] = _START;
             message[1] = _START;
-            message[2] = _ADDRESS_SPEED;
+            message[2] = (byte)address;
             message[3] = valueSpeed[3];
             message[4] = valueSpeed[2];
             message[5] = valueSpeed[1];
@@ -200,6 +210,9 @@ public class MainActivity extends Activity {
 
     void initButtons() {
         buttonConnect = (ToggleButton) findViewById(R.id.button_connect);
+        buttonLayDown = (Button) findViewById(R.id.ButtonLayDown);
+        buttonPause = (Button) findViewById(R.id.ButtonPause);
+        buttonBalance = (Button) findViewById(R.id.ButtonBalance);
     }
 
     void initSeekBars(){
@@ -212,6 +225,7 @@ public class MainActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 speed = progress-_MAX_PROGRESS/2;
+                address = _ADDRESS_SPEED;
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -315,6 +329,18 @@ public class MainActivity extends Activity {
         } else {
             disconnect();
         }
+    }
+
+    public void onButtonLayDownClicked(View view) {
+        address = _ADDRESS_LAYDOWN;
+    }
+
+    public void onButtonPauseClicked(View view) {
+        address = _ADDRESS_PAUSE;
+    }
+
+    public void onButtonBalanceClicked(View view) {
+        address = _ADDRESS_BALANCE;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

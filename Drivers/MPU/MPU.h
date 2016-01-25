@@ -12,12 +12,12 @@ typedef struct
 
    void ( *ApplyFilter ) ( void );
 
-   float ( *GetKalmanQAngle ) ( void );
-   float ( *GetKalmanRMeasure ) ( void );
-   void ( *SetKalmanQAngle ) ( float Value );
-   void ( *SetKalmanQAngleDef ) ( void );
-   void ( *SetKalmanRMeasure ) ( float Value );
-   void ( *SetKalmanRMeasureDef ) ( void );
+   float ( *GetKalmanQAngle )( void );
+   float ( *GetKalmanRMeasure )( void );
+   void ( *SetKalmanQAngleDef )( void );
+   void ( *SetKalmanRMeasureDef )( void );
+   void ( *SetKalmanQAngle )( float Value );
+   void ( *SetKalmanRMeasure )( float Value );
 }MpuKalmanClass_T;
 
 //-----------------------Public defines-------------------------------//
